@@ -1,0 +1,102 @@
+#+STARTUP: content
+* Thoughts
+  
+** 分享心得
+    - 写作的时候，只要明确文章主旨，句句点题就不会写的太差，
+      一定不要企图将你的想法在一篇文章中全部表达，
+      毕竟你没写的不代表你不知道，
+      而东拼西凑的文章对读者没什么益处，毕竟读者是为了某个明确目的来读文章的，
+      如果内容和标题关系不大，读者大概率会选择离开。
+     
+    - 总结，延伸，超越原来的文章而非直接翻译或者摘抄一遍。
+      观点互补，指出更进一步的思考方向。
+*** Refers
+    - [[https://github.com/dt-fe/weekly/blob/v2/137.%E7%B2%BE%E8%AF%BB%E3%80%8A%E5%BD%93%E6%88%91%E5%9C%A8%E5%88%86%E4%BA%AB%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E6%88%91%E5%9C%A8%E5%81%9A%E4%BB%80%E4%B9%88%EF%BC%9F%E3%80%8B.md][当我在分享的时候，我在做什么？]]
+
+
+** 专家与技术细节
+
+*** Refers
+    - [[https://github.com/dt-fe/weekly/blob/v2/103.%E7%B2%BE%E8%AF%BB%E3%80%8A%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%93%E5%AE%B6%E4%B8%8D%E5%86%8D%E5%85%B3%E5%BF%83%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82%E3%80%8B.md][为什么专家不再关心技术细节]]
+
+*** 思考
+
+    - 技术细节只是敲门砖，并不是科学只是技术，想要人人都可以学会
+    - 学习技术细节没有技术门槛，但是累计的知识被淘汰，剩下的只是学习新知的竞速
+    - 因此技术细节并不能形成门槛。
+      而宏观架构不会一下子大变，了解整体的变化和全局的思考，有助于判断技术细节是否需要掌握。
+      然后如何快速掌握，快速脱身。这是容易形成门槛的。
+      
+*** 影响
+     
+    - 不了解技术细节并不会影响业务，更多的是定好一套规范，一个接口，
+      实现一个整体，再对细节进行补充。
+    - 技术服务于业务，沉迷解决不切实际的问题，或者别人解决过的问题，对学习有帮助。
+      但对公司没有价值。
+      一个懂得重构的专家，不如一个懂得利用成熟的技术方案快速迭代当前业务原型的技术专家重要。
+    - 所以技术懂业务很重要。
+      要懂业务，只有懂业务，跟着对的业务，才能对未来又信心，知道自己的付出可以换来回报。
+    - 了解公司业务需要什么，才可能创造出更大的价值，而非空降的框架创造者。
+
+
+** 刻意学习
+   
+*** Refers
+    - https://mp.weixin.qq.com/s?__biz=MzAxNDE0MjA2OQ==&mid=2650422756&idx=1&sn=ea7c90305123a0e0fac76678ef1ffd2c
+   
+*** 写作
+    输出, 写作, 假想自己是读者, 教会 = 掌握
+    
+   
+*** 刻意学习
+    坚持, 自己的话写, 持续关注, 渐进式
+
+*** 素材积累
+    子问题, 小想法, 合并解决复杂问题, 找到关联性和获得大量素材
+
+
+** 高级工程师需要做的
+   
+*** Refers
+    - https://skamille.medium.com/an-incomplete-list-of-skills-senior-engineers-need-beyond-coding-8ed4a521b29f
+      
+*** 除了 coding
+    - 执行会议, 和取消, 主动权
+    - 当 mentor, 给中低级建议
+    - 不要让低级的人在分享不理解的技术是感觉自己像个傻逼
+    - 不要让高级的人在听到不理解的技术时觉得尴尬, 解决问题不要让他们羞愧
+    - 将自己写的轮子推给其他团队
+    - 时常寻求帮助让他们感觉高兴
+    - 成为 项目 Owner, 也懂得放弃
+    - 让别人倾听你的想法, 或者自己听别人想法时, 不感到威胁和歧视
+    - 重复多次直到有人注意到
+    - 帮助别人晋升
+    - 获取更多消息的方式
+    - 接受批评和否定
+
+
+** Boring
+   - Lie with badness.
+   - Done without speak.
+   - No advice without requirement.
+   - Bind rewards and danger with others.
+   - Keep your mood stablely.
+   - Confident, be serious and modest.
+   - Smile or act like angry.
+   - Teach, speak and take analogy.
+   - Things happen and link with person.
+   - Friends, evan a while.
+   - Accpet difference.
+   - Short means kind.
+   - Eye contact means careful.
+
+   Dream:
+   - Exam with low score: Strong sense of responsibility, moral and self doubt.
+   - Car: Control and lost control.
+   - Castle: Inflexible, strict.
+   - Food: Love.
+   - Hair: Bad love.
+   - Tooth: Change.
+   - Poker: Choice.
+   - Airport: Career. 
+

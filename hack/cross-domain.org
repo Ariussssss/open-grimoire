@@ -1,0 +1,54 @@
+#+STARTUP: content
+#+CREATED: [2021-06-16 08:21]
+* cross-domain
+** Refers
+   - https://segmentfault.com/a/1190000015597029
+   - https://www.huaweicloud.com/articles/eeca0bfe5ce9321ed2e81a2218326d53.html
+** 原因
+   浏览器同源策略, 保护用户
+** 方法
+   1. 通过jsonp跨域
+   2. document.domain + iframe跨域
+   3. location.hash + iframe
+   4. window.name + iframe跨域
+   5. postMessage跨域
+   6. 跨域资源共享（CORS）
+   7. nginx代理跨域
+   8. nodejs中间件代理跨域
+   9. WebSocket协议跨域
+** JSONP
+   script, img 没有跨域限制, 利用 window callback 控制.  
+   后端拼接 js 调用 window 下的 callback.   
+** document.domain + iframe
+   子域名不同可以通过 ~document.domain~ 强制修改.
+   iframe 通过 ~window.parent~ 来获取信息
+** CROS Cross-origin resource sharing
+   请求方法: HEAD, GET, POST
+   
+   HTTP的头信息不超出以下几种字段：
+   - Accept
+   - Accept-Language
+   - Content-Language
+   - Last-Event-ID
+   - Content-Type：只限于三个值application/x-www-form-urlencoded、multipart/form-data、text/plain
+
+   后端设置 { 'Access-Control-Allow-Origin', '*' }
+** DOM 查询
+   window.postMessage HTML5 用于不同窗口不同页面跨域通讯 
+** xhr.withCredentials
+   boolean
+   
+   判断当前请求在 跨域 时, 是否提供身份凭证(同域名无法控制必带)
+
+   #+begin_src js
+     var xhr = new XMLHttpRequest();
+     xhr.withCredentials = true;
+     xhr.open('GET', 'http://www.lovejavascript.com/learnLinkManager/getLearnLinkList', true);
+     xhr.onreadystatechange = function() {
+       console.log('withCredentials=>', xhr.withCredentials);
+     };
+     xhr.send(null);
+   #+end_src
+
+   后端支持:
+   - Access-Control-Allow-Origin，且必须指定域名，而不能指定为*

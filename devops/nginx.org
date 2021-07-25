@@ -1,0 +1,28 @@
+#+STARTUP: content
+#+CREATED: [2021-06-10 09:04]
+* nginx
+** Refers
+** 负载均衡算法
+   1. 默认轮询
+   2. weight 权重, 按比例划分
+      #+begin_src conf
+	upstream bakend {  
+	    server 192.168.0.1 weight=10;  
+	    server 192.168.0.2 weight=10;  
+	}
+      #+end_src
+   3. ip_hash
+      固定请求固定访问, 可以解决 session 固定问题
+      #+begin_src conf
+	upstream bakend {  
+	    ip_hash;  
+	    server 192.168.0.1:88;  
+	    server 192.168.0.2:80;  
+	} 
+      #+end_src
+   4. fair 第三方
+      计算加载时间长短和大小分配, 响应时间越短就越优先
+   5. url_hash 第三方
+      类似 ip_hash 通过 url 确定服务器
+
+   一般还会有一些预留的 backup 机器, 仅在 所有 非 backup 挂掉时启动. 

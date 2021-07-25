@@ -1,0 +1,8 @@
+#+STARTUP: content
+#+CREATED: [2021-06-30 21:10]
+* implement
+** Refers
+   - https://mp.weixin.qq.com/s/nLG43aDSomGjCS5iIT8Gmg
+** debug
+   - https://ts-ast-viewer.com/
+   - https://www.typescriptlang.org/play/

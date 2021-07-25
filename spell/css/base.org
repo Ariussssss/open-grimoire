@@ -1,0 +1,5 @@
+#+STARTUP: content
+* base
+** Refers
+** animation
+   ~animation-timing-function~ 默认是 ease, 常用的还有 ~step(n, end)~

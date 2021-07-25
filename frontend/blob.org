@@ -1,0 +1,48 @@
+#+STARTUP: content
+* blob
+** Refers
+   - https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types
+** blob
+   blob binary large object.
+   二进制类型大对象. 不可改变.
+   ~File~ 接口即成 blob 功能扩展实现. 
+
+   属性:
+   - size: 大小
+   - type: MIME 类型字符串
+
+   构造函数参数:
+   - blobArr:  ArrayBuffer，ArrayBufferView，Blob，DOMString 等对象构成的数组, utf-8 编码
+   - options:
+     - type: 执行 type
+     - endings: 制定包含行结束符 ~\n~ 如何被写入
+       - ~"transparent"~ 默认, 不变
+       - ~"native"~, 转变为适合宿主系统的换行符号
+
+   方法:
+   - slice 返回范围内的新 blob 对象
+   - stream 返回一个读取内容的 ReadableStream
+   - text 返回一个 Promise 对象, 包含所有内容的 utf-8 USVstring
+   - arrayBuffer 返回 Promise, 包含所有内容的二进制格式 ~ArrayBuffer~
+** 与 ArrayBuffer
+   - ArrayBuffer 有写入, 编辑的能力, 可以用 TypedArrays 或 DataView 来操作. Blob 对象不可变
+   - ArrayBuffer 存在内存中, 可以直接操作. Blob可以存在磁盘其他位置.
+   - 可以相互转换
+     - ~readAsArrayBuffer()~ 妆换成 ArrayBuffer 对象
+     - ~new Blob([new Uint8Array(data)])~ 可以吧 ArrayBuffer 对象转换为 Blob 对象
+** more
+*** MIME types
+    IANA media types, Multipurpose Internet Mail Extersions.
+
+    一种媒体格式, 描述文本格式化, 文件类型.
+    一般包含 ~type/subtype~,  没有空格.
+
+    一般有:
+    - application: 只有特定应用可以用. exp: ~application/pdf~, ~application/zip~
+    - audio: 音频, 更多的是 mp4. exp: ~audio/mpeg~
+    - example: 保留演示用占位符. exp: ~audio/example~
+    - font: 字符
+    - image: 图片
+    - model: 3d 对象场景. exp: ~model/3mf~, ~model/vrml~
+    - text
+    - video: 视频 mp4

@@ -1,0 +1,100 @@
+#+STARTUP: content
+* chrome
+** 更新
+*** v8 => 9.1 2021-05-04
+    https://v8.dev/blog/v8-release-91
+    - 升级 V8 到 9.1，默认开启 Top-level await
+    - 默认开启 WebAssembly SIMD
+    - 支持 WebTransport，WebSockets 之外的又一种双向通讯方式，UDP-like datagrams，可取消
+    - WebSockets 支持 HTTP/2，可以和其他请求复用一个 TCP 连接，不用单独建一个，从而提升速度
+    - ServiceWorker 支持 ES Modules
+    - File System Access API 更新，showSaveFilePicker 支持 suggestedName，showOpenFilePicker 支持 startIn
+    - Clipboard 接口支持读文件，通过 paste 事件加 e.clipboardData.files 获取
+    - 新增 GravitySensor 接口，用于手机游戏研发
+    - 禁用端口 10080
+    - 支持关联站点共享凭据，通过在 /.well-known/assetlinks.json 声明实现
+** fileSystem HTML5
+*** Refers
+    - https://web.dev/read-files/
+    - https://web.dev/file-system-access/
+
+*** demo
+**** 读取
+     #+begin_src js
+       function readImage(file) {
+	 // Check if the file is an image.
+	 if (file.type && !file.type.startsWith('image/')) {
+	   console.log('File is not an image.', file.type, file);
+	   return;
+	 }
+
+	 const reader = new FileReader();
+	 reader.addEventListener('load', (event) => {
+	   img.src = event.target.result;
+	 });
+	 reader.readAsDataURL(file);
+       }
+     #+end_src
+
+     进度条
+     #+begin_src js
+       reader.addEventListener('progress', (event) => {
+	 if (event.loaded && event.total) {
+	   const percent = (event.loaded / event.total) * 100;
+	   console.log(`Progress: ${Math.round(percent)}`);
+	 }
+       });
+     #+end_src
+
+**** 请求本地 fs
+     #+begin_src js
+       window.requestFileSystem(window.TEMPORARY, 5*1024*1024, function(){
+	   fs.root.getFile('test.dat', {}, function(fileEntry) {
+	       fileEntry.file(function(file) {
+		   // Here is our file object ... 
+	       });
+	   });
+       }, errorHandler);
+     #+end_src
+
+     读取
+     #+begin_src js
+       const file = await fileHandle.getFile();
+       const contents = await file.text();
+     #+end_src
+
+     写文件(实现多次保存同一个文件)
+     #+begin_src js
+       async function getNewFileHandle() {
+	 const options = {
+	   // An Array of allowed file types to save.
+	   types: [
+	     {
+	       description: 'Text Files',
+	       accept: {
+		 'text/plain': ['.txt'],
+	       },
+	     },
+	   ],
+	 };
+	 const handle = await window.showSaveFilePicker(options);
+	 return handle;
+       }
+       async function writeFile(fileHandle, contents) {
+	 // Create a FileSystemWritableFileStream to write to.
+	 const writable = await fileHandle.createWritable();
+	 // Write the contents of the file to the stream.
+	 await writable.write(contents);
+	 // Close the file and write the contents to disk.
+	 await writable.close();
+       }
+     #+end_src
+
+     流式
+     #+begin_src js
+       const writable = await fileHandle.createWritable();
+       const response = await fetch(url);
+       await response.body.pipeTo(writable);
+     #+end_src
+
+     

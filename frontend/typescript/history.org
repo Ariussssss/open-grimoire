@@ -1,0 +1,7 @@
+#+STARTUP: content
+* history
+** 4.4
+*** Refers
+    - https://devblogs.microsoft.com/typescript/announcing-typescript-4-4-beta/#cfa-aliased-conditions
+*** Control Flow Analysis of Aliased Conditions
+    类似 解构, 取值判断 现在会直接 work, 不需要单独 is 声明类型守护

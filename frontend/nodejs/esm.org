@@ -1,0 +1,41 @@
+#+STARTUP: content
+* node-esm
+** Referrs
+   - https://maximorlov.com/es-modules-in-nodejs/
+  
+** 与 CJS 的不同
+   1. strict mode
+   2. 浏览器兼容
+      可以通过设置 ~type~ 来使用，当且仅当有 ~mjs~ 后缀时可用。
+      不支持路径检索。
+
+      #+begin_src html
+	<script type="module" src="esm-module.mjs"></script>;
+      #+end_src
+
+      可以通过 [[*https://github.com/WICG/import-maps][Import Maps]] 来控制依赖
+
+      #+begin_src html
+	<script type="module">
+		import _ from 'lodash';
+	</script>
+
+	<script type="importmap">
+	{
+		"imports": {
+			"lodash": "./node_modules/lodash-es/lodash.js"
+		}
+	}
+	</script>
+      #+end_src
+       
+   3. 静态解析
+
+      CJS 引用模块的时候，会把模块当成文件解析之行，直到报错。
+
+      ESM 不会执行任何模块，直到加载解析完所有模块。
+      
+   4. 异步
+
+      引入不会打断执行， ~import~ 执行会插入事件队列而不是像 CJS 一样直接打断等待引用模块执行完成。
+

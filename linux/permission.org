@@ -1,0 +1,25 @@
+#+STARTUP: content
+#+CREATED: [2021-07-17 14:44]
+* permission
+** Refers
+   - https://apple.stackexchange.com/questions/26776/what-is-the-mark-at-the-end-of-file-description
+   - https://blog.csdn.net/jvl_jevy/article/details/38498001
+** wrx
+   默认写入执行, 三种权限, 
+** mac
+   #+begin_quote
+   If the file or directory has extended attributes, the permissions field printed by the -l  
+   option is followed by a '@' character.  Otherwise, if the file or directory has extended security  
+   information (such as an access control list), the permissions field printed by the -l option is fol-  
+   lowed by a '+' character
+   #+end_quote
+
+   mac 有两种特殊的扩展符号: ~+~ , ~@~  
+   执行 ~ls -le~ 查看 extended security  
+   执行 ~ls -le~ 查看 extended security  
+
+   ~+~:  权限控制列表 (ACL, Access Control List), 每个规则称为 权限控制入口(ACE, Access Control Entry)
+   #+begin_src shell
+     chmod -N ~/* # -R 可以递归
+   #+end_src
+   

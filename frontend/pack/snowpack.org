@@ -1,0 +1,26 @@
+#+STARTUP: content
+#+CREATED: [2021-07-14 11:40]
+* snowpack
+** Refers
+   - https://juejin.cn/post/6844904176342794254
+** 理念
+   简单来说就是将源码流式编译, 部署到 本地 server 访问地址, 然后通过 浏览器的 esm import 凡是访问.
+   因此所有加载和构建逻辑都是按需的.
+
+   向 bundleless 的方向发展, 暂时可用于开发环境. 
+     
+** 设计
+   转译生成 esm
+    
+   编译主要工作:
+   - 编译打包 node_modules 依赖, 路径加上自定义前缀  ~_snowpack/pkg/somemodules~ 
+   - 非 JS 转换 JS module JS 文件
+   - 处理依赖循环
+
+** css
+   css 的文件, 转发到 ~some.css.proxy.js~
+   文本转换为字符串, 插入 ~script~
+     
+** 热更新
+
+

@@ -1,0 +1,11 @@
+#+STARTUP: content
+* wasm
+** Refers
+** FAQ
+*** cargo +nightly error : no such subcommand
+    which cargo printing out /usr/bin/cargo indicates that it defaults to Cargo that you installed from your OS's package manager (apt).
+
+    Invocations with the toolchain version like cargo +nightly are not a feature of Cargo, but rather Rustup. In fact, Rustup's cargo is a link to rustup that then invokes the "real" cargo stored under .rustup/toolchains.
+
+    The easiest way to solve this would be to uninstall the Cargo you obtained from Ubuntu repositories:
+

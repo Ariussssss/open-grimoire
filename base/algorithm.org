@@ -1,0 +1,23 @@
+* Algorithm
+  
+** 基础
+   
+   除法中，负数元算的余数和商也会是负数。
+   可以用在等比数列对应二进制的运算中。
+   
+   #+begin_src python
+     -3 // -2
+     # Output 1
+     3 // -2
+     # Output -1
+
+     3 % -2
+     # Output -1
+     -3 % -2
+     # Output -1
+
+     1 // -2
+     # Output -1
+     1 // 2
+     # Output 0
+   #+end_src

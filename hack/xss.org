@@ -1,0 +1,84 @@
+#+STARTUP: content
+* XSS 跨站脚本攻击(Cross Site Scripting)
+  为不和层叠样式表(Cascading Style Sheets, CSS)的缩写混淆，故将跨站脚本攻击缩写为 XSS
+
+  恶意攻击者在 web 页面内插入恶意 Script 代码，当用户浏览时候执行
+
+** Refers
+   - http://ha.ckers.org/xss.html
+   - https://www.freebuf.com/articles/web/153055.html
+   - https://www.sqlsec.com/2020/01/xss.html
+
+** 主要攻击方式
+  
+*** 窃取网页浏览中的 cookie 值
+    模拟身份
+
+    Http-Only 可以保证不可执行和修改
+
+*** 坚持流量恶意跳转
+    js 自动跳转，控制流量带动转发浏览量等
+
+** 利用和绕过
+
+*** 大小写
+    ~</script>，//，\，.~ 会受到影响，但是其他敏感字符东西 ~"，'，[，]，{，}~ 并不会
+  
+    ~jsfuck.com~ 可以生成 payload 绕过大写过滤器，缺点是很长
+  
+*** 想办法让过滤返回期望值
+
+   
+*** 除了 script 标签， 其他标签也可以执行请求或者事件处理
+
+  
+*** 将关键字做编码绕过过滤，eval()会将编码过的语句解码后再执行
+    如换成其他进制 ip
+   
+*** 主动闭合标签
+
+** 组合方式
+   可以分为两类：
+   - 反射型 XSS，非持久型
+   - 储存型 XSS，持久型
+
+*** 反射型
+    一次性攻击，脚本通过 url 方式传递，只有访问者访问时才会触发
+
+*** 存储型
+    脚本存入数据库，每个访问这条记录的页面都会触发
+
+** 实例
+   1. 劫持访问，利用域名降低防备
+   2. 建立 XSS 平台存储盗取的 cookie，如 DVWA(Damn Vulnerable Web App)
+   3. 配合 csrf 攻击完成恶意请求
+      即未经许可发送恶意请求
+** 防范
+   
+   - 过滤，过滤对应标签, 禁止以 javascript 开头
+   - 编码，特殊符号进行转换编码,  HTML Encode 处理
+   - 限制，限制可输入长度，强制拦截
+ 
+*** CSP
+    - 脚本：只信任当前域名
+    - <object>标签：不信任任何 URL，即不加载任何资源
+    - 样式表：只信任 cdn.example.org 和 third-party.org
+    - 框架（frame）：必须使用 HTTPS 协议加载
+    - 其他资源：没有限制
+
+*** React
+    React 在渲染内容前会校验特殊字符和替换, 如果属性不对 (~$$typeof~) 也不会渲染直接报错
+
+    如果需要 ~dangerouslySetInnerHTML~, 则需要服务端或者前端预处理内容, e.g.
+    #+begin_src js
+      var xss = require('xss');
+      console.log(xss('<a href="#" onclick="alert(/xss/)">click me</a>'));
+      // <a href="#">click me</a>
+    #+end_src
+
+** XSS 靶场
+   官网：https://pentesterlab.com/
+
+   下载地址：https://isos.pentesterlab.com/web_for_pentester_i386.iso
+
+   安装方法：通过虚拟机挂载 iso 运行，该靶场环境是封装在 debian 系统里面的，运行在时候直接以 Live 方式运行，然后查看下 ip 地址：

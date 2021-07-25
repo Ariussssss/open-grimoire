@@ -1,0 +1,9 @@
+#+STARTUP: content
+* base
+** Refers
+   - https://www.youtube.com/watch?v=O8tyml3xBMM&list=PL6ed-L7Ni0yRnaN8-l2wfA0u3ILmyJMkz&index=6
+   - https://grain-lang.org/docs/guide/hello_world
+** Install
+   #+begin_src bash
+     brew install --no-quarantine --cask grain-lang/tap/grain
+   #+end_src

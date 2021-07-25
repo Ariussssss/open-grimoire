@@ -1,0 +1,18 @@
+#+STARTUP: content
+#+CREATED: [2021-06-16 08:31]
+* CSRF
+** Refers
+   - https://www.cnblogs.com/hyddd/archive/2009/04/09/1432744.html
+** 是什么
+   Cross-site request forgery, 跨站请求伪装
+
+   盗用身份名义发送请求
+** Examples
+   - 邮件转发, 自定义表单提交
+** 防御
+*** 服务端
+**** hash code
+     隐藏表单属性, 后端生成
+**** 验证码
+**** One-Time Token
+     为每个页面生成伪随机数哈希, 对应时间, 隐藏在请求中

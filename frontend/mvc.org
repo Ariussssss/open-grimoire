@@ -1,0 +1,24 @@
+#+STARTUP: content
+#+CREATED: [2021-06-10 09:12]
+* mvc
+** Refers
+   - https://draveness.me/mvx/
+** MVC (react)
+   Model, View, Controller
+
+   一般为视图, 控制器翻译输入操作模型和视图, 模型管理行为和数据
+
+   三者互相作用
+
+   View 主动映射 Model 数据
+** MVP
+   核心区别, 视图与模型结耦
+   
+   Presenter 包含所有视图 UI 逻辑, 作为 Model 的代理
+
+   被动视图, 通过接口被 Presenter 操作
+** MVVM (VUE)
+
+   延边模型 PM, Presentation Model 分离出 视图 Model 和 UI 渲染结果
+
+   特点是对视图模型创建了一个抽象的数据结构, 将视图和状态行为分离

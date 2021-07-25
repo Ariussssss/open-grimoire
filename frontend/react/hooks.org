@@ -1,0 +1,9 @@
+#+STARTUP: content
+#+CREATED: [2021-06-10 02:49]
+* hooks
+** Refers
+   - https://overreacted.io/zh-hans/how-are-function-components-different-from-classes/
+** class difference
+   - class 虽然 props 不可变, 但每次 this 都可以获取到最新的值
+   - 本质一样, diff 一致, 调度器一致, 所以性能几乎一致
+   - class 打包会构建出一堆继承 React.Component 的辅助函数

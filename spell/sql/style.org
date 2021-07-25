@@ -1,0 +1,7 @@
+#+STARTUP: content
+* SQL Style
+* Refers
+  - [[https://github.com/mattm/sql-style-guide][Mazur's SQL Style Guide]]
+  - https://www.zhihu.com/question/56236190
+* ALI
+**  

@@ -1,0 +1,77 @@
+#+STARTUP: content
+* clickhouse
+** Referrs
+   - https://github.com/collabH/repository/blob/master/bigdata/olap/clickhouse/ClickHouseOverView.md
+   - https://clickhouse.tech/docs/zh/
+** Overview
+   俄罗斯 Yandex 2016 开源的列式存储数据库 DBMS.
+   主要用于在线分析处理查询 OLAP, 能够使用 SQL 查询实时生成分析数据报告.
+** Others
+*** DBMS
+    传统的行式数据库, 同一行的数据总是被物理存储在一起.
+    常见的行式数据库系统有：MySQL、Postgres 和 MS SQL Server.
+
+    常见的列式数据库有： Vertica、 Paraccel (Actian Matrix, Amazon Redshift)、 Sybase IQ、 Exasol、
+    Infobright、 InfiniDB、 MonetDB (VectorWise,  Actian Vector)、
+    LucidDB、 SAP HANA、 Google Dremel、 Google PowerDrill、 Druid、 kdb+.
+*** OLAP
+
+    联机分析处理 OLAP On-Line Analytical Processing.
+    其特点是查询频率较 OLTP 系统更低, 但通常会涉及到非常复杂的聚合计算.
+    OLAP 系统以维度模型来存储历史数据, 其主要存储描述性的数据并且在结构上都是同质的.
+
+    联机事务处理 OLTP On-line Transaction Processing.
+    主要是为了操作数据而设计的, 用于处理已知的任务和负载.
+    优化思路方向时 主码索引和散列吗, 检索特定特征的记录, 优化特定查询语句.
+
+    多维分析, 最常见的五大操作：切片, 切块, 旋转, 上卷, 下钻。
+
+    - 下钻 Drill-down: 更细节的数据, 从 季度到月份, 从省到市
+    - 上卷 Roll-up: 钻取的逆操作, 聚合数据.
+    - 切片 Slice: 选择维中特定的值进行分析, 分析单独项目或特定值的数据, 如所有销售额中的电子产品
+    - 切块 Dice: 选择维中特定的区间进行分析, 如电子产品和日用品,
+    - 旋转 Pivot: 维的位置互换, 行列互换, 切换维度排序和划分
+
+    OLAP 场景的关键特征
+    - 绝大多数是读请求
+    - 数据以相当大的批次(> 1000 行)更新，而不是单行更新;或者根本没有更新。
+    - 已添加到数据库的数据不能修改。
+    - 对于读取，从数据库中提取相当多的行，但只提取列的一小部分。
+    - 宽表，即每个表包含着大量的列
+    - 查询相对较少(通常每台服务器每秒查询数百次或更少)
+    - 对于简单查询，允许延迟大约 50 毫秒
+    - 列中的数据相对较小：数字和短字符串(例如，每个 URL 60 个字节)
+    - 处理单个查询时需要高吞吐量(每台服务器每秒可达数十亿行)
+    - 事务不是必须的
+    - 对数据一致性要求低
+    - 每个查询有一个大表。除了他以外，其他的都很小。
+    - 查询结果明显小于源数据。换句话说，数据经过过滤或聚合，因此结果适合于单个服务器的 RAM 中
+
+    快速的原因:
+    1. 只需要读一小部分的列, 就可以进行筛选.
+    2. 成批压缩读取, 降低 io 体积
+    3. io体积小, 数据可以缓存
+
+    数据库设计需要在数据量, 性能, 灵活性做取舍.
+
+    MPP 即大规模并行处理 Massively Parallel Processor.
+    MPP 架构系统, 每个节点都有独立的磁盘存储系统和内存系统,
+    业务数据根据数据库模型和应用特点划分到各个节点, 通过网络互相连接协同计算.
+    有完全的可伸缩性、高可用、高性能、优秀的性价比、资源共享等优势, 但是响应时间会变慢.
+
+    搜索殷勤架构 如 Elasticsearch.
+    在入库时将数据转换为倒排索引, 采用 Scatter-Gather 计算模型, 牺牲了灵活性换取很好的性能.
+    对于扫描聚合为主的查询, 随着处理数据量的增加, 响应时间也会退化到分钟级.
+
+    预计算系统, 入库时对数据进行预聚合.
+    进一步牺牲灵活性换性能, 实现超大数据集的秒级响应.
+    如 Druid/Kylin 等.
+** Features
+   - 数据压缩
+   - 数据磁盘存储
+   - 多核心并行处理
+   - 多服务器分布式处理
+   - 支持 SQL
+   - 向量引擎
+   - 实时数据更新
+   - 索引

@@ -1,0 +1,30 @@
+#+STARTUP: content
+#+CREATED: [2021-05-18 11:03]
+* 常用工具变更历史
+** 📦 包
+*** 🦋 ink
+    代替 ~console.log~ + ~chalk~ 实现基于 ~react~ 的命令行 UI. 
+** 🔧 工具
+*** 调研中
+**** zx
+**** https://github.com/slidevjs/slidev
+     ppt
+**** zellij
+     用 rust 编写, 插件完全支持 ~wasi~. 
+     可能可以替代 tmux. 
+     client, server 还不健全. 
+**** duf
+     代替 df
+**** https://github.com/charmbracelet/bubbletea
+     Go cli.
+**** astro
+     原生支持 markdown 的框架, 适合一边写前端一边写笔记
+*** 历史
+**** 🦋 Hammerspon
+     不习惯 Alfred, 快捷键增强, 基于 ~lua~ 定制快捷键脚本
+**** 👻 Alacritty => +Iterm2+
+     更快, 更简洁, 配置文件, 简化 GUI 操作
+**** 👻 starship => +powerlevel9k+
+     更简洁, 配置更简单独立
+**** 👻 Spectacle => +SizeUp+
+     更强的功能, 免费 

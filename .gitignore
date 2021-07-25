@@ -1,0 +1,10 @@
+.DS_Store
+*.md
+private
+financial
+
+# Emacs
+*~
+\#*\#
+.\#*
+.ignore

@@ -1,0 +1,17 @@
+#+STARTUP: content
+* custom-runtime-stack
+** Refers
+** background
+
+   靠 return 可以跳出，也可以单独使用 flag 判断
+   
+   #+begin_src js
+     if (a) {
+       if (b) {
+       } else {
+	 fallback()
+       }
+     } else {
+       fallback()
+     }
+   #+end_src

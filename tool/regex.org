@@ -1,0 +1,6 @@
+#+STARTUP: content
+* regex
+** 千分位
+   #+begin_src js
+     num.toString().replace(/(\d)(?=(?:\d{3})+$)/g,'$1,')
+   #+end_src

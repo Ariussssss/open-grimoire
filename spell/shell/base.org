@@ -1,0 +1,52 @@
+* Shell
+** spells
+*** du
+
+    Human-readable
+    depth
+
+    #+begin_src shell
+      du -h -d 1 .
+    #+end_src
+    
+** tools
+*** cloc Count Lines of Code
+
+    从 Draven blog 里看到的，统计词数
+**  set -o allexport
+   env 失效问题根源, 需要允许 env 相关 source 来源允许导出
+** count
+   #+begin_src shell
+     grep -o "[0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+" httpd.log | sort | uniq -c | sort -n
+     cat demo.txt | awk '{print $2}' | sort | uniq -c | sort -n -r | head -n 1
+   #+end_src
+   
+   awk '{ print $2}'：取数据的第2域（第2列），第一列是标号（1，2，3...）,第二列是ip地址
+
+   sort：对IP部分进行排序。
+
+   uniq -c：打印每一重复行出现的次数。（并去掉重复行）
+
+   sort -n -r：按照重复行出现的次序倒序排列。
+
+   head -n 1：取排在第一位的ip地址
+** awk
+   #+begin_src bash
+     echo something | awk '{ print $1 }'
+   #+end_src
+** xargs
+   #+begin_src bash
+     xargs git branch -d < ./branch.txt
+     awk | xargs kill -9
+   #+end_src
+** find
+   通配文件检索
+   #+begin_src shell
+     find ./**/*.org -type f
+   #+end_src
+** wc
+   #+begin_src shell
+     wc -wl
+   #+end_src
+   
+

@@ -1,0 +1,60 @@
+#+STARTUP: content
+* ninja
+** !~ 对 indexof 判定
+** for of
+   同步循环的迭代器 iterables 和生成器 generators, 对结果处理
+
+   #+begin_src js
+     function* generator() {
+       yield 0;
+       yield 1;
+       yield Promise.resolve(2);
+       yield Promise.resolve(3);
+       yield 4;
+     }
+
+     (async function() {
+       for await (let num of generator()) {
+	 console.log(num);
+       }
+     })();
+     // 0
+     // 1
+     // 2
+     // 3
+     // 4
+
+     // compare with for-of loop:
+
+     for (let numOrPromise of generator()) {
+       console.log(numOrPromise);
+     }
+     // 0
+     // 1
+     // Promise { 2 }
+     // Promise { 3 }
+     // 4
+   #+end_src
+
+   遇到 reject 会跳过后续直接 throw
+   #+begin_src js
+     function* generator() {
+       yield 0;
+       yield 1;
+       yield Promise.resolve(2);
+       yield Promise.reject(3).finally(() => {console.log('finally')});
+       yield 4;
+     }
+
+     (async function() {
+       for await (let num of generator()) {
+	 console.log(num);
+       }
+     })();
+     // 0
+     // 1
+     // 2
+     // finally
+     // Promise {<rejected>: 3}
+     // >  Uncaught (in promise) 3
+   #+end_src

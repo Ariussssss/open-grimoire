@@ -1,0 +1,10 @@
+#+STARTUP: content
+* v8
+** Refers
+   - https://mp.weixin.qq.com/s/XB3n7aGz6ntPRJwwaDSRMw
+** 浏览器隔离
+   浏览器代码块之间隔离独立执行, 共享变量
+
+   分预编译期和执行期, 先变量提升和代码检测再执行
+
+   函数会在预编译期被声明

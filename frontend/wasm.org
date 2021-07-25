@@ -1,0 +1,44 @@
+#+STARTUP: content
+* Wasm
+* Referrs
+  - [[https://docs.wasmer.io/integrations/rust][rust wasm docs]]
+  - [[https://wapm.io/][wapm: wasm package manager]]
+  - [[https://wasmerio.github.io/wasmer/crates/wasmer_runtime/][wasm runtime]]
+* FAQ
+** nightly
+   #+begin_src bash
+     rustup -v install  nightly
+     rustup target add wasm32-unknown-unknown --toolchain nightly
+     rustup default nightly
+   #+end_src
+** wasm-bindgen version
+   版本不对的时候, 可以尝试切换 tag.
+   当版本有 commit hash 说明对不上. 
+   #+begin_src bash
+     error:
+
+     it looks like the Rust project used to create this wasm file was linked against
+     a different version of wasm-bindgen than this binary:
+
+       rust wasm file: 0.2.73 (c8fb41faf)
+	  this binary: 0.2.73
+
+     Currently the bindgen format is unstable enough that these two version must
+     exactly match, so it's required that these two version are kept in sync by
+     either updating the wasm-bindgen dependency or this binary. You should be able
+     to update the wasm-bindgen dependency with:
+
+	 cargo update -p wasm-bindgen
+
+     or you can update the binary with
+
+	 cargo install -f wasm-bindgen-cli
+
+     if this warning fails to go away though and you're not sure what to do feel free
+     to open an issue at https://github.com/rustwasm/wasm-bindgen/issues!
+
+     Error: Running the wasm-bindgen CLI
+     Caused by: failed to execute `wasm-bindgen`: exited with exit code: 1
+       full command: "/Users/ariuszhao/.cargo/bin/wasm-bindgen" "/Users/ariuszhao/Packages/rustwasm/wasm-bindgen/target/wasm32-unknown-unknown/debug/webgl.wasm" "--out-dir" "/Users/ariuszhao/Packages/rustwasm/wasm-bindgen/examples/webgl/pkg" "--typescript" "--target" "bundler" "--out-name" "index" "--debug"
+   #+end_src
+   

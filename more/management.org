@@ -1,0 +1,5 @@
+#+STARTUP: content
+* management
+** Refers
+   - [[https://mp.weixin.qq.com/s?__biz=MzU0OTE4MzYzMw==&mid=2247503801&idx=1&sn=f9b9ac084877dbe785c2c738b4e6d500&chksm=fbb14647ccc6cf518e24e52cd03a7ab614b187091cd903e25a36e317a142be8a0bfa2ca71198#rd][网飞的管理]]
+   - [[https://sahillavingia.com/work][Gumroad 的自立兼职管理]]

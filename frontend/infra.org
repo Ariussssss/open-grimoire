@@ -1,0 +1,5 @@
+#+STARTUP: content
+#+CREATED: [2021-07-06 11:49]
+* infra
+** Refers
+   - https://mp.weixin.qq.com/s/1sw7IzokBLMCqo7jqOJGXQ

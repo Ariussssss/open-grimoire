@@ -1,0 +1,13 @@
+#+STARTUP: content
+#+CREATED: [2021-07-06 11:44]
+* model
+** Refers
+   - https://zhuanlan.zhihu.com/p/54846008
+** 漏斗模型 Funnel
+   流程式数据分析, 如:
+   - 访问
+   - 注册
+   - 注册成功
+
+   通过数据指导流程优化, 常见的: AIDMA, AISAS, AARRR
+   

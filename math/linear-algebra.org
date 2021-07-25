@@ -1,0 +1,6 @@
+#+STARTUP: content
+* Linear Algebra
+* Referrs
+  - https://pabloinsente.github.io/intro-linear-algebra
+  - https://hefferon.net/linearalgebra/
+  

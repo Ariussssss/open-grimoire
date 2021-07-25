@@ -1,0 +1,27 @@
+#+STARTUP: content
+#+CREATED: [2021-06-27 19:29]
+* cookie
+** Refers
+   - https://segmentfault.com/a/1190000004556040
+** 简介
+   cookie 是浏览器功能, 存储在浏览器的纯文本, 对应每个域存储
+
+   增加网络开销, 较少重复添加操作
+
+   一般大小为 4kb, 20 个
+** 构成
+
+   document.cookie 由分号和空格隔开, 每个 cookie 允许有属性 expires, domain, path, secure, HttpOnly
+
+   #+begin_src js
+     "key=name; expires=Thu, 25 Feb 2016 04:18:00 GMT; domain=ppsc.sankuai.com; path=/; secure; HttpOnly"
+   #+end_src
+
+   expires 为过期时间, 默认为 session 关闭丢失
+
+   domain 和 path 限制访问, 默认为当前域名和当前目录, 其本身是可以设置成子域名的
+
+   secure 需要有安全协议时才使用, 如 https
+
+   httpOnly 可以控制 js 是否可以访问
+   

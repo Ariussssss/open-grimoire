@@ -1,0 +1,9 @@
+#+STARTUP: content
+* short-bigger
+** TBH
+   "Tbh," the acronym that stands for "to be honest," 
+** TL;DR, TLDR
+   TLDR (or TL;DR) is a common internet acronym for “Too Long; Didn't Read.”
+   At face value, the phrase seems pretty easy to understand.
+** LGTM
+   LGTM is an acronym meaning looks good to me, frequently used when reviewing documents.

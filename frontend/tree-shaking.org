@@ -1,0 +1,27 @@
+#+STARTUP: content
+#+CREATED: [2021-07-05 11:06]
+* tree-shaking
+** Refers
+   - https://zhuanlan.zhihu.com/p/32831172
+   - https://juejin.cn/post/6844903544756109319
+** history
+   rollup 提出, webpack 2 在基于 uglify 实现
+** 失效原因
+*** babel
+    类的构造函数会被转译 ~Object.defineProperty~
+    
+    区分默认模式(es6)和宽松模式(loose)
+    #+begin_src js
+      // .babelrc
+      {
+	"presets": [["env", { "loose": false }]]
+      }
+    #+end_src
+*** effect
+    函数执行, 或者赋值对外部产生影响, 如 ~_createClass~ 默认有副作用  
+
+    webpack 4 可以通过 ~sideEffects~ 设为 false 取消判定
+*** 类型
+    只有 ~esm~ 格式支持
+
+    rollup 提案, 在 ~package.json~ 中, 除了 ~main~ 另外指定 ~module~

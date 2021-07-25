@@ -1,0 +1,115 @@
+#+STARTUP: content
+#+CREATED: [2021-05-18 11:42]
+* Emacs   
+** Mac 优化
+   [[https://github.com/railwaycat/homebrew-emacsmacport][homebrew-emacsmacport repo]]
+   
+   - 优化中文显示
+   - 优化全屏显示
+   - 性能优化
+*** 更新 Emacs-head
+    https://github.com/daviderestivo/homebrew-emacs-head
+    进一步优化体验, 可以根据需要定制构建 GUI.
+    目前用的:
+    #+begin_src bash
+      brew install emacs-head@28 --with-cocoa --with-native-comp
+    #+end_src
+
+** Elisp
+*** Alist
+    alist 类似于 map 的数据结构
+    
+    #+begin_src lisp
+      (setq test-alist '((name . "a") (value . "A")))
+
+      (alist-get 'name test-alist)
+      // "a"
+      (assoc 'name test-alist)
+      // (name . "a")
+    #+end_src
+
+    alist 也是 list 类型，可以用 mapcar 之类的方式改变形式。
+    查询可以新建一个 alist
+
+** Marco
+   ~C-x (~ 开启录制 ~C-x )~ 关闭录制
+
+   ~name-last-kbd-macro~ 命名上次的 宏，可以直接 ~M-x~ 执行该名称来调用 宏
+
+   ~C-x eeeeeee~ 可以一直重复上一次执行的 宏
+
+   ~insert-kbd-macro~ 缓存某个宏到当前文件，可以执行 init 再初始化
+
+** Org mode
+
+*** global
+
+    设置文档 启动格式
+
+    #+begin_src org
+      ,#+STARTUP: overview | content | showall
+    #+end_src
+
+
+*** font style
+    - *粗体*
+    - /斜体/
+    - +删除线+
+    - _下划线_
+    - =等宽=
+    - ~code~
+
+    ~C-c C-x C-f~ 修改选择区的样式
+      
+*** 常用 shortcut
+    ~C-c C-x C-v~ 预览图片
+    ~C-x n s/w~ 切换专注
+    ~C-c C-(fpnbu)~ 移动光标
+
+    ~C-c .~ 时间戳
+    ~C-c ,~ 优先级
+    
+    
+*** Table
+    Refers:
+    - https://www.zmonster.me/2016/06/03/org-mode-table.html
+
+    首先手动完成第一行，确定表格有多少列，然后按下 TAB 键就能自动在下一行插入新一行表格行了。
+    
+    ~C-c -~ 可以快速插入分割线
+    ~C-c |~ 可以快速创建表格，选中的数据（如逗号分隔的 CSV）可以直接生成
+    ~C-c '~ 可以生成公式
+
+    | a | b | c |
+    |---+---+---|
+    | 1 | 2 | 3 |
+    #+TBLFM: $3=$2 + $1
+
+    | 快捷键         | 说明                                                                                |
+    |----------------+-------------------------------------------------------------------------------------|
+    | TAB            | 切换到下一个单元格，如已是最后一个单元格，则新建一行并跳到该行第一个单元格          |
+    | M-S-right      | 在当前列前插入一列                                                                  |
+    | M-S-left       | 删除当前列                                                                          |
+    | M-S-down       | 在当前行前插入一行                                                                  |
+    | M-S-up         | 删除当前行                                                                          |
+    | C-m            | 移动到下一行，或新建一行                                                            |
+    | M-up/M-down    | 将当前行往上/下移动                                                                 |
+    | M-left/M-right | 将当前列往左/右移动                                                                 |
+    | C-c `          | 编辑当前单元格                                                                      |
+    | C-c C-x C-w    | 剪切某个区域的表格内容                                                              |
+    | C-c C-x C-y    | 拷贝复制的内容到表格                                                                |
+    | S-return       | 当单元格无内容时，将其上方第一个非空内容拷贝过来;否则拷贝当前内容到下一行并随之移动 |
+    | C-c C-c        | 强制表格重新排列                                                                    |
+    | C-c ^          | 表格排序                                                                            |
+
+    绘图
+    
+    #+PLOT: title:"Citas" ind:1 deps:(3) type:2d with:histograms set:"yrange [0:]" file:"./plot.png"
+    | Sede      | Max cites | H-index |
+    |-----------+-----------+---------|
+    | Chile     |    257.72 |   21.39 |
+    | Leeds     |    165.77 |   19.68 |
+    | Sao Paolo |     71.00 |   11.50 |
+    | Stockholm |    134.19 |   14.33 |
+    | Morelia   |    257.56 |   17.67 |
+

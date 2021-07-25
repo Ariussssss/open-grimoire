@@ -1,0 +1,293 @@
+#+STARTUP: content
+* LaTeX
+
+** 基本语法
+
+   #+begin_quote
+   LaTeX 大小写敏感
+   #+end_quote
+   
+   #+begin_src latex
+     \documentclass{article}
+     % 这里是导言区
+     \begin{document}
+     Hello, world!
+     \end{document}
+   #+end_src
+
+   其中 ~\documentclass~ 作为控制序列，后面紧跟着的事参数
+   
+   可以理解成函数
+
+   ~%~ 开头属于注释，直接忽略该行之后的文字，正常的百分号 ~\%~
+
+   控制序列 ~begin,end~ 同时使用，带一致参数，内部的内容被称为环境
+   
+   只有 ~document~ 内部的内容才会被输出到文档中
+
+   导言区设置页面大小、页眉页脚样式、章节标题样式，影响全篇文档
+
+   #+begin_quote
+    LaTeX 将一个换行当做是一个简单的空格来处理，如果需要换行另起一段，则需要用两个换行（一个空行）来实现
+    #+end_quote
+
+** 包引用
+   使用包的基本方式 ~\usepackage~
+   查询： ~tlmgr info ctex~
+   下载： ~tlmgr install ctex~
+   
+*** 中文
+
+    #+begin_quote
+    关于 LaTeX 的中文支持，首先要说的是：在现在，一切教你使用 CJK 宏包的模板、人、网页、书，都是糟糕的、有害的、恼人的、邪恶的和应该摒弃的。
+    #+end_quote
+
+    Tex 起始设计不支持中文，但后来 XeTeX 原生支持 Unicode，并且可以方便地调用系统字体
+
+    宏包，就是控制序列的集合
+
+    刘海洋、李清和孟晨维护的 ~CTeX~ 宏集, 隐藏细节，自动检测系统
+
+    #+begin_src latex
+      \documentclass[UTF8]{ctexart}
+    #+end_src
+
+    也可以使用 ~CJK~, 修改主字体,
+
+    #+begin_src latex
+      \documentclass{article}
+      \usepackage{xeCJK} %调用 xeCJK 宏包
+      \setCJKmainfont{SimSun} %设置 CJK 主字体为 SimSun （宋体）
+      \begin{document}
+      你好，world!
+      \end{document}
+    #+end_src
+      
+*** 常用的控制序列
+    
+    通过 ~titling~ 包可以修改环境的属性信息
+
+    ~\maketitle~ 可以在内容中生成对应的标题
+
+    #+begin_src latex
+      \title{你好，world!}
+      \author{arius}
+      \date{\today}
+    #+end_src
+
+    在文档类 ~article/ctexart~ 中，定义了五个控制序列来调整行文组织结构。他们分别是:
+    
+    - ~\section{·}~
+    - ~\subsection{·}~
+    - ~\subsubsection{·}~
+    - ~\paragraph{·}~
+    - ~\subparagraph{·}~
+
+    对应章节，在 ~report/ctexrep~ 中，还有 ~\chapter{·}~ ；在文档类 ~book/ctexbook~ 中，还定义了 ~\part{·}~ 。
+
+    ~\tableofcontents~ 可以构建目录
+
+    注意和 ~\maketitle~ 一起使用时，需要注意，后者会强制从新空页面开始，前者不会
+
+*** 数学公式
+    数学相关的包 ~amsmath~
+
+    数学模式有两个：行内模式（inline），行间模式（display）
+    
+**** 行内模式 inline
+     出现在正文中，插入数学公式
+
+     使用 ~$...$~ 或者 ~\[...\]~ 可以插入
+
+**** 行间模式 display
+     如果需要编号，可以使用 begin 的模式
+
+     #+begin_src latex
+       \begin{equation}
+       ...
+       \end{equation}
+     #+end_src
+     
+**** 规范
+     两者规范不同，行内公式的标点，应该放在数学模式的限定符之外，而行间公式则应该放在数学模式限定符之内。
+
+**** 上下标
+     上下标分别是 ~^~ 和 ~_~
+
+     默认只作用于之后的一个字符，如果想对连续的几个字符起作用，请将这些字符用花括号 ~{}~ 括起来
+
+**** 根号与分式
+     根式用 ~\sqrt{·}~ 来表示，分式用 ~\frac{·}{·}~ 来表示（第一个参数为分子，第二个为分母）
+
+     在行间公式和行内公式中，分式的输出效果是有差异的
+
+     如果要强制行内模式的分式显示为行间模式的大小，可以使用 ~\dfrac~, 反之可以使用 ~\tfrac~
+
+**** 定界符
+     各种括号用 ~(), [], \{\}, \langle\rangle~ 等命令表示
+
+     ~amsmath~ 宏包推荐使用 ~\big, \Big, \bigg, \Bigg~ 等一系列命令放在上述括号前面调整大小
+
+     #+begin_src latex
+       \[ \Biggl(\biggl(\Bigl(\bigl((x)\bigr)\Bigr)\biggr)\Biggr) \]
+       \[ \Biggl[\biggl[\Bigl[\bigl[[x]\bigr]\Bigr]\biggr]\Biggr] \]
+       \[ \Biggl \{\biggl \{\Bigl \{\bigl \{\{x\}\bigr \}\Bigr \}\biggr \}\Biggr\} \]
+       \[ \Biggl\langle\biggl\langle\Bigl\langle\bigl\langle\langle x
+       \rangle\bigr\rangle\Bigr\rangle\biggr\rangle\Biggr\rangle \]
+       \[ \Biggl\lvert\biggl\lvert\Bigl\lvert\bigl\lvert\lvert x
+       \rvert\bigr\rvert\Bigr\rvert\biggr\rvert\Biggr\rvert \]
+       \[ \Biggl\lVert\biggl\lVert\Bigl\lVert\bigl\lVert\lVert x
+       \rVert\bigr\rVert\Bigr\rVert\biggr\rVert\Biggr\rVert \]
+     #+end_src
+
+**** 省略号
+     #+begin_src latex
+       \[ x_1,x_2,\dots ,x_n\quad 1,2,\cdots ,n\quad
+       % 方向不同
+       \vdots\quad \ddots \]
+     #+end_src
+
+**** 矩阵
+     ~amsmath~ 的 ~pmatrix, bmatrix, Bmatrix, vmatrix, Vmatrix~ 等环境可以在矩阵两边加上各种分隔符
+
+     #+begin_src latex
+       \[ \begin{pmatrix} a&b\\c&d \end{pmatrix} \quad
+       \begin{bmatrix} a&b\\c&d \end{bmatrix} \quad
+       \begin{Bmatrix} a&b\\c&d \end{Bmatrix} \quad
+       \begin{vmatrix} a&b\\c&d \end{vmatrix} \quad
+       \begin{Vmatrix} a&b\\c&d \end{Vmatrix} \]
+
+       % 使用 smallmatrix 环境，可以生成行内公式的小矩阵。
+       Marry has a little matrix $ ( \begin{smallmatrix} a&b\\c&d \end{smallmatrix} ) +end_src.
+     #$
+     
+**** 多行
+
+     #+begin_src latex
+       % 不对齐
+       \begin{multline}
+       x = a+b+c+{} \\
+       d+e+f+g
+       \end{multline}
+
+       % 对齐，必须包含在数学环境里
+       \[\begin{aligned}
+       x ={}& a+b+c+{} \\
+       &d+e+f+g
+       \end{aligned}\]
+
+       % 不对齐公式组
+       \begin{gather}
+       a = b+c+d \\
+       x = y+z
+       \end{gather}
+
+       % 对齐公式组
+       \begin{align}
+       a &= b+c+d \\
+       x &= y+z
+       \end{align}
+
+       % 分段函数，必须用 cases 此环境，而且包含在数学环境之内
+       \[ y= \begin{cases}
+       -x,\quad x\leq 0 \\
+       x,\quad x>0
+       \end{cases} \]
+     #+end_src
+
+** 图片与表格
+   插图需要引用 ~graphic~ 宏包
+
+   #+begin_src latex
+     \includegraphics{a.jpg}
+     % 缩放到页面宽度的 80%
+     \includegraphics[width = .8\textwidth]{a.jpg}
+   #+end_src
+
+   浮动图片
+
+   #+begin_src latex
+     % htbp 选项用来指定插图的理想位置，这几个字母分别代表 here, top, bottom, float page，也就是就这里、页顶、页尾、浮动页
+     \begin{figure}[htbp]
+     \centering
+     \includegraphics{a.jpg}
+     \caption{有图有真相}
+     \label{fig:myphoto}
+     \end{figure}
+   #+end_src
+
+   ~tabular~ 环境提供了最简单的表格功能。
+
+   它用 \hline 命令表示横线，在列格式中用 | 表示竖线
+
+   用 & 来分列，用 \\ 来换行
+
+   每列可以采用居左、居中、居右等横向对齐方式，分别用 l、c、r 来表示
+
+   #+begin_src latex
+     \begin{tabular}{|l|c|r|}
+      \hline
+     操作系统& 发行版& 编辑器\\
+      \hline
+     Windows & MikTeX & TexMakerX \\
+      \hline
+     Unix/Linux & teTeX & Kile \\
+      \hline
+     Mac OS & MacTeX & TeXShop \\
+      \hline
+     通用& TeX Live & TeXworks \\
+      \hline
+     \end{tabular}
+   #+end_src
+** 排版
+   ~geometry~ 包可以设置页面边距，文档 [[http://texdoc.net/texmf-dist/doc/latex/geometry/geometry.pdf][geometry 文档]]
+
+   #+begin_src latex
+     % 将纸张的长度设置为 20cm、宽度设置为 15cm、左边距 1cm、右边距 2cm、上边距 3cm、下边距 4cm
+     \usepackage{geometry}
+     \geometry{papersize={20cm,15cm}}
+     \geometry{left=1cm,right=2cm,top=3cm,bottom=4cm}
+   #+end_src
+
+   设置页眉页脚，推荐使用 ~fancyhdr~ 宏包, [[http://texdoc.net/texmf-dist/doc/latex/fancyhdr/fancyhdr.pdf][fancyhdr 文档]]
+
+   #+begin_src latex
+     % 在页眉左边写上我的名字，中间写上今天的日期，右边写上我的电话；
+     % 页脚的正中写上页码；页眉和正文之间有一道宽为 0.4pt 的横线分割
+     \usepackage{fancyhdr}
+     \pagestyle{fancy}
+     \lhead{\author}
+     \chead{\date}
+     \rhead{152xxxxxxxx}
+     \lfoot{}
+     \cfoot{\thepage}
+     \rfoot{}
+     \renewcommand{\headrulewidth}{0.4pt}
+     \renewcommand{\headwidth}{\textwidth}
+     \renewcommand{\footrulewidth}{0pt}
+   #+end_src
+
+   使用 ~ctex~ 之后会自动首行缩进
+
+   可以通过 ~setspace~ 宏包设置行间距
+
+   #+begin_src latex
+     % 将行距设置为字号的 1.5 倍
+     \usepackage{setspace}
+     \onehalfspacing
+     % 修改段间距
+     \addtolength{\parskip}{.4em}
+   #+end_src
+   
+** 其他
+   TeX 系统生成的文件是 dvi 格式，pdfTeX 直接输出 pdf 格式的文档
+
+   XeTeX 引擎直接支持 Unicode 字符，支持中日韩文排版，需要使用 UTF-8 编码
+   
+   [[file:images/latex-symbol-1.png]]
+   [[file:images/latex-symbol-2.png]]
+   [[file:images/latex-symbol-3.png]]
+   [[file:images/latex-symbol-4.png]]
+   
+** Refers
+   - [[https://liam.page/2014/09/08/latex-introduction/][一份其实很短的 LaTeX 入门文档]]

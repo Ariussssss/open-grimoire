@@ -1,0 +1,22 @@
+#+STARTUP: content
+* Refers
+  - https://www.zhihu.com/question/26190832/answer/825301105
+* stream
+  分可读, 可写, 双工, 转换流.
+* pipe
+  半自动的 stream 模式
+* More
+*** Buffer 与 Cache
+    Buffer 缓冲区.
+    IO 读写必定产生 Buffer, 不可回收.
+    
+    因为 cpu 不能操作硬盘数据, 所以读和写都是通过操作内存中的 Buffer 完成的.
+    Cache 其实不止缓存, 还有快取:
+    - 快取: 存储上一次查询的数据或者地址, 加快下次获取的速度.
+    - 缓存: 修改完成后的数据, 通过 Buffer 的格式存在内存中, 返回成功.
+      等后续写入请求和其他修改接收后, 完成合并最终写入硬盘.
+      减少写入次数.
+
+    Nodejs 中的 Buffer:
+    - On 32-bit architectures, this value currently is 2^30 - 1 (~1GB).
+    - On 64-bit architectures, this value currently is 2^31 - 1 (~2GB)

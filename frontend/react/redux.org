@@ -1,0 +1,121 @@
+#+STARTUP: content
+* redux
+** Refers
+   - https://codesandbox.io/s/thirsty-field-7ekbp?file=/src/index.js
+** Easy redux
+   #+begin_src js
+     // ./myMiddleware.js
+     export function logMiddleWare(middlewareAPI) {
+       return (next) => (action) => {
+	 console.log("logMiddleWare:", action);
+	 return next(action);
+       };
+     }
+
+     export function customMiddleWare(middlewareAPI) {
+       return (next) => (action) => {
+	 console.log("customMiddleWare");
+	 if (Object.prototype.toString.call(action) === "[object Promise]") {
+	   action.then((res) => {
+	     middlewareAPI.dispatch(res);
+	   });
+	   return;
+	 }
+	 return next(action);
+       };
+     }
+   #+end_src
+
+   #+begin_src js
+     // ./myRedux.js
+     export function createStore(reducer, preloadState, enhancer) {
+       if (enhancer === undefined && typeof preloadState === "function") {
+	 // preloadState 可以不传，第二个参数为enhancer
+	 enhancer = preloadState;
+	 preloadState = undefined;
+       }
+
+       if (typeof enhancer === "function") {
+	 // 调用applymiddleware的返回函数
+	 return enhancer(createStore)(reducer, preloadState);
+       }
+
+       let currentState = preloadState;
+       let listeners = [];
+
+       function getState() {
+	 return currentState;
+       }
+
+       function subscribe(listener) {
+	 listeners.push(listener);
+	 return function unsubscribe() {
+	   const index = listeners.indexOf(listener);
+	   listeners.splice(index);
+	 };
+       }
+
+       function dispatch(action) {
+	 currentState = reducer(currentState, action);
+	 for (let i = 0; i < listeners.length; i++) {
+	   const listener = listeners[i];
+	   listener();
+	 }
+       }
+
+       return {
+	 getState,
+	 subscribe,
+	 dispatch
+       };
+     }
+
+     export function combineReducers(reducers) {
+       return function combination(state, action) {
+	 const nextState = {};
+	 for (let [key, reducer] of Object.entries(reducers)) {
+	   const previousStateForKey = state[key];
+	   const nextStateForKey = reducer(previousStateForKey, action);
+	   nextState[key] = nextStateForKey;
+	 }
+	 return nextState;
+       };
+     }
+
+     export function applyMiddleware(middlewares) {
+       return (createStore) => (reducer, preloadState) => {
+	 const store = createStore(reducer, preloadState);
+	 let dispatch = () => {
+	   // 构造middle函数的时候，是不允许调用dispatch的。
+	   throw new Error(
+	     "Dispatching while constructing your middleware is not allowed. " +
+	       "Other middleware would not be applied to this dispatch."
+	   );
+	 };
+
+	 const middlewareAPI = {
+	   getState: store.getState,
+	   dispatch: (action, ...args) => dispatch(action, ...args)
+	 };
+	 const chain = middlewares.map((middleware) => middleware(middlewareAPI));
+	 dispatch = compose(...chain)(store.dispatch);
+	 return {
+	   ...store,
+	   dispatch
+	 };
+       };
+     }
+
+     export function compose(...funcs) {
+       if (funcs.length === 0) {
+	 return (...args) => args;
+       }
+
+       if (funcs.length === 1) {
+	 return funcs[0];
+       }
+
+       return funcs.reduce((a, b) => (...args) => a(b(...args)));
+     }
+
+   #+end_src

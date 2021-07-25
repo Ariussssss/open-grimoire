@@ -1,0 +1,14 @@
+#+STARTUP: content
+* blog
+** https://lutaonan.com/
+** https://xargin.com/
+** https://golang.design/
+** https://robert.kra.hn/
+** https://orta.io/notes/home
+** https://tokio.rs/blog/
+** https://github.com/berwin/Blog
+** https://coolshell.cn/
+** https://dmesg.app/
+** https://github.com/answershuto/Blog
+** https://markodenic.com/blog/
+** https://github.com/crisxuan/bestJavaer

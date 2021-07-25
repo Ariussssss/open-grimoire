@@ -1,0 +1,55 @@
+#+STARTUP: content
+* rpc
+** Refers
+   - https://www.zhihu.com/question/41609070
+** 概述
+   RPC Remote Procedure Call 远程过程调用
+
+   目标:
+   1. 简单清晰, 建立分布式计算容易
+   2. 高效, 调用过程简单
+      想调用本地接口一样调用远程服务
+   3. 通用
+** 理解与 http 的关系
+   rpc 主要指远程调用, 调用协议包括 传输协议 和 序列化协议
+
+   传输协议 grpc 中使用了 http2 协议, dubbo 报文使用了 tcp 协议
+
+   序列化包括 xml, json, 二进制的 protobuf, thrift 等
+
+   同时 http 也可以使用 rpc 的序列化协议
+
+   而 http 会在头部占用很打一部分传输数据比例, 对于 rpc 来说不需要
+
+   其次 http2 支持二进制和头部压缩, 也可以用于 rpc
+
+   除了内容外, rpc 还可以封装服务发现, 负债均衡, 熔断降级等高级特性
+
+   主要是 rpc 可以基于服务端使用场景进行自定义的定制, 提高效率.
+   而 http 需要满足浏览器和通用环境, 对于后端场景不必要. 
+
+** 框架
+   RPC 框架主要负责屏蔽底层的传输方式 TCP 或者 UDP,  序列化, 通信细节.
+
+   分为三类:
+   - 支持多语言的 RPC, Google gRPC, Apache 的 Thrift
+   - 特定语言 新浪的 Motan
+   - 支持服务治理特性的分布式服务框架, 底层为 RPC, 阿里 Dubbo
+   
+** 流程
+  
+   [[file:images/f5e1b69c-651f-4568-bf54-1380f577c465.png]]
+
+   1. 调用方 Client 通过本地 RPC 代理调用接口
+   2. 本地代理将 RPC 服务名, 方法名, 参数转换成 RPC Request 对象, 交给框架
+   3. RPC 框架采用 RPC 协议 RPC Protocol 将对象序列化成二进制, 通过 TCP 通道传递给服务提供方 Server
+   4. Server 反序列化 RPC Request 对象
+   5. 找到方法, 参数执行, 获得结果, 封装 RPC Response
+   6. Server 通过 RPC Protocol 序列化成二进制形式, 通过 TCP 通道返回服务调用方
+   7. Client 收到二进制, 反序列化成对象, 返回结果 
+
+** 发展与困境
+   - 服务拆分成多个服务, 每个服务独立集群部署, 每个集群若干实例
+   - 调用方需要有服务发现手段去知道 服务方的 ip 和端口
+   - 服务众多, 依赖关系复杂, 异常实例排除和动态剔除
+   - 负载均衡需要对每一层进行操作

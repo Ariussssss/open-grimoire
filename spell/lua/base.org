@@ -1,0 +1,5 @@
+#+STARTUP: content
+* base
+** Refers
+   - https://learnxinyminutes.com/docs/lua/
+   - https://coolshell.cn/articles/10739.html
