@@ -38,6 +38,8 @@
    #+begin_src bash
      xargs git branch -d < ./branch.txt
      awk | xargs kill -9
+     # 参数
+     ls -d ./* | xargs -i {} cp {} ~/tmp
    #+end_src
 ** find
    通配文件检索

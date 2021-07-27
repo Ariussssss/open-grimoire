@@ -1,4 +1,4 @@
-q#+STARTUP: content
+#+STARTUP: content
 * Git
 ** ssh
    生成.
@@ -29,11 +29,13 @@ q#+STARTUP: content
 	     name = arius
    #+end_src
 ** Tips
+
 *** get commit msg
     Cli 获取单行 ~commit~
     #+begin_src shell
       git log -1 HEAD --pretty=format:%s
     #+end_src
+
 *** Star history
     利用 ~https://starchart.cc/<namespace>/<repo_name>~ 可以展示对应的图片
     使用方式如下
@@ -43,8 +45,10 @@ q#+STARTUP: content
 
       [![Stargazers over time](https://starchart.cc/halfrost/Halfrost-Field.svg)](https://starchart.cc/halfrost/Halfrost-Field)
     #+end_src
+
 *** 行为记录
     ~https://gitstalk.netlify.app/<user_name>~
+
 *** geojson
     https://github.com/ElaWorkshop/awesome-cn-cafe/blob/master/shenzhen.geojson
     支持 map 信息.
