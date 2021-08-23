@@ -1,0 +1,4 @@
+#+STARTUP: content
+* tmux
+** keybinding
+   -  ~ctrl-s~ search

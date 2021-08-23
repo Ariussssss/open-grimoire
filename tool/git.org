@@ -52,3 +52,8 @@
 *** geojson
     https://github.com/ElaWorkshop/awesome-cn-cafe/blob/master/shenzhen.geojson
     支持 map 信息.
+
+** cli
+   https://cli.github.com/
+
+   

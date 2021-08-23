@@ -1,0 +1,31 @@
+#    -*- mode: org -*-
+
+
+Archived entries from file /Users/ariuszhao/org/grimoire/linux/ssh.org
+
+
+* 公钥登陆
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2021-08-22 Sun 14:17
+  :ARCHIVE_FILE: ~/org/grimoire/linux/ssh.org
+  :ARCHIVE_OLPATH: ssh
+  :ARCHIVE_CATEGORY: ssh
+  :END:
+
+* 原理
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2021-08-22 Sun 14:19
+  :ARCHIVE_FILE: ~/org/grimoire/linux/ssh.org
+  :ARCHIVE_OLPATH: ssh
+  :ARCHIVE_CATEGORY: ssh
+  :END:
+  因为保证安全, 所以使用公钥加密.
+
+  Steps:
+  - 远程主机收到用户的登录请求, 发送自己的公钥
+  - 用户使用公钥加密密码, 发送
+  - 远程主机接收, 用私钥解密
+
+  没有 CA 证书, 害怕中间人伪造远端主机.
+
+  初次登陆会返回确认公钥指纹, 公钥接受猴会被保存在  ~$HOME/.ssh/known_hosts~ 

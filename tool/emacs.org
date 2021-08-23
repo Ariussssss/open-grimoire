@@ -113,3 +113,75 @@
     | Stockholm |    134.19 |   14.33 |
     | Morelia   |    257.56 |   17.67 |
 
+
+** dired
+
+*** base
+    - ~><~ 移动光标到 dir
+    - ~o~ 打开到新的 frame
+    
+*** subdirectory
+    - ~i~ 将目标文件夹路径引入  ~subdirectory~ list 中  
+    - ~^~ 返回父目录
+    - ~C-u C-SPC~  返回上一级
+    - ~C-u k~ 删除当前 ~subdirectory~
+    - ~$~ ~M-$~ 缩小快速跳转
+    - ~C-M-n~ dired-next-subdir
+    - ~C-M-p~ dired-prev-subdir
+
+
+** Centos 编译
+   #+begin_src bash
+     sudo yum install \
+	 GConf2-devel \
+	 Xaw3d-devel \
+	 dbus-devel \
+	 dbus-glib-devel \
+	 dbus-python \
+	 gcc \
+	 giflib-devel \
+	 gnutls-devel \
+	 gpm-devel \
+	 gtk+-devel \
+	 gtk2-devel \
+	     ImageMagick \
+	     ImageMagick-devel \
+	 jansson-devel \
+	 libX11-devel \
+	 libXft-devel \
+	 libXpm-devel \
+	 libjpeg-devel \
+	 libpng-devel \
+	 libtiff-devel \
+	 libungif-devel \
+	 make \
+	 ncurses-devel \
+	 pkgconfig \
+	 texi2html \
+	 texinfo
+
+     git clone https://git.savannah.gnu.org/git/emacs.git
+     cd emacs
+     git tag -l
+     git checkout emacs-27.1.91
+
+     ./autogen.sh
+     ./configure --without-selinux
+
+     make -j4 && sudo make install
+   #+end_src
+
+** ssh
+   find-file
+   #+begin_src bash
+     /ssh:user@192.168.1.5:/usr/share/nginx/html/index.html
+   #+end_src
+
+   method
+   #+begin_src lisp
+     (defun connect-remote ()
+       (interactive)
+       (dired "/user@192.168.1.5:/"))
+   #+end_src
+   
+   https://www.dazhuanlan.com/hawklim/topics/971776

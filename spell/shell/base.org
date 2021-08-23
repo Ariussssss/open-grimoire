@@ -50,5 +50,7 @@
    #+begin_src shell
      wc -wl
    #+end_src
-   
-
+** scp
+   #+begin_src shell
+     scp -P 2222 file.ext username@domain:~/ 
+   #+end_src

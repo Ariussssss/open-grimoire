@@ -1,0 +1,44 @@
+#+STARTUP: content
+#+CREATED: [2021-08-22 14:11]
+* ssh
+** Refers
+   - https://www.ruanyifeng.com/blog/2011/12/ssh_remote_login.html
+   - http://zhdotemacs.sourceforge.net/emacs/emacs-packages.html
+   - https://github.com/wangdoc/ssh-tutorial/blob/main/docs/basic.md
+   - https://www.cnblogs.com/zzdyyy/p/7538077.html
+** ssh Secure Shell
+   一种网络协议, 加密登陆, 被认为是安全的.
+   即使中途截获也不会泄露密码.
+
+   于 1995 年芬兰学者 Tatu Ylonen 设计. 
+** 原理
+   因为保证安全, 所以使用公钥加密.
+
+   Steps:
+   - 远程主机收到用户的登录请求, 发送自己的公钥
+   - 用户使用公钥加密密码, 发送
+   - 远程主机接收, 用私钥解密
+
+   没有 CA 证书, 害怕中间人伪造远端主机.
+
+   初次登陆会返回确认公钥指纹, 公钥接受后会被保存在  ~$HOME/.ssh/known_hosts~, 下次登录时使用. 
+   
+** 公钥登录
+   本地创建
+   #+begin_src bash
+     ssh-keygen
+   #+end_src
+
+   注册公钥到远端
+   #+begin_src bash
+     ssh-copy-id user@host
+   #+end_src
+
+   如果用 shell 代替 ssh-copy-id
+   #+begin_src bash
+     sh user@host 'mkdir -p .ssh && cat >> .ssh/authorized_keys' < ~/.ssh/id_rsa.pub
+   #+end_src
+
+** tty
+   tty, tele typewriter, 是用户访问计算机主机的硬件设备. 
+   可以理解为一个显示器和一个键盘的组合
