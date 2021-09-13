@@ -1,0 +1,23 @@
+#+STARTUP: content
+#+CREATED: [2021-06-21 13:40]
+* vue-diff
+** Refers
+   - https://zhuanlan.zhihu.com/p/100228073
+   - https://zhuanlan.zhihu.com/p/149972619
+** 数据监听
+   Vue 是 getter/setter, 因为 Vue 的数据是可变的
+
+   React 是 diff, 全量更新 vdom, 数据不可变
+** 数据流
+   vue 是双向绑定
+
+   react 是单向数据流
+** 组合
+   Vue 通过 mixin 的方式
+
+   React 放弃了 mixin, 通过 HoC 和 hooks
+** css
+   Vue 支持 scoped 和 module
+
+   React 更支持 CSS-in-JS
+   

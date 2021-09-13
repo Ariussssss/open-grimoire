@@ -2,6 +2,7 @@
 * redux
 ** Refers
    - https://codesandbox.io/s/thirsty-field-7ekbp?file=/src/index.js
+   - https://dev.to/hellomuthu23/how-to-use-usereducer-and-usecontext-hooks-with-typescript-in-react-14d1
 ** Easy redux
    #+begin_src js
      // ./myMiddleware.js
@@ -119,3 +120,5 @@
      }
 
    #+end_src
+   
+** 
