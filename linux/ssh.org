@@ -7,7 +7,7 @@
    - https://github.com/wangdoc/ssh-tutorial/blob/main/docs/basic.md
    - https://www.cnblogs.com/zzdyyy/p/7538077.html
 ** ssh Secure Shell
-   一种网络协议, 加密登陆, 被认为是安全的.
+   是一种网络协议, 加密登陆, 被认为是安全的.
    即使中途截获也不会泄露密码.
 
    于 1995 年芬兰学者 Tatu Ylonen 设计. 
@@ -33,10 +33,11 @@
    #+begin_src bash
      ssh-copy-id user@host
    #+end_src
+   执行完成后, 可以去远端查看 ~.ssh/authorized_keys~
 
    如果用 shell 代替 ssh-copy-id
    #+begin_src bash
-     sh user@host 'mkdir -p .ssh && cat >> .ssh/authorized_keys' < ~/.ssh/id_rsa.pub
+     ssh user@host 'mkdir -p .ssh && cat >> .ssh/authorized_keys' < ~/.ssh/id_rsa.pub
    #+end_src
 
 ** tty

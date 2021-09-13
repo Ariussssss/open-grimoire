@@ -2,3 +2,6 @@
 * tmux
 ** keybinding
    -  ~ctrl-s~ search
+** source
+   插件主题等: https://github.com/rothgar/awesome-tmux
+8192

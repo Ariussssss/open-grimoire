@@ -183,5 +183,9 @@
        (interactive)
        (dired "/user@192.168.1.5:/"))
    #+end_src
-   
-   https://www.dazhuanlan.com/hawklim/topics/971776
+
+*** tramp
+    Refers: 
+    - https://www.dazhuanlan.com/hawklim/topics/971776
+
+    TRAMP: Transparent Remote file Access, Multiple Protocol
