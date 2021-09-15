@@ -235,7 +235,7 @@
    通过对象取值的方式, 生成新的参数
    
    #+begin_src typescript
-      interface Props<ResType> {
+     interface Props<ResType> {
        columns: { 
 	 [K in keyof ResType]: {
 	   dataIndex: K;

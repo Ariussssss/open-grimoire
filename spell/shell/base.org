@@ -1,4 +1,35 @@
 * Shell
+** syntax
+   参数
+   #+begin_src shell
+     echo "Shell 传递参数实例！";
+     echo "执行的文件名：$0";
+     echo "第一个参数为：$1";
+     echo "第二个参数为：$2";
+     echo "第三个参数为：$3";
+     echo "参数个数为$#"
+     echo "所有参数$@"
+     echo "所有参数$*"
+     echo "进程号$$"
+   #+end_src
+
+   判断
+   #+begin_src shell
+     if [ $a -le $b ]
+     then
+	echo "$a -le $b: a 小于或等于 b"
+     else
+	echo "$a -le $b: a 大于 b"
+     fi
+   #+end_src
+
+   非空
+   #+begin_src shell
+     [ test -z "$word" ]
+     [ ! -n "$word" ]
+     [ ! "$word" ]
+     [ "" = "$word" ]
+   #+end_src
 ** spells
 *** du
 

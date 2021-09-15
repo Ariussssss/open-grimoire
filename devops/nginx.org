@@ -2,6 +2,19 @@
 #+CREATED: [2021-06-10 09:04]
 * nginx
 ** Refers
+** syntax
+   #+begin_src conf
+     server {
+       listen       80;
+       listen       [::]:80;
+       server_name  some-domain.com;
+  
+       location /projects/* {
+	 root /root/projects/;
+	 index  index.html;
+       }
+     }
+   #+end_src
 ** 负载均衡算法
    1. 默认轮询
    2. weight 权重, 按比例划分

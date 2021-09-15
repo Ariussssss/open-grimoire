@@ -3,7 +3,18 @@
 * document-transition
 ** Refers
    - https://developer.chrome.com/en/blog/shared-element-transitions-for-spas/
-** preview
+   - https://medium.com/@prateekbh/shared-elements-transitions-for-web-6fa9d31d4d6a
+** history
+   之前想实现原生类似原生的动画需要些复杂的 transition: https://transition.surge.sh/
+
+   大致思路, Steps:
+   1. 单击卡片时, 上传卡片位置到全局顶层透明的虚拟层
+   2. 虚拟层展示原来的卡片所在的位置覆盖原来的卡片
+   3. 当新路径初始化渲染时, 新页面布局上报对应的共享元素位置信息到虚拟层
+   4. 虚拟层执行动画移动虚拟元素到对应的位置, 然后拷贝成新页面的元素, 移除虚拟层元素
+
+   原文: https://medium.com/@prateekbh/shared-elements-transitions-for-web-6fa9d31d4d6a
+** 新 API 试用设置
    目前需要试用提案, 有两种方式:
    1. 网站注册试用 token
       Chrome 92 版本起, 允许使用 ~shared element transions API~, 可以通过域名试用的方式启用.
@@ -22,7 +33,7 @@
       - 添加到 meta 里 ~<meta http-equiv="origin-trial" content="TOKEN_GOES_HERE">~
       - 添加到 response heeder 中 ~Origin-Trial: TOKEN_GOES_HERE~ 
 
-   Web 提案: https://github.com/WICG/shared-element-transitions/
+   提案地址: https://github.com/WICG/shared-element-transitions/
 ** 使用
 *** 环境
     判断是否支持
@@ -54,7 +65,26 @@
     3. 执行 ~start~ 展示动画
 
 *** 共享元素动画
-    
+
+    #+begin_src js
+      async function navigateToSettingsPage() {
+	await document.documentTransition.prepare({
+	  rootTransition: 'cover-up',
+          // 需要更新执行动画的元素
+	  sharedElements: [element1, element2, element3],
+	});
+	updateDOMForSettingsPage();
+	await document.documentTransition.start({
+          // 对应动画结束时的元素
+	  sharedElements: [element1, element4, element5],
+	});
+      }
+    #+end_src
+
+    其中前后共享元素需要一一对应. 
+
+    动画会根据新页面的样式进行调整, 可以通过新页面的样式布局自动执行.
+    因为是动画是基于 dom 的, CSS 变化和动画都可以流畅拼接. 
     
 ** 限制:
    1. 动画基于 DOM 动态执行, 内置 CSS 动画或者 gif 会处于静止状态
