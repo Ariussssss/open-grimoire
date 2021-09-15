@@ -1,6 +1,30 @@
 #+STARTUP: content
 * regex
+** 基础
+   match, matchAll 返回都是迭代器, 可以通过数组解构和  ~next~ 来获取值.  
+   match 会获取匹配结果, matchAll 会获取单词匹次的所有结果(就是括号值)
+   #+begin_src js
+     const regexp = /t(e)(st(\d?))/g;
+     const str = 'test1test2';
+
+     const array = [...str.matchAll(regexp)];
+
+     console.log(array[0]);
+     // expected output: Array ["test1", "e", "st1", "1"]
+
+     console.log(array[1]);
+     // expected output: Array ["test2", "e", "st2", "2"]
+   #+end_src
+   test
+   #+begin_src js
+     const regexp = /t(e)(st(\d?))/g;
+     const str = 'test1test2';
+
+     regexp.test(str)
+   #+end_src
+   
 ** 千分位
    #+begin_src js
      num.toString().replace(/(\d)(?=(?:\d{3})+$)/g,'$1,')
    #+end_src
+   

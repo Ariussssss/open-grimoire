@@ -95,7 +95,7 @@
     
 ** React 16
 *** 架构
-    - Scheduler 调度器, 分配优先级, 高优任务优先 Reconcile
+    - Scheduler 调度器, 分配优先级, 高优任务优先 Reconciler
       因为浏览器兼容以及不稳定可控, 想要频率控制.
       不使用原生的 ~requestIdleCallback~.
     - Reconciler 协调器, 负责找出变化的组件.

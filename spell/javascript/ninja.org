@@ -58,3 +58,7 @@
      // Promise {<rejected>: 3}
      // >  Uncaught (in promise) 3
    #+end_src
+** clearTimeout
+    ~clearTimeout~  只是把回调事件从定时器队列中移除, 并没有改变他的变量.
+
+    判空需要先清空. 
