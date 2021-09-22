@@ -1,0 +1,63 @@
+#+STARTUP: content
+#+CREATED: [2021-09-21 16:19]
+* electron
+** Refers
+** electron-store
+   存储数据用. 需要定制配置, 不然会读不到报错.
+   #+begin_src js
+     import pkg from "../../package.json";
+
+     export const store = new Store({
+       configName: "fetch-cninfo",
+       projectSuffix: "cninfo",
+       projectName: pkg.name,
+       projectVersion: pkg.version,
+     } as any);
+
+   #+end_src
+   
+** webpack
+   因为会用到 node 相关的东西, webpack 有三个专门为 electron 定制的 target 模式 electron-renderer,  electron-main, electron-preload.
+
+   除了 electron-renderer 有前端框架和预编译样式需要用 webpack 外. 其他两个可以直接用 tsc. 
+** 打包
+   通过 electron-builder 打包, 配置 package.json
+   #+begin_src js
+     "main": "./lib/main.js",
+     "build": {
+       "productName": "app-name",
+       "appId": "com.app.id",
+       "copyright": "app",
+       "directories": {
+	 "output": "build"
+       },
+       "win": {
+	 "icon": "images/logo.ico"
+       },
+       "files": [
+	 "./lib/**/*",
+	 "./dist/**/*",
+	 "./index.html",
+	 "./package.json"
+       ],
+       "target": [
+	 {
+	   "target": "nsis",
+	   "arch": [
+	     "x64",
+	     "ia32"
+	   ]
+	 }
+       ]
+     },
+
+   #+end_src
+
+   npm  ~npm config set registry https://registry.npm.taobao.org/~ 
+
+   下载源 https://npm.taobao.org/mirrors/electron/, 可以手动下载缓存
+
+   缓存位置: 
+   - Linux：$XDG_CACHE_HOME 或 ~/.cache/electron/
+   - macOS：~/Library/Caches/electron/
+   - Windows：~/AppData/local/electron/Cache

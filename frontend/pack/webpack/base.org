@@ -80,7 +80,7 @@
 
    内置的 SplitChunksPlugin 有懒加载的能力
 
-** easy-webpack
+** easy-webpack demo
    #+begin_src js
      const fs = require('fs')
      const path = require('path')

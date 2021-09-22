@@ -5,7 +5,9 @@
    - https://segmentfault.com/a/1190000015597029
    - https://www.huaweicloud.com/articles/eeca0bfe5ce9321ed2e81a2218326d53.html
 ** 原因
-   浏览器同源策略, 保护用户
+   浏览器同源策略, 保护用户.
+
+   同域名不包含子域名, 同协议. 
 ** 方法
    1. 通过jsonp跨域
    2. document.domain + iframe跨域

@@ -3,6 +3,7 @@
 * snowpack
 ** Refers
    - https://juejin.cn/post/6844904176342794254
+   - https://juejin.cn/post/6844904183083040775
 ** 理念
    简单来说就是将源码流式编译, 部署到 本地 server 访问地址, 然后通过 浏览器的 esm import 凡是访问.
    因此所有加载和构建逻辑都是按需的.
@@ -22,5 +23,13 @@
    文本转换为字符串, 插入 ~script~
      
 ** 热更新
+   客户端, 将 css 转译成 js, socket import 导入 script. 
+   
+   服务端 基于 chokidar 代替  ~fs.watch~, ~fs.watchFile~ 来监听文件变化, chokidar 解决的问题:
+   - 不能递归监视文件树
+   - 高 cpu 占用
+   - 文件更新事件重复触发
 
+
+   
 
