@@ -85,3 +85,8 @@
    #+begin_src shell
      scp -P 2222 file.ext username@domain:~/ 
    #+end_src
+** sed
+   filter 获取
+   #+begin_src shell
+     git diff --name-only | sed -E '*.org'
+   #+end_src

@@ -7,3 +7,6 @@
    At face value, the phrase seems pretty easy to understand.
 ** LGTM
    LGTM is an acronym meaning looks good to me, frequently used when reviewing documents.
+** OTOH
+   On the other hand.
+   

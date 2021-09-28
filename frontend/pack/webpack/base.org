@@ -8,7 +8,10 @@
 
    module 交给 webpack 处理的中间产物是 chunk
 
-   chunk 处理完成，生成的产物是 bundle
+   chunk 处理完成，生成的产物是 bundle.
+
+   默认 chunk 会声称对应的 bundle 也就是静态产物, output 会通过命名规则将其合并.
+   最终 assets 每个会匹配最少一个, 符合规则的 chunks 集合. 
 
 ** filename, chunkFilename
 
@@ -18,11 +21,13 @@
 
 ** hash, chunkhash, contenthash
 
-   hash 所有文件单次构建 hash 都一致
+   hash 所有文件单次构建 hash 都一致. 
+   同一项目构建, 有内容变更的时候变更
 
-   chunkhash 是会 chunk 更改时候变化
+   chunkhash 是会 chunk 更改时候变化.
+   同一chunk 变更的时候变更. 
 
-   contenthash 使用较多，只有当输出资源变化时变化
+   contenthash 使用较多，只有当输出资源变化时变化, 最小.
    
 ** source-map
 

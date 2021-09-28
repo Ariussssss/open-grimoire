@@ -1,0 +1,62 @@
+#+STARTUP: content
+#+SETUPFILE: ~/.emacs.d/org-styles/html/white_clean.theme
+#+TITLE: esbuild
+#+DATE: [2021-06-29 12:34]
+* Refers
+* 本身
+  支持常用功能: 加载压缩打包, tree-shaking, source-map, jsx 等
+
+  新的部分:
+  - top-level await
+  - BigInt
+  - Hashbang
+* why fast
+  - go 编写, 完全可以编译为本地代码
+    js 不能充分使用 cpu, v8 JIT 机制只能部分代码实现机械码, go 可以全部
+  - 解析, 生成产物, source-map 并行
+  - 无需数据转换
+  - 提速, 减少内存分配管理
+* API
+  一共 四个函数 transform, build, buildSync, Service
+   
+** transform
+   转化代码输出 js
+    
+   params:
+   - input 输入参数
+   - loader:
+     #+begin_src typescript
+       type Loader = 'js' | 'jsx' | 'ts' | 'tsx' | 'css' | 'json' | 'text' | 'base64' | 'file' | 'dataurl' | 'binary'
+     #+end_src
+
+** build
+   实现 transfrom, 将转化后的代码压缩生成 js 到 output
+
+   buildSync 就是同步构建
+    
+** Service
+   因为执行上述 API 会创建子运行时, 多次调用有性能损耗
+
+   Service 提供常驻共享子进程, Vite 利用 Service 进行代码转换
+
+   使用时, 通过 startService 创建实例并调用, 用完 stop
+    
+   #+begin_src js
+     const {
+       startService,
+       build,
+     } = require("esbuild")
+     const service = await startService()
+
+     try {
+       const res = await service.build({
+	 entryPoints: ["./src/main.js"],
+	 write: false
+       })
+       console.log(res)
+     } finally {
+       service.stop()
+     }
+   #+end_src
+
+   这就是基于 esbuild 实现的最简单的 bundler

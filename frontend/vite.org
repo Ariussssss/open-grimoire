@@ -2,11 +2,3 @@
 #+CREATED: [2021-06-29 12:36]
 * vite
 ** Refers
-   - https://juejin.cn/post/6883862821289852936
-   - https://harlanzw.com/blog/how-the-heck-does-vite-work/
-** webpack 迁移相关
-   vite 本身基于 esm, 所以没有 require
-
-   vite 半身面向 开发, 而非打包 (bundler)
-
-   底层使用了 esbuild 的 transform 而非所有 API , 可以定制的部分有限

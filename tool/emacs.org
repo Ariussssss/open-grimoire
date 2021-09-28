@@ -1,191 +1,292 @@
 #+STARTUP: content
-#+CREATED: [2021-05-18 11:42]
-* Emacs   
-** Mac 优化
-   [[https://github.com/railwaycat/homebrew-emacsmacport][homebrew-emacsmacport repo]]
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: Emacs 笔记
+#+DATE: [2021-05-18 11:42]
+* Refers
+* Mac 优化
+  [[https://github.com/railwaycat/homebrew-emacsmacport][homebrew-emacsmacport repo]]
    
-   - 优化中文显示
-   - 优化全屏显示
-   - 性能优化
-*** 更新 Emacs-head
-    https://github.com/daviderestivo/homebrew-emacs-head
-    进一步优化体验, 可以根据需要定制构建 GUI.
-    目前用的:
-    #+begin_src bash
-      brew install emacs-head@28 --with-cocoa --with-native-comp
-    #+end_src
-
-** Elisp
-*** Alist
-    alist 类似于 map 的数据结构
-    
-    #+begin_src lisp
-      (setq test-alist '((name . "a") (value . "A")))
-
-      (alist-get 'name test-alist)
-      // "a"
-      (assoc 'name test-alist)
-      // (name . "a")
-    #+end_src
-
-    alist 也是 list 类型，可以用 mapcar 之类的方式改变形式。
-    查询可以新建一个 alist
-
-** Marco
-   ~C-x (~ 开启录制 ~C-x )~ 关闭录制
-
-   ~name-last-kbd-macro~ 命名上次的 宏，可以直接 ~M-x~ 执行该名称来调用 宏
-
-   ~C-x eeeeeee~ 可以一直重复上一次执行的 宏
-
-   ~insert-kbd-macro~ 缓存某个宏到当前文件，可以执行 init 再初始化
-
-** Org mode
-
-*** global
-
-    设置文档 启动格式
-
-    #+begin_src org
-      ,#+STARTUP: overview | content | showall
-    #+end_src
-
-
-*** font style
-    - *粗体*
-    - /斜体/
-    - +删除线+
-    - _下划线_
-    - =等宽=
-    - ~code~
-
-    ~C-c C-x C-f~ 修改选择区的样式
-      
-*** 常用 shortcut
-    ~C-c C-x C-v~ 预览图片
-    ~C-x n s/w~ 切换专注
-    ~C-c C-(fpnbu)~ 移动光标
-
-    ~C-c .~ 时间戳
-    ~C-c ,~ 优先级
-    
-    
-*** Table
-    Refers:
-    - https://www.zmonster.me/2016/06/03/org-mode-table.html
-
-    首先手动完成第一行，确定表格有多少列，然后按下 TAB 键就能自动在下一行插入新一行表格行了。
-    
-    ~C-c -~ 可以快速插入分割线
-    ~C-c |~ 可以快速创建表格，选中的数据（如逗号分隔的 CSV）可以直接生成
-    ~C-c '~ 可以生成公式
-
-    | a | b | c |
-    |---+---+---|
-    | 1 | 2 | 3 |
-    #+TBLFM: $3=$2 + $1
-
-    | 快捷键         | 说明                                                                                |
-    |----------------+-------------------------------------------------------------------------------------|
-    | TAB            | 切换到下一个单元格，如已是最后一个单元格，则新建一行并跳到该行第一个单元格          |
-    | M-S-right      | 在当前列前插入一列                                                                  |
-    | M-S-left       | 删除当前列                                                                          |
-    | M-S-down       | 在当前行前插入一行                                                                  |
-    | M-S-up         | 删除当前行                                                                          |
-    | C-m            | 移动到下一行，或新建一行                                                            |
-    | M-up/M-down    | 将当前行往上/下移动                                                                 |
-    | M-left/M-right | 将当前列往左/右移动                                                                 |
-    | C-c `          | 编辑当前单元格                                                                      |
-    | C-c C-x C-w    | 剪切某个区域的表格内容                                                              |
-    | C-c C-x C-y    | 拷贝复制的内容到表格                                                                |
-    | S-return       | 当单元格无内容时，将其上方第一个非空内容拷贝过来;否则拷贝当前内容到下一行并随之移动 |
-    | C-c C-c        | 强制表格重新排列                                                                    |
-    | C-c ^          | 表格排序                                                                            |
-
-    绘图
-    
-    #+PLOT: title:"Citas" ind:1 deps:(3) type:2d with:histograms set:"yrange [0:]" file:"./plot.png"
-    | Sede      | Max cites | H-index |
-    |-----------+-----------+---------|
-    | Chile     |    257.72 |   21.39 |
-    | Leeds     |    165.77 |   19.68 |
-    | Sao Paolo |     71.00 |   11.50 |
-    | Stockholm |    134.19 |   14.33 |
-    | Morelia   |    257.56 |   17.67 |
-
-
-** dired
-
-*** base
-    - ~><~ 移动光标到 dir
-    - ~o~ 打开到新的 frame
-    
-*** subdirectory
-    - ~i~ 将目标文件夹路径引入  ~subdirectory~ list 中  
-    - ~^~ 返回父目录
-    - ~C-u C-SPC~  返回上一级
-    - ~C-u k~ 删除当前 ~subdirectory~
-    - ~$~ ~M-$~ 缩小快速跳转
-    - ~C-M-n~ dired-next-subdir
-    - ~C-M-p~ dired-prev-subdir
-
-
-** Centos 编译
+  - 优化中文显示
+  - 优化全屏显示
+  - 性能优化
+** 更新 Emacs-head
+   https://github.com/daviderestivo/homebrew-emacs-head
+   进一步优化体验, 可以根据需要定制构建 GUI.
+   目前用的:
    #+begin_src bash
-     sudo yum install \
-	 GConf2-devel \
-	 Xaw3d-devel \
-	 dbus-devel \
-	 dbus-glib-devel \
-	 dbus-python \
-	 gcc \
-	 giflib-devel \
-	 gnutls-devel \
-	 gpm-devel \
-	 gtk+-devel \
-	 gtk2-devel \
-	     ImageMagick \
-	     ImageMagick-devel \
-	 jansson-devel \
-	 libX11-devel \
-	 libXft-devel \
-	 libXpm-devel \
-	 libjpeg-devel \
-	 libpng-devel \
-	 libtiff-devel \
-	 libungif-devel \
-	 make \
-	 ncurses-devel \
-	 pkgconfig \
-	 texi2html \
-	 texinfo
-
-     git clone https://git.savannah.gnu.org/git/emacs.git
-     cd emacs
-     git tag -l
-     git checkout emacs-27.1.91
-
-     ./autogen.sh
-     ./configure --without-selinux
-
-     make -j4 && sudo make install
+     brew install emacs-head@28 --with-cocoa --with-native-comp
    #+end_src
 
-** ssh
-   find-file
-   #+begin_src bash
-     /ssh:user@192.168.1.5:/usr/share/nginx/html/index.html
-   #+end_src
-
-   method
+* Elisp
+** Alist
+   alist 类似于 map 的数据结构
+    
    #+begin_src lisp
-     (defun connect-remote ()
-       (interactive)
-       (dired "/user@192.168.1.5:/"))
+     (setq test-alist '((name . "a") (value . "A")))
+
+     (alist-get 'name test-alist)
+     // "a"
+     (assoc 'name test-alist)
+     // (name . "a")
    #+end_src
 
-*** tramp
-    Refers: 
-    - https://www.dazhuanlan.com/hawklim/topics/971776
+   alist 也是 list 类型，可以用 mapcar 之类的方式改变形式。
+   查询可以新建一个 alist
 
-    TRAMP: Transparent Remote file Access, Multiple Protocol
+* Marco
+  ~C-x (~ 开启录制 ~C-x )~ 关闭录制
+
+  ~name-last-kbd-macro~ 命名上次的 宏，可以直接 ~M-x~ 执行该名称来调用 宏
+
+  ~C-x eeeeeee~ 可以一直重复上一次执行的 宏
+
+  ~insert-kbd-macro~ 缓存某个宏到当前文件，可以执行 init 再初始化
+
+* Org mode
+
+** global
+
+   设置文档 启动格式
+
+   #+begin_src org
+     ,#+STARTUP: overview | content | showall
+   #+end_src
+
+** font style
+   - *粗体*
+   - /斜体/
+   - +删除线+
+   - _下划线_
+   - =等宽=
+   - ~code~
+
+   ~C-c C-x C-f~ 修改选择区的样式
+      
+** 常用 shortcut
+   ~C-c C-x C-v~ 预览图片
+   ~C-x n s/w~ 切换专注
+   ~C-c C-(fpnbu)~ 移动光标
+
+   ~C-c .~ 时间戳
+   ~C-c ,~ 优先级
+    
+** Table
+   Refers:
+   - https://www.zmonster.me/2016/06/03/org-mode-table.html
+
+   首先手动完成第一行，确定表格有多少列，然后按下 TAB 键就能自动在下一行插入新一行表格行了。
+    
+   ~C-c -~ 可以快速插入分割线
+   ~C-c |~ 可以快速创建表格，选中的数据（如逗号分隔的 CSV）可以直接生成
+   ~C-c '~ 可以生成公式
+
+   | a | b | c |
+   |---+---+---|
+   | 1 | 2 | 3 |
+   #+TBLFM: $3=$2 + $1
+
+   | 快捷键         | 说明                                                                                |
+   |----------------+-------------------------------------------------------------------------------------|
+   | TAB            | 切换到下一个单元格，如已是最后一个单元格，则新建一行并跳到该行第一个单元格          |
+   | M-S-right      | 在当前列前插入一列                                                                  |
+   | M-S-left       | 删除当前列                                                                          |
+   | M-S-down       | 在当前行前插入一行                                                                  |
+   | M-S-up         | 删除当前行                                                                          |
+   | C-m            | 移动到下一行，或新建一行                                                            |
+   | M-up/M-down    | 将当前行往上/下移动                                                                 |
+   | M-left/M-right | 将当前列往左/右移动                                                                 |
+   | C-c `          | 编辑当前单元格                                                                      |
+   | C-c C-x C-w    | 剪切某个区域的表格内容                                                              |
+   | C-c C-x C-y    | 拷贝复制的内容到表格                                                                |
+   | S-return       | 当单元格无内容时，将其上方第一个非空内容拷贝过来;否则拷贝当前内容到下一行并随之移动 |
+   | C-c C-c        | 强制表格重新排列                                                                    |
+   | C-c ^          | 表格排序                                                                            |
+
+   绘图
+    
+   #+PLOT: title:"Citas" ind:1 deps:(3) type:2d with:histograms set:"yrange [0:]" file:"./plot.png"
+   | Sede      | Max cites | H-index |
+   |-----------+-----------+---------|
+   | Chile     |    257.72 |   21.39 |
+   | Leeds     |    165.77 |   19.68 |
+   | Sao Paolo |     71.00 |   11.50 |
+   | Stockholm |    134.19 |   14.33 |
+   | Morelia   |    257.56 |   17.67 |
+
+** html
+   导出多个
+   #+begin_src lisp
+     ;; 所有的
+     (defun gen-blog-all ()
+       (interactive)
+       (let  ((todo-list (split-string
+			  (s-trim
+			   (shell-command-to-string "find ~/org/capture/note -name \"*.org\""
+						    )
+			   ) "\n")))
+	 (mapcar (lambda (x)
+		   (progn (find-file x) (org-html-export-to-html) (kill-buffer))
+		   ) todo-list)
+	 )
+       )
+
+     ;; 仅 commit 部分
+     (defun gen-blog ()
+       (interactive)
+       (let  ((todo-list (split-string
+			  (s-trim
+			   (shell-command-to-string "git diff --name-only HEAD~1 | awk '/.org/'"
+						    )
+			   ) "\n")))
+	 (mapcar (lambda (x)
+		   (progn (find-file (format "/Users/areshhzhao/org/capture/%s" x)) (org-html-export-to-html) (kill-buffer))
+		   ) todo-list)
+	 )
+       )
+   #+end_src
+
+   代码样式使用 htmlize
+    
+   通过 title 和 date 指定导出相关属性
+
+   底部时间, 分成导出时间和创建时间
+   #+begin_src lisp
+     (setq org-html-postamble "<p class=\"postamble-author\">Author: %a.</p><p class=\"postamble-created\">Created: %d.</p><p class=\"postamble-last\">Last Updated: %T.</p>")
+     ;; %t stands for the title.
+     ;; %a stands for the author's name.
+     ;; %e stands for the author's email.
+     ;; %d stands for the date.
+     ;; %c will be replaced by `org-html-creator-string'.
+     ;; %v will be replaced by `org-html-validation-link'.
+     ;; %T will be replaced by the export time.
+     ;; %C will be replaced by the last modification time.
+   #+end_src
+
+   主题, 可以通过 ~SETUPFILE~ 设置 ~HTTP_HEAD~.
+   
+   主题基于 https://github.com/fniessen/org-html-themes, 参考 https://olmon.gitlab.io/org-themes/
+
+   对应定制模板
+   #+begin_src snippet
+     ,#+STARTUP: content
+     ,#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+     ,#+TITLE: `(s-replace ".org" "" (file-name-nondirectory (buffer-file-name)))`
+     ,#+DATE: [`(format-time-string  "%F %R" (current-time))`]
+     ,* Refers
+   #+end_src
+* dired
+** base
+   - ~><~ 移动光标到 dir
+   - ~o~ 打开到新的 frame
+    
+** subdirectory
+   - ~i~ 将目标文件夹路径引入  ~subdirectory~ list 中  
+   - ~^~ 返回父目录
+   - ~C-u C-SPC~  返回上一级
+   - ~C-u k~ 删除当前 ~subdirectory~
+   - ~$~ ~M-$~ 缩小快速跳转
+   - ~C-M-n~ dired-next-subdir
+   - ~C-M-p~ dired-prev-subdir
+
+* Centos 编译
+  #+begin_src bash
+    sudo yum install \
+	GConf2-devel \
+	Xaw3d-devel \
+	dbus-devel \
+	dbus-glib-devel \
+	dbus-python \
+	gcc \
+	giflib-devel \
+	gnutls-devel \
+	gpm-devel \
+	gtk+-devel \
+	gtk2-devel \
+	    ImageMagick \
+	    ImageMagick-devel \
+	jansson-devel \
+	libX11-devel \
+	libXft-devel \
+	libXpm-devel \
+	libjpeg-devel \
+	libpng-devel \
+	libtiff-devel \
+	libungif-devel \
+	make \
+	ncurses-devel \
+	pkgconfig \
+	texi2html \
+	texinfo
+
+    git clone https://git.savannah.gnu.org/git/emacs.git
+    cd emacs
+    git tag -l
+    git checkout emacs-27.1.91
+
+    ./autogen.sh
+    ./configure --without-selinux
+
+    make -j4 && sudo make install
+  #+end_src
+
+* ssh
+  find-file
+  #+begin_src bash
+    /ssh:user@192.168.1.5:/usr/share/nginx/html/index.html
+  #+end_src
+
+  method
+  #+begin_src lisp
+    (defun connect-remote ()
+      (interactive)
+      (dired "/ssh:dev-tty:~"))
+  #+end_src
+
+  对应 ~.ssh/config~, 注意为了编辑器可以用(去掉 zsh), 需要设置 RemoteCommand 和 RequestTTY
+  #+begin_src conf
+    Host dev-tty
+	 Hostname host
+	 Port 36000
+	 User root
+	 RequestTTY force	
+	 RemoteCommand /bin/bash
+
+    Host dev
+	 Hostname host
+	 Port 36000
+	 User root
+  #+end_src
+
+** tramp
+   Refers: 
+   - https://www.dazhuanlan.com/hawklim/topics/971776
+
+   TRAMP: Transparent Remote file Access, Multiple Protocol
+
+* 缓存
+  每次编辑都会生成缓存文件
+
+  gitignore 去掉
+  #+begin_src bash
+    # Emacs
+    ,*~
+    \#*\#
+    .\#*
+  #+end_src
+
+  清除
+  #+begin_src shell
+    find ./note -name '*.html' -exec rm {} \; 
+  #+end_src
+
+  可以统一保存管理
+  #+begin_src lisp
+    (setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
+      backup-by-copying t    ; Don't delink hardlinks
+      version-control t      ; Use version numbers on backups
+      delete-old-versions t  ; Automatically delete excess backups
+      kept-new-versions 20   ; how many of the newest versions to keep
+      kept-old-versions 5    ; and how many of the old
+      )
+  #+end_src
+  

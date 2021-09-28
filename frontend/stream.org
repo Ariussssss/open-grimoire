@@ -1,11 +1,11 @@
 #+STARTUP: content
 * Refers
   - https://www.zhihu.com/question/26190832/answer/825301105
-* stream
-  分可读, 可写, 双工, 转换流.
-* pipe
-  半自动的 stream 模式
-* More
+** stream
+   分可读, 可写, 双工, 转换流.
+** pipe
+   半自动的 stream 模式
+** More
 *** Buffer 与 Cache
     Buffer 缓冲区.
     IO 读写必定产生 Buffer, 不可回收.

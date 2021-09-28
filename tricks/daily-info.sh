@@ -13,6 +13,7 @@ open "https://github.com/sorrycc/weekly"
 open "https://wubaiqing.github.io/zaobao/"
 open "https://github.com/ChanceYu/front-end-rss"
 open "https://github.com/Advanced-Frontend/Daily-Interview-Question/issues"
+open "https://github.com/tnfe/TNT-Weekly"
 printf "👾 ${BLUE}Checkout daily trending.${NC}\n\n"
 
 if [[ $(date +%u) -eq 1 ]]; then
