@@ -1,5 +1,5 @@
 #+STARTUP: content
-#+SETUPFILE: ~/.emacs.d/org-styles/html/white_clean.theme
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: esbuild
 #+DATE: [2021-06-29 12:34]
 * Refers

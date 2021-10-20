@@ -1,5 +1,5 @@
 #+STARTUP: content
-#+SETUPFILE: ~/.emacs.d/org-styles/html/white_clean.theme
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: vite
 #+DATE: [2021-07-14 11:39]
 * Refers

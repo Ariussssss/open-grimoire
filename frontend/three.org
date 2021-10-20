@@ -1,0 +1,19 @@
+#+STARTUP: content
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: three
+#+DATE: [2021-09-30 11:31]
+* Refers
+  - https://threejs.org/
+  - https://juejin.cn/post/6981249521258856456
+  - playground https://codepen.io/tompeham/pen/ZWomey?editors=0010
+* base
+** scene
+   三维时间容器
+** camera
+   三维时间的镜头眼睛
+
+   一般有:
+   - PerspectiveCamera 透视相机
+   - OrthographicCamera 正交相机
+** renderer
+   把

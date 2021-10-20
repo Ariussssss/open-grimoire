@@ -1,7 +1,7 @@
 #+STARTUP: content
 * blog
-** https://lutaonan.com/
-** https://xargin.com/
+** 肄业前蚂蚁金服前端, 自由职业 https://lutaonan.com/
+** go 语言笔记, go 语言高级编程 作者 https://xargin.com/
 ** https://golang.design/
 ** https://robert.kra.hn/
 ** https://orta.io/notes/home
@@ -13,3 +13,4 @@
 ** https://markodenic.com/blog/
 ** https://github.com/crisxuan/bestJavaer
 ** https://dwqs.gitbooks.io/frontenddevhandbook/content/
+** 游戏开发, ai, 图像识别  https://huailiang.github.io/blog/

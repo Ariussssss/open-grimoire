@@ -113,6 +113,27 @@
    | Stockholm |    134.19 |   14.33 |
    | Morelia   |    257.56 |   17.67 |
 
+** 图片
+   从粘贴板导出图片. 
+   先下载 ~pngpaste~
+   #+begin_src bash
+     homebrew install pngpaste
+   #+end_src
+   #+begin_src lisp
+     (use-package org-download
+       :ensure t
+       :after org
+       :defer nil
+       :custom
+       (org-download-method 'directory)
+       (org-download-image-dir "images")
+       (org-download-heading-lvl nil)
+       (org-download-timestamp "%Y%m%d-%H%M%S_")
+       (org-image-actual-width 300)
+       (org-download-screenshot-method "/usr/local/bin/pngpaste %s")
+       :bind
+       ("C-M-y" . org-download-screenshot))
+   #+end_src
 ** html
    导出多个
    #+begin_src lisp

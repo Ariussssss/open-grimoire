@@ -1,5 +1,5 @@
 #+STARTUP: content
-#+SETUPFILE: ~/.emacs.d/org-styles/html/white_clean.theme
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: TypeScript（体操运动员）
 #+DATE: [2020-12-08 11:08]
 * Refers

@@ -19,6 +19,11 @@
      Go cli.
 **** astro
      原生支持 markdown 的框架, 适合一边写前端一边写笔记
+**** medis
+     redis gui
+**** rome
+     js cli
+     https://rome.tools/blog/2021/09/21/rome-will-be-rewritten-in-rust
 *** 历史
 **** 🦋 Hammerspon
      不习惯 Alfred, 快捷键增强, 基于 ~lua~ 定制快捷键脚本
@@ -28,3 +33,4 @@
      更简洁, 配置更简单独立
 **** 👻 Spectacle => +SizeUp+
      更强的功能, 免费 
+

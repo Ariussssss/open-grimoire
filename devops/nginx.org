@@ -1,41 +1,139 @@
 #+STARTUP: content
-#+CREATED: [2021-06-10 09:04]
-* nginx
-** Refers
-** syntax
-   #+begin_src conf
-     server {
-       listen       80;
-       listen       [::]:80;
-       server_name  some-domain.com;
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: nginx
+#+DATE: [2021-06-10 09:04]
+* Refers
+* 目录结构
+  更新 conf.d 隔离配置, nginx.conf 通过 http 使用
+  #+begin_src conf
+    include /etc/nginx/conf.d/*.conf;
+  #+end_src
+* syntax
+  #+begin_src conf
+    server {
+      listen       80;
+      listen       [::]:80;
+      server_name  some-domain.com;
   
-       location /projects/* {
-	 root /root/projects/;
-	 index  index.html;
+      location /projects/* {
+	root /root/projects/;
+	index  index.html;
+      }
+    }
+  #+end_src
+* 负载均衡算法
+  1. 默认轮询
+  2. weight 权重, 按比例划分
+     #+begin_src conf
+       upstream bakend {  
+	   server 192.168.0.1 weight=10;  
+	   server 192.168.0.2 weight=10;  
        }
-     }
-   #+end_src
-** 负载均衡算法
-   1. 默认轮询
-   2. weight 权重, 按比例划分
-      #+begin_src conf
-	upstream bakend {  
-	    server 192.168.0.1 weight=10;  
-	    server 192.168.0.2 weight=10;  
-	}
-      #+end_src
-   3. ip_hash
-      固定请求固定访问, 可以解决 session 固定问题
-      #+begin_src conf
-	upstream bakend {  
-	    ip_hash;  
-	    server 192.168.0.1:88;  
-	    server 192.168.0.2:80;  
-	} 
-      #+end_src
-   4. fair 第三方
-      计算加载时间长短和大小分配, 响应时间越短就越优先
-   5. url_hash 第三方
-      类似 ip_hash 通过 url 确定服务器
+     #+end_src
+  3. ip_hash
+     固定请求固定访问, 可以解决 session 固定问题
+     #+begin_src conf
+       upstream bakend {  
+	   ip_hash;  
+	   server 192.168.0.1:88;  
+	   server 192.168.0.2:80;  
+       } 
+     #+end_src
+  4. fair 第三方
+     计算加载时间长短和大小分配, 响应时间越短就越优先
+  5. url_hash 第三方
+     类似 ip_hash 通过 url 确定服务器
 
-   一般还会有一些预留的 backup 机器, 仅在 所有 非 backup 挂掉时启动. 
+  一般还会有一些预留的 backup 机器, 仅在 所有 非 backup 挂掉时启动. 
+* njs
+** 背景
+   大部分历史灰度方案, 会采用 Nginx + Lua + Redis 方案.
+
+   通过 lua-nginx-module 模块将 lua 语言嵌入 Nginx 中.
+
+   通过 Lua 脚本扩展 Nginx 功能, 访问数据库. 
+** 区别
+   njs 专门设计了 持久化 js vm, 每个小请求初始化, 结束释放内存.
+** 安装
+   不需要下载, 直接更新或者手动构建即可. 
+   ~nginx.conf~ 使用, 加载 njs 动态模块. 
+   #+begin_src bash
+     load_module modules/ngx_http_js_module.so;
+   #+end_src
+** 使用
+*** 普通
+    #+begin_src conf
+      http {
+	  js_import http.js;
+	  # or js_import http from http.js;
+
+	  server {
+	      listen 8000;
+
+	      location / {
+		  js_content http.hello;
+	      }
+	  }
+      }
+    #+end_src
+
+    #+begin_src js
+      function hello(r) {
+	  r.return(200, "Hello world!");
+      }
+
+      export default { hello };
+    #+end_src
+*** 代理
+    #+begin_src conf
+      js_import http.js;
+
+      location /start {
+	  js_content http.content;
+      }
+    #+end_src
+    #+begin_src js
+      function content(r) {
+	  r.subrequest('/api/5/foo', {
+		method: 'POST',
+		body: JSON.stringify({ foo: 'foo', bar: "bar" })
+	  }, function(res) {
+		  if (res.status != 200) {
+		      r.return(res.status, res.responseBody);
+		      return;
+		  }
+		  var json = JSON.parse(res.responseBody);
+		  r.return(200, json.content);
+	  });
+      }
+
+      export default { content };
+    #+end_src
+*** 数据库
+    - redis redis2-nginx-module 
+    - mysql  drizzle-nginx-module subrequest
+
+    #+begin_src conf
+      upstream backend {
+	  drizzle_server 127.0.0.1:3306 dbname=test
+	      password=some_pass user=monty protocol=mysql;
+      }
+
+      server {
+	  location /mysql {
+	       set_unescape_uri $name $arg_name;
+	       # 为防止 SQL 注入攻击，使用 set_quote_sql_str 来设置 sql 语句中的变量
+	       set_quote_sql_str $quoted_name $name;
+
+	       drizzle_query "select * from cats where name = $quoted_name";
+	       drizzle_pass backend;
+
+	       drizzle_connect_timeout    500ms; # default 60s
+	       drizzle_send_query_timeout 2s;    # default 60s
+	       drizzle_recv_cols_timeout  1s;    # default 60s
+	       drizzle_recv_rows_timeout  1s;    # default 60s
+	  }
+      }
+    #+end_src
+* 常用模块
+  https://github.com/agile6v/awesome-nginx

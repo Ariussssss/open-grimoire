@@ -1,0 +1,6 @@
+#+STARTUP: content
+#+DATE: [2021-10-06 07:11]
+#+TITLE: live-2d
+* Refers
+  - https://www.zhangxinxu.com/wordpress/2018/05/live2d-web-webgl-js/
+  - https://cloud.tencent.com/developer/article/1661874

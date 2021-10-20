@@ -1,0 +1,39 @@
+#+STARTUP: content
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: opengl
+#+DATE: [2021-10-19 23:11]
+* Refers
+  - https://www.zhihu.com/question/51867884/answer/127979304
+* 概述
+  OpenGL API 是一套接口, 可以在支持 OpenGL 的机器上使用和绘制.
+
+  Khrono 组织维护, 写个说明书, 
+* qt
+  跨平台开发.
+
+  旧版 unity 需要模拟机 mono. unity 5 开始使用 IL2CPP 编译成 C++,  本质上没有区别.
+
+  细节上, unity 会生成很多代码, 性能不是最优解, qt 接近原生, 但没有 unity 的游戏引擎. 
+* 立即渲染 Immediate mode
+  固定渲染管线, 不允许开发者控制管线运算. 
+* 核心模式 Core-profile
+  可编程管线.
+
+  GPU 渲染流水线:
+  1. 定点着色器 vertex shader
+  2. 形状(图元)装配 shape assembly
+  3. 几何着色器 geometry shader
+  4. 光栅化 rasterization  
+     形状变成像素
+  5. 片段着色器 fragment shader
+  6. 测试与混合 test and blending
+     融合透明度, 阴影等
+
+  openGL 3.2 推出, 与传统管线模式(立即渲染)的区别就是 允许自定义修改 几何着色器 和 片段着色器. 
+* 状态机 State Machine
+  - openGL 本身是一个大型的状态机
+  - 需要描述如何操作所有变量的大型集合
+
+  通过 状态设置函数 (State-changing Function) 和 状态应用函数 (State-using Function) 控制上下文 (Context). 
+* 对象 Object
+  
