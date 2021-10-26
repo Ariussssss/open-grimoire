@@ -1,0 +1,65 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: game-appreciation
+#+DATE: [2021-10-24 19:24]
+* Refers
+  - https://zhuanlan.zhihu.com/p/47973230
+  - https://mp.weixin.qq.com/s?__biz=MzUyMTAyOTAxMg==&mid=2247484178&idx=1&sn=b72496d099453663eb2a0b1fb38980aa&chksm=f9e017e9ce979efff18b18ad379ee19d0df57f43e95bab5c51709d05ad7bb3254f5e263290ab&scene=21#wechat_redirect
+  - https://www.zhihu.com/question/23735129/answer/25499152
+
+* into the breach
+  纯血统战棋游戏 (SLG), 从游戏性下功夫, 抛弃音乐和画面.
+
+  推演, 清楚的看到任何一步行动和后果.
+
+  难度, 敌我攻防属性差不多, 甚至更弱. 
+
+  游戏机制:
+  1. 已知对方的意图, 作出反击, 等待执行
+  2. 坚持到怪物退去.
+  3. 击退, 配合地形和属性打出特殊效果
+
+
+  地形设计:
+  1. 水面淹不死飞行怪物
+  2. 山峰阻挡投射物
+  3. 闪电秒杀怪物
+
+  弱AI:
+  1. 可以让怪物失误打到自己人
+  2. 特殊操作击杀有奖励和解锁
+
+* fez
+  2D 小人, 3D 美术, 艺术风格吸引人.
+
+  核心玩法是手机和探索. 偏休闲. 
+
+* Elona
+  https://ztjal.info/
+
+  最高自由度 RPG, 随机性, 恶搞, 丰富剧情. 
+
+* 超级肉肉男,  蔚蓝
+  高难度平台跳跃, 过关键关卡获得特殊能力(二段跳, 横冲)
+
+  超级肉肉男孩有一个很棒的回放功能, 可以回看所有死亡记录. 难度不高, 但很爽. 
+  #+DOWNLOADED: screenshot @ 2021-10-25 04:43:56
+  [[file:images/20211025-044356_screenshot.png]]
+
+* Cataclysm-DDA
+
+  没有画面, 满满的游戏性
+
+  玩家是 DOS 的 @, 会生病, 受伤, 可以攻击收集建造, 活下去.
+#+DOWNLOADED: screenshot @ 2021-10-25 05:27:41
+[[file:images/20211025-052741_screenshot.png]]
+
+* Minecraft
+  沙盒游戏的开端, 被微软以 1.5 亿美刀收购.
+
+  全球约 11 亿玩家. 元世界, ARVR 皆可结合. 
+
+* Magicite
+
+  2D 版的怪物猎人, 采集合成升级转职打怪. 
+

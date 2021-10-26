@@ -1,0 +1,34 @@
+#+STARTUP: content
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: requestAnimationFrame
+#+DATE: [2021-10-26 13:40]
+* Refers
+* 概述
+  js 单线程, 间隔时间判断不可靠.
+
+  出于对浏览器 js 实现动画流畅动画的需求设计.
+* 细节
+** 原理
+   API 告知浏览器需要执行动画, 浏览器收到通知后优化代码并执行更新.
+
+   动画仅执行一帧, 会在下一次绘制图像之前执行.
+
+   因为一般的屏幕硬件设备的刷新频率都是 60Hz, 然后每执行一次大约是 16.6 ms.
+   使用 requestAnimationFrame 的时候, 只需要反复调用它就可以实现动画效果.
+
+   同时 requestAnimationFrame 会返回一个请求 ID, 是回调函数列表中的一个唯一值，可以使用 cancelAnimationFrame 通过传入该请求 ID 取消回调函数.
+** 对比
+   setTimeout 执行间隔设置为 0, 可以用来模仿 requestAnimationFrame.
+
+   执行速度不同, 如果代码执行运算量少, 则 setTimeout 会比 requestAnimationFrame 快.
+
+* 不同浏览器兼容性
+  #+begin_src js
+    var vendors = ['webkit', 'moz'];
+    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+      window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
+      window.cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame'] ||    // Webkit中此取消方法的名字变了
+	window[vendors[x] + 'CancelRequestAnimationFrame'];
+    }
+
+  #+end_src

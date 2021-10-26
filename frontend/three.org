@@ -6,6 +6,10 @@
   - https://threejs.org/
   - https://juejin.cn/post/6981249521258856456
   - playground https://codepen.io/tompeham/pen/ZWomey?editors=0010
+* 概述
+  基于原声 WebGL API 和着色器封装的 3D 引擎.
+
+  让开发不用写原生的 WebGL, 学习 WebGL 帮助理解 three 原理和可以自定义着色器相关. 
 * base
 ** scene
    三维时间容器

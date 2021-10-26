@@ -1,0 +1,9 @@
+#+STARTUP: content
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: base
+#+DATE: [2021-10-20 19:05]
+* c++ 弃用特性(11之后)
+  - 不允许字面常量带 ~*~ 
+    如果有需要初始化一个  ~char *~, 应该使用 ~const char *~ 或者 ~auto~. 
+  - 异常说明 unexpected_handler, set_unexpected() 等相关特性被弃用, 应该使用 noexcept
+* syntax

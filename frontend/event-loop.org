@@ -1,137 +1,155 @@
 #+STARTUP: content
-#+CREATED: [2021-06-21 02:06]
-* event-loop
-** Refers
-   - https://blog.fundebug.com/2019/01/15/diffrences-of-browser-and-node-in-event-loop/
-** Micro-Task 与 Macro-Task
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: event-loop
+#+DATE: [2021-06-21 02:06]
+* Refers
+  - https://blog.fundebug.com/2019/01/15/diffrences-of-browser-and-node-in-event-loop/
+* Micro-Task 与 Macro-Task
 
-   macro: setTimeout, script, I/O,  UI
-   micro: promise
+  macro: setTimeout, script, I/O,  UI
+  micro: promise
 
-   只有一个微任务队列, 多个宏任务队列.
+  只有一个微任务队列, 多个宏任务队列.
 
-   清除微任务的时候, 会顺便清除执行生成的微任务, 知道队列空, 而不是单独监听启动时长度
+  清除微任务的时候, 会顺便清除执行生成的微任务, 知道队列空, 而不是单独监听启动时长度
    
-** 浏览器
-   常驻线程:
-   - GUI 渲染
-     与 js 引擎互斥
-   - Javascript 引擎
-   - 定时器
-     timeout, interval
-   - 事件触发
-   - 异步 http
+* 浏览器
+  常驻线程:
+  - GUI 渲染
+    与 js 引擎互斥
+  - Javascript 引擎
+  - 定时器
+    timeout, interval
+  - 事件触发
+  - 异步 http
 
-   *处理一个宏任务, 清理所有微任务, 渲染, loop*
-  
-** Node
-   完全不同, Node 使用 v8 作为 js 引擎, libuv  作为 抽象 I/O
+  *处理一个宏任务, 清理所有微任务, 渲染, loop*
 
-   #+begin_src bash
-	┌───────────────────────────┐
-     ┌─>│           timers          │
-     │  └─────────────┬─────────────┘
-     │  ┌─────────────┴─────────────┐
-     │  │     pending callbacks     │
-     │  └─────────────┬─────────────┘
-     │  ┌─────────────┴─────────────┐
-     │  │       idle, prepare       │
-     │  └─────────────┬─────────────┘      ┌───────────────┐
-     │  ┌─────────────┴─────────────┐      │   incoming:   │
-     │  │           poll            │<─────┤  connections, │
-     │  └─────────────┬─────────────┘      │   data, etc.  │
-     │  ┌─────────────┴─────────────┐      └───────────────┘
-     │  │           check           │
-     │  └─────────────┬─────────────┘
-     │  ┌─────────────┴─────────────┐
-     └──┤      close callbacks      │
-	└───────────────────────────┘
-   #+end_src
+** 浏览器细节
    
-   - timers 执行定时器回调, 所有
-   - I/O callbacks 处理上次循环未执行的 I/O 回调
-   - Idle / prepare
-   - poll 获取新一轮的 I/O, 阻塞
-     - 回到 timer 进行回调
-     - 执行 I/O 回调
+   Event Loop 在浏览器中分为:
+   - window event loop
+   - worker event loop
+   - worklet event loop
+** task queue
+   1. 从任务队列中取出一个可运行的任务
+      1. 如果没有跳第三步
+   2. pop 出可运行任务, FIFO
+   3. 执行 task
+   4. 执行 microtask 检查
+   5. 设置 hasARenderingOpportunity 为 false
+   6. 完成一次循环, 更新执行渲染
+   7. 如果 window event loop 没有 task 且没有 microtask, 
+      同时 hasARenderingOpportunity 为 false.
+      执行 idle period, hasARenderingOpportunity. 
+   8. 返回第一步
+* Node
+  完全不同, Node 使用 v8 作为 js 引擎, libuv  作为 抽象 I/O
 
-     如果 超时时间内有 timer 就回去, 没有就往下
-   - check setImmediate 回调
-   - close callback 执行 socket close
-   - loop
+  #+begin_src bash
+       ┌───────────────────────────┐
+    ┌─>│           timers          │
+    │  └─────────────┬─────────────┘
+    │  ┌─────────────┴─────────────┐
+    │  │     pending callbacks     │
+    │  └─────────────┬─────────────┘
+    │  ┌─────────────┴─────────────┐
+    │  │       idle, prepare       │
+    │  └─────────────┬─────────────┘      ┌───────────────┐
+    │  ┌─────────────┴─────────────┐      │   incoming:   │
+    │  │           poll            │<─────┤  connections, │
+    │  └─────────────┬─────────────┘      │   data, etc.  │
+    │  ┌─────────────┴─────────────┐      └───────────────┘
+    │  │           check           │
+    │  └─────────────┬─────────────┘
+    │  ┌─────────────┴─────────────┐
+    └──┤      close callbacks      │
+       └───────────────────────────┘
+  #+end_src
+   
+  - timers 执行定时器回调, 所有
+  - I/O callbacks 处理上次循环未执行的 I/O 回调
+  - Idle / prepare
+  - poll 获取新一轮的 I/O, 阻塞
+    - 回到 timer 进行回调
+    - 执行 I/O 回调
 
-   *每个阶段结束都可以清空微任务队列*
+    如果 超时时间内有 timer 就回去, 没有就往下
+  - check setImmediate 回调
+  - close callback 执行 socket close
+  - loop
+
+  *每个阶段结束都可以清空微任务队列*
 
    
-     
-*** setImmediate
-    setImmediate 在 poll 完成执行, check 阶段
+** setImmediate
+   setImmediate 在 poll 完成执行, check 阶段
 
-    setTimeout 在空闲之限定时间达到后执行, timer 阶段
+   setTimeout 在空闲之限定时间达到后执行, timer 阶段
 
-    时间顺序时间不确定
+   时间顺序时间不确定
 
-*** process.nextTick
-    跳过 poll 轮训
+** process.nextTick
+   跳过 poll 轮训
 
-    比 setImmediate 更快, 不需要等待阶段, 同阶段执行
+   比 setImmediate 更快, 不需要等待阶段, 同阶段执行
 
-    用处:
-    - 处理错误清理资源
-    - 在事件循环之前重试
+   用处:
+   - 处理错误清理资源
+   - 在事件循环之前重试
 
-*** 线程
-    一般为 7 个线程：
+** 线程
+   一般为 7 个线程：
 
-    1. 一个 javascript 主线程
-    2. 一个 watchdog 监控线程用于处理调试信息
-    3. 一个 v8 task scheduler 线程用于调度任务优先级。
-       加速敏感任务执行
-    4. 4个 v8线程
-       主要用于执行代码调优与 GC 等后台任务
-    5. 以及用于异步 I/O 的libuv 线程池
+   1. 一个 javascript 主线程
+   2. 一个 watchdog 监控线程用于处理调试信息
+   3. 一个 v8 task scheduler 线程用于调度任务优先级。
+      加速敏感任务执行
+   4. 4个 v8线程
+      主要用于执行代码调优与 GC 等后台任务
+   5. 以及用于异步 I/O 的libuv 线程池
 
-    网络 I/O 不占用线程池
+   网络 I/O 不占用线程池
 
-    I/O 用到 DMA 不需要 CPU, 占用硬盘资源
+   I/O 用到 DMA 不需要 CPU, 占用硬盘资源
 
-    *DMA*(Direct Memory Access，直接存储器访问)
+   *DMA*(Direct Memory Access，直接存储器访问)
     
-** 区别
-   #+begin_src js
-     function test () {
-	console.log('start')
-	 setTimeout(() => {
-	     console.log('children2')
-	     Promise.resolve().then(() => {console.log('children2-1')})
-	 }, 0)
-	 setTimeout(() => {
-	     console.log('children3')
-	     Promise.resolve().then(() => {console.log('children3-1')})
-	 }, 0)
-	 Promise.resolve().then(() => {console.log('children1')})
-	 console.log('end') 
-     }
+* 区别
+  #+begin_src js
+    function test () {
+       console.log('start')
+	setTimeout(() => {
+	    console.log('children2')
+	    Promise.resolve().then(() => {console.log('children2-1')})
+	}, 0)
+	setTimeout(() => {
+	    console.log('children3')
+	    Promise.resolve().then(() => {console.log('children3-1')})
+	}, 0)
+	Promise.resolve().then(() => {console.log('children1')})
+	console.log('end') 
+    }
 
-     test()
+    test()
 
-     // 以上代码在node11以下版本的执行结果(先执行所有的宏任务，再执行微任务)
-     // start
-     // end
-     // children1
-     // children2
-     // children3
-     // children2-1
-     // children3-1
+    // 以上代码在node11以下版本的执行结果(先执行所有的宏任务，再执行微任务)
+    // start
+    // end
+    // children1
+    // children2
+    // children3
+    // children2-1
+    // children3-1
 
-     // 以上代码在node11及浏览器的执行结果(顺序执行宏任务和微任务)
-     // start
-     // end
-     // children1
-     // children2
-     // children2-1
-     // children3
-     // children3-1
-   #+end_src
+    // 以上代码在node11及浏览器的执行结果(顺序执行宏任务和微任务)
+    // start
+    // end
+    // children1
+    // children2
+    // children2-1
+    // children3
+    // children3-1
+  #+end_src
 
 

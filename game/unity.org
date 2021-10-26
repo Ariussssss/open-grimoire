@@ -6,6 +6,9 @@
 * FAQ
 ** VCRUNTIME140.dll, MSVCP140.dll 丢失
    缺少 vc++ 2015, 官网下载
+** error refreshing packages
+   1. 登出登入, 刷新证书
+   2. 重启系统
 * 多人游戏解决方案
 ** UNet (deprecated)
    已废弃
