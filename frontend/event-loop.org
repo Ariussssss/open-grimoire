@@ -25,24 +25,6 @@
 
   *处理一个宏任务, 清理所有微任务, 渲染, loop*
 
-** 浏览器细节
-   
-   Event Loop 在浏览器中分为:
-   - window event loop
-   - worker event loop
-   - worklet event loop
-** task queue
-   1. 从任务队列中取出一个可运行的任务
-      1. 如果没有跳第三步
-   2. pop 出可运行任务, FIFO
-   3. 执行 task
-   4. 执行 microtask 检查
-   5. 设置 hasARenderingOpportunity 为 false
-   6. 完成一次循环, 更新执行渲染
-   7. 如果 window event loop 没有 task 且没有 microtask, 
-      同时 hasARenderingOpportunity 为 false.
-      执行 idle period, hasARenderingOpportunity. 
-   8. 返回第一步
 * Node
   完全不同, Node 使用 v8 作为 js 引擎, libuv  作为 抽象 I/O
 

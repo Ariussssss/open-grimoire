@@ -37,3 +37,9 @@
    #+begin_src python
      math.factorial(23)
    #+end_src
+** GIL global interpreter lock 全局解释器
+   解释器相关, 每个线程解释器在执行字节码的时候需要获取锁.
+
+   锁对单独进程, 全局仅限制进程内, 不影响多核多进程.
+   所以推荐使用协程或者多进程. 
+   
