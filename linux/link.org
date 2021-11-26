@@ -1,7 +1,14 @@
-#+STARTUP: content
-* Link
-** type
-*** hard link
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: link
+#+DATE: [2021-03-01 20:52]
+* Refers
+   - https://blog.csdn.net/LEON1741/article/details/100136449
+   - https://juejin.cn/post/6844904164468768776
+   - https://www.chevtek.io/you-can-finally-npm-link-packages-that-contain-peer-dependencies/
+   - https://pnpm.io/workspaces
+* type
+** hard link
 
     硬链接，是指文件的另一个引用方式，指向真实数据存储地址。
     
@@ -14,7 +21,7 @@
 
     因为是系统的多个索引编号，所以不能跨文件系统，不能对目录链接。
     
-*** symbolic link
+** symbolic link
 
     符号链接，又称软链接，类似快捷方式，存放内容是指向内容路径的指针。
 
@@ -24,13 +31,13 @@
     软链接指向的是内容路径的指针，并非真实的内容，不能直接修改该文件。
     而且，如果指向一个硬链接，删除该硬链接后，原来的软链接并不会指到真实文件内容而是报错。
 
-** Cli
+* Cli
 
    链接可以使用 ~ln~ 来创建。
    一般就是的使用方式 ~ln [-s] [target-path] [link-url]~ , ~-s~ 表示是否是软链接。
    其他更多用法可以查看 ~man ln~ 。
 
-** NPM
+* NPM
 
    ~npm link~ 就是对应 ~npm~ 目录生成的软链接。
 
@@ -77,7 +84,7 @@
    1. ~node~ 执行使用的时候，可以带上 ~--preserve-symlinks~
    2. 对应这些依赖再创建一个 软链接，将这个依赖 ~link~ 到项目和库的 ~node_modules~ 里。
 
-** pnpm
+* pnpm
    速度对比：https://github.com/pnpm/benchmarks-of-javascript-package-managers
 
    除了继承了 yarn 缓存和 lock，还是用了硬链接的方式提高速度。
@@ -95,8 +102,3 @@
    - workspace: 局部 ~npm link~, 类似 ~lerna~ 的功能
    - aliases: 原生实现别名 
 
-** Refers
-   - https://blog.csdn.net/LEON1741/article/details/100136449
-   - https://juejin.cn/post/6844904164468768776
-   - https://www.chevtek.io/you-can-finally-npm-link-packages-that-contain-peer-dependencies/
-   - https://pnpm.io/workspaces

@@ -1,23 +1,28 @@
-* Algorithm
-  
-** 基础
-   
-   除法中，负数元算的余数和商也会是负数。
-   可以用在等比数列对应二进制的运算中。
-   
-   #+begin_src python
-     -3 // -2
-     # Output 1
-     3 // -2
-     # Output -1
+#+STARTUP: content
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: algorithm
+#+DATE: [2021-11-19 02:49]
+* Refers
+- OI（Olympiad in Informatics，信息学奥林匹克竞赛） https://oi-wiki.org/ https://github.com/OI-wiki/OI-wiki/
 
-     3 % -2
-     # Output -1
-     -3 % -2
-     # Output -1
+* 基础
 
-     1 // -2
-     # Output -1
-     1 // 2
-     # Output 0
-   #+end_src
+除法中，负数元算的余数和商也会是负数。
+可以用在等比数列对应二进制的运算中。
+   
+#+begin_src python
+  -3 // -2
+  # Output 1
+  3 // -2
+  # Output -1
+
+  3 % -2
+  # Output -1
+  -3 % -2
+  # Output -1
+
+  1 // -2
+  # Output -1
+  1 // 2
+  # Output 0
+#+end_src

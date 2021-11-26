@@ -1,9 +1,24 @@
-#+STARTUP: content
-* Wasm
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: wasm
+#+DATE: [2021-05-11 01:50]
 * Referrs
   - [[https://docs.wasmer.io/integrations/rust][rust wasm docs]]
   - [[https://wapm.io/][wapm: wasm package manager]]
   - [[https://wasmerio.github.io/wasmer/crates/wasmer_runtime/][wasm runtime]]
+* 简介
+WebAssembly 又名 wasm 是一个运行在网络浏览器的高效的, 低级别的字节码.
+
+允许使用 js 以外的语言编写代码到浏览器运行.
+
+因为直接是可执行字节码, 已经编译完了, 可以直接使用. 
+* 使用
+
+wasm 文件难以阅读, 通过 wabt (一个 wasm 的工具集) 工具可以转为 wast 文件, 直接阅读和修改.
+https://github.com/WebAssembly/wabt
+
+
+
 * FAQ
 ** nightly
    #+begin_src bash
@@ -72,7 +87,7 @@
     - VP8 编码,  webm 格式(Google公司)
     - Theora 编码, ogg 格式(iTouch公司)
 *** 基于 wasm + FFmpeg
-    Emscripten 将 c 编译成 wasm + js
+    用 Emscripten 将 c 编译成 wasm. 
 **** Emscripten
      https://github.com/emscripten-core/emsdk.git
      docs https://emscripten.org/docs/getting_started/downloads.html

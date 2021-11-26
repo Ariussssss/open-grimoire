@@ -1,9 +1,131 @@
-#+STARTUP: content
+#+STARTUP: all
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: base
 #+DATE: [2021-10-20 19:05]
 * c++ 弃用特性(11之后)
-  - 不允许字面常量带 ~*~ 
-    如果有需要初始化一个  ~char *~, 应该使用 ~const char *~ 或者 ~auto~. 
-  - 异常说明 unexpected_handler, set_unexpected() 等相关特性被弃用, 应该使用 noexcept
+- 不允许字面常量带 ~*~ 
+  如果有需要初始化一个  ~char *~, 应该使用 ~const char *~ 或者 ~auto~. 
+- 异常说明 unexpected_handler, set_unexpected() 等相关特性被弃用, 应该使用 noexcept
 * syntax
+** 输入输出
+std 的  ~cin~ 和 ~count~ 负责输入输出
+#+begin_src cpp
+  #include <iostream>
+
+  int main() {
+    int x, y;                          // 声明变量
+    std::cin >> x >> y;                // 读入 x 和 y
+    std::cout << y << std::endl << x;  // 输出 y，换行，再输出 x
+    return 0;                          // 结束主函数
+  }
+#+end_src
+
+~scanf~ 和 ~printf~  也可以输入和格式化
+#+begin_src cpp
+  #include <cstdio>
+
+  int main() {
+    int x, y;
+    scanf("%d%d", &x, &y);   // 读入 x 和 y
+    printf("%d\n%d", y, x);  // 输出 y，换行，再输出 x
+    return 0;
+  }
+#+end_src
+** ~#define~ 命令
+预处理宏定义
+#+begin_src cpp
+  #include <iostream>
+  #define n 233
+  // n 不是变量，而是编译器会将代码中所有 n 文本替换为 233，但是作为标识符一部分的
+  // n 的就不会被替换，如 fn 不会被替换成 f233，同样，字符串内的也不会被替换
+
+  int main() {
+    std::cout << n;  // 输出 233
+    return 0;
+  }
+#+end_src
+函数替换
+#+begin_src cpp
+  #include <iostream>
+  #define sum(x, y) ((x) + (y))
+  #define square(x) ((x) * (x))
+
+  int main() {
+    std::cout << sum(1, 2) << ' ' << 2 * sum(3, 5) << std::endl;  // 输出 3 16
+  }
+#+end_src
+
+全程序文本替换, 有错误风险
+
+主要用途:
+1. 避免忘记 ~longlong~ 导致错误
+   #+begin_src cpp
+     #define int long long+signed main()
+   #+end_src
+2. 减少重复代码, 压缩代码量
+   #+begin_src cpp
+     #define For(i, l, r) for (int i = (l); i <= (r); ++i)
+     #define pb push_back
+     #define mid ((l + r) / 2)
+   #+end_src
+** 基本类型
+bool, char, int, float, double, void.
+
+1字节 (byte) = 8位 (bit)
+*** bool
+~true~ 和 ~false~ 两种, 占 1 字节. 
+*** char
+存放字符, 通过 ASCII 编码实现对应转化, 一般为 1 字节.
+*** int
+大多数为 32 位.
+
+| 类型                   | 位宽 | 表示范围         |
+|------------------------+------+------------------|
+| short int              |   16 | -2^15 ~ 2^15 - 1 |
+| unsigned short int     |   16 | 0 ~ 2^16 - 1     |
+| int                    |   32 | -2^31 ~ 2^31 - 1 |
+| unsigned int           |   32 | 0 ~ 2^32 - 1     |
+| long int               |   32 | -2^31 ~ 2^31 - 1 |
+| unsigned long int      |   32 | 0 ~ 2^32 - 1     |
+| long long int          |   64 | -2^63 ~ 2^63 - 1 |
+| unsigned long long int |   64 | 0 ~ 2^64 - 1     |
+
+其中 int, signed, int signed, signed int 表示同一类型.
+而 unsigned long 和 unsigned long int 表示同一类型.
+可以省略编写.
+*** float
+单精度浮点, 32 位. 
+范围比较少, 精度不高. 
+
+大小在 -3.4 x 10^38 和 3.4 x 10^38 之间. 
+*** double
+双精度浮点, 64 位.
+范围 -1.7 x 10^-308 到 1.7 x 10^308 之间.
+*** void
+无类型, 不能直接声明, 仅表示空返回值. 
+*** 类型转换
+**** 类型提升
+1. 符号类型不同, 长度的转换, 参考补码
+2. char 和 short 类型运算会自动提升为 int.
+3. unsigned short 进行运算也会自动提升了 unsigned int.
+4. 对 long long 参数(包括整型)函数传入 int 值时, 会被自动提升为位宽较大的变量.
+5. 浮点参数也会对应进行提升, float 变 double.
+6. bool 可以被提升为整形, 对应 0, 1.
+**** 数值转换
+1. 位大的浮点转换, 会取最接近的值
+2. 浮点数转换为整数时, 会舍弃浮点数的全部小数部分
+3. 整数转换为浮点数时, 会舍入到目标类型下最接近的值
+4. 各种类型转 bool, 零值为 false, 其他为 true. 
+** 变量
+通过括号区分全局作用域和局部作用域.
+
+如果内层作用域与全局作用域有同名变量, 内层无法访问到外层块中相同变量名的变量.
+
+常量需要在定义时候加上 ~const~ . 
+** 运算
+运算时类型不以智慧自动转换, 按序触发判断:
+1. char, bool, short 等类型提升为 int.
+2. 如果存在 long double, 另一个也会被同化. double, float 同理.
+3. 如果都为整型.
+   1. 如果符号一致, 位宽转换为最大的.
+   2. 如果无符号的不小于带符号的位宽, 则带符号的转换为无符号数对应类型. 

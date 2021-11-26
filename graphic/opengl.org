@@ -4,6 +4,7 @@
 #+DATE: [2021-10-19 23:11]
 * Refers
   - https://www.zhihu.com/question/51867884/answer/127979304
+  - https://learnopengl-cn.github.io/01%20Getting%20started/01%20OpenGL/
 * 概述
   OpenGL API 是一套接口, 可以在支持 OpenGL 的机器上使用和绘制.
 

@@ -1,8 +1,10 @@
 #+STARTUP: content
-* base
-** Refers
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: python 基础
+#+DATE: [2021-04-06 10:33]
+* Refers
    - https://github.com/trekhleb/learn-python 速查表
-** map array
+* map array
   #+begin_src python
     [x * 4 for x in [1]]
 
@@ -12,8 +14,8 @@
     for i in range(1, 10):
 	print(i)
   #+end_src
-** type
-*** List
+* type
+** List
     #+begin_src python
       from typing import List
 
@@ -22,7 +24,7 @@
 
       s(["1", "2"])
     #+end_src
-*** heapq
+** heapq
     #+begin_src python
       import heapq
 
@@ -32,14 +34,30 @@
       # using heapify to convert list into heap 
       heapq.heapify(li) 
     #+end_src
-** math
+* math
    阶乘
    #+begin_src python
      math.factorial(23)
    #+end_src
-** GIL global interpreter lock 全局解释器
+* GIL global interpreter lock 全局解释器
    解释器相关, 每个线程解释器在执行字节码的时候需要获取锁.
 
    锁对单独进程, 全局仅限制进程内, 不影响多核多进程.
    所以推荐使用协程或者多进程. 
-   
+* pip 加速   
+国内源:
+- pypi 清华大学源：https://pypi.tuna.tsinghua.edu.cn/simple
+- pypi 豆瓣源 ：http://pypi.douban.com/simple/
+- pypi 腾讯源：http://mirrors.cloud.tencent.com/pypi/simple
+- pypi 阿里源：https://mirrors.aliyun.com/pypi
+
+单行
+#+begin_src bash
+  pip install markdown -i https://pypi.tuna.tsinghua.edu.cn/simple
+#+end_src
+
+默认
+#+begin_src bash
+  # 清华源
+  pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+#+end_src
