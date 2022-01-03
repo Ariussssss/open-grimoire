@@ -1,8 +1,0 @@
-#+STARTUP: content
-* Monthly 
-** Intro
-   收集一些感兴趣的, 有的没的, 新旧相对于个人
-** Future
-*** shared-element-transitions-for-spas - Jake Archibald <2021-08-17 Tue>
-    https://developer.chrome.com/en/blog/shared-element-transitions-for-spas/
-*** 
