@@ -3,4 +3,10 @@
 #+TITLE: 计算机内存
 #+DATE: [2021-11-12 18:21]
 * Refers
-* 原码
+1.RAM（RamdomAccessMemory）：
+　易挥发性随机存取存储器，高速存取，读写时间相等，且与地址无关，如计算机内存等。 
+
+2.ROM（Read Only Memory）：
+　　　　　　　　　　　　　　只读存储器。断电后信息不丢失，如计算机启动用的BIOS芯片。存取速度很低，（较RAM而言）且不能改写。
+　　　　　　　　　　　　　　由于不能改写信息，不能升级，现已很少使用。
+* RAM RamdomAccessMemory

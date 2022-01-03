@@ -1,7 +1,9 @@
-#+STARTUP: content
-* tmux
-** keybinding
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: tmux
+#+DATE: [2021-08-10 21:36]
+* keybinding
    -  ~ctrl-s~ search
-** source
+* source
    插件主题等: https://github.com/rothgar/awesome-tmux
 8192

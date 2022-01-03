@@ -1,18 +1,19 @@
-#+STARTUP: content
-#+CREATED: [2021-06-10 08:32]
-* koa
-** Refers
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: koa
+#+DATE: [2021-06-10 08:32]
+* Refers
    - https://juejin.cn/post/6882309889478098951
-** 与 Express 区别
+* 与 Express 区别
    - 异步传递处理中间件, Express 使用回调一直 ~next~
    - Koa 必须走完所有中间件, Express 只要遇到调用 ~res.send~
-** Steps
-*** app.use
+* Steps
+** app.use
     注册中间件
     #+begin_src js
       this.middleware.push(fn);
     #+end_src
-*** app.listen
+** app.listen
     监听端口和回调
     #+begin_src js
       listen(...args) {
@@ -39,7 +40,7 @@
 	return handleRequest;
       }
     #+end_src
-*** compose 洋葱模型
+** compose 洋葱模型
     闭包记录中间件执行进度索引, 异步执行.
 
     因为有 ~next~ 的存在 指向下个 中间件, FILO
@@ -72,7 +73,7 @@
       }
 
     #+end_src
-*** handleRequest
+** handleRequest
     初始化报错信息, 处理执行结果
     #+begin_src js
       handleRequest(ctx, fnMiddleware) {

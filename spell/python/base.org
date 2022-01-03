@@ -61,3 +61,11 @@
   # 清华源
   pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 #+end_src
+* bugs
+** OSX 找不到 dylib
+By default of CPython (and pyenv),
+the python executable will be generated as static linked and libpython*.dylib will not be generated.
+
+env PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install -v 3.8.0
+
+https://github.com/pyenv/pyenv/issues/443#issuecomment-528277145

@@ -2,6 +2,7 @@ BLUE='\033[38;5;45m'
 NC='\033[0m' # No Color
 
 # open "https://github.com/halfrost/Halfrost-Field"
+open "https://github.com"
 open "https://github.com/trending?since=daily"
 open "https://news.ycombinator.com/newest"
 # open "https://blog.acolyer.org/"
@@ -16,7 +17,8 @@ open "https://github.com/Advanced-Frontend/Daily-Interview-Question/issues"
 open "https://github.com/tnfe/TNT-Weekly"
 printf "👾 ${BLUE}Checkout daily trending.${NC}\n\n"
 
-if [[ $(date +%u) -eq 1 ]]; then
+total=$1
+if [ $total -eq 1 -o $(date +%u) -eq 1 ]; then
     open "https://www.infoq.com/"
     open "https://program-think.blogspot.com/"
     open "https://github.com/polaris1119/golangweekly"

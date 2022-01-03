@@ -2,19 +2,8 @@
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: chrome
 #+DATE: [2021-07-14 12:07]
-* 更新
-** v8 => 9.1 2021-05-04
-   https://v8.dev/blog/v8-release-91
-   - 升级 V8 到 9.1，默认开启 Top-level await
-   - 默认开启 WebAssembly SIMD
-   - 支持 WebTransport，WebSockets 之外的又一种双向通讯方式，UDP-like datagrams，可取消
-   - WebSockets 支持 HTTP/2，可以和其他请求复用一个 TCP 连接，不用单独建一个，从而提升速度
-   - ServiceWorker 支持 ES Modules
-   - File System Access API 更新，showSaveFilePicker 支持 suggestedName，showOpenFilePicker 支持 startIn
-   - Clipboard 接口支持读文件，通过 paste 事件加 e.clipboardData.files 获取
-   - 新增 GravitySensor 接口，用于手机游戏研发
-   - 禁用端口 10080
-   - 支持关联站点共享凭据，通过在 /.well-known/assetlinks.json 声明实现
+* 3S 核心原则
+Speed, Stability, Simplicity
 * fileSystem HTML5
 ** Refers
    - https://web.dev/read-files/

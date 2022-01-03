@@ -1,4 +1,9 @@
-#+STARTUP: content
-* docker
-** Refers
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: docker
+#+DATE: [2021-11-28 19:12]
+* Refers
    - https://github.com/docker/awesome-compose
+* 基本使用
+* awesome-conmpose
+https://github.com/docker/awesome-compose

@@ -6,6 +6,7 @@
   - [[https://docs.wasmer.io/integrations/rust][rust wasm docs]]
   - [[https://wapm.io/][wapm: wasm package manager]]
   - [[https://wasmerio.github.io/wasmer/crates/wasmer_runtime/][wasm runtime]]
+  - https://github.com/mcuking/blog/issues/96
 * 简介
 WebAssembly 又名 wasm 是一个运行在网络浏览器的高效的, 低级别的字节码.
 
@@ -20,6 +21,11 @@ https://github.com/WebAssembly/wabt
 
 
 * FAQ
+
+** rustup install
+#+begin_src bash
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+#+end_src
 ** nightly
    #+begin_src bash
      rustup -v install  nightly
@@ -83,9 +89,9 @@ https://github.com/WebAssembly/wabt
     #+end_src
 
     目前 video 仅支持固定编码格式:
-    - H.264 编码, mp4 格式(MPEG-LA公司)
-    - VP8 编码,  webm 格式(Google公司)
-    - Theora 编码, ogg 格式(iTouch公司)
+    - H.264 编码, mp4 格式(MPEG-LA 公司)
+    - VP8 编码,  webm 格式(Google 公司)
+    - Theora 编码, ogg 格式(iTouch 公司)
 *** 基于 wasm + FFmpeg
     用 Emscripten 将 c 编译成 wasm. 
 **** Emscripten

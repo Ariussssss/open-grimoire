@@ -1,46 +1,50 @@
-#+STARTUP: content
-* Nodejs
-** 基础
-*** 特点
-**** 适合构建 WEB 应用
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: node 基础
+#+DATE: [2020-11-17 03:03]
+* Refers
+- https://github.com/theanarkh/understand-nodejs
+* 基础
+** 特点
+*** 适合构建 WEB 应用
      I/O 密集
-**** 高性能
+*** 高性能
      v8 引擎，动态语言算快
      
      天生异步
-**** 简单可拓展
+*** 简单可拓展
      语法并发编程简单，部署开发简单
      
      有大量可用 npm 模块，且对于 CPU 密集任务可以用 C++ 实现
-*** 并发
-**** 定义
+** 并发
+*** 定义
      - 进程 在内存上运行的程序
      - 多进程 多个程序一起执行多个任务，统一管理
      - 线程 进程中相对独立的执行单元，共享进程资源
      - 多线程 线程一起执行任务
-**** 对比
+*** 对比
      传统 java apache IO 同步，请求之后获取数据会一直占进程
      
      一个服务器最大进程数有限
      
      CPU 严重浪费
-**** node
+*** node
      基于事件循环，主进程只有一个线程是阻塞的
      
      操作系统调度的多进程多线程与 node 无关，IO 是系统底层的调度
      
      单线程并不影响多进程，可以开多个 cluster
-**** 应对
+*** 应对
      传统的方法：
      - 增加机器，负载均衡
      - 提高机器质量，硬盘质量好一点，提高 IO 效率
      这种需求 node 都可以比较好的满足
-*** 非阻塞 I/O
-** 事件循环
+** 非阻塞 I/O
+* 事件循环
    ~libuv~ 提供事件循环和线程池，两者共同构建异步非阻塞 I/O
    
    事件驱动是 整个非阻塞 I/O 模型中，线程池 通知 事件循环 它已经完成 I/O 操作的机制
-*** 阶段
+** 阶段
     [[file:images/node_eventLoop_six.png]]
     反复执行 6 个阶段
     - timers
@@ -68,11 +72,11 @@
     #+begin_quote
     6 个阶段不包括 ~process.nextTick~
     #+end_quote
-*** timer
+** timer
     受 poll 控制， 执行回调。
     
     定时器并不是精准时间，只是尽快执行
-*** poll
+** poll
     这个阶段会做的事：
     - 回到 timer 阶段执行回调
     - 执行 I/O 回调并且进入该阶段时，如果没有设定 timer 的话
@@ -84,11 +88,11 @@
 	- 如果没有，会等待回调加入队列，并立即执行回调
 	  
 	  有超时事件，防止一直等待	 
-*** check
+** check
     ~setImmediate~ 的回调会被放到 check 队列中，在 poll 之后执行
     
     不推荐使用
-*** Micro-Task 与 Macro-Task
+** Micro-Task 与 Macro-Task
     异步队列分成 macro 宏任务，micro 微任务队列
     - 常见的 macro：setTimeout, setInterval, setImmediate, script, I/O
     - 常见的 micro：process.nextTick, promise.then
@@ -98,7 +102,7 @@
     微任务是在事件循环的 各个阶段 之间执行，或者说各个阶段之间的宏队列之间执行
     
     [[file:images/node_event_macrotaskandmicrotask.png]]
-**** 版本变化
+*** 版本变化
      - node 10 或者之前
        
        会等待所有宏任务执行完成，再执行微任务
@@ -112,19 +116,19 @@
        #+begin_quote
        这个切换不会改变阶段，执行完所有微任务后，会返回当前阶段继续执行宏任务
        #+end_quote
-*** process.nextTick
+** process.nextTick
     函数独立于事件循环，有自己的队列
     
     每个阶段完成之后，如果有 nextTick 队列，优先执行，清空所有回调函数
     
     优先于其他微任务
-** 发展
-*** 架构升级
+* 发展
+** 架构升级
     Web 开发从 LAMP 到 MEAN 的技术演变
     - LAMP: Linux, Apache, mysql, PHP
     - MEAN: Mongodb, Express, Angular, Node
     MEAN 演变成阿里开源 Egg.js 服务化，包括 RPC 服务，服务组装，页面即服务
-*** 前后端分离
+** 前后端分离
     应用采用三层架构：
     - 表现层：处理 HTTP 请求，返回 API 结果，和 HTML 渲染
     - 业务逻辑层：处理业务逻辑，应用的核心部分
@@ -170,7 +174,7 @@
 	  
 	  分成 单节点 API 网关 (API Gateway) 和 BFF 网关
 
-**** API 网关
+*** API 网关
      API 网关是一个服务器，是系统的唯一入口。
 
      从面向对象设计的角度看，它与外观模式类似。
@@ -181,13 +185,13 @@
 
      核心要点是： *所有客户端都通过统一的网管接入微服务，网关层处理所有非业务功能*
 
-***** 单节点
+**** 单节点
       单节点的 API 网关为每个客户端提供不同的 API，而不是提供一种万能风格的 API
       
-***** BFF
+**** BFF
       不同客户端使用不同的 API 网关
 
-**** 服务组装
+*** 服务组装
 
 * 其他相关
 ** gRPC

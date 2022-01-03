@@ -1,0 +1,6 @@
+#+STARTUP: content
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: kenel
+#+DATE: [2021-12-22 10:30]
+* Refers
+- https://github.com/sunym1993/flash-linux0.11-talk

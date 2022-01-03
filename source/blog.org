@@ -14,3 +14,8 @@
 ** https://github.com/crisxuan/bestJavaer
 ** https://dwqs.gitbooks.io/frontenddevhandbook/content/
 ** 游戏开发, ai, 图像识别  https://huailiang.github.io/blog/
+** ui story book 开发 https://varun.ca/
+** 毛星云 https://github.com/QianMo?tab=repositories
+** emacs 专家 https://tech.toryanderson.com/
+** LOAP 数据库相关 https://blog.bcmeng.com/
+** https://github.com/curlpipe/awesome-learning

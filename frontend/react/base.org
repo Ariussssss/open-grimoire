@@ -1,59 +1,18 @@
-#+STARTUP: content
-* React
-** Refers
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: base
+#+DATE: [2021-12-08 11:07]
+* Refers
    - https://dev.to/tkdodo/simplifying-useeffect-5fim
    - https://react.iamkasong.com/ react 技术揭秘
    - https://medium.com/hackernoon/introducing-immer-immutability-the-easy-way-9d73d8f71cb3 immer
    - https://react.iamkasong.com/
-** Libs
+* Libs
    一些优秀的库
-*** react-query
+** react-query
     https://github.com/tannerlinsley/react-query
     
-** Hooks
-*** tips
-**** useEffect 的参数函数依然可以拥有名字
-     不需要用到 custom 的时候可以用这种方式命名，增加可读性
-     
-     #+begin_src js
-       const [title, setTitle] = React.useState('hello world')
-
-       React.useEffect(function syncTitle() {
-	   document.title = title
-       }, [title])
-     #+end_src
-**** hooks 测试
-     https://github.com/testing-library/react-hooks-testing-library
-
-     Demo
-     #+begin_src js
-       // useCounter.js
-       import { useState, useCallback } from 'react'
-
-       function useCounter() {
-	 const [count, setCount] = useState(0)
-
-	 const increment = useCallback(() => setCount((x) => x + 1), [])
-
-	 return { count, increment }
-       }
-
-       export default useCounter
-       // useCounter.test.js
-       import { renderHook, act } from '@testing-library/react-hooks'
-       import useCounter from './useCounter'
-
-       test('should increment counter', () => {
-	 const { result } = renderHook(() => useCounter())
-
-	 act(() => {
-	   result.current.increment()
-	 })
-
-	 expect(result.current.count).toBe(1)
-       })
-     #+end_src
-** Immer
+* Immer
 
    German: always
 
@@ -71,9 +30,9 @@
    #+end_src
 
    从 produce 产出的数据都是 freeze 的
-** Design
+* Design
    定义 React 为快速响应的大型 web 应用程序框架.
-*** CPU 瓶颈
+** CPU 瓶颈
     主流浏览器刷新频率 60 Hz,  每 1000ms/60Hz 16.6ms 浏览器刷新一次.
     渲染流程与 JS 线程互斥, 执行 JS 脚本和浏览器布局, 货值不能同时进行.
     方案是时间切片, 将所有 JS 脚本执行时间控制在 [[https://github.com/facebook/react/blob/1fb18e22ae66fdb1dc127347e169e73948778e5a/packages/scheduler/src/forks/SchedulerHostConfig.default.js#L119][5s]] 内, 将长任务分拆成每一帧.
@@ -88,13 +47,13 @@
 
     需要把所有同步的更新变为可中断的异步更新.
     
-*** IO 瓶颈
+** IO 瓶颈
     减小网络延迟感知.
     通过 ~Suspense~ 和 ~useDeferredValue~ 控制更新, 如果足够短则不显示 loading.
     进一步优化体验, 减少无意义的渲染.
     
-** React 16
-*** 架构
+* React 16
+** 架构
     - Scheduler 调度器, 分配优先级, 高优任务优先 Reconciler
       因为浏览器兼容以及不稳定可控, 想要频率控制.
       不使用原生的 ~requestIdleCallback~.
@@ -102,7 +61,7 @@
       15 到 16 的变化就是从 递归变成了 通过 ~shouldYield~ 判断时间的可中断循环过程.
     - Renderer 渲染器, 负责将变化的组件渲染到页面上
       
-**** 16 中断更新后, 渲染会不完全?
+*** 16 中断更新后, 渲染会不完全?
      16 的 Renderer 和 Reconciler 不再交替工作.
       Reconciler 在虚拟 DOM 打上变化标记, 在内存完成变更, 之后统一渲染.
 

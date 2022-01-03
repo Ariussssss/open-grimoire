@@ -1,20 +1,34 @@
 #+STARTUP: content
-* clickhouse
-** Referrs
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: clickhouse
+#+DATE: [2021-04-06 10:33]
+* Referrs
    - https://github.com/collabH/repository/blob/master/bigdata/olap/clickhouse/ClickHouseOverView.md
    - https://clickhouse.tech/docs/zh/
-** Overview
-   俄罗斯 Yandex 2016 开源的列式存储数据库 DBMS.
-   主要用于在线分析处理查询 OLAP, 能够使用 SQL 查询实时生成分析数据报告.
-** Others
-*** DBMS
+* Overview
+俄罗斯 Yandex 2016 开源的列式存储数据库 DBMS.
+   
+主要用于在线分析处理查询 OLAP, 能够使用 SQL 查询实时生成分析数据报告.
+* 场景
+- 读请求多
+- 数据不变更, 或者仅大范围变更
+- 读请求每次请求一堆列, 行请求行数小
+- 表宽, 很多字段
+- 查询量小, 且允许延迟出现
+- 字段内容小
+- 事务不重要, 低事务原子性
+- 语句只包含一个大表
+- 结果小于原数据, 可存于RAM
+  
+* Others
+** DBMS
     传统的行式数据库, 同一行的数据总是被物理存储在一起.
     常见的行式数据库系统有：MySQL、Postgres 和 MS SQL Server.
 
     常见的列式数据库有： Vertica、 Paraccel (Actian Matrix, Amazon Redshift)、 Sybase IQ、 Exasol、
     Infobright、 InfiniDB、 MonetDB (VectorWise,  Actian Vector)、
     LucidDB、 SAP HANA、 Google Dremel、 Google PowerDrill、 Druid、 kdb+.
-*** OLAP
+** OLAP
 
     联机分析处理 OLAP On-Line Analytical Processing.
     其特点是查询频率较 OLTP 系统更低, 但通常会涉及到非常复杂的聚合计算.
@@ -66,7 +80,7 @@
     预计算系统, 入库时对数据进行预聚合.
     进一步牺牲灵活性换性能, 实现超大数据集的秒级响应.
     如 Druid/Kylin 等.
-** Features
+* Features
    - 数据压缩
    - 数据磁盘存储
    - 多核心并行处理

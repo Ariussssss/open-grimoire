@@ -1,9 +1,62 @@
-#+STARTUP: content
-#+CREATED: [2021-06-10 02:49]
-* hooks
-** Refers
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: hooks
+#+DATE: [2021-06-10 02:49]
+* Refers
    - https://overreacted.io/zh-hans/how-are-function-components-different-from-classes/
-** class difference
+* class difference
    - class 虽然 props 不可变, 但每次 this 都可以获取到最新的值
    - 本质一样, diff 一致, 调度器一致, 所以性能几乎一致
    - class 打包会构建出一堆继承 React.Component 的辅助函数
+
+* tips
+** useEffect 的参数函数依然可以拥有名字
+     不需要用到 custom 的时候可以用这种方式命名，增加可读性
+     
+     #+begin_src js
+       const [title, setTitle] = React.useState('hello world')
+
+       React.useEffect(function syncTitle() {
+	   document.title = title
+       }, [title])
+     #+end_src
+** hooks 测试
+     https://github.com/testing-library/react-hooks-testing-library
+
+     Demo
+     #+begin_src js
+       // useCounter.js
+       import { useState, useCallback } from 'react'
+
+       function useCounter() {
+	 const [count, setCount] = useState(0)
+
+	 const increment = useCallback(() => setCount((x) => x + 1), [])
+
+	 return { count, increment }
+       }
+
+       export default useCounter
+       // useCounter.test.js
+       import { renderHook, act } from '@testing-library/react-hooks'
+       import useCounter from './useCounter'
+
+       test('should increment counter', () => {
+	 const { result } = renderHook(() => useCounter())
+
+	 act(() => {
+	   result.current.increment()
+	 })
+
+	 expect(result.current.count).toBe(1)
+       })
+     #+end_src
+     
+* ninja
+
+** useEffect 可在 mount 前(渲染前)执行
+取决于类似 useLayoutEffect 这种在重绘之前的执行的 hooks 中, 有没有调用 setState.
+
+如果有会导致函数重执行, 造成 useEffect 提前于期望中的时间执行.
+
+useEffect 会监听函数执行时间中的 deps, 每次重执行都会判定. 

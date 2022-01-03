@@ -1,0 +1,6 @@
+#+STARTUP: content
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: high-mathematics
+#+DATE: [2021-12-13 11:01]
+* Refers
+- https://math.haozi.me/#%E5%8F%82%E6%95%B0%E4%BC%B0%E8%AE%A1

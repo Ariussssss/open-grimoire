@@ -1,0 +1,8 @@
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+STARTUP: all
+#+TITLE: new
+#+DATE: [2021-12-06 10:10]
+* ficus
+https://github.com/vpisarev/ficus
+* ats
+http://www.ats-lang.org/#Suggestion_on_learning_ATS

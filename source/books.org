@@ -1,6 +1,9 @@
-#+STARTUP: content
+#+STARTUP: all
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: books
 #+DATE: [2021-10-09 15:59]
 * Refers
-  - 大佬的书籍分享 https://xargin.com/readings/
+- 大佬的书籍分享 https://xargin.com/readings/
+- https://github.com/EbookFoundation/free-programming-books
+* 文章
+- https://coolshell.cn/articles/19464.html

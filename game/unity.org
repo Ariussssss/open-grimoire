@@ -1,7 +1,8 @@
-#+STARTUP: content
+#+STARTUP: all
 #+DATE: [2021-10-15 05:29]
 #+TITLE: unity
 * Refers
+- https://github.com/QianMo/Game-Programmer-Study-Notes
 * 资源
 * FAQ
 ** VCRUNTIME140.dll, MSVCP140.dll 丢失

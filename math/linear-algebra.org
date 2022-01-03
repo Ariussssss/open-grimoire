@@ -1,5 +1,7 @@
 #+STARTUP: content
-* Linear Algebra
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: linear-algebra
+#+DATE: [2021-01-06 21:59]
 * Referrs
   - https://pabloinsente.github.io/intro-linear-algebra
   - https://hefferon.net/linearalgebra/

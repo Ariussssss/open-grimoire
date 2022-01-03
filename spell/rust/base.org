@@ -1,7 +1,8 @@
-
-#+STARTUP: content
-* Rust 基础
-** Refers
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: Rust 基础
+#+DATE: [2020-12-16 10:48]
+* Refers
    - [[https://github.com/KaiserY/trpl-zh-cn][Rust 程序语言设计 第二版 2018 edition 中文版]]
    - [[https://github.com/rust-lang/rustlings][rust 练习]]
    - [[https://fasterthanli.me/articles/a-half-hour-to-learn-rust][半个小时学习 Rust]]
@@ -9,12 +10,13 @@
    - https://kaisery.github.io/trpl-zh-cn/
    - https://doc.rust-lang.org/book/
    - https://kaisery.github.io/trpl-zh-cn/
-** 社区
+   - https://github.com/yoshuawuyts/rust-for-js-peeps
+* 社区
   - 常见场景的最佳实践和第三方库 [[https://rust-lang-nursery.github.io/rust-cookbook/][https://rust-lang-nursery.github.io/rust-cookbook/]]
   - 包托管网站 [[https://crates.io/][https://crates.io/]]
   - 文档托管网站 [[https://docs.rs/][https://docs.rs/]]
 
-** Simple Syntax
+* Simple Syntax
 
    hello world
    ~brew install ghc~
@@ -168,7 +170,7 @@
     ~!~ 表示启用 macro, 类似装饰器的方式调用一段压缩代码.
     ~'~ 明明生命周期.
 
-** 工具
+* 工具
    ~rustup~ 是 rust 的安装器.
    ~rustup doc~ 可以查看一下安装信息.
    ~rustup doc~ 可以查看本地文档.
@@ -179,7 +181,7 @@
      run-cargo-script hello-world.rs
    #+end_src
    
-** 环境
+* 环境
    
    #+begin_src shell
      # 装 rustup 方便之后的依赖
@@ -189,3 +191,31 @@
    #+end_src
 
 
+* 国内加速
+#+begin_src conf
+  [source.crates-io]
+  registry = "https://github.com/rust-lang/crates.io-index"
+
+  # 替换成你偏好的镜像源
+  replace-with = 'ustc'
+
+  # 清华大学
+  [source.tuna]
+  registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
+
+  # 中国科学技术大学
+  [source.ustc]
+  registry = "git://mirrors.ustc.edu.cn/crates.io-index"
+
+  # 上海交通大学
+  [source.sjtu]
+  registry = "https://mirrors.sjtug.sjtu.edu.cn/git/crates.io-index"
+
+  # rustcc社区
+  [source.rustcc]
+  registry = "git://crates.rustcc.cn/crates.io-index"
+
+
+  [net]
+  git-fetch-with-cli = true
+#+end_src

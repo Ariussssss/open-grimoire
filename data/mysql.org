@@ -1,0 +1,6 @@
+#+STARTUP: content
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: mysql
+#+DATE: [2021-12-01 11:45]
+* Refers
+* cheatsheets

@@ -1,12 +1,15 @@
-#+STARTUP: content
-#+CREATED: [2021-08-16 10:12]
-* graphy
-** 时序图
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: graphy
+#+DATE: [2021-08-16 10:12]
+* Refers
+
+* 时序图
    绘制时序图 https://www.websequencediagrams.com/#
-** yuml
+* yuml
    超简单绘制流程图 https://yuml.me/diagram/scruffy/class/draw
-** emacs
-*** graphviz
+* emacs
+** graphviz
     安装 ~graphviz~
     #+begin_src bash
       brew install graphviz
@@ -41,7 +44,7 @@
       end
     #+end_src
 
-*** plantuml
+** plantuml
 
     底层需要 Java runtime
     #+begin_src lis
@@ -58,3 +61,6 @@
 
     #+RESULTS:
     [[file:my-diagram.png]]
+
+** 免费 drawio
+https://app.diagrams.net/?src=about

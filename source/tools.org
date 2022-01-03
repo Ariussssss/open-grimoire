@@ -1,0 +1,7 @@
+#+STARTUP: content
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: tools
+#+DATE: [2021-12-01 11:50]
+* https://devhints.io/ 代码片段速查
+* https://openbase.com/ 项目打分
+* https://github.com/codemayq/chinese_chatbot_corpus 中文 chatbot 语录

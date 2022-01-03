@@ -1,4 +1,4 @@
-#+STARTUP: content
+#+STARTUP: all
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: Emacs 笔记
 #+DATE: [2021-05-18 11:42]
@@ -311,3 +311,46 @@
       )
   #+end_src
   
+* git
+日常配合 rebase 使用, 设置环境变量
+#+begin_src bash
+  EDITOR="/usr/local/Cellar/emacs-head@29/29.0.50_1/bin/emacsclient"
+#+end_src
+
+* tricks
+合并到同一行  ~M-^~ 
+
+* 自定义语法高亮
+https://coldnew.github.io/196e902d/
+
+* magit
+初始三个指令
+#+begin_src lisp
+  M-x magit-init
+  M-x magit-clone
+  M-x magit-status
+#+end_src
+
+进入 magit-status 之后编辑
+
+** sync
+- ~f-a~ fetch all
+- ~P-u~ push origin
+
+** branch
+- ~b~ 分支管理
+- ~b-c~ checkout -b 从其他源
+- ~b-b~ 分支切换
+
+** stash
+- ~z-z~ stash
+- ~z-a~ apply
+- ~z-l~ list
+- ~z-p~ pop
+- ~z-k~ kill
+
+** 追踪
+三个区域
+- 工作区 实际编辑目录
+- 暂存区 (stage) git add 从工作区添加到暂存区
+- git 仓库

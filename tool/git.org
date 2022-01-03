@@ -1,6 +1,8 @@
-#+STARTUP: content
-* Git
-** ssh
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: git
+#+DATE: [2021-01-11 21:43]
+* ssh
    生成.
    #+begin_src bash
      ssh-keygen -t ed25519 -f ~/.ssh/key_name -C "name@example.com"
@@ -15,11 +17,16 @@
 	  UseKeychain yes
 	  IdentityFile ~/.ssh/key_name
    #+end_src
-** 多身份
+* 多身份
    个人使用目录管理身份, 内部在 ~\~/code~ , 外部在 ~\~/packages~ .
    #+begin_src conf
+     # ~/.gitconfig
+     [user]
+             email = some@company.com
+             name = realname
+
      [includeIf "gitdir:~/Packages/"]
-		path = ~/.config/git/.gitconfig_personal
+             path = ~/.config/git/.gitconfig_personal
    #+end_src
 
    然后 ~.gitconfig_personal~
@@ -28,15 +35,15 @@
 	     email = ariussssss37@gmail.com
 	     name = arius
    #+end_src
-** Tips
+* Tips
 
-*** get commit msg
+** get commit msg
     Cli 获取单行 ~commit~
     #+begin_src shell
       git log -1 HEAD --pretty=format:%s
     #+end_src
 
-*** Star history
+** Star history
     利用 ~https://starchart.cc/<namespace>/<repo_name>~ 可以展示对应的图片
     使用方式如下
 
@@ -46,17 +53,16 @@
       [![Stargazers over time](https://starchart.cc/halfrost/Halfrost-Field.svg)](https://starchart.cc/halfrost/Halfrost-Field)
     #+end_src
 
-*** 行为记录
+** 行为记录
     ~https://gitstalk.netlify.app/<user_name>~
 
-*** geojson
+** geojson
     https://github.com/ElaWorkshop/awesome-cn-cafe/blob/master/shenzhen.geojson
     支持 map 信息.
 
-** cli
+* cli
    https://cli.github.com/
 
-   
-** comment
+* comment
    基于 issue 的评论区  https://utteranc.es/
    

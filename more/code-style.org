@@ -1,0 +1,9 @@
+#+STARTUP: content
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: code-style
+#+DATE: [2021-12-01 11:20]
+* Refers
+* some-thing
+如果可以的话, 分离 style 和 build, refactor 相关的提交.
+
+让 style 类提交随变更更新

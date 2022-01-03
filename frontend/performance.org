@@ -1,0 +1,11 @@
+#+STARTUP: content
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: performance
+#+DATE: [2021-12-14 09:55]
+* Refers
+* 概念
+- DCL DOMContentLoad Event
+- FP first paint
+- FCP first contentful paint
+- LCP larget contentful paintx
+- L onLoad event
