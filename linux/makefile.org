@@ -1,4 +1,4 @@
-#+STARTUP: content
+#+STARTUP: all
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: makefile
 #+DATE: [2022-01-03 22:38]
@@ -8,6 +8,12 @@
 自动化编译, 写好了 make 就可以执行
 
 make 是用来解释 makefile 的工具, 不同 IDE 不同
-** 编译
-首先将源文件编译出中间代码, windows 下的  ~.obj~ , unix 下的  ~.o~ 
+流程:
+1. 编译 compile: 将源文件编译出中间代码, windows 下的  ~.obj~ , unix 下的  ~.o~
+2. 链接 link: 将大量的 Object File 合并成执行文件
+   
+编译需要告诉编译器头文件所在位置, 然后每个源文件生成一个中间目标文件. 
+
+链接使用中间文件, 需要指出中间文件名.
+中间文件过多可以打包,  windows 下是库文件 Library File ~.lib~ , unix 下的 Archive File  ~.a~ . 
 

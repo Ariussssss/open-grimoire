@@ -6,3 +6,5 @@
 - https://github.com/microsoft/ML-For-Beginners
 - https://github.com/purocean/tensorflow-simple-captcha
 - https://github.com/datawhalechina/pumpkin-book
+- https://github.com/abhisheksoni27/machine-learning-with-js
+- https://github.com/axetroy/ml-KNN-flower

@@ -1,23 +1,25 @@
-#+STARTUP: content
-#+CREATED: [2021-09-09 23:28]
-* diff
-** Refers
-** 策略
-   遍历对比节点O(n2), 遍历后计算最小修改的距离(leetcode 72)  
-   减少 diff, 将 O(n3) 复杂度转换为 O(n), 即所有节点都只遍历一遍. 
-   - DOM 节点跨层级移动操作烧, 忽略不计
-   - 统一层级使用 key 作为 id 区分
-   - 相同组件同一算法
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: diff
+#+DATE: [2021-09-09 23:28]
+* Refers
+* 策略
+遍历对比节点 O(n2), 遍历后计算最小修改的距离(leetcode 72)  
+减少 diff, 将 O(n3) 复杂度转换为 O(n), 即所有节点都只遍历一遍. 
+- DOM 节点跨层级移动操作烧, 忽略不计
+- 统一层级使用 key 作为 id 区分
+- 相同组件同一算法
 
-   通过减少小概率事件, 变成每个组件的同层 diff. 
-   因此假设:
-   - VDOM 变化在同一层
-   - 切变化依赖于用户指定的 key
-** tree-diff
-   跨层级直接创建销毁, 利用 css 隐藏可以优化性能
-** component-diff
-   如果是变化前原组件, 直接用 tree-diff.
+  通过减少小概率事件, 变成每个组件的同层 diff. 
+  因此假设:
+  - VDOM 变化在同一层
+  - 切变化依赖于用户指定的 key
+* tree-diff
+跨层级直接创建销毁, 利用 css 隐藏可以优化性能
+* component-diff
+如果是变化前原组件, 直接用 tree-diff.
 
-   否则直接全量替换
-** element-diff
-   增删移动, 通过 key 匹配优化
+否则直接全量替换
+* element-diff
+增删移动, 通过 key 匹配优化
+

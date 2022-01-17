@@ -1,0 +1,6 @@
+#+STARTUP: content
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: kubernetes
+#+DATE: [2022-01-05 11:08]
+* Refers
+- https://github.com/jolestar/kubernetes-complete-course

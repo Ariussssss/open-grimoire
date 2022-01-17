@@ -5,3 +5,4 @@
 * https://devhints.io/ 代码片段速查
 * https://openbase.com/ 项目打分
 * https://github.com/codemayq/chinese_chatbot_corpus 中文 chatbot 语录
+* https://gitcode.net/mirrors github 国内镜像加速

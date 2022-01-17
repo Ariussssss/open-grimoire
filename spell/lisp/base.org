@@ -5,3 +5,39 @@
 * Refers
 - https://acl.readthedocs.io/en/latest/
 - http://xahlee.info/emacs/emacs/emacs.html
+* LISP-1 與 LISP-2？
+LISP-1 是指 function 與 variable 共用同一個 namespace 的語言.
+所以你沒辦法讓 function 與 varianble 取同個名字.
+目前大部分的程式語言都是這樣設計.
+例如 Python,Java,JavaScript,Scheme.
+
+LISP-2 則是 function 與 variable 各自有不同 namespace 的語言.
+所以你可以同時定義一個名字叫 foobar 的 function 以及一個叫 foobar 的 variable.
+這樣設計的語言有 Ruby, Emacs Lisp, Common Lisp, Perl.
+* array
+#+begin_src lisp
+  ;; get
+  (nth 0 '(0 1 2))
+  ;; find
+  (cl-position "a" '("a" "b" "c") :test 'equal)
+  (cl-position 'a '(a b c) :test 'equal)
+  ;; pop
+  (car '(0 1 2))
+  ;; slice [1:]
+  (cdr '(0 1 2))
+  ;; remove
+  (defun my-remove (element list)
+    (if (endp list)
+        list
+      (if (equal element (first list))
+          (my-remove element (rest list))
+        (list* (first list)
+               (my-remove element (rest list))))))
+#+end_src
+* string
+#+begin_src lisp
+  (symbol-name 'some-symbol)
+  ; => "some-symbol"
+  (intern "some-symbol")
+  ; => some-symbol
+#+end_src

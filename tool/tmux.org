@@ -7,3 +7,16 @@
 * source
    插件主题等: https://github.com/rothgar/awesome-tmux
 8192
+* pane init script
+#+begin_src sh
+  if [ $TMUX ]; then
+      current_tmux="$(tmux display-message -p '#W/#P')"
+      echo "Current tmux-session: $current_tmux"
+      target_script="$HOME/lib/tmux-scripts/$current_tmux.sh"
+      if [ -f $target_script ]; then
+          sh $target_script
+      fi
+  fi
+#+end_src
+
+script 目录地址  ~<window-name>/<pane-index>.sh~ 

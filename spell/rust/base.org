@@ -3,193 +3,212 @@
 #+TITLE: Rust 基础
 #+DATE: [2020-12-16 10:48]
 * Refers
-   - [[https://github.com/KaiserY/trpl-zh-cn][Rust 程序语言设计 第二版 2018 edition 中文版]]
-   - [[https://github.com/rust-lang/rustlings][rust 练习]]
-   - [[https://fasterthanli.me/articles/a-half-hour-to-learn-rust][半个小时学习 Rust]]
-   - https://getrust.tech/docs/introduction/
-   - https://kaisery.github.io/trpl-zh-cn/
-   - https://doc.rust-lang.org/book/
-   - https://kaisery.github.io/trpl-zh-cn/
-   - https://github.com/yoshuawuyts/rust-for-js-peeps
+- [[https://github.com/KaiserY/trpl-zh-cn][Rust 程序语言设计 第二版 2018 edition 中文版]]
+- [[https://github.com/rust-lang/rustlings][rust 练习]]
+- [[https://fasterthanli.me/articles/a-half-hour-to-learn-rust][半个小时学习 Rust]]
+- https://getrust.tech/docs/introduction/
+- https://kaisery.github.io/trpl-zh-cn/
+- https://doc.rust-lang.org/book/
+- https://kaisery.github.io/trpl-zh-cn/
+- https://github.com/yoshuawuyts/rust-for-js-peeps
+- https://hardocs.com/d/rustprimer
+- https://github.com/wubx/rust-in-databend
 * 社区
-  - 常见场景的最佳实践和第三方库 [[https://rust-lang-nursery.github.io/rust-cookbook/][https://rust-lang-nursery.github.io/rust-cookbook/]]
-  - 包托管网站 [[https://crates.io/][https://crates.io/]]
-  - 文档托管网站 [[https://docs.rs/][https://docs.rs/]]
+- 常见场景的最佳实践和第三方库 [[https://rust-lang-nursery.github.io/rust-cookbook/][https://rust-lang-nursery.github.io/rust-cookbook/]]
+- 包托管网站 [[https://crates.io/][https://crates.io/]]
+- 文档托管网站 [[https://docs.rs/][https://docs.rs/]]
 
 * Simple Syntax
 
-   hello world
-   ~brew install ghc~
+hello world
+~brew install ghc~
 
-   #+begin_src rust
-     fn main() {
-	 println!("Hello， world!");
-     }
-   #+end_src
+#+begin_src rust
+  fn main() {
+      println!("Hello， world!");
+  }
+#+end_src
 
-   然后 ~rustc main.rs && ./main~
-   函数和变量名使用 snake case 规范风格. 
-   ~let~ 声明变量, ~_~ 可以 drop 结果. 
-   #+begin_src rust
-     let x: i32;
-     x = 42;
-     // or
-     let x: i32 = 42;
-   #+end_src
+然后 ~rustc main.rs && ./main~
+函数和变量名使用 snake case 规范风格. 
+~let~ 声明变量, ~_~ 可以 drop 结果. 
+#+begin_src rust
+  let x: i32;
+  x = 42;
+  // or
+  let x: i32 = 42;
+#+end_src
 
-   tuples
-   #+begin_src rust
-     let pair = ('a', 17);
-     pair.0;
-     pair.1;
-     // 类型强制
-     let pair: (char, i32) = ('a', 17);
-     // 解构
-     let (some_char, some_int) = ('a', 17);
-   #+end_src
+tuples
+#+begin_src rust
+  let pair = ('a', 17);
+  pair.0;
+  pair.1;
+  // 类型强制
+  let pair: (char, i32) = ('a', 17);
+  // 解构
+  let (some_char, some_int) = ('a', 17);
+#+end_src
 
-   函数, 或者手动作用域.
-   静态编译, 函数先后顺序不影响. 
-   "omitting the semicolon at the end of a function".
-   就是末值返回的意思.
-   #+begin_src rust
-     fn foo() -> i32 {
-	 4
-     }
+函数, 或者手动作用域.
+静态编译, 函数先后顺序不影响. 
+"omitting the semicolon at the end of a function".
+就是末值返回的意思.
 
-     fn main() {
-	 let x = "1";
-	 {
-	     let x = "2"
-	 }
-     }
+#+begin_src rust
+  fn foo() -> i32 {
+      4
+  }
 
-     let x = 42;
-     // equal
-     let x = { 42 }
-   #+end_src
-
-   ~if~ 或者 ~match~
-   #+begin_src rust
-     fn fair_dice_roll() -> i32 {
-	 if feeling_lucky {
-	     6
-	 } else {
-	     4
-	 }
-     }
-     fn fair_dice_roll() -> i32 {
-	 match feeling_lucky {
-	     true => 6,
-	     false => 4,
-	 }
-     }
-   #+end_src
-
-   ~::~ 命名空间操作符号.
-   ~std~ 是 ~library~, ~cmp~ 是 ~module~, ~min~ 是 ~function~.
-   可以直接通过 ~use~ 声明后直接使用函数.
-   #+begin_src rust
-     let least = std::cmp::min(3, 8); // this is 3
-     // or 
-     use std::cmp::min;
-
-     let least = min(7, 1); // this is 1
-     // 逐个和所有
-     use std::cmp::{min, max};
-     use std::{cmp::min, cmp::max};
-     use std::cmp::*;
-   #+end_src
-
-   ~Rust~ 会在启动时候讲一部分常用的加载进来.
-   所以不需要每个都去引 ~std~.
-   像 ~Vec~, ~String~, ~Option~, ~Result~ 等结构.
-   #+begin_src rust
-     use std::prelude::v1::*;
-   #+end_src
-
-   定义结构体, 解构
-   #+begin_src rust
-     struct Vec2 {
-	 x: f64,
-	 y: f64,
-     }
-     let v1 = Vec2 { x: 1.0, y: 3.0 };
-     let v2 = Vec2 { y: 2.0, x: 4.0 };
-     let v3 = Vec2 {
-	 x: 14.0,
-	 ..v2
-     };
-     // 扔掉其他的
-     let Vec2 { x, .. } = v3;
-   #+end_src
-
-   ~if~ 和 ~match~ 中解构, 省略参数.
-   ~_~ 可以捕获默认. 
-    #+begin_src rust
-      fn print_number(n: Number) {
-	  match n {
-	      Number { value: 1, .. } => println!("One"),
-	      Number { value: 2, .. } => println!("Two"),
-	      Number { value, .. } => println!("{}", value),
-	      _ => println!("{}", n.value),
-	  }
+  fn main() {
+      let x = "1";
+      {
+          let x = "2"
       }
-    #+end_src
+  }
 
-    变量默认不可变, 需要特定声明.
-    #+begin_src rust
-      fn main() {
-	  let mut n = Number {
-	      odd: true,
-	      value: 17,
-	  }
-	  n.value = 19; // all good
+  let x = 42;
+  // equal
+  let x = { 42 }
+#+end_src
+
+~if~ 或者 ~match~
+#+begin_src rust
+  fn fair_dice_roll() -> i32 {
+      if feeling_lucky {
+          6
+      } else {
+          4
       }
-    #+end_src
+  }
+  fn fair_dice_roll() -> i32 {
+      match feeling_lucky {
+          true => 6,
+          false => 4,
+      }
+  }
+#+end_src
 
-    ~trait~ 是多个类型拥有的共同的东西.
-    孤立规则 ~orphan rules~: 不能为别人的类型实现别人的 ~trait~.
+~::~ 命名空间操作符号.
+~std~ 是 ~library~, ~cmp~ 是 ~module~, ~min~ 是 ~function~.
+可以直接通过 ~use~ 声明后直接使用函数.
+#+begin_src rust
+  let least = std::cmp::min(3, 8); // this is 3
+  // or 
+  use std::cmp::min;
+
+  let least = min(7, 1); // this is 1
+  // 逐个和所有
+  use std::cmp::{min, max};
+  use std::{cmp::min, cmp::max};
+  use std::cmp::*;
+#+end_src
+
+~Rust~ 会在启动时候讲一部分常用的加载进来.
+所以不需要每个都去引 ~std~.
+像 ~Vec~, ~String~, ~Option~, ~Result~ 等结构.
+#+begin_src rust
+  use std::prelude::v1::*;
+#+end_src
+
+定义结构体, 解构
+#+begin_src rust
+  struct Vec2 {
+      x: f64,
+      y: f64,
+  }
+  let v1 = Vec2 { x: 1.0, y: 3.0 };
+  let v2 = Vec2 { y: 2.0, x: 4.0 };
+  let v3 = Vec2 {
+      x: 14.0,
+      ..v2
+  };
+  // 扔掉其他的
+  let Vec2 { x, .. } = v3;
+#+end_src
+
+~if~ 和 ~match~ 中解构, 省略参数.
+~_~ 可以捕获默认. 
+#+begin_src rust
+  fn print_number(n: Number) {
+      match n {
+          Number { value: 1, .. } => println!("One"),
+          Number { value: 2, .. } => println!("Two"),
+          Number { value, .. } => println!("{}", value),
+          _ => println!("{}", n.value),
+      }
+  }
+#+end_src
+
+变量默认不可变, 需要特定声明.
+#+begin_src rust
+  fn main() {
+      let mut n = Number {
+          odd: true,
+          value: 17,
+      }
+      n.value = 19; // all good
+  }
+#+end_src
+
+~trait~ 是多个类型拥有的共同的东西.
+孤立规则 ~orphan rules~: 不能为别人的类型实现别人的 ~trait~.
     
-    #+begin_src rust
-      impl Signed for i32 {
-	  fn is_strictly_negative(self) -> bool {
-	      self < 0
-	  }
+#+begin_src rust
+  impl Signed for i32 {
+      fn is_strictly_negative(self) -> bool {
+          self < 0
       }
+  }
 
-      fn main() {
-	  let n: i32 = -44;
-	  println!("{}", n.is_strictly_negative()); // prints "true"
-      }
-    #+end_src
+  fn main() {
+      let n: i32 = -44;
+      println!("{}", n.is_strictly_negative()); // prints "true"
+  }
+#+end_src
 
-    函数直接传递值会被借用, 如果没有实现 ~copy~ 的话.
-    如果是取地址这种不可变的引用就可以使用.
+函数直接传递值会被借用, 如果没有实现 ~copy~ 的话.
+如果是取地址这种不可变的引用就可以使用.
 
-    ~!~ 表示启用 macro, 类似装饰器的方式调用一段压缩代码.
-    ~'~ 明明生命周期.
+~!~ 表示启用 macro, 类似装饰器的方式调用一段压缩代码.
+~'~ 明明生命周期.
 
-* 工具
-   ~rustup~ 是 rust 的安装器.
-   ~rustup doc~ 可以查看一下安装信息.
-   ~rustup doc~ 可以查看本地文档.
+* COMMENT 工具
+~rustup~ 是 rust 的安装器, 用来管理 rust 的编译器.
+~rustup doc~ 可以查看一下安装信息.
+~rustup doc~ 可以查看本地文档.
 
-   测试脚本
-   #+begin_src bash
-     cargo install cargo-script
-     run-cargo-script hello-world.rs
-   #+end_src
-   
+~rustc~ 是 rust 的编译器. 
+
+测试脚本
+#+begin_src bash
+  cargo install cargo-script
+  run-cargo-script hello-world.rs
+#+end_src
+
+cargo 相当于 rust 包管理工具. 包在 rust 中成为 crates (板条箱)
+~cargo install~  相当于  ~npm install -g~ .
+~cargo add~  只会针对  ~cargo.toml~ 进行更新. 
+执行  ~cargo build/check~ 会自动下载更新依赖.
+
+~rustfmt~ rust 的 prettier.
+~rustup component add rustfmt~ 安装.
+    
+#+begin_src bash
+  cargo fmt                  
+  cargo fmt -- --check       
+  cargo fmt -- --edition=2018
+#+end_src    
+
 * 环境
    
-   #+begin_src shell
-     # 装 rustup 方便之后的依赖
-     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-     # 格式化工具
-     rustup component add rustfmt
-   #+end_src
-
+#+begin_src shell
+  # 装 rustup 方便之后的依赖
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  # 格式化工具
+  rustup component add rustfmt
+#+end_src
+yt
 
 * 国内加速
 #+begin_src conf
