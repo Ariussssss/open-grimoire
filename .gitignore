@@ -2,6 +2,7 @@
 *.md
 private
 financial
+share
 
 # Emacs
 *~
