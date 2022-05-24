@@ -12,3 +12,5 @@ LGTM is an acronym meaning looks good to me, frequently used when reviewing docu
 * OTOH
 On the other hand.
 * deprecated
+* N/A
+Not applicable

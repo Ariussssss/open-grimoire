@@ -1,4 +1,4 @@
-#+STARTUP: content
+#+STARTUP: all
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: python 基础
 #+DATE: [2021-04-06 10:33]
@@ -69,3 +69,58 @@ the python executable will be generated as static linked and libpython*.dylib wi
 env PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install -v 3.8.0
 
 https://github.com/pyenv/pyenv/issues/443#issuecomment-528277145
+* production
+initial
+#+begin_src bash
+  pip install -r requirements.txt
+#+end_src
+* requirement.txt
+生成
+#+begin_src bash
+  pip freeze >requirements.txt
+#+end_src
+使用
+#+begin_src bash
+  pip install -r requirement.txt
+#+end_src
+* 依赖
+~PYTHONPATH~ 来查询可调用依赖,  ~sys.path~ 可以获取
+
+python 不允许相对路径检索, 更多的是 module 模式调度
+
+bash 修改
+#+begin_src bash
+  export PYTHONPATH=$PYTHONPATH:/other/module
+#+end_src
+
+python 主动注入. 
+#+begin_src python
+  import sys
+  import os
+
+  SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+  sys.path.append(os.path.dirname(SCRIPT_DIR))
+#+end_src
+
+根据外层执行路径转化为 module 执行
+#+begin_src python
+  import os.path
+  import os
+
+  def excute(path):
+      [*path_arr, filename] = path.replace('.py', '').split('/')
+      previous_path = [filename]
+      while len(path_arr) > 0:
+          current_path = "/".join(path_arr)
+          if not os.path.isfile(current_path + '/__init__.py'):
+              command = "cd {} && python -m {}".format(current_path, ".".join(previous_path))
+              print(command)
+              os.system(command)
+              break
+          previous_path.insert(0, path_arr.pop())
+
+  if __name__ == "__main__":
+      import sys
+      print(sys.argv[-1])
+      excute(sys.argv[-1])
+#+end_src

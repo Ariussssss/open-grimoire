@@ -66,3 +66,8 @@
 * comment
    基于 issue 的评论区  https://utteranc.es/
    
+* COMMENT 加速
+https://gitclone.com/
+#+begin_src bash
+  git config --global url."https://gitclone.com/".insteadOf https://
+#+end_src

@@ -8,3 +8,7 @@
 - https://github.com/datawhalechina/pumpkin-book
 - https://github.com/abhisheksoni27/machine-learning-with-js
 - https://github.com/axetroy/ml-KNN-flower
+- https://github.com/nndl/exercise
+- https://github.com/dragen1860/Deep-Learning-with-TensorFlow-book
+* nlp
+https://github.com/fighting41love/funNLP

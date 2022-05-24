@@ -44,3 +44,9 @@
 * tty
    tty, tele typewriter, 是用户访问计算机主机的硬件设备. 
    可以理解为一个显示器和一个键盘的组合
+
+* 端口转发
+
+#+begin_src bash
+
+#+end_src

@@ -3,24 +3,24 @@
 #+TITLE: three
 #+DATE: [2021-09-30 11:31]
 * Refers
-  - https://threejs.org/
-  - https://juejin.cn/post/6981249521258856456
-  - playground https://codepen.io/tompeham/pen/ZWomey?editors=0010
+- https://threejs.org/
+- https://juejin.cn/post/6981249521258856456
+- playground https://codepen.io/tompeham/pen/ZWomey?editors=0010
 * 概述
-  基于原声 WebGL API 和着色器封装的 3D 引擎.
+基于原声 WebGL API 和着色器封装的 3D 引擎.
 
-  让开发不用写原生的 WebGL, 学习 WebGL 帮助理解 three 原理和可以自定义着色器相关. 
+让开发不用写原生的 WebGL, 学习 WebGL 帮助理解 three 原理和可以自定义着色器相关. 
 * base
 ** scene
-   三维时间容器
+三维时间容器
 ** camera
-   三维时间的镜头眼睛
+三维时间的镜头眼睛
 
-   一般有:
-   - PerspectiveCamera 透视相机
-   - OrthographicCamera 正交相机
+一般有:
+- PerspectiveCamera 透视相机
+- OrthographicCamera 正交相机
 ** renderer
-   把
+把
 ** 周边生态
 https://threejs.org/docs/#manual/en/introduction/Libraries-and-Plugins
 * glb 文件压缩
@@ -49,20 +49,20 @@ box demo
     });
     // draw the box
     return (
-      <mesh {...props} ref={mesh}>
+        <mesh {...props} ref={mesh}>
         <boxGeometry args={[1, 1, 1]} />
         <meshStandardMaterial color="#FFAE00" />
-      </mesh>
+        </mesh>
     );
   }
 
   export default function Scene() {
     return (
-      <Canvas dpr={window.devicePixelRatio}>
+        <Canvas dpr={window.devicePixelRatio}>
         <ambientLight />
         <pointLight position={[10, 10, 10]} />
         <Box position={[0, 0, 0]} />
-      </Canvas>
+        </Canvas>
     );
   }
 #+end_src
@@ -101,19 +101,19 @@ NoiseMaterial demo
     });
 
     return (
-      <Plane args={[12, 14.75]}>
+        <Plane args={[12, 14.75]}>
         <noiseMaterial ref={material} side={THREE.DoubleSide} />
-      </Plane>
+        </Plane>
     );
   }
 
   export default function Scene() {
     return (
-      <Canvas dpr={window.devicePixelRatio} camera={{ position: new THREE.Vector3(0, 0, 10) }}>
+        <Canvas dpr={window.devicePixelRatio} camera={{ position: new THREE.Vector3(0, 0, 10) }}>
         <Center>
-          <Data />
+        <Data />
         </Center>
-      </Canvas>
+        </Canvas>
     );
   }
 

@@ -1,0 +1,17 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: base
+#+DATE: [2022-04-19 21:49]
+* Refers
+- https://sites.cs.ucsb.edu/~lingqi/teaching/games101.html
+* intro
+四大概念:
+- 光栅化
+- 几何
+- 光线追踪
+- 模拟动画
+* 依赖
+基础数学:
+- 线性代数
+- 几何
+- 积分

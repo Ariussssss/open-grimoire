@@ -7,3 +7,5 @@
 - https://github.com/EbookFoundation/free-programming-books
 * 文章
 - https://coolshell.cn/articles/19464.html
+- https://www.cntofu.com/
+- https://ursocute.github.io/2019/01/12/article2/

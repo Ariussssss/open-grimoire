@@ -1,0 +1,11 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: deep learning 深度学习
+#+DATE: [2022-04-22 10:39]
+* Refers
+- https://github.com/d2l-ai/d2l-zh
+* 方法
+** 卷积神经网络 – CNN
+** 生成对抗网络 – GANs
+** 循环神经网络 – RNN
+** 深度强化学习 – RL

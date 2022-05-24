@@ -1,6 +1,8 @@
-#+STARTUP: content
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: latex
+#+DATE: [2020-12-13 21:58]
 * LaTeX
-
 ** 基本语法
 
    #+begin_quote

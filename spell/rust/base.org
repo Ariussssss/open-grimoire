@@ -13,6 +13,7 @@
 - https://github.com/yoshuawuyts/rust-for-js-peeps
 - https://hardocs.com/d/rustprimer
 - https://github.com/wubx/rust-in-databend
+- https://github.com/rcore-os/rCore-Tutorial-Book-v3
 * 社区
 - 常见场景的最佳实践和第三方库 [[https://rust-lang-nursery.github.io/rust-cookbook/][https://rust-lang-nursery.github.io/rust-cookbook/]]
 - 包托管网站 [[https://crates.io/][https://crates.io/]]

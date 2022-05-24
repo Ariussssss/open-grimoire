@@ -1,198 +1,200 @@
-#+STARTUP: content
-* Webpack
-** Refers
-   - https://mp.weixin.qq.com/s/Rl0Zo4o0CP-BhK2ci56CgQ
-** module, chunk, bundle
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: wbpack 基础
+#+DATE: [2021-02-23 21:53]
+* Refers
+- https://mp.weixin.qq.com/s/Rl0Zo4o0CP-BhK2ci56CgQ
+* module, chunk, bundle
 
-   所有被加载的文件都会被对应 loader 解析成 module
+所有被加载的文件都会被对应 loader 解析成 module
 
-   module 交给 webpack 处理的中间产物是 chunk
+module 交给 webpack 处理的中间产物是 chunk
 
-   chunk 处理完成，生成的产物是 bundle.
+chunk 处理完成，生成的产物是 bundle.
 
-   默认 chunk 会声称对应的 bundle 也就是静态产物, output 会通过命名规则将其合并.
-   最终 assets 每个会匹配最少一个, 符合规则的 chunks 集合. 
+默认 chunk 会声称对应的 bundle 也就是静态产物, output 会通过命名规则将其合并.
+最终 assets 每个会匹配最少一个, 符合规则的 chunks 集合. 
 
-** filename, chunkFilename
+* filename, chunkFilename
 
-   filename 指列在 entry 中，打包后输出的文件名
+filename 指列在 entry 中，打包后输出的文件名
 
-   chunkFilename 指没有列在 entry 中，打包输出的文件名
+chunkFilename 指没有列在 entry 中，打包输出的文件名
 
-** hash, chunkhash, contenthash
+* hash, chunkhash, contenthash
 
-   hash 所有文件单次构建 hash 都一致. 
-   同一项目构建, 有内容变更的时候变更
+hash 所有文件单次构建 hash 都一致. 
+同一项目构建, 有内容变更的时候变更
 
-   chunkhash 是会 chunk 更改时候变化.
-   同一chunk 变更的时候变更. 
+chunkhash 是会 chunk 更改时候变化.
+同一 chunk 变更的时候变更. 
 
-   contenthash 使用较多，只有当输出资源变化时变化, 最小.
+contenthash 使用较多，只有当输出资源变化时变化, 最小.
    
-** source-map
+* source-map
 
-   [[https://webpack.docschina.org/configuration/devtool/][source-map 介绍]]
+[[https://webpack.docschina.org/configuration/devtool/][source-map 介绍]]
 
-   基本都是单词组合，拆分每个子单词，简化理解：
+基本都是单词组合，拆分每个子单词，简化理解：
 
-   | 参数     | 参数解释                                                                  |
-   |----------+---------------------------------------------------------------------------|
-   | eval     | 打包后的模块都使用 =eval()= 执行，行映射可能不准；不产生独立的 map 文件   |
-   | cheap    | map 映射只显示行不显示列，忽略源自 loader 的 source map                   |
-   | inline   | 映射文件以 base64 格式编码，加在 bundle 文件最后，不产生独立的 map 文件   |
-   | module   | 增加对 loader source map 和第三方模块的映射                               |
+| 参数     | 参数解释                                                                  |
+|----------+---------------------------------------------------------------------------|
+| eval     | 打包后的模块都使用 =eval()= 执行，行映射可能不准；不产生独立的 map 文件   |
+| cheap    | map 映射只显示行不显示列，忽略源自 loader 的 source map                   |
+| inline   | 映射文件以 base64 格式编码，加在 bundle 文件最后，不产生独立的 map 文件   |
+| module   | 增加对 loader source map 和第三方模块的映射                               |
 
-   常用：
-   - source-map 大而全，有详细的报错信息和行数
-   - cheap-sourse-map 不会有列映射，小很多
-   - eval-source-map 不生成单独，行列可能不准
-   - inline-source-map 映射文件以 base64 格式编码，加在 bundle 里，不生成单独 map，包体积巨大
+常用：
+- source-map 大而全，有详细的报错信息和行数
+- cheap-sourse-map 不会有列映射，小很多
+- eval-source-map 不生成单独，行列可能不准
+- inline-source-map 映射文件以 base64 格式编码，加在 bundle 里，不生成单独 map，包体积巨大
 
-   开发根据 debuger 难度和执行时间权衡选择使用，线上一般不使用，如果需要一般带上 cheap。
+  开发根据 debuger 难度和执行时间权衡选择使用，线上一般不使用，如果需要一般带上 cheap。
 
-   速查：
+  速查：
    
-   | devtool                                    | performance                         | production | quality        | comment                                                                               |
-   |--------------------------------------------+-------------------------------------+------------+----------------+---------------------------------------------------------------------------------------|
-   | (none)                                     | *build*: fastest *rebuild*: fastest | yes        | bundle         | Recommended choice for production builds with maximum performance.                    |
-   | *=eval=*                                   | *build*: fast *rebuild*: fastest    | no         | generated      | Recommended choice for development builds with maximum performance.                   |
-   | =eval-cheap-source-map=                    | *build*: ok *rebuild*: fast         | no         | transformed    | Tradeoff choice for development builds.                                               |
-   | =eval-cheap-module-source-map=             | *build*: slow *rebuild*: fast       | no         | original lines | Tradeoff choice for development builds.                                               |
-   | *=eval-source-map=*                        | *build*: slowest *rebuild*: ok      | no         | original       | Recommended choice for development builds with high quality SourceMaps.               |
-   | =cheap-source-map=                         | *build*: ok *rebuild*: slow         | no         | transformed    |                                                                                       |
-   | =cheap-module-source-map=                  | *build*: slow *rebuild*: slow       | no         | original lines |                                                                                       |
-   | *=source-map=*                             | *build*: slowest *rebuild*: slowest | yes        | original       | Recommended choice for production builds with high quality SourceMaps.                |
-   | =inline-cheap-source-map=                  | *build*: ok *rebuild*: slow         | no         | transformed    |                                                                                       |
-   | =inline-cheap-module-source-map=           | *build*: slow *rebuild*: slow       | no         | original lines |                                                                                       |
-   | =inline-source-map=                        | *build*: slowest *rebuild*: slowest | no         | original       | Possible choice when publishing a single file                                         |
-   | =eval-nosources-cheap-source-map=          | *build*: ok *rebuild*: fast         | no         | transformed    | source code not included                                                              |
-   | =eval-nosources-cheap-module-source-map=   | *build*: slow *rebuild*: fast       | no         | original lines | source code not included                                                              |
-   | =eval-nosources-source-map=                | *build*: slowest *rebuild*: ok      | no         | original       | source code not included                                                              |
-   | =inline-nosources-cheap-source-map=        | *build*: ok *rebuild*: slow         | no         | transformed    | source code not included                                                              |
-   | =inline-nosources-cheap-module-source-map= | *build*: slow *rebuild*: slow       | no         | original lines | source code not included                                                              |
-   | =inline-nosources-source-map=              | *build*: slowest *rebuild*: slowest | no         | original       | source code not included                                                              |
-   | =nosources-cheap-source-map=               | *build*: ok *rebuild*: slow         | no         | transformed    | source code not included                                                              |
-   | =nosources-cheap-module-source-map=        | *build*: slow *rebuild*: slow       | no         | original lines | source code not included                                                              |
-   | =nosources-source-map=                     | *build*: slowest *rebuild*: slowest | yes        | original       | source code not included                                                              |
-   | =hidden-nosources-cheap-source-map=        | *build*: ok *rebuild*: slow         | no         | transformed    | no reference, source code not included                                                |
-   | =hidden-nosources-cheap-module-source-map= | *build*: slow *rebuild*: slow       | no         | original lines | no reference, source code not included                                                |
-   | =hidden-nosources-source-map=              | *build*: slowest *rebuild*: slowest | yes        | original       | no reference, source code not included                                                |
-   | =hidden-cheap-source-map=                  | *build*: ok *rebuild*: slow         | no         | transformed    | no reference                                                                          |
-   | =hidden-cheap-module-source-map=           | *build*: slow *rebuild*: slow       | no         | original lines | no reference                                                                          |
-   | =hidden-source-map=                        | *build*: slowest *rebuild*: slowest | yes        | original       | no reference. Possible choice when using SourceMap only for error reporting purposes. |
+  | devtool                                    | performance                         | production | quality        | comment                                                                               |
+  |--------------------------------------------+-------------------------------------+------------+----------------+---------------------------------------------------------------------------------------|
+  | (none)                                     | *build*: fastest *rebuild*: fastest | yes        | bundle         | Recommended choice for production builds with maximum performance.                    |
+  | *=eval=*                                   | *build*: fast *rebuild*: fastest    | no         | generated      | Recommended choice for development builds with maximum performance.                   |
+  | =eval-cheap-source-map=                    | *build*: ok *rebuild*: fast         | no         | transformed    | Tradeoff choice for development builds.                                               |
+  | =eval-cheap-module-source-map=             | *build*: slow *rebuild*: fast       | no         | original lines | Tradeoff choice for development builds.                                               |
+  | *=eval-source-map=*                        | *build*: slowest *rebuild*: ok      | no         | original       | Recommended choice for development builds with high quality SourceMaps.               |
+  | =cheap-source-map=                         | *build*: ok *rebuild*: slow         | no         | transformed    |                                                                                       |
+  | =cheap-module-source-map=                  | *build*: slow *rebuild*: slow       | no         | original lines |                                                                                       |
+  | *=source-map=*                             | *build*: slowest *rebuild*: slowest | yes        | original       | Recommended choice for production builds with high quality SourceMaps.                |
+  | =inline-cheap-source-map=                  | *build*: ok *rebuild*: slow         | no         | transformed    |                                                                                       |
+  | =inline-cheap-module-source-map=           | *build*: slow *rebuild*: slow       | no         | original lines |                                                                                       |
+  | =inline-source-map=                        | *build*: slowest *rebuild*: slowest | no         | original       | Possible choice when publishing a single file                                         |
+  | =eval-nosources-cheap-source-map=          | *build*: ok *rebuild*: fast         | no         | transformed    | source code not included                                                              |
+  | =eval-nosources-cheap-module-source-map=   | *build*: slow *rebuild*: fast       | no         | original lines | source code not included                                                              |
+  | =eval-nosources-source-map=                | *build*: slowest *rebuild*: ok      | no         | original       | source code not included                                                              |
+  | =inline-nosources-cheap-source-map=        | *build*: ok *rebuild*: slow         | no         | transformed    | source code not included                                                              |
+  | =inline-nosources-cheap-module-source-map= | *build*: slow *rebuild*: slow       | no         | original lines | source code not included                                                              |
+  | =inline-nosources-source-map=              | *build*: slowest *rebuild*: slowest | no         | original       | source code not included                                                              |
+  | =nosources-cheap-source-map=               | *build*: ok *rebuild*: slow         | no         | transformed    | source code not included                                                              |
+  | =nosources-cheap-module-source-map=        | *build*: slow *rebuild*: slow       | no         | original lines | source code not included                                                              |
+  | =nosources-source-map=                     | *build*: slowest *rebuild*: slowest | yes        | original       | source code not included                                                              |
+  | =hidden-nosources-cheap-source-map=        | *build*: ok *rebuild*: slow         | no         | transformed    | no reference, source code not included                                                |
+  | =hidden-nosources-cheap-module-source-map= | *build*: slow *rebuild*: slow       | no         | original lines | no reference, source code not included                                                |
+  | =hidden-nosources-source-map=              | *build*: slowest *rebuild*: slowest | yes        | original       | no reference, source code not included                                                |
+  | =hidden-cheap-source-map=                  | *build*: ok *rebuild*: slow         | no         | transformed    | no reference                                                                          |
+  | =hidden-cheap-module-source-map=           | *build*: slow *rebuild*: slow       | no         | original lines | no reference                                                                          |
+  | =hidden-source-map=                        | *build*: slowest *rebuild*: slowest | yes        | original       | no reference. Possible choice when using SourceMap only for error reporting purposes. |
 
-** magic comment
+* magic comment
 
-   内置的 SplitChunksPlugin 有懒加载的能力
+内置的 SplitChunksPlugin 有懒加载的能力
 
-** easy-webpack demo
-   #+begin_src js
-     const fs = require('fs')
-     const path = require('path')
-     const parser = require('@babel/parser')
-     const traverse = require('@babel/traverse').default
-     const babel = require('@babel/core')
+* easy-webpack demo
+#+begin_src js
+  const fs = require('fs')
+  const path = require('path')
+  const parser = require('@babel/parser')
+  const traverse = require('@babel/traverse').default
+  const babel = require('@babel/core')
 
-     // 保存根路径，所有模块根据根路径产出相对路径
-     let root = process.cwd()
+  // 保存根路径，所有模块根据根路径产出相对路径
+  let root = process.cwd()
 
-     function readModuleInfo(filePath) {
-       // 准备好相对路径作为 module 的 key
-       filePath =
-	 './' + path.relative(root, path.resolve(filePath)).replace(/\\+/g, '/')
-       // 读取源码
-       const content = fs.readFileSync(filePath, 'utf-8')
-       // 转换出 AST
-       const ast = parser.parse(content)
-       // 遍历模块 AST，将依赖收集到 deps 数组中
-       const deps = []
-       traverse(ast, {
-	 CallExpression: ({ node }) => {
-	   // 如果是 require 语句，则收集依赖
-	   if (node.callee.name === 'require') {
-	     // 改造 require 关键字
-	     node.callee.name = '_require_'
-	     let moduleName = node.arguments[0].value
-	     moduleName += path.extname(moduleName) ? '' : '.js'
-	     moduleName = path.join(path.dirname(filePath), moduleName)
-	     moduleName = './' + path.relative(root, moduleName).replace(/\\+/g, '/')
-	     deps.push(moduleName)
-	     // 改造依赖的路径
-	     node.arguments[0].value = moduleName
-	   }
-	 },
-       })
-       // 编译回代码
-       const { code } = babel.transformFromAstSync(ast)
-       return {
-	 filePath,
-	 deps,
-	 code,
-       }
-     }
+  function readModuleInfo(filePath) {
+    // 准备好相对路径作为 module 的 key
+    filePath =
+      './' + path.relative(root, path.resolve(filePath)).replace(/\\+/g, '/')
+    // 读取源码
+    const content = fs.readFileSync(filePath, 'utf-8')
+    // 转换出 AST
+    const ast = parser.parse(content)
+    // 遍历模块 AST，将依赖收集到 deps 数组中
+    const deps = []
+    traverse(ast, {
+      CallExpression: ({ node }) => {
+        // 如果是 require 语句，则收集依赖
+        if (node.callee.name === 'require') {
+          // 改造 require 关键字
+          node.callee.name = '_require_'
+          let moduleName = node.arguments[0].value
+          moduleName += path.extname(moduleName) ? '' : '.js'
+          moduleName = path.join(path.dirname(filePath), moduleName)
+          moduleName = './' + path.relative(root, moduleName).replace(/\\+/g, '/')
+          deps.push(moduleName)
+          // 改造依赖的路径
+          node.arguments[0].value = moduleName
+        }
+      },
+    })
+    // 编译回代码
+    const { code } = babel.transformFromAstSync(ast)
+    return {
+      filePath,
+      deps,
+      code,
+    }
+  }
 
-     function buildDependencyGraph(entry) {
-       // 获取入口模块信息
-       const entryInfo = readModuleInfo(entry)
-       // 项目依赖树
-       const graphArr = []
-       graphArr.push(entryInfo)
-       // 从入口模块触发，递归地找每个模块的依赖，并将每个模块信息保存到 graphArr
-       for (const module of graphArr) {
-	 module.deps.forEach((depPath) => {
-	   const moduleInfo = readModuleInfo(path.resolve(depPath))
-	   graphArr.push(moduleInfo)
-	 })
-       }
-       return graphArr
-     }
+  function buildDependencyGraph(entry) {
+    // 获取入口模块信息
+    const entryInfo = readModuleInfo(entry)
+    // 项目依赖树
+    const graphArr = []
+    graphArr.push(entryInfo)
+    // 从入口模块触发，递归地找每个模块的依赖，并将每个模块信息保存到 graphArr
+    for (const module of graphArr) {
+      module.deps.forEach((depPath) => {
+        const moduleInfo = readModuleInfo(path.resolve(depPath))
+        graphArr.push(moduleInfo)
+      })
+    }
+    return graphArr
+  }
 
-     function pack(graph, entry) {
-       const moduleArr = graph.map((module) => {
-	 return (
-	   `"${module.filePath}": function(module, exports, _require_) {
-	     eval(\`` +
-	   module.code +
-	   `\`)
-	   }`
-	 )
-       })
-       const output = `;(() => {
-	 var modules = {
-	   ${moduleArr.join(',\n')}
-	 }
-	 var modules_cache = {}
-	 var _require_ = function(moduleId) {
-	   if (modules_cache[moduleId]) return modules_cache[moduleId].exports
+  function pack(graph, entry) {
+    const moduleArr = graph.map((module) => {
+      return (
+        `"${module.filePath}": function(module, exports, _require_) {
+          eval(\`` +
+          module.code +
+          `\`)
+        }`
+      )
+    })
+    const output = `;(() => {
+      var modules = {
+        ${moduleArr.join(',\n')}
+      }
+      var modules_cache = {}
+      var _require_ = function(moduleId) {
+        if (modules_cache[moduleId]) return modules_cache[moduleId].exports
 
-	   var module = modules_cache[moduleId] = {
-	     exports: {}
-	   }
-	   modules[moduleId](module, module.exports, _require_)
-	   return module.exports
-	 }
+        var module = modules_cache[moduleId] = {
+          exports: {}
+        }
+        modules[moduleId](module, module.exports, _require_)
+        return module.exports
+      }
 
-	 _require_('${entry}')
-       })()`
-       return output
-     }
-     function main(entry = './src/index.js', output = './dist.js') {
-       fs.writeFileSync(output, pack(buildDependencyGraph(entry), entry))
-     }
+      _require_('${entry}')
+    })()`
+    return output
+  }
+  function main(entry = './src/index.js', output = './dist.js') {
+    fs.writeFileSync(output, pack(buildDependencyGraph(entry), entry))
+  }
 
-     main()
-   #+end_src
+  main()
+#+end_src
 
-** loader
-   劫持和处理资源
-   [[https://webpack-v3.jsx.app/api/loaders/#this-resourcepath][api]]
-   #+begin_src js
-     module.exports = function (source) {
-  
-       console.log('The original file was here:', this.resourcePath)
+* loader
+劫持和处理资源
+[[https://webpack-v3.jsx.app/api/loaders/#this-resourcepath][api]]
+#+begin_src js
+  module.exports = function (source) {
 
-       this.callback(null, source)
+    console.log('The original file was here:', this.resourcePath)
 
-     }
-   #+end_src
+    this.callback(null, source)
+
+  }
+#+end_src
 

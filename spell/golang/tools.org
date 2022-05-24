@@ -1,4 +1,4 @@
-#+STARTUP: content
+#+STARTUP: all
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: tools
 #+DATE: [2021-11-28 19:04]
@@ -9,4 +9,6 @@ gopls 和 godef, 支持语言系统和依赖检索跳转
   go install golang.org/x/tools/gopls@latest
   go get -u github.com/rogpeppe/godef
 #+end_src
-
+* cli-builder
+- cli  https://github.com/charmbracelet/bubbletea
+- terminal layout https://github.com/charmbracelet/lipgloss

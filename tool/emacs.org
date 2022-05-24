@@ -1,4 +1,4 @@
-#+STARTUP: all
+#+STARTUP: content
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: Emacs 笔记
 #+DATE: [2021-05-18 11:42]
@@ -195,6 +195,7 @@ Refers:
   ,#+DATE: [`(format-time-string  "%F %R" (current-time))`]
   ,* Refers
 #+end_src
+
 * dired
 ** base
 - ~><~ 移动光标到 dir

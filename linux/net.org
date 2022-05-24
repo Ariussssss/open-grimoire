@@ -1,0 +1,29 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: net
+#+DATE: [2022-04-28 14:55]
+* 测试网络
+
+server
+#+begin_src bash
+  iperf -s 
+#+end_src
+
+client
+#+begin_src bash
+  iperf -c target.domain
+#+end_src
+* ifconfig
+- lo 回环接口(loop back) 或者 本地主机(localhost)
+- gif Software Network Interface 通用 IP-in-IP 隧道(RFC2893)
+- stf 6to4 tunnel interface 连接(RFC3056)
+- en Ethernet 以太网或 802.11 接口
+- fw IP over FireWire(IEEE-1394), macOS 特有
+- p2p Point-to-Point 协议
+- awdl airdrop peer to peer(一种 mesh network), apple airdrop 设备特有
+- bridge 第 2 层桥接 vlan 虚拟局域网络
+- utun vpn 
+* 查看链接
+#+begin_src bash
+  networksetup
+#+end_src

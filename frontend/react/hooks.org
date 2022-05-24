@@ -60,3 +60,12 @@
 如果有会导致函数重执行, 造成 useEffect 提前于期望中的时间执行.
 
 useEffect 会监听函数执行时间中的 deps, 每次重执行都会判定. 
+
+** jsx vs function
+因为 hooks 依赖上层作用域决定数据(hook)挂载的位置.
+
+jsx 会生成一个单独的 frame, function 不会.
+
+这会导致执行周期不同.
+同时 function 的执行因为不同于 jsx 独立作用域.
+需要主动(开发者非 react)保证每次外层挂载作用域都能按顺序执行 hook, 保证不会有问题. 

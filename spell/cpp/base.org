@@ -2,13 +2,33 @@
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: base
 #+DATE: [2021-10-20 19:05]
-* c++ 弃用特性(11之后)
+* c++ 弃用特性(11 之后)
 - 不允许字面常量带 ~*~ 
   如果有需要初始化一个  ~char *~, 应该使用 ~const char *~ 或者 ~auto~. 
 - 异常说明 unexpected_handler, set_unexpected() 等相关特性被弃用, 应该使用 noexcept
 * syntax
+** 常规结构
+1. 注释
+2. 预处理器编译指令 ~#include~
+3. 编译指令  ~using namespace~
+
+程序必须包含 main 函数, 返回值返回给操作系统
+*** 预处理器
+一般是 include 引用
+*** 头文件
+include file(库), header file 声明库
+
+头文件用扩展名 h. 老版本: ~math.h~, ~cmath~
+*** 命名空间
+using 之后可以省略前缀, ~std::cout => cout~
 ** 输入输出
-std 的  ~cin~ 和 ~count~ 负责输入输出
+std 的  ~cin~ 和 ~cout~ 负责输入输出.
+
+相比 ~printf~ 多了类型判断和自动转化
+
+~<<~ 表示传输, 是 cout 对象的符号重载.
+
+形似 ~cin >> variable~
 #+begin_src cpp
   #include <iostream>
 
@@ -71,13 +91,15 @@ std 的  ~cin~ 和 ~count~ 负责输入输出
 ** 基本类型
 bool, char, int, float, double, void.
 
-1字节 (byte) = 8位 (bit)
+1 字节 (byte) = 8 位 (bit)
 *** bool
 ~true~ 和 ~false~ 两种, 占 1 字节. 
 *** char
 存放字符, 通过 ASCII 编码实现对应转化, 一般为 1 字节.
+
+分是否带符号, 对应不同系统. 如果是标准的 ASCII 则没有关系
 *** int
-大多数为 32 位.
+大多数为 32 位. 16, 32, 64
 
 | 类型                   | 位宽 | 表示范围         |
 |------------------------+------+------------------|
@@ -93,6 +115,9 @@ bool, char, int, float, double, void.
 其中 int, signed, int signed, signed int 表示同一类型.
 而 unsigned long 和 unsigned long int 表示同一类型.
 可以省略编写.
+
+042 八进制, 34.
+0x42 十六进制, 66. 
 *** float
 单精度浮点, 32 位. 
 范围比较少, 精度不高. 

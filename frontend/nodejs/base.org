@@ -4,6 +4,7 @@
 #+DATE: [2020-11-17 03:03]
 * Refers
 - https://github.com/theanarkh/understand-nodejs
+- https://github.com/semlinker/node-deep
 * 基础
 ** 特点
 *** 适合构建 WEB 应用

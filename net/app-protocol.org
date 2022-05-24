@@ -1,38 +1,39 @@
-#+STARTUP: content
-#+CREATED: [2021-05-24 15:08]
-* app-protocol
-** 设置应用协议
-   Electron 可以设置应用协议监听外部调用.
-   #+begin_src js
-     import { app } from "electron";
-	const agreement = "some-protocol";
-	const agreementRegExp = new RegExp(`^${agreement}://`);
-	let isSet = false;
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: app-protocol
+#+DATE: [2021-05-24 15:08]
+* 设置应用协议
+Electron 可以设置应用协议监听外部调用.
+#+begin_src js
+  import { app } from "electron";
+  const agreement = "some-protocol";
+  const agreementRegExp = new RegExp(`^${agreement}://`);
+  let isSet = false;
 
-	if (
-	  process.env.NODE_ENV === "development" &&
-	  process.platform === "win32"
-	) {
-	  // 设置electron.exe 和 app的路径
-	  isSet = app.setAsDefaultProtocolClient(agreement, process.execPath, [
-	    path.resolve(process.argv[1]),
-	  ]);
-	} else {
-	  isSet = app.setAsDefaultProtocolClient(agreement);
-	}
-	console.log("是否注册成功", isSet);
-   #+end_src
+  if (
+    process.env.NODE_ENV === "development" &&
+      process.platform === "win32"
+  ) {
+    // 设置electron.exe 和 app的路径
+    isSet = app.setAsDefaultProtocolClient(agreement, process.execPath, [
+      path.resolve(process.argv[1]),
+    ]);
+  } else {
+    isSet = app.setAsDefaultProtocolClient(agreement);
+  }
+  console.log("是否注册成功", isSet);
+#+end_src
 
-   响应
-   #+begin_src js
-	 app.on("open-url", (event, url) => {
-	   console.log(url);
-	   const isProtocol = agreementRegExp.test(url);
-	   if (isProtocol) {
-	     // ...
-	   }
-	 });
-   #+end_src
-** universal-link 解决方案
-   - 跳转一个 app 的 scheme 时, 设置延时检测, 如果还在原来的页面则跳转下载页
-   - 跳转短链, 让 scheme 动态, 
+响应
+#+begin_src js
+  app.on("open-url", (event, url) => {
+    console.log(url);
+    const isProtocol = agreementRegExp.test(url);
+    if (isProtocol) {
+      // ...
+    }
+  });
+#+end_src
+* universal-link 解决方案
+- 跳转一个 app 的 scheme 时, 设置延时检测, 如果还在原来的页面则跳转下载页
+- 跳转短链, 让 scheme 动态, 

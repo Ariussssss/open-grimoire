@@ -1,0 +1,7 @@
+#+STARTUP: latexpreview
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+* math
+** vector
+\begin{displaymath}
+  \vec a\quad\overrightarrow{AB}
+\end{displaymath}

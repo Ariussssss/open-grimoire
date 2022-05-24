@@ -137,3 +137,22 @@
     #+end_src
 * 常用模块
   https://github.com/agile6v/awesome-nginx
+* 常用代理
+ ~/etc/host~ 将请求转发到本地, 真实 ip 通过自定义一个域名保存.
+
+ 本地转发
+ #+begin_src conf
+   location ~ ^/(api|track) {
+       proxy_pass  http://real.xbrain:8080;
+   }
+   location ~ ^/(?!(api|track)) {
+       proxy_pass  http://localhost:3000;
+   }
+ #+end_src
+
+ 不使用 nginx 可以通过  ~ssh -L 127.0.0.1:8080:127.0.0.1:3000 -N 127.0.0.1~ 实现.
+
+ 但没办法自定义路由分配规则. 
+ 
+ 
+

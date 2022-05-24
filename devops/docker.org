@@ -4,6 +4,48 @@
 #+DATE: [2021-11-28 19:12]
 * Refers
    - https://github.com/docker/awesome-compose
+   - https://www.qikqiak.com/k8s-book/docs/2.Docker%20%E7%AE%80%E4%BB%8B.html
+* 概念
+docker 搬运工, 搬运 container
+
 * 基本使用
+** 常用语法
+- FROM
+- ENV
+- COPY
+- WORKDIR
+- RUN
+- CMD
+- ENTRYPOINT
+- EXPOSE
+** RUN 、 CMD 、 ENTRYPOINT 区别
+两种形式:
+- shell <instruction> <command>
+- exec <instruction> ["executable", "param1", "param2", ...]
+
+区别是 exec 不会调用 shell 处理, 没有环境变量干扰.
+
+RUN:
+- 一般用于安装依赖
+- 建立新层, 在构建 image 时执行
+
+CMD:
+- image 启动时执行
+- 指定默认执行命令, 多个忽略前面所有保留最后一个
+- 如果是命令模式则不执行.
+
+ENTRYPOINT
+- 类似 CMD, 但是可以透穿参数
+- exec 后续 CMD 会被拼接
+** image
+程序必须在前台执行, 不然会直接退出, 方便 docker 监控和重启.
+
+像 pm2 需要 pm2-runtime 执行. 
+https://pm2.keymetrics.io/docs/usage/docker-pm2-nodejs/
+** 命名
+后缀对应 ~Dockerfile.server.dockerignore~ , 覆盖默认  ~.dockerignore~ 
+#+begin_src bash
+  docker build . -f Dockerfile.server
+#+end_src
 * awesome-conmpose
 https://github.com/docker/awesome-compose

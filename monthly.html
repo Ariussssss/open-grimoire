@@ -1,0 +1,1191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-12-29 Wed 14:58 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>monthly</title>
+<meta name="author" content="arius" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+</style>
+<style type="text/css">
+/******************************************************
+* I copied these styles from markdotto.com, who is
+* the creator of bootstrap, and I also did some
+* modification. Thanks Mark for the beautiful theme,
+* so I reserved the @mdo sign below.
+*****************************************************/
+
+/*
+__
+__                  /\ \
+/'_`\_    ___ ___    \_\ \    ___
+/'/'_` \ /' __` __`\  /'_` \  / __`\
+/\ \ \L\ \/\ \/\ \/\ \/\ \L\ \/\ \L\ \
+\ \ `\__,_\ \_\ \_\ \_\ \___,_\ \____/
+\ `\_____\\/_/\/_/\/_/\/__,_ /\/___/
+`\/_____/
+
+*/
+
+
+
+/* Body resets
+-------------------------------------------------- */
+
+* {
+-webkit-box-sizing:  border-box;
+-moz-box-sizing:  border-box;
+box-sizing:  border-box;
+}
+html, body {
+margin:  0;
+padding:  0;
+}
+html {
+font-size:  62.5%;
+}
+body {
+padding:  20px;
+font-family:  Menlo, Monaco, monospace;
+font-size:  14px;
+line-height:  1.5;
+color:  #666;
+background-color:  #fff;
+}
+p {
+margin:  0 0 20px;
+}
+h1, h2, h3 {
+position:  relative;
+margin:  30px 0 20px;
+font-size:  18px;
+font-weight:  bold;
+line-height:  1.1;
+color:  #111;
+text-rendering:  optimizeLegibility;
+}
+h1:before, h2:before, h3:before {
+position:  absolute;
+top:  auto;
+color:  #ccc;
+display:  none;
+}
+h1:before {
+content:  "";
+left:  -1.25em;
+}
+h2:before {
+content:  "*";
+left:  -2em;
+}
+h3:before {
+content:  "**";
+left:  -2.5em;
+}
+i, em, b, strong {
+padding-left:  .1em;
+padding-right:  .1em;
+}
+b, strong {
+font-weight:  bold;
+color:  #333;
+}
+b:before, b: after, strong:before, strong: after {
+content:  "*";
+}
+i:before, i: after, em:before, em: after {
+content:  "/";
+}
+hr {
+margin:  0;
+border:  0;
+}
+hr: after {
+display:  block;
+margin:  20px 0;
+content:  "----------------------------------------------------------------";
+color:  #ccc;
+}
+ul, ol {
+padding:  0;
+margin:  0 0 20px;
+}
+code, pre {
+font-family:  Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+code {
+color:  #d14;
+}
+code:before, code: after {
+content:  "=";
+color:  #ccc;
+}
+pre {
+display:  block;
+margin:  0 0 14px;
+padding:  15px;
+border: none;
+border-radius:  3px 3px 3px 3px;
+font-size:  18px;
+line-height:  28px;
+background-color:  #f5f5f5;
+white-space:  pre;
+white-space:  pre-wrap;
+word-break:  break-all;
+word-wrap:  break-word;
+}
+blockquote {
+padding:  0 0 0 20px;
+margin:  0 30px 20px -22.5px;
+color:  #999;
+border-left:  8px solid #e5e5e5;
+}
+blockquote p: last-child {
+margin-bottom:  0;
+}
+img {
+display:  block;
+margin:  0;
+border-radius:  5px;
+max-width: 500px;
+margin: auto;
+}
+a {
+font-weight:  inherit;
+line-height:  inherit;
+color:  #889ede;
+}
+sup a:before {
+content:  "[";
+}
+sup a: after {
+content:  "]";
+}
+a: hover {
+text-decoration:  underline;
+}
+table {
+line-height:  2.5;
+margin-bottom:  15px;
+max-width:  100%;
+width:  100%;
+}
+table td, table th {
+padding:  0 15px;
+}
+table th.left, table td.left {
+text-align:  left;
+}
+table th.right, table td.right {
+text-align:  right;
+}
+/******************************************************/
+/* body */
+body {
+margin:  0 auto;
+max-width:  1200px;
+}
+/* head */
+.masthead {
+color:  #888;
+}
+.masthead: after {
+display:  block;
+content:  '----------------------------------------------------------------';
+margin:  10px 0;
+color:  #ccc;
+}
+.masthead a {
+color:  #333;
+}
+.masthead ul {
+list-style:  none;
+}
+.masthead li {
+display:  inline-block;
+}
+.masthead li + li:before {
+display:  inline-block;
+content:  "\00B7 \00a0";
+color:  #ccc;
+}
+/* searchform*/
+#searchform {
+position:  absolute;
+top:  54px;
+right:  30.4%;
+}
+#searchform #s {
+background:  url("/media/img/search.png") no-repeat 5px 6px;
+box-shadow:  inset 0 1px 1px rgba(0,0,0,0.1);
+border:  1px solid #ddd;
+border-radius:  2px;
+-moz-border-radius:  2px;
+width:  90px;
+height:  30px;
+line-height:  12px;
+padding:  4px 10px 4px 28px;
+
+-webkit-transition-duration:  400ms;
+-webkit-transition-property:  width, background;
+-webkit-transition-timing-function:  ease;
+-moz-transition-duration:  400ms;
+-moz-transition-property:  width, background;
+-moz-transition-timing-function:  ease;
+-o-transition-duration:  400ms;
+-o-transition-property:  width, background;
+-o-transition-timing-function:  ease;
+}
+#searchform #s: focus {
+background-color:  #f9f9f9;
+width:  160px;
+}
+.masthead img.avatar {
+position:  relative;
+float:  right;
+margin-top:  -100px;
+margin-bottom:  -100%;
+margin-right:  10%;
+width:  200px;
+background-color:  #fff;
+}
+/* post */
+.post {
+position:  relative;
+}
+.post: after {
+display:  block;
+content:  "----------------------------------------------------------------";
+color:  #ccc;
+}
+.post img {
+max-width:  100%;
+}
+.post li {
+list-style:  none outside none;
+}
+.post ul > li:before {
+content:  "- ";
+margin-left:  -1.25em;
+color:  #ccc;
+}
+.post ol {
+counter-reset:  o-list;
+}
+.post ol > li:before {
+content:  counter(o-list) ") ";
+counter-increment:  o-list;
+margin-left:  -1.85em;
+color:  #ccc;
+}
+
+/* special for li in pre */
+.post pre li {
+list-style-type:  decimal;
+}
+
+.post pre li:before {
+display:  none;
+}
+
+/* meta info */
+.post-info {
+display:  inline-block;
+margin:  -10px 0 -10px;
+color:  #999;
+}
+.post-info + .post-info:before {
+content:  "\2223 \00a0";
+}
+.post-meta: after {
+content:  "----------------------------------------------------------------";
+display:  block;
+margin-top:  -1px;
+color:  #ccc;
+}
+
+/* table of content */
+#table-of-contents {
+position:  fixed;
+right:  0em;
+top:  0em;
+border: 1px solid #e1e1e8;
+-webkit-box-shadow:  0 0 1em #777777;
+-moz-box-shadow:  0 0 1em #777777;
+-webkit-border-bottom-left-radius:  5px;
+-moz-border-radius-bottomleft:  5px;
+text-align:  center;
+/* ensure doesn't flow off the screen when expanded */
+max-height:  80%;
+overflow:  auto;
+z-index:  200;
+background: white;
+}
+
+#table-of-contents h2 {
+max-width:  20em;
+font-weight:  normal;
+padding-left:  0.5em;
+padding-top:  0.05em;
+padding-bottom:  0.05em;
+}
+
+#table-of-contents ul {
+margin-left:  14pt;
+margin-bottom:  10pt;
+padding:  0
+}
+
+#table-of-contents li {
+padding:  0;
+margin:  1px;
+list-style:  none;
+}
+
+#table-of-contents ul>: first-child {
+color:  blue;
+}
+
+#table-of-contents #text-table-of-contents {
+display:  none;
+text-align:  left;
+}
+
+#table-of-contents: hover #text-table-of-contents {
+display:  block;
+padding:  0.5em;
+margin-top:  -1.5em;
+}
+
+/* footer */
+.footer {
+margin:  80px 0 0;
+text-align:  center;
+font-size:  15px;
+color:  #999;
+}
+.footer > p {
+margin:  0;
+line-height:  1.5;
+}
+.footpara {
+display:  inline;
+}
+#postamble {
+border-top: 2px solid #e2d6dc;
+padding-top: 16px;
+}
+
+/* Responsive
+-------------------------------------------------- */
+
+@media (min-width:  768px) {
+/* Increase body padding and font-sizes */
+body {
+padding:  30px;
+font-size:  18px;
+line-height:  1.75;
+}
+h1:before, h2:before, h3:before {
+display:  inline;
+}
+}
+
+@media (min-width:  1024px) {
+body {
+padding:  30px;
+}
+}
+</style>
+<link rel="shortcut icon" href="favicon.ico" />
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',function() {
+document.getElementById("table-of-contents").onclick = function() {
+var elem = document.getElementById("text-table-of-contents");
+elem.style.display = elem.style.display == "block" ? "none" : "block";
+}
+});
+
+var url = document.location.href;
+var orgsource = url.substring(0, url.lastIndexOf("."))+".org.html";
+function show_org_source(){
+document.location.href = orgsource;
+}
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">monthly</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#news-december-29-2021">1. News December 29, 2021</a>
+<ul>
+<li><a href="#rust-spotify-gui">1.1. Rust spotify gui</a></li>
+<li><a href="#stork-静态-es-搜索">1.2. stork 静态 es 搜索</a></li>
+<li><a href="#doom-theme-preview">1.3. doom-theme-preview</a></li>
+<li><a href="#搞笑-ppt">1.4. 搞笑 ppt</a></li>
+<li><a href="#ox-rust-vim">1.5. OX rust vim</a></li>
+</ul>
+</li>
+<li><a href="#news-december-28-2021">2. News December 28, 2021</a>
+<ul>
+<li><a href="#行-c-lisp">2.1. 1000 行 c lisp</a></li>
+<li><a href="#色块转换工具">2.2. 色块转换工具</a></li>
+<li><a href="#介绍-libuv">2.3. 介绍 libuv</a></li>
+<li><a href="#python-gui">2.4. python gui</a></li>
+<li><a href="#townscaper">2.5. Townscaper</a></li>
+</ul>
+</li>
+<li><a href="#news-december-26-2021">3. News December 26, 2021</a>
+<ul>
+<li><a href="#vertico-embark 和 consult">3.1. <code>vertico</code>, <code>embark=和=consult</code></a></li>
+</ul>
+</li>
+<li><a href="#news-december-24-2021">4. News December 24, 2021</a>
+<ul>
+<li><a href="#video-srt">4.1. video srt</a></li>
+<li><a href="#parcel-js-transfomer-rewrite-by-swc">4.2. parcel js transfomer rewrite by swc</a></li>
+<li><a href="#wasm-react-boilerplate">4.3. wasm react boilerplate</a></li>
+<li><a href="#rust-game-engine">4.4. rust game engine</a></li>
+</ul>
+</li>
+<li><a href="#blog">5. blog</a></li>
+<li><a href="#news-december-22-2021">6. News December 22, 2021</a>
+<ul>
+<li><a href="#摇滚代码">6.1. 摇滚代码</a></li>
+<li><a href="#kb-webgl-lib">6.2. 5KB webgl lib</a></li>
+<li><a href="#to-reactvue">6.3. to react/vue</a></li>
+<li><a href="#互联网快餐">6.4. 互联网快餐</a></li>
+<li><a href="#howdoi">6.5. howdoi</a></li>
+</ul>
+</li>
+<li><a href="#news-december-17-2021">7. News December 17, 2021</a></li>
+<li><a href="#news-december-20-2021">8. News December 20, 2021</a>
+<ul>
+<li><a href="#rust-禁用下载不终止下载进度">8.1. Rust 禁用下载，不终止下载进度</a></li>
+<li><a href="#epic-免费游戏">8.2. Epic 免费游戏</a></li>
+<li><a href="#云原生-wasm-争霸赛选手之一-runtime">8.3. 云原生 wasm 争霸赛选手之一 runtime</a></li>
+<li><a href="#github-代码搜索增强">8.4. github 代码搜索增强</a></li>
+<li><a href="#wasm-go-playground">8.5. wasm go playground</a></li>
+</ul>
+</li>
+<li><a href="#news-december-17-2021-1">9. News December 17, 2021</a>
+<ul>
+<li><a href="#开源-像素风-rouge-java 移动端">9.1. 开源 像素风 rouge java，移动端</a></li>
+<li><a href="#基于-favicon-追踪用户">9.2. 基于 favicon 追踪用户</a></li>
+<li><a href="#模板编译类似-jsx">9.3. 模板编译，类似 jsx</a></li>
+<li><a href="#提速-dired">9.4. <del>提速 dired</del></a></li>
+</ul>
+</li>
+<li><a href="#news-december-16-2021">10. News December 16, 2021</a>
+<ul>
+<li><a href="#漫画脸">10.1. 漫画脸</a></li>
+<li><a href="#矢量图合成">10.2. 矢量图合成</a></li>
+<li><a href="#mini-nginx">10.3. Mini nginx</a></li>
+<li><a href="#自动生成世界地图">10.4. 自动生成世界地图</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-news-december-29-2021" class="outline-2">
+<h2 id="news-december-29-2021"><span class="section-number-2">1.</span> News December 29, 2021</h2>
+<div class="outline-text-2" id="text-news-december-29-2021">
+</div>
+<div id="outline-container-rust-spotify-gui" class="outline-3">
+<h3 id="rust-spotify-gui"><span class="section-number-3">1.1.</span> Rust spotify gui</h3>
+<div class="outline-text-3" id="text-rust-spotify-gui">
+<p>
+<a href="https://github.com/Rigellute/spotify-tui">https://github.com/Rigellute/spotify-tui</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-stork-静态-es-搜索" class="outline-3">
+<h3 id="stork-静态-es-搜索"><span class="section-number-3">1.2.</span> stork 静态 es 搜索</h3>
+<div class="outline-text-3" id="text-stork-静态-es-搜索">
+<p>
+<a href="https://github.com/jameslittle230/stork">https://github.com/jameslittle230/stork</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-doom-theme-preview" class="outline-3">
+<h3 id="doom-theme-preview"><span class="section-number-3">1.3.</span> doom-theme-preview</h3>
+<div class="outline-text-3" id="text-doom-theme-preview">
+<p>
+<a href="https://github.com/doomemacs/themes/tree/screenshots">https://github.com/doomemacs/themes/tree/screenshots</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-搞笑-ppt" class="outline-3">
+<h3 id="搞笑-ppt"><span class="section-number-3">1.4.</span> 搞笑 ppt</h3>
+<div class="outline-text-3" id="text-搞笑-ppt">
+<p>
+<a href="https://github.com/kuanyui/takahashi.js">https://github.com/kuanyui/takahashi.js</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-ox-rust-vim" class="outline-3">
+<h3 id="ox-rust-vim"><span class="section-number-3">1.5.</span> OX rust vim</h3>
+<div class="outline-text-3" id="text-ox-rust-vim">
+<p>
+<a href="https://github.com/curlpipe/ox">https://github.com/curlpipe/ox</a>
+</p>
+
+<hr />
+</div>
+</div>
+</div>
+
+<div id="outline-container-news-december-28-2021" class="outline-2">
+<h2 id="news-december-28-2021"><span class="section-number-2">2.</span> News December 28, 2021</h2>
+<div class="outline-text-2" id="text-news-december-28-2021">
+</div>
+<div id="outline-container-行-c-lisp" class="outline-3">
+<h3 id="行-c-lisp"><span class="section-number-3">2.1.</span> 1000 行 c lisp</h3>
+<div class="outline-text-3" id="text-行-c-lisp">
+<p>
+<a href="https://github.com/rui314/minilisp">https://github.com/rui314/minilisp</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-色块转换工具" class="outline-3">
+<h3 id="色块转换工具"><span class="section-number-3">2.2.</span> 色块转换工具</h3>
+<div class="outline-text-3" id="text-色块转换工具">
+<p>
+<a href="https://github.com/nuno-faria/tiler">https://github.com/nuno-faria/tiler</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-介绍-libuv" class="outline-3">
+<h3 id="介绍-libuv"><span class="section-number-3">2.3.</span> 介绍 libuv</h3>
+<div class="outline-text-3" id="text-介绍-libuv">
+<p>
+<a href="https://github.com/nikhilm/uvbook">https://github.com/nikhilm/uvbook</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-python-gui" class="outline-3">
+<h3 id="python-gui"><span class="section-number-3">2.4.</span> python gui</h3>
+<div class="outline-text-3" id="text-python-gui">
+<p>
+pygt：周边生态组件
+</p>
+
+<p>
+kivy： 跨平台，移动开发
+</p>
+
+<p>
+tkinter：最简单最快
+</p>
+
+<p>
+数据图表：*Streamlit + Plotly dash*
+</p>
+
+<p>
+pack： py2app
+</p>
+
+<p>
+menu：rumps
+</p>
+</div>
+</div>
+
+<div id="outline-container-townscaper" class="outline-3">
+<h3 id="townscaper"><span class="section-number-3">2.5.</span> <a href="https://oskarstalberg.com/Townscaper/">Townscaper</a></h3>
+<div class="outline-text-3" id="text-townscaper">
+<p>
+<a href="https://oskarstalberg.com/Townscaper/">https://oskarstalberg.com/Townscaper/</a>
+</p>
+
+<p>
+<a href="https://oskarstalberg.com/game/house/index.html">https://oskarstalberg.com/game/house/index.html</a>
+</p>
+
+<hr />
+</div>
+</div>
+</div>
+
+<div id="outline-container-news-december-26-2021" class="outline-2">
+<h2 id="news-december-26-2021"><span class="section-number-2">3.</span> News December 26, 2021</h2>
+<div class="outline-text-2" id="text-news-december-26-2021">
+</div>
+<div id="outline-container-vertico-embark 和 consult" class="outline-3">
+<h3 id="vertico-embark 和 consult"><span class="section-number-3">3.1.</span> <code>vertico</code>, <code>embark=和=consult</code></h3>
+<div class="outline-text-3" id="text-vertico-embark 和 consult">
+<hr />
+</div>
+</div>
+</div>
+
+<div id="outline-container-news-december-24-2021" class="outline-2">
+<h2 id="news-december-24-2021"><span class="section-number-2">4.</span> News December 24, 2021</h2>
+<div class="outline-text-2" id="text-news-december-24-2021">
+</div>
+<div id="outline-container-video-srt" class="outline-3">
+<h3 id="video-srt"><span class="section-number-3">4.1.</span> video srt</h3>
+<div class="outline-text-3" id="text-video-srt">
+<p>
+基于 golang，lxn/walk 绘制 windows gui，api：
+</p>
+
+<ul class="org-ul">
+<li>阿里云 <a href="https://www.aliyun.com/product/oss?spm=5176.12825654.eofdhaal5.13.e9392c4aGfj5vj&amp;aly_as=K11FcpO8">OSS
+对象存储</a></li>
+<li>阿里云 <a href="https://ai.aliyun.com/nls/filetrans?spm=5176.12061031.1228726.1.47fe3cb43I34mn">录音文件识别</a></li>
+<li>百度翻译开放平台 <a href="http://api.fanyi.baidu.com/api/trans/product/index">翻译
+API</a></li>
+<li>腾讯云 <a href="https://cloud.tencent.com/product/tmt">翻译 API</a></li>
+</ul>
+
+<p>
+<a href="https://github.com/lxn/walk">https://github.com/lxn/walk</a>
+</p>
+
+<p>
+<a href="https://github.com/wxbool/video-srt-windows">https://github.com/wxbool/video-srt-windows</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-parcel-js-transfomer-rewrite-by-swc" class="outline-3">
+<h3 id="parcel-js-transfomer-rewrite-by-swc"><span class="section-number-3">4.2.</span> parcel js transfomer rewrite by swc</h3>
+<div class="outline-text-3" id="text-parcel-js-transfomer-rewrite-by-swc">
+<p>
+<a href="https://github.com/parcel-bundler/parcel/pull/6230">https://github.com/parcel-bundler/parcel/pull/6230</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-wasm-react-boilerplate" class="outline-3">
+<h3 id="wasm-react-boilerplate"><span class="section-number-3">4.3.</span> wasm react boilerplate</h3>
+<div class="outline-text-3" id="text-wasm-react-boilerplate">
+<p>
+<a href="https://www.joshfinnie.com/blog/using-webassembly-created-in-rust-for-fast-react-components/">https://www.joshfinnie.com/blog/using-webassembly-created-in-rust-for-fast-react-components/</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-rust-game-engine" class="outline-3">
+<h3 id="rust-game-engine"><span class="section-number-3">4.4.</span> rust game engine</h3>
+<div class="outline-text-3" id="text-rust-game-engine">
+<p>
+<a href="https://github.com/h3r2tic?tab=repositories">https://github.com/h3r2tic?tab=repositories</a>
+</p>
+
+<p>
+<a href="https://github.com/h3r2tic/cornell-mcray">https://github.com/h3r2tic/cornell-mcray</a>
+</p>
+
+<p>
+<a href="https://github.com/EmbarkStudios/kajiya">https://github.com/EmbarkStudios/kajiya</a>
+</p>
+
+<p>
+blog <a href="http://h3.gd/">http://h3.gd/</a>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-blog" class="outline-2">
+<h2 id="blog"><span class="section-number-2">5.</span> blog</h2>
+<div class="outline-text-2" id="text-blog">
+<p>
+<a href="https://blog.rxliuli.com/links/">https://blog.rxliuli.com/links/</a>
+</p>
+
+<hr />
+</div>
+</div>
+
+<div id="outline-container-news-december-22-2021" class="outline-2">
+<h2 id="news-december-22-2021"><span class="section-number-2">6.</span> News December 22, 2021</h2>
+<div class="outline-text-2" id="text-news-december-22-2021">
+</div>
+<div id="outline-container-摇滚代码" class="outline-3">
+<h3 id="摇滚代码"><span class="section-number-3">6.1.</span> 摇滚代码</h3>
+<div class="outline-text-3" id="text-摇滚代码">
+<p>
+Remember the golden rule of Rockstar syntax: if you can't sing it, you
+can't have it.
+</p>
+
+<p>
+<a href="https://codewithrockstar.com/">https://codewithrockstar.com/</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-kb-webgl-lib" class="outline-3">
+<h3 id="kb-webgl-lib"><span class="section-number-3">6.2.</span> 5KB webgl lib</h3>
+<div class="outline-text-3" id="text-kb-webgl-lib">
+<p>
+<a href="https://github.com/shuding/cobe">https://github.com/shuding/cobe</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-to-reactvue" class="outline-3">
+<h3 id="to-reactvue"><span class="section-number-3">6.3.</span> to react/vue</h3>
+<div class="outline-text-3" id="text-to-reactvue">
+<p>
+<a href="https://mitosis.builder.io/">https://mitosis.builder.io/</a>
+</p>
+
+<p>
+[<a href="https://mitosis.builder.io/?outputTab=vue&amp;code=import+%7B+useState%2C+useRef%2C+useEffect+%7D+from+%22%40builder.io%2Fmitosis%22%3B">https://mitosis.builder.io/?outputTab=vue&amp;code=import+%7B+useState%2C+useRef%2C+useEffect+%7D+from+%22%40builder.io%2Fmitosis%22%3B</a>
+export+default+function+MyComponent(props)+{
+<del>+const</del>[name%2C+setName]+%3D+useState("Steve")%3B
+<del>+const+inputRef+%3D+useRef()%3B ++useEffect(()+%3D&gt;+{
+++++console.log(inputRef.current)%3B +</del>}%2C+[]) <del><del>return+( ++</del></del>
+</p>
+
+<div class="html" id="org16d8ce6">
+<p>
+&lt;div&gt;
+</p>
+
+</div>
+
+<p>
+<del>+++++&lt;input ++++++++ref%3D{inputRef} ++++++++css%3D{{
+++++++++++color%3A</del>"red"%2C <del><del><del>++</del></del></del>}} ++++++++value%3D{name}
+++++++++onChange%3D{(event)+%3D&gt;+setName(event.target.value)} ++++++%2F&gt;
+<del>+++++Hello!+I+can+run+in+React%2C+Vue%2C+Solid%2C+or+Liquid!
+++++&lt;%2Fdiv&gt; +</del>)%3B
+}](<a href="https://mitosis.builder.io/?outputTab=vue&amp;code=import+%7B+useState%2C+useRef%2C+useEffect+%7D+from+%22%40builder.io%2Fmitosis%22%3B%0A%0Aexport+default+function+MyComponent%28props%29+%7B%0A++const+%5Bname%2C+setName%5D+%3D+useState%28%22Steve%22%29%3B%0A++const+inputRef+%3D+useRef%28%29%3B%0A%0A++useEffect%28%28%29+%3D%3E+%7B%0A++++console.log%28inputRef.current%29%3B%0A++%7D%2C+%5B%5D%29%0A%0A++return+%28%0A++++%3Cdiv%3E%0A++++++%3Cinput%0A++++++++ref%3D%7BinputRef%7D%0A++++++++css%3D%7B%7B%0A++++++++++color%3A+%22red%22%2C%0A++++++++%7D%7D%0A++++++++value%3D%7Bname%7D%0A++++++++onChange%3D%7B%28event%29+%3D%3E+setName%28event.target.value%29%7D%0A++++++%2F%3E%0A++++++Hello%21+I+can+run+in+React%2C+Vue%2C+Solid%2C+or+Liquid%21%0A++++%3C%2Fdiv%3E%0A++%29%3B%0A%7D">https://mitosis.builder.io/?outputTab=vue&amp;code=import+%7B+useState%2C+useRef%2C+useEffect+%7D+from+%22%40builder.io%2Fmitosis%22%3B%0A%0Aexport+default+function+MyComponent%28props%29+%7B%0A++const+%5Bname%2C+setName%5D+%3D+useState%28%22Steve%22%29%3B%0A++const+inputRef+%3D+useRef%28%29%3B%0A%0A++useEffect%28%28%29+%3D%3E+%7B%0A++++console.log%28inputRef.current%29%3B%0A++%7D%2C+%5B%5D%29%0A%0A++return+%28%0A++++%3Cdiv%3E%0A++++++%3Cinput%0A++++++++ref%3D%7BinputRef%7D%0A++++++++css%3D%7B%7B%0A++++++++++color%3A+%22red%22%2C%0A++++++++%7D%7D%0A++++++++value%3D%7Bname%7D%0A++++++++onChange%3D%7B%28event%29+%3D%3E+setName%28event.target.value%29%7D%0A++++++%2F%3E%0A++++++Hello%21+I+can+run+in+React%2C+Vue%2C+Solid%2C+or+Liquid%21%0A++++%3C%2Fdiv%3E%0A++%29%3B%0A%7D</a>)
+</p>
+
+<p>
+<a href="https://github.com/BuilderIO/mitosis">https://github.com/BuilderIO/mitosis</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-互联网快餐" class="outline-3">
+<h3 id="互联网快餐"><span class="section-number-3">6.4.</span> 互联网快餐</h3>
+<div class="outline-text-3" id="text-互联网快餐">
+<p>
+<a href="https://github.com/phoenixlzx/the_start.md">https://github.com/phoenixlzx/the_start.md</a>
+</p>
+
+<p>
+Google 前端 <a href="https://lazzzis.moe/">https://lazzzis.moe/</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-howdoi" class="outline-3">
+<h3 id="howdoi"><span class="section-number-3">6.5.</span> howdoi</h3>
+<div class="outline-text-3" id="text-howdoi">
+<p>
+<a href="https://github.com/gleitz/howdoi">https://github.com/gleitz/howdoi</a>
+</p>
+
+<p>
+<a href="https://blog.phoenixlzx.com/links/">https://blog.phoenixlzx.com/links/</a>
+</p>
+
+<hr />
+</div>
+</div>
+</div>
+
+<div id="outline-container-news-december-17-2021" class="outline-2">
+<h2 id="news-december-17-2021"><span class="section-number-2">7.</span> News December 17, 2021</h2>
+<div class="outline-text-2" id="text-news-december-17-2021">
+</div>
+</div>
+<div id="outline-container-news-december-20-2021" class="outline-2">
+<h2 id="news-december-20-2021"><span class="section-number-2">8.</span> News December 20, 2021</h2>
+<div class="outline-text-2" id="text-news-december-20-2021">
+</div>
+<div id="outline-container-rust-禁用下载不终止下载进度" class="outline-3">
+<h3 id="rust-禁用下载不终止下载进度"><span class="section-number-3">8.1.</span> Rust 禁用下载，不终止下载进度</h3>
+<div class="outline-text-3" id="text-rust-禁用下载不终止下载进度">
+<p>
+<a href="https://youcantdownloadthisimage.online/">https://youcantdownloadthisimage.online/</a>
+</p>
+
+<p>
+<a href="https://github.com/radiantly/you-cant-download-this-image">https://github.com/radiantly/you-cant-download-this-image</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-epic-免费游戏" class="outline-3">
+<h3 id="epic-免费游戏"><span class="section-number-3">8.2.</span> Epic 免费游戏</h3>
+<div class="outline-text-3" id="text-epic-免费游戏">
+<p>
+<a href="https://github.com/Revadike/epicgames-freebies-claimer">https://github.com/Revadike/epicgames-freebies-claimer</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-云原生-wasm-争霸赛选手之一-runtime" class="outline-3">
+<h3 id="云原生-wasm-争霸赛选手之一-runtime"><span class="section-number-3">8.3.</span> 云原生 wasm 争霸赛选手之一 runtime</h3>
+<div class="outline-text-3" id="text-云原生-wasm-争霸赛选手之一-runtime">
+<p>
+<a href="https://github.com/WasmEdge/WasmEdge">https://github.com/WasmEdge/WasmEdge</a>
+</p>
+
+<p>
+<a href="https://www.infoq.cn/article/qsmwRvPo3NEPQRSfDvQO?source=app_share">https://www.infoq.cn/article/qsmwRvPo3NEPQRSfDvQO?source=app_share</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-github-代码搜索增强" class="outline-3">
+<h3 id="github-代码搜索增强"><span class="section-number-3">8.4.</span> github 代码搜索增强</h3>
+<div class="outline-text-3" id="text-github-代码搜索增强">
+<p>
+<a href="https://github.blog/2021-12-08-improving-github-code-search/">https://github.blog/2021-12-08-improving-github-code-search/</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-wasm-go-playground" class="outline-3">
+<h3 id="wasm-go-playground"><span class="section-number-3">8.5.</span> wasm go playground</h3>
+<div class="outline-text-3" id="text-wasm-go-playground">
+<p>
+<a href="https://ccbrown.github.io/wasm-go-playground/">https://ccbrown.github.io/wasm-go-playground/</a>
+</p>
+
+<p>
+<a href="https://github.com/ccbrown/wasm-go-playground">https://github.com/ccbrown/wasm-go-playground</a>
+</p>
+
+<hr />
+</div>
+</div>
+</div>
+
+<div id="outline-container-news-december-17-2021-1" class="outline-2">
+<h2 id="news-december-17-2021-1"><span class="section-number-2">9.</span> News December 17, 2021</h2>
+<div class="outline-text-2" id="text-news-december-17-2021-1">
+</div>
+<div id="outline-container-开源-像素风-rouge-java 移动端" class="outline-3">
+<h3 id="开源-像素风-rouge-java 移动端"><span class="section-number-3">9.1.</span> 开源 像素风 rouge java，移动端</h3>
+<div class="outline-text-3" id="text-开源-像素风-rouge-java 移动端">
+<p>
+<a href="https://github.com/00-Evan/shattered-pixel-dungeon">https://github.com/00-Evan/shattered-pixel-dungeon</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-基于-favicon-追踪用户" class="outline-3">
+<h3 id="基于-favicon-追踪用户"><span class="section-number-3">9.2.</span> 基于 favicon 追踪用户</h3>
+<div class="outline-text-3" id="text-基于-favicon-追踪用户">
+<p>
+<a href="https://supercookie.me/workwise">https://supercookie.me/workwise</a>
+</p>
+
+<p>
+<a href="https://github.com/jonasstrehle/supercookie">https://github.com/jonasstrehle/supercookie</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-模板编译类似-jsx" class="outline-3">
+<h3 id="模板编译类似-jsx"><span class="section-number-3">9.3.</span> 模板编译，类似 jsx</h3>
+<div class="outline-text-3" id="text-模板编译类似-jsx">
+<p>
+4kb，高速
+</p>
+
+<p>
+<a href="https://github.com/maomincoding/strve">https://github.com/maomincoding/strve</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-提速-dired" class="outline-3">
+<h3 id="提速-dired"><span class="section-number-3">9.4.</span> <del>提速 dired</del></h3>
+<div class="outline-text-3" id="text-提速-dired">
+<p>
+<a href="https://github.com/jarun/nnn">https://github.com/jarun/nnn</a>
+</p>
+
+<blockquote>
+<p>
+很多功能基于 linux，mac 体验不太好 需要根据 mac 和 emacs 订制
+</p>
+</blockquote>
+
+<hr />
+</div>
+</div>
+</div>
+
+<div id="outline-container-news-december-16-2021" class="outline-2">
+<h2 id="news-december-16-2021"><span class="section-number-2">10.</span> News December 16, 2021</h2>
+<div class="outline-text-2" id="text-news-december-16-2021">
+</div>
+<div id="outline-container-漫画脸" class="outline-3">
+<h3 id="漫画脸"><span class="section-number-3">10.1.</span> 漫画脸</h3>
+<div class="outline-text-3" id="text-漫画脸">
+<p>
+神经风格迁移+生成对抗网络（GAN）的组合
+</p>
+
+<p>
+repo： <a href="https://github.com/TachibanaYoshino/AnimeGANv2">https://github.com/TachibanaYoshino/AnimeGANv2</a>
+</p>
+
+<p>
+demo: <a href="https://huggingface.co/spaces/akhaliq/AnimeGANv2">https://huggingface.co/spaces/akhaliq/AnimeGANv2</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-矢量图合成" class="outline-3">
+<h3 id="矢量图合成"><span class="section-number-3">10.2.</span> 矢量图合成</h3>
+<div class="outline-text-3" id="text-矢量图合成">
+<p>
+头像合成
+</p>
+
+<p>
+<a href="https://github.com/Codennnn/vue-color-avatar">https://github.com/Codennnn/vue-color-avatar</a>
+</p>
+
+<p>
+文字合成
+</p>
+
+<p>
+<a href="https://github.com/pearmini/colorfu">https://github.com/pearmini/colorfu</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-mini-nginx" class="outline-3">
+<h3 id="mini-nginx"><span class="section-number-3">10.3.</span> Mini nginx</h3>
+<div class="outline-text-3" id="text-mini-nginx">
+<p>
+<a href="https://caddyserver.com/docs/install">https://caddyserver.com/docs/install</a>
+</p>
+
+<p>
+<a href="https://github.com/caddyserver/caddy">https://github.com/caddyserver/caddy</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-自动生成世界地图" class="outline-3">
+<h3 id="自动生成世界地图"><span class="section-number-3">10.4.</span> 自动生成世界地图</h3>
+<div class="outline-text-3" id="text-自动生成世界地图">
+<p>
+<a href="https://github.com/marian42/wavefunctioncollapse">https://github.com/marian42/wavefunctioncollapse</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2021-12-29 Wed 11:49</p>
+<p class="author">Author: arius</p>
+<p class="date">Created: 2021-12-29 Wed 14:58</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

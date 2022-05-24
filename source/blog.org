@@ -1,22 +1,29 @@
-#+STARTUP: content
-* blog
-** 肄业前蚂蚁金服前端, 自由职业 https://lutaonan.com/
-** go 语言笔记, go 语言高级编程 作者 https://xargin.com/
-** https://golang.design/
-** https://robert.kra.hn/
-** https://orta.io/notes/home
-** https://tokio.rs/blog/
-** https://github.com/berwin/Blog
-** https://coolshell.cn/
-** https://dmesg.app/
-** https://github.com/answershuto/Blog
-** https://markodenic.com/blog/
-** https://github.com/crisxuan/bestJavaer
-** https://dwqs.gitbooks.io/frontenddevhandbook/content/
-** 游戏开发, ai, 图像识别  https://huailiang.github.io/blog/
-** ui story book 开发 https://varun.ca/
-** 毛星云 https://github.com/QianMo?tab=repositories
-** emacs 专家 https://tech.toryanderson.com/
-** LOAP 数据库相关 https://blog.bcmeng.com/
-** https://github.com/curlpipe/awesome-learning
-** linux 全栈工程师 WebRTC https://a-wing.top/
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: blog
+#+DATE: [2022-06-15 13:52]
+* 肄业前蚂蚁金服前端, 自由职业 https://lutaonan.com/
+* go 语言笔记, go 语言高级编程 作者 https://xargin.com/
+* https://golang.design/
+* https://robert.kra.hn/
+* https://orta.io/notes/home
+* https://tokio.rs/blog/
+* https://github.com/berwin/Blog
+* https://coolshell.cn/
+* https://dmesg.app/
+* https://github.com/answershuto/Blog
+* https://markodenic.com/blog/
+* https://github.com/crisxuan/bestJavaer
+* https://dwqs.gitbooks.io/frontenddevhandbook/content/
+* 游戏开发, ai, 图像识别  https://huailiang.github.io/blog/
+* ui story book 开发 https://varun.ca/
+* 毛星云 https://github.com/QianMo?tab=repositories
+* emacs 专家 https://tech.toryanderson.com/
+* LOAP 数据库相关 https://blog.bcmeng.com/
+* https://github.com/curlpipe/awesome-learning
+* linux 全栈工程师 WebRTC https://a-wing.top/
+* spotify 开源项目 https://spotify.github.io/
+* 蚂蚁金服 可视化 blog https://www.yuque.com/antv
+* https://draveness.me/golang/docs/part4-advanced/ch09-stdlib/golang-json/
+* 云谦 blog https://github.com/lencx/z
+* 前端 计算机图形学 https://pengfeixc.com/

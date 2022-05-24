@@ -89,3 +89,20 @@ OLAP 系统以维度模型来存储历史数据, 其主要存储描述性的数�
 - 向量引擎
 - 实时数据更新
 - 索引
+* function
+* example
+每种 10 行.
+
+~WITH~ 一般用来存常量和普通类型, 反过来可以存 table
+
+#+begin_src sql
+  WITH TOPTEN AS (
+      SELECT *,
+          ROW_NUMBER() over (PARTITION BY type) AS RowNo
+      FROM (<table>))
+  SELECT *
+  EXCEPT  (RowNo) 
+  FROM TOPTEN
+  WHERE RowNo <= 10
+#+end_src
+

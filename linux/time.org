@@ -2,8 +2,16 @@
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: time
 #+DATE: [2021-12-02 10:49]
-* Refers
-1秒(s) ＝1000毫秒(ms)
-1毫秒(ms)＝1000微秒 (us)
-1微秒(us)＝1000纳秒 (ns)
-1纳秒(ns)＝1000皮秒 (ps)
+* ISO 8601 time formattimezone
+- 2022-05-23T02:58:08+00:00
+- 2022-05-23T02:58:08Z
+- 20220523T025808Z
+
+T time separator
+
+Z Zulu time (GMT),  +00.00
+* unit
+1 秒(s) ＝1000 毫秒(ms)
+1 毫秒(ms)＝1000 微秒 (us) = 1e-3s
+1 微秒(us)＝1000 纳秒 (ns) = 1e-6s
+1 纳秒(ns)＝1000 皮秒 (ps) = 1e-9s

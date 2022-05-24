@@ -1,50 +1,52 @@
-#+STARTUP: content
-* history
-** rule
-   优先记录看得懂的用得到的
-** webpack 4
-*** sideEffects
-** webpack 5
-*** Refers
-    - https://juejin.cn/post/6882663278712094727#heading-17
-*** 纵览
-    - 通过持久化硬盘缓存能力来提升构建性能
-    - 通过更好的算法来改进长期缓存（降低产物资源的缓存失效率）
-    - 通过更好的 Tree Shaking 能力和代码的生成逻辑来优化产物的大小
-    - 改善 web 平台的兼容性能力
-    - 清除了内部结构中，在 Webpack4 没有重大更新而引入一些新特性时所遗留下来的一些奇怪的 state
-    - 通过引入一些重大的变更为未来的一些特性做准备，使得能够长期的稳定在 Webpack5 版本上
-*** 模块联邦 module federation
-    允许多个 webpack 协同工作
-*** 原生 worker 支持
-    自动生成给你 入口 和 导出
-    #+begin_src js
-      new Worker(new URL("./worker.js", import.meta.url))
-    #+end_src
-*** tree-shaking 优化
-    - ~export *~ 时解析使用细节进行清除
-    - 内置模块解析使用对应内部调用函数, 进行清除, sideEffect 检测
-    - commonjs shaking 优化, 支持生命导出部分 + 引用部分可检测的 多余清除
-*** 缓存
-    默认使用缓存, 时间戳标记, 默认认为包管理器管理修改, 即监听 link 不监听直接修改
-*** 没有 JS 代码块
-    允许只生成 CSS 的代码块
-*** 插件
-**** 增加 cache 类允许读写缓存
-**** 从数组到集合(Set)
-     - Compilation.modules 现在是一个集合
-     - Compilation.chunks 现在是一个集合
-     - Chunk.files 现在是一个集合
-**** HMR 重构
-     运行时 js 从 HMR 分离, 允许定制更多模块如 CSS, WASM 热更新
-**** 观察者
-     原先 需要 chokidar 和 原生依赖 fsevents, 现脱离 原生依赖, 仅依赖 fs
-**** 依赖信息检索
-     模块之前只能通过 ~Compilation.getDependencyReference~ 获取信息
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: Webpack 历史
+#+DATE: [2021-07-01 20:34]
+* rule
+优先记录看得懂的用得到的
+* webpack 4
+** sideEffects
+* webpack 5
+** Refers
+- https://juejin.cn/post/6882663278712094727#heading-17
+** 纵览
+- 通过持久化硬盘缓存能力来提升构建性能
+- 通过更好的算法来改进长期缓存（降低产物资源的缓存失效率）
+- 通过更好的 Tree Shaking 能力和代码的生成逻辑来优化产物的大小
+- 改善 web 平台的兼容性能力
+- 清除了内部结构中，在 Webpack4 没有重大更新而引入一些新特性时所遗留下来的一些奇怪的 state
+- 通过引入一些重大的变更为未来的一些特性做准备，使得能够长期的稳定在 Webpack5 版本上
+** 模块联邦 module federation
+允许多个 webpack 协同工作
+** 原生 worker 支持
+自动生成给你 入口 和 导出
+#+begin_src js
+  new Worker(new URL("./worker.js", import.meta.url))
+#+end_src
+** tree-shaking 优化
+- ~export *~ 时解析使用细节进行清除
+- 内置模块解析使用对应内部调用函数, 进行清除, sideEffect 检测
+- commonjs shaking 优化, 支持生命导出部分 + 引用部分可检测的 多余清除
+** 缓存
+默认使用缓存, 时间戳标记, 默认认为包管理器管理修改, 即监听 link 不监听直接修改
+** 没有 JS 代码块
+允许只生成 CSS 的代码块
+** 插件
+*** 增加 cache 类允许读写缓存
+*** 从数组到集合(Set)
+- Compilation.modules 现在是一个集合
+- Compilation.chunks 现在是一个集合
+- Chunk.files 现在是一个集合
+*** HMR 重构
+运行时 js 从 HMR 分离, 允许定制更多模块如 CSS, WASM 热更新
+*** 观察者
+原先 需要 chokidar 和 原生依赖 fsevents, 现脱离 原生依赖, 仅依赖 fs
+*** 依赖信息检索
+模块之前只能通过 ~Compilation.getDependencyReference~ 获取信息
 
-     现在:
-     - ModuleGraphConnection
-     - Depenedency.getReferenceExports
-     - Depenedency class
-** future
+现在:
+- ModuleGraphConnection
+- Depenedency.getReferenceExports
+- Depenedency class
+* future
    

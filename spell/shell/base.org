@@ -18,6 +18,15 @@
   echo "进程号$$"
 #+end_src
 
+default
+#+begin_src shell
+  # return default if missing
+  FOO="${VARIABLE:-default}"
+
+  # set default if missing
+  FOO="${VARIABLE:=default}" 
+#+end_src
+
 判断
 #+begin_src shell
   if [ $a -le $b ]
@@ -77,7 +86,7 @@ head -n 1：取排在第一位的 ip 地址
   # 参数
   ls -d ./* | xargs -i {} cp {} ~/tmp
 #+end_src
-* COMMENT find
+* find
 通配文件检索
 #+begin_src shell
   find ./**/*.org -type f
@@ -122,9 +131,13 @@ filter 获取
   crontab -r
 #+end_src
 
+#+begin_quote
+注意环境, nvm 或者 node 不一定有. 
+#+end_quote
+
 demo
 #+begin_src bash
-  ,*/1 * * * * /bin/date >> /Users/arius/lib/crontab-test/console   
+  */1 * * * * /bin/date >> /Users/arius/lib/crontab-test/console   
 #+end_src
 
 mac 需要增加权限,  ~System Preferences > Security & Privacy > Privacy > Full Disk Access~  :
@@ -236,4 +249,65 @@ test 可以用括号省略, 换行可以用 ~;~ 代替.
   /hhme/centos  
   # echo ${var//o/h}  
   /hhme/cenths  
+#+end_src
+* curl
+下载 + 执行
+#+begin_src bash
+  curl -fsSL http://<some-host>/install.sh | sudo -E bash -
+#+end_src
+* 系统判断
+三种方式, uname 不准 
+#+begin_src bash
+  cat /proc/version
+  ## Linux version 5.4.0-94-generic (buildd@lcy02-amd64-059) (gcc version 7.5.0 (Ubuntu 7.5.0-3ubuntu1~18.04)) #106~18.04.1-Ubuntu SMP Fri Jan 7 07:23:53 UTC 2022
+  lsb_release -a
+  # No LSB modules are available.
+  # Distributor ID: Ubuntu
+  # Description:    Ubuntu 18.04.6 LTS
+  # Release:        18.04
+  # Codename:       bionic
+  ls /etc/*-release
+  # /etc/lsb-release  /etc/os-release
+  cat /etc/os-release
+  # NAME="Ubuntu"
+  # VERSION="18.04.6 LTS (Bionic Beaver)"
+  # ID=ubuntu
+  # ID_LIKE=debian
+  # PRETTY_NAME="Ubuntu 18.04.6 LTS"
+  # VERSION_ID="18.04"
+  # HOME_URL="https://www.ubuntu.com/"
+  # SUPPORT_URL="https://help.ubuntu.com/"
+  # BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+  # PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+  # VERSION_CODENAME=bionic
+  # UBUNTU_CODENAME=bionic
+  cat /etc/lsb-release
+  # DISTRIB_ID=Ubuntu
+  # DISTRIB_RELEASE=18.04
+  # DISTRIB_CODENAME=bionic
+  # DISTRIB_DESCRIPTION="Ubuntu 18.04.6 LTS"
+#+end_src
+* 指令判断
+#+begin_src bash
+  echo $0
+#+end_src
+* lsof
+list open files 一切皆文件. 系统会为每个应用分配一个描述符, 除了文件像 TCP, UDP 也有. 
+
+#+begin_src bash
+  # 查看进程
+  lsof /bin/bash
+  # 查看用户打开的文件
+  lsof -u username -c mysql
+  # 网络和接口
+  lsof -i tcp :3306
+#+end_src
+* multi line
+#+begin_src bash
+  USAGE=$(cat <<-END
+      This is line one.
+      This is line two.
+      This is line three.
+  END
+  )
 #+end_src

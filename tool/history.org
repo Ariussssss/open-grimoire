@@ -23,11 +23,6 @@ https://github.com/FerretDB/FerretDB
 *** caddy
 mini nginx
 代替 anywhere
-*** scuttlebutt
-https://scuttlebutt.nz/get-started/
-https://github.com/ssbc/ssb-server
-https://github.com/ssbc/patchbay
-https://handbook.scuttlebutt.nz/guides/ssb-server-context
 *** zx
 *** https://github.com/slidevjs/slidev
 ppt
@@ -41,14 +36,16 @@ client, server 还不健全.
 Go cli.
 *** medis
 redis gui
-*** nnn
-vim 生态的 dired mode, 很便捷
 *** rome
 js cli
 https://rome.tools/blog/2021/09/21/rome-will-be-rewritten-in-rust
 ** 历史
+*** 🦋 atuin
+易用版 history
 *** 🦋 Hammerspon
 不习惯 Alfred, 快捷键增强, 基于 ~lua~ 定制快捷键脚本
+*** 👻 fnm => +nvm+
+更快, zsh 启动时间减少 1s
 *** 👻 Alacritty => +Iterm2+
 更快, 更简洁, 配置文件, 简化 GUI 操作
 *** 👻 starship => +powerlevel9k+

@@ -1,8 +1,22 @@
-#+STARTUP: content
+#+STARTUP: all
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: tools
 #+DATE: [2021-12-01 11:50]
 * https://devhints.io/ 代码片段速查
 * https://openbase.com/ 项目打分
 * https://github.com/codemayq/chinese_chatbot_corpus 中文 chatbot 语录
+* https://toolbox.googleapps.com/apps/dig/#A/ 谷歌域名检索
 * https://gitcode.net/mirrors github 国内镜像加速
+* Unicode Emoji https://emojipedia.org/unicode-1.1/
+* nert font list https://www.nerdfonts.com/font-downloads
+* golang 文档 <2020-11-23 Mon>                                       :golang:
+* game ui <2021-01-04 Mon>                                           :design:
+https://www.gameuidatabase.com/
+* svg editor <2021-01-06 Wed>                                            :fe:
+https://github.com/Yqnn/svg-path-editor
+* bt 下载器 https://cjting.me/2020/10/31/tinytorrent-a-deno-bt-downloader/
+* 免费 cs 书籍 https://csgordon.github.io/books.html
+* design tool http://chuangzaoshi.com/index
+* free icon https://www.flaticon.com/
+* pop os laptop https://system76.com/laptops/darp7/configure
+* 电子书 https://z-lib.org/   
