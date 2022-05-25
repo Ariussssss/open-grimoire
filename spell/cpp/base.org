@@ -2,10 +2,6 @@
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: base
 #+DATE: [2021-10-20 19:05]
-* c++ 弃用特性(11 之后)
-- 不允许字面常量带 ~*~ 
-  如果有需要初始化一个  ~char *~, 应该使用 ~const char *~ 或者 ~auto~. 
-- 异常说明 unexpected_handler, set_unexpected() 等相关特性被弃用, 应该使用 noexcept
 * syntax
 ** 常规结构
 1. 注释
@@ -155,3 +151,97 @@ bool, char, int, float, double, void.
    1. 如果符号一致, 位宽转换为最大的.
    2. 如果无符号的不小于带符号的位宽, 则带符号的转换为无符号数对应类型. 
 ** pragam
+* 文件类型
+** cpp
+可以把所有东西放到 cpp 里,  对应一个编译单元 obj.
+
+obj 之间通过引用链接起来, 通过 ~extern~ 和 ~static~ 申明内部函数的作用域
+
+header file 用来包含这些描述信息, 被引用的时候只需要吧 header file include 进去
+
+ ~#include~ 只是指定文件内容, 原封不动的考进来
+** header file
+ ~*.hpp~ 是 cpp 专用
+
+~*.h~ 是 c/cpp 通用头文件
+
+可以做成通用, 同时根据宏支持 cpp 特性
+#+begin_src cpp
+  #ifndef MY_HEADER_H
+  #define MY_HEADER_H
+
+     #ifdef __cplusplus
+        extern "C"
+        {
+     #endif
+
+     void myCFunction() ;
+
+     #ifdef __cplusplus
+        } // extern "C"
+     #endif
+
+  #endif // MY_HEADER_H
+#+end_src
+ 
+* c++ 弃用特性(11 之后)
+- 不允许字面常量带 ~*~ 
+  如果有需要初始化一个  ~char *~, 应该使用 ~const char *~ 或者 ~auto~. 
+- 异常说明 unexpected_handler, set_unexpected() 等相关特性被弃用, 应该使用 noexcept
+
+* C++ 11 新特性
+** noexcept
+告诉编译器绝对不会发生异常, 有利于编译器优化, 不影响正确性, 暂时不用
+#+begin_src cpp
+  void f() noexcept; // the function f() does not throw
+  void (*fp)() noexcept(false); // fp points to a function that may throw
+#+end_src
+* 编译
+** 预处理 Preprocessing, ~cpp~ / ~gcc -E~
+预处理指令以 ~#~ 开头, 常用的:
+- ~#ifdef~ 判定保留
+- ~#define~ 宏替换
+- ~#include~ 插入对应的源码
+
+标记对应行数文件, 为之后的错误信息
+
+** 编译和汇编 Compilation,  Assembly, ~cc1~ / ~gcc -s~, ~as~ / ~gcc -c~
+去除预编译指令之后的纯 cpp 代码编译称为底层的汇编代码:
+- 语法识别,
+- 检查优化
+
+汇编器吧汇编代码转换为机械码.
+
+可分开编译打包, 生成静态库, 给其他包调用.
+
+编译和汇编最终生成目标文件 object file, 也就是机械码
+** 链接 Linking ~ld~
+链接器将编译器产物的引用替换成对应的 object file 链接起来
+** 产物
+
+| .c　　　　     | C 源程序　　　　　　  | 　　预处理，编译，汇编       |
+| .C　　　　     | C++源程序　　  　　　 | 　预处理，编译，汇编         |
+| .cc　　　　    | C++源程序　　         |                              |
+| .cxx 　　　    | C++源程序　　　       | 　  　　预处理，编译，汇编   |
+| .m 　　　　    | Objective-C 源程序    | 　　　预处理，编译，汇编     |
+| .i 　　　　    | 预处理后的 C 文件　　 | 　　编译，汇编               |
+| .ii　　　　    | 预处理后的 C++文件    | 　　　编译，汇编             |
+| .s　　　　　   | 汇编语言源程序　　    | 　　　汇编                   |
+| .S　　　　　   | 汇编语言源程序　　    | 　　　预处理，汇编           |
+| .h　　　　　　 | 预处理器文件　　　    | 　　　通常不出现在命令行上　 |
+** 工具
+gcc 默认处理 C 文件, 设定 C 链接
+
+g++ 默认处理 CPP 文件, 设定 CPP 链接
+
+#+begin_src bash
+  # console preprocessing result cpp
+  g++ -E hello-word.cpp
+
+  # build cpp to object file, hello-world.o
+  g++ -c hello-word.cpp
+
+  # linking object file
+  g++ -o myexecutable hello-word.o
+
+#+end_src
