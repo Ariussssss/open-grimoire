@@ -2,6 +2,11 @@
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: base
 #+DATE: [2021-10-20 19:05]
+* 版本
+mac
+#+begin_src bash
+  gcc -dumpversion
+#+end_src
 * syntax
 ** 常规结构
 1. 注释
@@ -151,6 +156,15 @@ bool, char, int, float, double, void.
    1. 如果符号一致, 位宽转换为最大的.
    2. 如果无符号的不小于带符号的位宽, 则带符号的转换为无符号数对应类型. 
 ** pragam
+** extern, static
+extern 描述外部全局变量, 仅做声明不分配内存.
+告知编译器在别处定义. 
+
+static 修饰的全局变量只能在本文件访问(object file).
+延长局部变量寿命, 直到程序结束.
+
+全局变量默认有外部链接, 作用域是整个工程. 
+
 * 文件类型
 ** cpp
 可以把所有东西放到 cpp 里,  对应一个编译单元 obj.
@@ -245,3 +259,6 @@ g++ 默认处理 CPP 文件, 设定 CPP 链接
   g++ -o myexecutable hello-word.o
 
 #+end_src
+* 标准库
+** stdio
+ ~fprintf~ 
