@@ -15,6 +15,10 @@ https://github.com/floating-ui/floating-ui/
 *** +astro+
 原生支持 markdown 的框架, 适合一边写前端一边写笔记.
 (为什么不直接 org + export html?)
+*** +atuin+
+易用版 history
+
+useless, 依赖服务端
 ** 调研中
 *** esno 代替 ts-node
 https://github.com/antfu/esno
@@ -40,8 +44,6 @@ redis gui
 js cli
 https://rome.tools/blog/2021/09/21/rome-will-be-rewritten-in-rust
 ** 历史
-*** 🦋 atuin
-易用版 history
 *** 🦋 Hammerspon
 不习惯 Alfred, 快捷键增强, 基于 ~lua~ 定制快捷键脚本
 *** 👻 fnm => +nvm+
