@@ -1,0 +1,56 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: memorize
+#+DATE: [2022-05-28 01:07]
+* Refers
+* languages
+** five principles
+*** four key words
+- meaning
+- relevance
+- attention
+- memory
+*** Usage
+Use language to create value.
+
+As a tool, or to communicate.
+*** Comprehensible input
+Understood message once, acquire it later for more.
+
+Comprehensible with context, environment
+
+It's not about accumulating knowledge, more like a sport training.
+*** Talking with muscle
+Let your body understand the hurt and action, be used to it.
+*** Be positive
+Don't persue on understanding all words, which may make you unset because you are not perfect.
+
+Pay a attention to those part you understand with relax.
+** action
+*** Listen a lot
+Brain soaking.
+
+Listen tons of languages. Does matter you understand or not.
+
+Focus on the rhythms, patterns
+*** Body language, Comprehensible input
+*** Focus on the Core
+Daily conversation 3000 words is enough
+** Usage
+*** Learn how to ask
+*** Simple words
+*** Make up words easily
+*** Get a language parent
+Like real parent, make a save environment to speak free
+
+Parent shoud:
+- Work to understand what you say
+- Never correct mistasks
+- Always confirm understanding and use right language
+- Use word your know
+*** Copy face
+Make muscles work right.
+
+Feed back loop, listen how you sounds and feel how it hear.
+*** direct connect
+Build memory and relavance
