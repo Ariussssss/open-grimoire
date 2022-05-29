@@ -1,6 +1,76 @@
-#+STARTUP: content
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: vim
+#+DATE: [2021-03-01 20:52]
 * vim
 ** Refers
+   - https://www.keycdn.com/blog/vim-commands#:~:text=Open%20a%20new%20or%20existing,and%20back%20to%20command%20mode.
+** base
+Operation and motion.
+
+Motion can be no arguments operation or argument of other operation.
+
+A command can be constitute by a motion or an operation with several motion.
+** vimrc
+*** set
+#+begin_src vimrc
+  set <no><Config>
+#+end_src
+*** map
+#+begin_src vimrc
+  map <Key> <Command>
+#+end_src
+** mode
+*** normal
+*** insert
+*** visual
+~:'<,'>normal <input>~ input to each region
+~:'<,'>A <input>~ input to each region end
+**** visual
+**** visual line
+**** visual block
+A block area
+** settings
+*** wildmenu
+Provide complement option for command
+*** shownumber
+line number
+*** syntax on
+*** hlsearch
+#+begin_src vimrc
+  exec "no hlsearch"
+#+end_src
+*** incsearch
+*** wrap
+*** showcmd
+*** cursorline
+*** ignorecase
+*** smartcase
+*** let
+#+begin_src vimrc
+  let mapleader=" "
+#+end_src
+** operation
+*** c change
+The difference between is not change into insert mode after delete regions.
+*** d delete
+*** f find <keyword>
+*** exec
+** motions
+*** b back
+*** w word
+*** n next
+*** v visual and select
+**** V visual line
+*** i in <keyword>
+*** g go
+**** G file end
+*** 0-9 number counts
+line start
+** window
+   ~ctrl-w s~ 拆分
+   ~ctrl-w j/k~ 切换
+
 ** snapshot
    ~zz~ 当前行居中
    ~zt~ 当前行顶部
