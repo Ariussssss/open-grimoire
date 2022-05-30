@@ -2,6 +2,8 @@
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: base
 #+DATE: [2021-10-20 19:05]
+* Refers
+- https://github.com/applenob/Cpp_Primer_Practice
 * 版本
 mac
 #+begin_src bash

@@ -4,7 +4,7 @@
 #+DATE: [2021-03-01 20:52]
 * vim
 ** Refers
-   - https://www.keycdn.com/blog/vim-commands#:~:text=Open%20a%20new%20or%20existing,and%20back%20to%20command%20mode.
+- https://www.keycdn.com/blog/vim-commands#:~:text=Open%20a%20new%20or%20existing,and%20back%20to%20command%20mode.
 ** base
 Operation and motion.
 
@@ -15,6 +15,8 @@ A command can be constitute by a motion or an operation with several motion.
 *** set
 #+begin_src vimrc
   set <no><Config>
+  " or
+  set <Config>!
 #+end_src
 *** map
 #+begin_src vimrc
@@ -50,13 +52,18 @@ line number
 #+begin_src vimrc
   let mapleader=" "
 #+end_src
-** operation
+*** spell
+Language spell check
+
+~z=~ Provide correct spell option, press ~number <CR>~ to use.
+
+Work same as ~coc-word~.
+** operation, motions
 *** c change
 The difference between is not change into insert mode after delete regions.
 *** d delete
 *** f find <keyword>
 *** exec
-** motions
 *** b back
 *** w word
 *** n next
@@ -64,25 +71,33 @@ The difference between is not change into insert mode after delete regions.
 **** V visual line
 *** i in <keyword>
 *** g go
-**** G file end
+**** G go operation
 *** 0-9 number counts
 line start
+*** r read
+ ~:r !ls~ 
+** command
+*** TOhtml
+** variable
+*** % current file
 ** window
-   ~ctrl-w s~ 拆分
-   ~ctrl-w j/k~ 切换
+~ctrl-w s~ 拆分
+~ctrl-w j/k~ 切换
 
 ** snapshot
-   ~zz~ 当前行居中
-   ~zt~ 当前行顶部
-   ~zb~ 当前行底部
+- ~zz~ 当前行居中
+- ~zt~ 当前行顶部
+- ~zb~ 当前行底部
+- ~c-e~ 行向上移
+- ~c-y~ 行向下移
+- ~c-f~ 向下翻页
+- ~c-b~ 向上翻页
+- ~c-i~ back to last location
+- ~c-o~ forward to last location
+- ~H~ 屏幕首行
+- ~L~ 尾行
+- ~M~ 中间
 
-   
-   ~c-e~ 行向上移
-   ~c-y~ 行向下移
-
-   ~c-f~ 向下翻页
-   ~c-b~ 向上翻页
-
-   ~H~ 屏幕首行
-   ~L~ 尾行
-   ~M~ 中间
+** with command
+Save admin permission file.
+ ~:w !sudo tee~ Exec a command in terminal.

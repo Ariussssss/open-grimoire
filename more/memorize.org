@@ -4,6 +4,7 @@
 #+DATE: [2022-05-28 01:07]
 * Refers
 * languages
+Don't translate.
 ** five principles
 *** four key words
 - meaning
@@ -23,7 +24,7 @@ It's not about accumulating knowledge, more like a sport training.
 *** Talking with muscle
 Let your body understand the hurt and action, be used to it.
 *** Be positive
-Don't persue on understanding all words, which may make you unset because you are not perfect.
+Don't pursue on understanding all words, which may make you unset because you are not perfect.
 
 Pay a attention to those part you understand with relax.
 ** action
@@ -43,9 +44,9 @@ Daily conversation 3000 words is enough
 *** Get a language parent
 Like real parent, make a save environment to speak free
 
-Parent shoud:
+Parent should:
 - Work to understand what you say
-- Never correct mistasks
+- Never correct mistakes
 - Always confirm understanding and use right language
 - Use word your know
 *** Copy face
@@ -53,4 +54,21 @@ Make muscles work right.
 
 Feed back loop, listen how you sounds and feel how it hear.
 *** direct connect
-Build memory and relavance
+Build memory and relevance
+** tools
+*** Youglish
+Get word pronounce in video.
+https://youglish.com/pronounce/performance/english/us
+
+Always binding word with graphics like pictures and video.
+*** Danci
+Listen and write.
+http://www.danci88.com/
+*** Forvo
+Multi version pronounce by people from different country.
+https://forvo.com/word/fusion/#en
+*** Cambridge dict
+Standard pronounce.
+https://dictionary.cambridge.org/dictionary/english/fusion
+*** Google translation
+Read follow and speak test

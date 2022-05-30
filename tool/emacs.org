@@ -400,3 +400,7 @@ theme 都是以 symbol 来制定和读取
    )
 #+end_src
 统一 header footer https://github.com/Bad-ptr/common-header-mode-line.el
+
+* plugins
+- avy 删了, 用的太少了
+- ace-window 完全没卵用
