@@ -91,7 +91,7 @@ OLAP 系统以维度模型来存储历史数据, 其主要存储描述性的数�
 - 索引
 * function
 * example
-每种 10 行.
+** rank 10
 
 ~WITH~ 一般用来存常量和普通类型, 反过来可以存 table
 
@@ -105,4 +105,11 @@ OLAP 系统以维度模型来存储历史数据, 其主要存储描述性的数�
   FROM TOPTEN
   WHERE RowNo <= 10
 #+end_src
+** regex
+#+begin_src sql
+  extract(haystack, pattern)
 
+  replaceRegexpOne(haystack, pattern, replacement)
+
+
+#+end_src

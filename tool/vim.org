@@ -24,7 +24,9 @@ A command can be constitute by a motion or an operation with several motion.
 #+end_src
 ** mode
 *** normal
+Always keep in normal mode.
 *** insert
+*** command
 *** visual
 ~:'<,'>normal <input>~ input to each region
 ~:'<,'>A <input>~ input to each region end
@@ -35,7 +37,7 @@ A block area
 ** settings
 *** wildmenu
 Provide complement option for command
-*** shownumber
+*** number
 line number
 *** syntax on
 *** hlsearch
