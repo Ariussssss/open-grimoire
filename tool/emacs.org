@@ -285,6 +285,13 @@ Refers:
 
   TRAMP: Transparent Remote file Access, Multiple Protocol
 
+* bookmark
+Value:
+- ~bookmark-alist~ 
+Action:
+- ~bookmark-set <name>~
+- ~bookmark-jump <mark-object>~
+- ~bookmark-delete <mark-object>~
 * 缓存
 每次编辑都会生成缓存文件
 
