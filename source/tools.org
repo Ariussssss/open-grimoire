@@ -21,3 +21,4 @@ https://github.com/Yqnn/svg-path-editor
 * pop os laptop https://system76.com/laptops/darp7/configure
 * 电子书 https://z-lib.org/   
 * 国内镜像加速 https://github.com/eryajf/Thanks-Mirror
+* 语音转换 https://app.xunjiepdf.com/text2voice/
