@@ -4,6 +4,7 @@
 #+DATE: [2021-10-20 19:05]
 * Refers
 - https://github.com/applenob/Cpp_Primer_Practice
+- build a server in 30 days https://github.com/yuesong-feng/30dayMakeCppServer
 * 版本
 mac
 #+begin_src bash

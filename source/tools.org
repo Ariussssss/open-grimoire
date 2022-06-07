@@ -22,3 +22,5 @@ https://github.com/Yqnn/svg-path-editor
 * 电子书 https://z-lib.org/   
 * 国内镜像加速 https://github.com/eryajf/Thanks-Mirror
 * 语音转换 https://app.xunjiepdf.com/text2voice/
+* remote jobs https://github.com/levelsio/awesome-remote-job
+* IPA reader http://ipa-reader.xyz/

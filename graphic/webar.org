@@ -1,4 +1,4 @@
-#+STARTUP: content
+#+STARTUP: all
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: webar
 #+DATE: [2021-12-13 09:58]
@@ -21,7 +21,7 @@ tracking.js, deeplearn.js, ConveNetJS.
 * 资源
 ** A-frame
 - 官方网站：https://aframe.io/
-- A-Frame中文教程：https://www.techbrood.com/aframe
+- A-Frame 中文教程：https://www.techbrood.com/aframe
 
 一个构建虚拟现实 VR 体验的 Web 框架.
 支持 VR, 同时可用于增强现实. 

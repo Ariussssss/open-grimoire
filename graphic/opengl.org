@@ -3,56 +3,56 @@
 #+TITLE: opengl
 #+DATE: [2021-10-19 23:11]
 * Refers
-  - https://www.zhihu.com/question/51867884/answer/127979304
-  - https://learnopengl-cn.github.io/01%20Getting%20started/01%20OpenGL/
+- https://www.zhihu.com/question/51867884/answer/127979304
+- https://learnopengl-cn.github.io/01%20Getting%20started/01%20OpenGL/
 * 概述
-  OpenGL API 是一套接口, 可以在支持 OpenGL 的机器上使用和绘制.
+OpenGL API 是一套接口, 可以在支持 OpenGL 的机器上使用和绘制.
 
-  Khrono 组织维护, 写个说明书, 
+Khrono 组织维护, 写个说明书, 
 * qt
-  跨平台开发.
+跨平台开发.
 
-  旧版 unity 需要模拟机 mono. unity 5 开始使用 IL2CPP 编译成 C++,  本质上没有区别.
+旧版 unity 需要模拟机 mono. unity 5 开始使用 IL2CPP 编译成 C++,  本质上没有区别.
 
-  细节上, unity 会生成很多代码, 性能不是最优解, qt 接近原生, 但没有 unity 的游戏引擎. 
+细节上, unity 会生成很多代码, 性能不是最优解, qt 接近原生, 但没有 unity 的游戏引擎. 
 * 立即渲染 Immediate mode
-  固定渲染管线, 不允许开发者控制管线运算. 
+固定渲染管线, 不允许开发者控制管线运算. 
 * 核心模式 Core-profile
-  可编程管线.
+可编程管线.
 
-  GPU 渲染流水线:
-  1. 定点着色器 vertex shader
-  2. 形状(图元)装配 shape assembly
-  3. 几何着色器 geometry shader
-  4. 光栅化 rasterization  
-     形状变成像素
-  5. 片段着色器 fragment shader
-  6. 测试与混合 test and blending
-     融合透明度, 阴影等
+GPU 渲染流水线:
+1. 定点着色器 vertex shader
+2. 形状(图元)装配 shape assembly
+3. 几何着色器 geometry shader
+4. 光栅化 rasterization  
+   形状变成像素
+5. 片段着色器 fragment shader
+6. 测试与混合 test and blending
+   融合透明度, 阴影等
 
-  openGL 3.2 推出, 与传统管线模式(立即渲染)的区别就是 允许自定义修改 几何着色器 和 片段着色器. 
+   openGL 3.2 推出, 与传统管线模式(立即渲染)的区别就是 允许自定义修改 几何着色器 和 片段着色器. 
 * 状态机 State Machine
-  - openGL 本身是一个大型的状态机
-  - 需要描述如何操作所有变量的大型集合
+- openGL 本身是一个大型的状态机
+- 需要描述如何操作所有变量的大型集合
 
   通过 状态设置函数 (State-changing Function) 和 状态应用函数 (State-using Function) 控制上下文 (Context). 
 * 对象 Object
 * 
 * 着色器
 ** 顶点着色器
-   通过数据, 数学计算得出光照效果, 位移, 颜色值等.
+通过数据, 数学计算得出光照效果, 位移, 颜色值等.
 
-   有几个顶点就执行几次. 将定点组合成片圆 (图元组合 Primitive Assembly). 
+有几个顶点就执行几次. 将定点组合成片圆 (图元组合 Primitive Assembly). 
 ** 片元着色器
-   计算片元的最终颜色(之后还是可能变化), 和深度值. 
+计算片元的最终颜色(之后还是可能变化), 和深度值. 
 ** 区别
-   顶点着色包括细分和几何着色, 决定了一个图元应该位于屏幕的什么位置.
+顶点着色包括细分和几何着色, 决定了一个图元应该位于屏幕的什么位置.
 
-   片元着色决定颜色.
-   其中:
-   - 顶点着色器(必要)
-   - 细分着色器(可选)
-   - 几何着色器(可选)
-   - 片元着色器(必)
+片元着色决定颜色.
+其中:
+- 顶点着色器(必要)
+- 细分着色器(可选)
+- 几何着色器(可选)
+- 片元着色器(必)
 ** 处理数据
-   属性: 分为浮点, 整形, 布尔类型
+属性: 分为浮点, 整形, 布尔类型

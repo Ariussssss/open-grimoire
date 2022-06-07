@@ -4,7 +4,7 @@
 #+DATE: [2021-11-19 02:49]
 * Refers
 - OI（Olympiad in Informatics，信息学奥林匹克竞赛） https://oi-wiki.org/ https://github.com/OI-wiki/OI-wiki/
-
+- https://github.com/TheAlgorithms/Python
 * 基础
 
 除法中，负数元算的余数和商也会是负数。

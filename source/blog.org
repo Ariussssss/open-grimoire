@@ -27,3 +27,11 @@
 * https://draveness.me/golang/docs/part4-advanced/ch09-stdlib/golang-json/
 * 云谦 blog https://github.com/lencx/z
 * 前端 计算机图形学 https://pengfeixc.com/
+* linux python https://github.com/junnplus/blog/issues
+* 清华大学课程 https://github.com/PKUanonym/REKCARC-TSC-UHT
+* 前端, emacs, cg https://scarletsky.github.io/post/
+* 数学, 汇编, latex https://evian-zhang.github.io/index.html
+* 机器学习入门, 语言入门 https://klose911.github.io/
+* 机器学习 https://ifwind.github.io/archives/
+* 前端游戏 demo https://github.com/lgq627628?tab=repositories
+* nginx linux java https://github.com/dunwu

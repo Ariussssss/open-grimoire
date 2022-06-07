@@ -4,6 +4,10 @@
 #+DATE: [2022-04-22 10:39]
 * Refers
 - https://github.com/d2l-ai/d2l-zh
+  - https://www.bilibili.com/video/BV1u64y1i75a?spm_id_from=333.999.0.0
+- https://www.bilibili.com/video/BV1JK4y1D7Wb?p=66
+- https://www.youtube.com/channel/UC2ggjtuuWvxrHHHiaDH1dlQ
+- 艺术风格转换实操 https://www.cnblogs.com/massquantity/p/9621393.html
 * 方法
 ** 卷积神经网络 – CNN
 ** 生成对抗网络 – GANs

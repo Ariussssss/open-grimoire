@@ -5,6 +5,7 @@
 * Refers
   - https://zhuanlan.zhihu.com/p/95461662
   - https://zhuanlan.zhihu.com/p/407191699
+  - https://github.com/AmesingFlank/taichi.js
 * webgpu
   - 2017 推出, 暂未发布正式版
   - 更好的支持多线程

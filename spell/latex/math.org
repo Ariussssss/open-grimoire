@@ -1,5 +1,8 @@
 #+STARTUP: latexpreview
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: math
+#+DATE: [2022-05-16 16:16]
+* Refers
 * math
 ** vector
 \begin{displaymath}

@@ -2,4 +2,8 @@
 #+CREATED: [2021-08-23 11:50]
 * dev
 ** 脚手架
-   参考 https://github.com/cookiecutter/cookiecutter
+参考 https://github.com/cookiecutter/cookiecutter
+** debug
+#+begin_src python
+  import pdb; pdb.set_trace()
+#+end_src
