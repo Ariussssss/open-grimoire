@@ -5,10 +5,15 @@
 * Refers
 - https://github.com/applenob/Cpp_Primer_Practice
 - build a server in 30 days https://github.com/yuesong-feng/30dayMakeCppServer
-* 版本
+* version
 mac
 #+begin_src bash
   gcc -dumpversion
+#+end_src
+
+Build with specific version
+#+begin_src bash
+  g++ --std=c++11 main.cpp -o main
 #+end_src
 * syntax
 ** 常规结构
@@ -31,8 +36,9 @@ std 的  ~cin~ 和 ~cout~ 负责输入输出.
 相比 ~printf~ 多了类型判断和自动转化
 
 ~<<~ 表示传输, 是 cout 对象的符号重载.
+~std::endl~ 换行
 
-形似 ~cin >> variable~
+形似 ~cin >> variable~, 类似的话 shell 中的输入输出  ~./main < ./data~ 
 #+begin_src cpp
   #include <iostream>
 
@@ -158,6 +164,32 @@ bool, char, int, float, double, void.
 3. 如果都为整型.
    1. 如果符号一致, 位宽转换为最大的.
    2. 如果无符号的不小于带符号的位宽, 则带符号的转换为无符号数对应类型. 
+** 对象重写运算
+声明返回类型, 定义运算方式. 
+#+begin_src cpp
+  inline bool 
+  operator!=(const Sales_item &lhs, const Sales_item &rhs)
+  {
+      return !(lhs == rhs); // != defined in terms of operator==
+  }
+
+  // assumes that both objects refer to the same ISBN
+  Sales_item& Sales_item::operator+=(const Sales_item& rhs) 
+  {
+      units_sold += rhs.units_sold; 
+      revenue += rhs.revenue; 
+      return *this;
+  }
+
+  // assumes that both objects refer to the same ISBN
+  Sales_item 
+  operator+(const Sales_item& lhs, const Sales_item& rhs) 
+  {
+      Sales_item ret(lhs);  // copy (|lhs|) into a local object that we'll return
+      ret += rhs;           // add in the contents of (|rhs|) 
+      return ret;           // return (|ret|) by value
+  }
+#+end_src
 ** pragam
 ** extern, static
 extern 描述外部全局变量, 仅做声明不分配内存.
@@ -217,6 +249,8 @@ header file 用来包含这些描述信息, 被引用的时候只需要吧 heade
 ** 预处理 Preprocessing, ~cpp~ / ~gcc -E~
 预处理指令以 ~#~ 开头, 常用的:
 - ~#ifdef~ 判定保留
+  - ~#ifndef~ 相反, 如果未定义, 避免重复定义
+- ~endif~ 结束
 - ~#define~ 宏替换
 - ~#include~ 插入对应的源码
 

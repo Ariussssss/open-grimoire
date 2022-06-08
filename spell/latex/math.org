@@ -4,6 +4,8 @@
 #+DATE: [2022-05-16 16:16]
 * Refers
 * math
+** emacs
+~c-c c-x c-l~ org Latex preview
 ** vector
 \begin{displaymath}
   \vec a\quad\overrightarrow{AB}

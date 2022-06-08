@@ -1,6 +1,8 @@
 #+STARTUP: all
+# #+STARTUP: latexpreview
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: ml
+#+OPTIONS: tex:t
 #+DATE: [2021-11-26 10:55]
 * Refers
 - https://github.com/microsoft/ML-For-Beginners
@@ -12,3 +14,74 @@
 - https://github.com/dragen1860/Deep-Learning-with-TensorFlow-book
 * nlp
 https://github.com/fighting41love/funNLP
+* Intro
+Let machine create a function work for our result.
+** Simple overview
+Steps:
+1. Create an unknown function
+2. Define Loss from training data
+3. Optimization to minima loss and get the function
+* Type
+** Regression
+** Classification
+** Structure learning
+Create something
+* Concept
+** Model
+Unknown parameters function.
+** Feature
+Real variable may bring effect to result.
+** Unknown parameters
+*** weight
+*** bias
+Amend result base on weight and feature.
+** Loss
+Function: $L(b,w)$
+
+Define the how good of the parameters set.
+
+Value based on the training data, type
+- MAE. mean absolute error
+- MSE, mean square error
+
+Example:
+
+$L = \frac{ 1 }{ N }\sum_{n} e_n$
+
+** Label
+The correct value from training data.
+
+** Error Surface
+Chart of Loss base on different parameters a
+
+** Hyperparamters
+Manual value
+
+** Optimization
+Process to caculate a set of parameters let L as small as possible
+
+*** Gradient Descent 梯度下降法
+Steps:
+1. Random pick a initial value for weight
+2. Compute differential $\frac{\partial L}{\partial w}|_{w=w^o}$
+   1. Negative, increase w, step size bese on differential
+   2. Positive, decrease w
+   3. Learning rate $\eta$ (hyperparamters) $\eta\frac{\partial L}{\partial W}|_{w=w^o}$
+
+$w^1 \leftarrow w^0 - \eta\frac{ \partial L }{ \partial W}|_{w=w^o}$
+
+3. Get next $w^{n+1}$ and iterative update
+   1. Base on patience (Hyperparameter)
+   2. Find a parameter set with minima $L$, differential as 0
+
+Disadvantage:
+- Local minima, Global minima, which is not the key point.
+
+PS:
+- Differential always has been set up and can be done in one line with most deep learning frameworks.
+
+*** Domain knowledge
+Change features base on domain knowledge
+
+*** Linear model
+
