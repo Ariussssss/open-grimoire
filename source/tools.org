@@ -24,3 +24,4 @@ https://github.com/Yqnn/svg-path-editor
 * 语音转换 https://app.xunjiepdf.com/text2voice/
 * remote jobs https://github.com/levelsio/awesome-remote-job
 * IPA reader http://ipa-reader.xyz/
+* ml training data https://www.kaggle.com/

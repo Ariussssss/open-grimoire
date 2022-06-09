@@ -18,7 +18,7 @@ https://github.com/fighting41love/funNLP
 Let machine create a function work for our result.
 ** Simple overview
 Steps:
-1. Create an unknown function
+1. Create an unknown function, such as $y = b + c^T\sigma(b + Wx)$
 2. Define Loss from training data
 3. Optimization to minima loss and get the function
 * Type
@@ -47,6 +47,15 @@ Value based on the training data, type
 Example:
 
 $L = \frac{ 1 }{ N }\sum_{n} e_n$
+
+For multi unknown parameters $\theta$:
+
+$g = \nabla L(\theta^0)$
+
+With times different:
+- Update: Change parameters one time with Differential and one batch of training data
+  - $\theta^1 \leftarrow \theta^0 - \eta g$
+- Epoch: see all batch once
 
 ** Label
 The correct value from training data.
@@ -85,3 +94,81 @@ Change features base on domain knowledge
 
 *** Linear model
 
+**** Model Bias
+Model limitation. 
+
+**** Sigmoid Function, S curve function
+
+$y = c\frac{ 1 }{ 1 + e^{-(b+wx_1)}}$
+$y = c sigmoid(b+wx_1)}$
+
+Parameters:
+- w slope
+- b shift horizontal
+- c height
+
+**** ReLU Rectified Linear Unit
+Hard, Better
+
+$c max(0,b + wx_1)$
+
+**** Activation Function
+Both ReLU and Sigmoid are activation function
+
+**** Piecewise Linear Curves
+Constant + a set of linear function.
+
+Approximate any continuous curve.
+
+$y = b + \sum_i C_i sigmoid(b_i + w_i x_i)$
+**** Matrix
+- Sample no. as i.
+- Sigmoid no. as j.
+
+Piecewise Function:
+
+$y = b + \sum_iC_i sigmod(bi + \sum_jw_{ij}x_j)$
+
+Limit in 3:
+  
+$$
+r1 = b1 + w_{11}x_1 + w_{12}x_2 + w_{13}x_3 \\
+r2 = b2 + w_{21}x_1 + w_{22}x_2 + w_{23}x_3 \\
+r3 = b2 + w_{31}x_1 + w_{32}x_2 + w_{33}x_3 \\
+$$
+
+
+In Matrix:
+
+$\begin{bmatrix} r_1 \\ r_2 \\ r_3 \end{bmatrix}
+=\begin{bmatrix} b_1 \\ b_2 \\ b_3 \end{bmatrix}
++\begin{bmatrix} w_{11} & w_{12} & w_{13} \\ w_{21} & w_{22} & w_{23} \\ w_{31} & w_{32} & w_{33} \end{bmatrix}
+\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}$
+
+In shorthand:
+
+$r = b + Wx$
+
+$a = \sigma(r)$
+
+$y = b + c^Ta$
+
+$y = b + c^T\sigma(b + Wx)$
+**** Unknown Parameters
+AKA $\theta$
+*** Layer
+Result as a new feature, iterative run the same process.
+
+Hidden layer, same as *Neuron*
+
+Many layers means *Deep*, process called *Deep learning*
+
+*** Neural Network
+The function node of one unknown parameters set called *Neuron* (神经元)
+
+Total process called *Neural Network*
+
+Bad reputation because the rumor history.
+
+*** Overfitting
+Better on training data, bad on unseen data

@@ -29,18 +29,18 @@
     #+begin_src graphviz-dot
       Alice -> Bob: Authentication Request
       alt successful case
-	Bob -> Alice: Authentication Accepted
+        Bob -> Alice: Authentication Accepted
       else some kind of failure
-	Bob -> Alice: Atuhentication Failue
-	group My own label
-	  Alice -> Log : Log attack start
-	  loop 1000 times
-	    Alice -> Bob: DNS Attack
-	  end
-	  Alice -> Log : Loag alice end
-	end
+        Bob -> Alice: Atuhentication Failue
+        group My own label
+          Alice -> Log : Log attack start
+          loop 1000 times
+            Alice -> Bob: DNS Attack
+          end
+          Alice -> Log : Loag alice end
+        end
       else Another type of failue
-	Bob -> Alice: Please repeat
+        Bob -> Alice: Please repeat
       end
     #+end_src
 

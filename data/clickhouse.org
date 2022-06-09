@@ -90,6 +90,14 @@ OLAP 系统以维度模型来存储历史数据, 其主要存储描述性的数�
 - 实时数据更新
 - 索引
 * function
+* data block
+https://github.com/ClickHouse/ClickHouse/issues/10352
+
+~runningDifference~, ~neighbor~
+
+这种相邻的数据块运算不一定需要要求数据都在同一个数据块, 如果分段的话需要另外 order 或者 group 合并数据.
+否则容易出现诡异的 0 . 
+
 * example
 ** rank 10
 

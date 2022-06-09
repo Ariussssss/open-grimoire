@@ -4,3 +4,4 @@
 #+DATE: [2022-06-07 11:37]
 * Refers
 * digital museum https://github.com/magcius/noclip.website
+* visualize algorithm https://bost.ocks.org/mike/algorithms/
