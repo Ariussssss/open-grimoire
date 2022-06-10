@@ -42,3 +42,23 @@ Speed, Stability, Simplicity
    https://www.google.com/intl/zh-CN/chrome/canary/
 
    开发者使用, 测试新特性(如 webgpu)
+* Notification
+#+begin_src js
+  const notifyConfig = {
+    body: '\\ ^o^ /',
+    icon: '/images/favicon.ico',
+    tag: 'newArrival' // Same tag only appear once at one time.
+  };
+
+  if (Notification.permission === 'default' || Notification.permission === 'undefined') {
+    Notification.requestPermission(function(permission) {
+      if (permission === 'granted') {
+        const notification = new Notification('Hi there!', notifyConfig);
+        notification.onclick = function(e) {
+          e.preventDefault();
+          window.open('http://sample.com./');
+        }
+      }
+    });
+  }
+#+end_src

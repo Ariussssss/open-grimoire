@@ -121,3 +121,8 @@ https://github.com/ClickHouse/ClickHouse/issues/10352
 
 
 #+end_src
+** settings
+#+begin_src sql
+  SELECT *
+  FROM system.settings
+#+end_src

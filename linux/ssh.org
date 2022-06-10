@@ -50,3 +50,13 @@
 #+begin_src bash
 
 #+end_src
+
+* 超时断开
+#+begin_src conf
+  # 指定了服务器端向客户端请求响应的时间间隔, 默认是0, 不发送请求；改为60秒
+  # 响应不断开
+  ClientAliveInterval 60
+  # 指定了服务器发出请求后客户端没有响应的次数达到一定值, 就会自动断开
+  ClientAliveCountMax 3
+#+end_src
+
