@@ -44,6 +44,8 @@ redis gui
 js cli
 https://rome.tools/blog/2021/09/21/rome-will-be-rewritten-in-rust
 ** 历史
+*** 👻 tauri => electron
+Rust 后端代替 node, 更快更小
 *** 🦋 Hammerspon
 不习惯 Alfred, 快捷键增强, 基于 ~lua~ 定制快捷键脚本
 *** 👻 fnm => +nvm+

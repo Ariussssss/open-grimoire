@@ -3,4 +3,9 @@
 #+TITLE: api
 #+DATE: [2021-10-25 04:31]
 * bilibili
-  https://www.moyu.moe/bilibili-api/#/
+- https://www.moyu.moe/bilibili-api/#/
+- https://www.bookset.io/read/BilibiliAPIDocs/API.userinfo.md
+** User info uid
+https://api.bilibili.com/x/space/acc/info?mid=33605910&jsonp=jsonp
+** Multi room status
+https://api.live.bilibili.com/room/v1/Room/get_status_info_by_uids?uids[]=184524755&uids[]=33605910

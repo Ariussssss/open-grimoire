@@ -25,3 +25,4 @@ https://github.com/Yqnn/svg-path-editor
 * remote jobs https://github.com/levelsio/awesome-remote-job
 * IPA reader http://ipa-reader.xyz/
 * ml training data https://www.kaggle.com/
+* vpn https://10davpn.cn.com/

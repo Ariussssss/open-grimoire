@@ -16,6 +16,13 @@
 * sketch
   #eeeeee 和 helvetica 极简审美
 * graphviz
-  dot 文件生成图像
+http://magjac.com/graphviz-visual-editor/
+
+dot 文件生成图像
+
+#+begin_src bash
+  brew install graphviz
+  dot ./test.dot -T png -o pic.png
+#+end_src
 * plantuml
   代码生成 uml 图像
