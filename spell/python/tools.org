@@ -21,3 +21,11 @@ black
 #+begin_src bash
   pip install git+https://github.com/psf/black 
 #+end_src
+* video editor
+moviepy
+** transfer
+#+begin_src python
+  import moviepy.editor as moviepy
+  clip = moviepy.VideoFileClip("myvideo.avi")
+  clip.write_videofile("myvideo.mp4")
+#+end_src
