@@ -5,7 +5,15 @@
 * bilibili
 - https://www.moyu.moe/bilibili-api/#/
 - https://www.bookset.io/read/BilibiliAPIDocs/API.userinfo.md
-** User info uid
-https://api.bilibili.com/x/space/acc/info?mid=33605910&jsonp=jsonp
-** Multi room status
+** risk management
+limit:20/s
+** multi
+*** Live room status
 https://api.live.bilibili.com/room/v1/Room/get_status_info_by_uids?uids[]=184524755&uids[]=33605910
+** single
+*** User info uid, medal name
+https://api.bilibili.com/x/space/acc/info?mid=33605910&jsonp=jsonp
+*** Anchor
+https://api.live.bilibili.com/xlive/app-room/v2/guardTab/topList?roomid=23260932&page_size=1&page=1&ruid=690608690
+*** fans count
+https://api.bilibili.com/x/relation/stat?vmid=690608714&jsonp=jsonp
