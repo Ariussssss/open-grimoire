@@ -1,0 +1,20 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: pytorch
+#+DATE: [2022-06-18 18:47]
+* Refers
+* overview
+** Goods
+- use GPU for Tensor computation (高纬运算) Numpy
+* Process
+** Train
+*** Define
+*** Loss function
+*** Organize
+** Validation
+** Testing
+* Dataset
+Store data samples and expected values
+* Dataloader
+Group data and load dataset in batch by size, enables multiprocessing
+* Tensors 
