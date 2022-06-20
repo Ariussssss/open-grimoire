@@ -5,6 +5,7 @@
 * Refers
 - 大佬的书籍分享 https://xargin.com/readings/
 - https://github.com/EbookFoundation/free-programming-books
+- https://blog.jiayuanzhang.com/post/naval-reading/
 * article
 - https://coolshell.cn/articles/19464.html
 - https://www.cntofu.com/

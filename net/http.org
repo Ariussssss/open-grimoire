@@ -278,3 +278,10 @@ OPPO 实践, 印度印尼等地区网络覆盖较差, https 成功率低, 下载
 
 * HTTP 3
 基于 QUIC, 又称 HTTP-over-QUIC
+
+** news
+2022.06.06, IETF QUIC（Internet Engineering Task Force, 互联网工程任务组, 简称 IETF）,
+比利时的 HTTP 工作组成员 Robin Mark 在 Twitter 上宣布“历时 5 年, HTTP/3 终于被标准化为 RFC 9114.
+将与 RFC 9204（QPACK header 压缩）和 RFC 9218 （可扩展的优先级）一起开启 Web 的新篇章！”,
+这意味着该协议已经进入了稳定的状态, 而 HTTP/3 是 HTTP 超文本传输协议的第三个主要版本.
+同时 HTTP/2 也更新为新的 RFC 9113 标准.

@@ -29,3 +29,11 @@ moviepy
   clip = moviepy.VideoFileClip("myvideo.avi")
   clip.write_videofile("myvideo.mp4")
 #+end_src
+* monitor and restart
+#+begin_src bash
+  pip install watchdog
+  watchmedo auto-restart \
+      --patterns="*.py" \
+      python index.py
+#+end_src
+

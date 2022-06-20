@@ -16,3 +16,6 @@ On the other hand.
 Not applicable
 * IRQ
 Interrupt Request
+* DYOR
+DYOR is an acronym for “Do Your Own Research“.
+DYOR is defined as the process of doing your own damn research before putting your money at risk.
