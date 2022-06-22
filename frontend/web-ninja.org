@@ -1,158 +1,160 @@
-#+STARTUP: content
-* web ninja
- 一些莫名其妙的小技巧
-** dblclick 失效
-   React 中的 ~onDoubleClick~ 生效，但 Vue 中的 ~@dblclick~ 失效。
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: web-ninja
+#+DATE: [2020-11-22 12:06]
+一些莫名其妙的小技巧
+* dblclick 失效
+React 中的 ~onDoubleClick~ 生效，但 Vue 中的 ~@dblclick~ 失效。
 
-   源码中双方的实现是不同的，前者采用 ~target.onEvent~ 的形式，后者采用 ~target.addEventListener~ 的形式。
+源码中双方的实现是不同的，前者采用 ~target.onEvent~ 的形式，后者采用 ~target.addEventListener~ 的形式。
 
-   ~addEventListener~ 需要 ~document.addEventListener('dblclick', () => {})~ 后才生效。
-** 使用最新的 Node
+~addEventListener~ 需要 ~document.addEventListener('dblclick', () => {})~ 后才生效。
+* 使用最新的 Node
 
-   You can install Node Nightlies/RCs via nvm using NVM_NODEJS_ORG_MIRROR environment variable.
+You can install Node Nightlies/RCs via nvm using NVM_NODEJS_ORG_MIRROR environment variable.
 
-   Install latest Node RC
+Install latest Node RC
    
-   #+begin_src bash
-     NVM_NODEJS_ORG_MIRROR=https://nodejs.org/download/rc/ nvm i node
-   #+end_src
+#+begin_src bash
+  NVM_NODEJS_ORG_MIRROR=https://nodejs.org/download/rc/ nvm i node
+#+end_src
    
-   Install latest Node.js Nightly
+Install latest Node.js Nightly
 
-   #+begin_src bash
-     NVM_NODEJS_ORG_MIRROR=https://nodejs.org/download/nightly/ nvm i node
-   #+end_src
+#+begin_src bash
+  NVM_NODEJS_ORG_MIRROR=https://nodejs.org/download/nightly/ nvm i node
+#+end_src
    
-   Install latest Node ChakraCore
+Install latest Node ChakraCore
 
-   #+begin_src bash
-     NVM_NODEJS_ORG_MIRROR=https://nodejs.org/download/chakracore-nightly/ nvm i node
-   #+end_src
+#+begin_src bash
+  NVM_NODEJS_ORG_MIRROR=https://nodejs.org/download/chakracore-nightly/ nvm i node
+#+end_src
    
-   Install latest Node v8 Canary
+Install latest Node v8 Canary
 
-   #+begin_src bash
-     NVM_NODEJS_ORG_MIRROR=https://nodejs.org/download/v8-canary/ nvm i node
-   #+end_src
-** 手动 babel
-   #+begin_src bash
-     npx babel source.js -o cli.js
-   #+end_src
-** Macro
-   查询当前已知 Macro https://github.com/jgierer12/awesome-babel-macros
+#+begin_src bash
+  NVM_NODEJS_ORG_MIRROR=https://nodejs.org/download/v8-canary/ nvm i node
+#+end_src
+* 手动 babel
+#+begin_src bash
+  npx babel source.js -o cli.js
+#+end_src
+* Macro
+查询当前已知 Macro https://github.com/jgierer12/awesome-babel-macros
    
-   简单通过机器生成代码  
-   babel-plugin-macros, marco 对比插件能力范围小, 但是开箱即用
+简单通过机器生成代码  
+babel-plugin-macros, marco 对比插件能力范围小, 但是开箱即用
 
-   GraphQL 例子
-   #+begin_src js
-     import { gql } from 'graphql.macro';
+GraphQL 例子
+#+begin_src js
+  import { gql } from 'graphql.macro';
 
-     const query = gql`
-       query User {
-	 user(id: 5) {
-	   lastName
-	   ...UserEntry1
-	 }
-       }
-     `;
+  const query = gql`
+    query User {
+      user(id: 5) {
+        lastName
+        ...UserEntry1
+      }
+    }
+  `;
 
-     //  在编译期会转换成 ↓ ↓ ↓ ↓ ↓ ↓
+  //  在编译期会转换成 ↓ ↓ ↓ ↓ ↓ ↓
 
-     const query = {
-       "kind": "Document",
-       "definitions": [{
-	 ...
-   #+end_src
+  const query = {
+    "kind": "Document",
+    "definitions": [{
+      ...
+#+end_src
 
-   其他使用方式
-   #+begin_src js
-     import eval from 'eval.macro'
-     const val = eval`7 * 6`
-     const val = eval('7 * 6')
+其他使用方式
+#+begin_src js
+  import eval from 'eval.macro'
+  const val = eval`7 * 6`
+  const val = eval('7 * 6')
 
-     import Eval from 'eval.macro'
-     const val = <Eval>7 * 6</Eval>
-   #+end_src
+  import Eval from 'eval.macro'
+  const val = <Eval>7 * 6</Eval>
+#+end_src
 
-   demo
-   #+begin_src js
-     import importURL from 'importurl.macros';
+demo
+#+begin_src js
+  import importURL from 'importurl.macros';
 
-     const React = importURL('https://unpkg.com/react@17.0.1/umd/react.development.js');
+  const React = importURL('https://unpkg.com/react@17.0.1/umd/react.development.js');
 
-     // 编译成
+  // 编译成
 
-     import importURL from 'importurl.macros';
+  import importURL from 'importurl.macros';
 
-     const React = require('../cache/pkg1.js');
+  const React = require('../cache/pkg1.js');
 
 
-     // core
-     import { execSync } from 'child_process';
-     import findRoot from 'find-root';
-     import path from 'path';
-     import fse from 'fs-extra';
+  // core
+  import { execSync } from 'child_process';
+  import findRoot from 'find-root';
+  import path from 'path';
+  import fse from 'fs-extra';
 
-     import { createMacro } from 'babel-plugin-macros';
+  import { createMacro } from 'babel-plugin-macros';
 
-     const syncGet = (url) => {
-       const data = execSync(`curl -L ${url}`).toString();
-       if (data === '') {
-	 throw new Error('empty data');
-       }
-       return data;
-     }
+  const syncGet = (url) => {
+    const data = execSync(`curl -L ${url}`).toString();
+    if (data === '') {
+      throw new Error('empty data');
+    }
+    return data;
+  }
 
-     let count = 0;
-     export const genUniqueName = () => `pkg${++count}.js`;
+  let count = 0;
+  export const genUniqueName = () => `pkg${++count}.js`;
 
-     module.exports = createMacro((ctx) => {
-       const {
-	 references, // 文件中所有对宏的引用
-	 babel: {
-	   types: t,
-	 }
-       } = ctx;
-       // babel 会把当前处理的文件路径设置到 ctx.state.filename
-       const workspacePath = findRoot(ctx.state.filename);
-       // 计算出缓存文件夹
-       const cacheDirPath = path.join(workspacePath, '.cache');
-       //
-       const calls = references.default.map(path => path.findParent(path => path.node.type === 'CallExpression' ));
-       calls.forEach(nodePath => {
-	 // 确定 astNode 的类型
-	 if (nodePath.node.type === 'CallExpression') {
-	   // 确定函数的第一个参数是纯字符串
-	   if (nodePath.node.arguments[0]?.type === 'StringLiteral') {
-	     // 获取一个参数，当做远程库的地址
-	     const url = nodePath.node.arguments[0].value;
-	     // 根据 url 拉取代码
-	     const codes = syncGet(url);
-	     // 生成一个唯一包名，防止冲突
-	     const pkgName = genUniqueName();
-	     // 确定最终要写入的文件路径
-	     const cahceFilename = path.join(cacheDirPath, pkgName);
-	     // 通过 fse 库，将内容写入， outputFileSync 会自动创建不存在的文件夹
-	     fse.outputFileSync(cahceFilename, codes);
-	     // 计算出相对路径
-	     const relativeFilename = path.relative(ctx.state.filename, cahceFilename);
-	     // 最终计算替换 importURL 语句
-	     nodePath.replaceWith(t.stringLiteral(`require('${relativeFilename}')`))
-	   }
-	 }
-       });
-     });
-   #+end_src
-** speech
-   #+begin_src js
-     (() => {
-     const text = '吔屎啦，梁非凡' // 可以选某个元素的innertext，想看小说文章什么的都可以用这个方式搞起
-     const msg = new SpeechSynthesisUtterance(text);
-     msg.volume = 1000; // 声音
-     msg.rate = 1; // 频率
-     msg.pitch = -150; // 音色
-     msg.lang = 'zh-HK' // 语言
-     window.speechSynthesis.speak(msg); // 开始讲话
-     })();
-   #+end_src
+  module.exports = createMacro((ctx) => {
+    const {
+      references, // 文件中所有对宏的引用
+      babel: {
+        types: t,
+      }
+    } = ctx;
+    // babel 会把当前处理的文件路径设置到 ctx.state.filename
+    const workspacePath = findRoot(ctx.state.filename);
+    // 计算出缓存文件夹
+    const cacheDirPath = path.join(workspacePath, '.cache');
+    //
+    const calls = references.default.map(path => path.findParent(path => path.node.type === 'CallExpression' ));
+    calls.forEach(nodePath => {
+      // 确定 astNode 的类型
+      if (nodePath.node.type === 'CallExpression') {
+        // 确定函数的第一个参数是纯字符串
+        if (nodePath.node.arguments[0]?.type === 'StringLiteral') {
+          // 获取一个参数，当做远程库的地址
+          const url = nodePath.node.arguments[0].value;
+          // 根据 url 拉取代码
+          const codes = syncGet(url);
+          // 生成一个唯一包名，防止冲突
+          const pkgName = genUniqueName();
+          // 确定最终要写入的文件路径
+          const cahceFilename = path.join(cacheDirPath, pkgName);
+          // 通过 fse 库，将内容写入， outputFileSync 会自动创建不存在的文件夹
+          fse.outputFileSync(cahceFilename, codes);
+          // 计算出相对路径
+          const relativeFilename = path.relative(ctx.state.filename, cahceFilename);
+          // 最终计算替换 importURL 语句
+          nodePath.replaceWith(t.stringLiteral(`require('${relativeFilename}')`))
+        }
+      }
+    });
+  });
+#+end_src
+* speech
+#+begin_src js
+  (() => {
+    const text = '吔屎啦，梁非凡' // 可以选某个元素的innertext，想看小说文章什么的都可以用这个方式搞起
+    const msg = new SpeechSynthesisUtterance(text);
+    msg.volume = 1000; // 声音
+    msg.rate = 1; // 频率
+    msg.pitch = -150; // 音色
+    msg.lang = 'zh-HK' // 语言
+    window.speechSynthesis.speak(msg); // 开始讲话
+  })();
+#+end_src
