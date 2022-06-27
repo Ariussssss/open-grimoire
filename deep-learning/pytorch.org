@@ -21,3 +21,37 @@ Group data and load dataset in batch by size, enables multiprocessing
 High dimensional matrices
 
 dim in pytorch, axis in numpy 
+* base training setup
+#+begin_src python
+
+  dataset = MyDataset(file)
+  tr_set = DataLoader(dataset, 16, shuffle=True)
+  model = MyModel().to(device)
+  criterion = nn.MSELoss()
+  optimizer = torch.optim.SGD(model.parameters(), 0.1)
+
+  for epoch in range(n_epochs):
+    model.train()
+    for x, y in tr_set:
+      optimizer.zero_grad()
+      x, y = x.to(device), t.to(device)
+      pred = model(x)
+      loss = criterion(pred, y)
+      loss.backward()
+      optimizer.step()
+#+end_src
+
+test
+
+#+begin_src python
+  model.eval()
+  total_loss = 0
+  for x,y in dv_set:
+    optimizer.zero_grad()
+    x, y = x.to(device), t.to(device)
+    with torch.no_grad():
+      pred = model(x)
+      loss = criterion(pred, y)
+    total_loss += loss.cpu().item() * len(x)
+    avg_loss = total_loss / len(dv_set.dataset)
+#+end_src
