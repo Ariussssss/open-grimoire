@@ -10,6 +10,6 @@
 - 艺术风格转换实操 https://www.cnblogs.com/massquantity/p/9621393.html
 * 方法
 ** 卷积神经网络 – CNN
-** 生成对抗网络 – GANs
+** 生成对抗网络 – GANs Generative adversarial networks
 ** 循环神经网络 – RNN
 ** 深度强化学习 – RL

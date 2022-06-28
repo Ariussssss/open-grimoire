@@ -107,3 +107,6 @@ https://developer.mozilla.org/en-US/docs/Web/API/PaintWorklet/registerPaint
     registerPaint("curved-line", CurvedLine);
   }
 #+end_src
+** 气泡, 火焰, 波浪特效
+1. 图形是在被设置了 ~filter: contrast() 的画布背景上进行动画的
+2. 进行动画的图形被设置了 ~filter: blur()~ (进行动画的图形的父元素需要是被设置了 filter: contrast() 的画布)
