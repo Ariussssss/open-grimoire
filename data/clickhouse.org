@@ -89,7 +89,44 @@ OLAP 系统以维度模型来存储历史数据, 其主要存储描述性的数�
 - 向量引擎
 - 实时数据更新
 - 索引
-* function
+* MergeTree
+** 概念
+*** graule
+clickhouse 可读的最小颗粒度数据
+
+根据 index_granularity 拆分 graule, 将存储 granule 开始的索引.
+
+建表指定排序, 有利于拆分存储
+
+*** mark
+非索引列的第一个记录存储到 ~{column_name.mrk2}~ , 与主键索引绑定
+
+** 分区 partition
+每个表至少有一个分区, 按文件夹目录分布, 不主动指定默认是 all
+
+分区是一系列 parts 的集合. 
+命名规则 ~{partition}_{min_block_number}_{max_block_number}_{level}_{data_version}~
+
+- partition: 为分区值
+- min_block_number, max_block_number 表示 part 内最小和最大的 block number, 每次写入数据都会生成最少一个 block
+- level 代表经历的 merge 次数,
+- data_version 表示 mutate 操作的 data_version,  每次生成一个新的 part
+
+part 内文件作用:
+- checksums.txt：当前目录下各个文件的大小以及各文件内容的 hash, 用于验证数据是否完整
+- columns.txt：此表中所有列以及每列的类型
+- count.txt：此 part 中数据的行数
+- default_compression_codec.txt：数据文件的默认压缩算法
+- minmax_dt.idx：此表的分区列 dt, 在这个 part 中的最大值和最小值
+- partition.dat：从分区列计算出分区值的方法
+- primary.idx：数据索引, 其实是排序键的那一列每间隔 index_granularity 的值
+  - 如果有 n 列, 那每间隔 index_granularity 就会有 n 个值, 同时也会受 index_granularity_bytes 影响
+  - 稀疏索引, 只记录开始和结束
+- {column_name}.bin：每一列数据的列存文件, 存放了实际每一单独列在各行的数值
+  - 压缩 max_compress_block_size (默认 1MB) 和 min_compress_block_size (默认 64k) 
+- {column_name}.mrk2：每一列数据的列存数据标记
+
+
 * data block
 https://github.com/ClickHouse/ClickHouse/issues/10352
 
@@ -105,24 +142,24 @@ https://github.com/ClickHouse/ClickHouse/issues/10352
 
 #+begin_src sql
   WITH TOPTEN AS (
-      SELECT *,
-          ROW_NUMBER() over (PARTITION BY type) AS RowNo
+    SELECT *,
+           ROW_NUMBER() over (PARTITION BY type) AS RowNo
       FROM (<table>))
   SELECT *
-  EXCEPT  (RowNo) 
-  FROM TOPTEN
-  WHERE RowNo <= 10
+           EXCEPT  (RowNo) 
+    FROM TOPTEN
+   WHERE RowNo <= 10
 #+end_src
 ** regex
 #+begin_src sql
   extract(haystack, pattern)
 
-  replaceRegexpOne(haystack, pattern, replacement)
+    replaceRegexpOne(haystack, pattern, replacement)
 
 
 #+end_src
 ** settings
 #+begin_src sql
   SELECT *
-  FROM system.settings
+    FROM system.settings
 #+end_src

@@ -19,3 +19,9 @@ Interrupt Request
 * DYOR
 DYOR is an acronym for “Do Your Own Research“.
 DYOR is defined as the process of doing your own damn research before putting your money at risk.
+* SE, FT, ET, PT, SOP
+- Simultaneous Engineering
+- Functional Trial
+- Engineering Trial
+- Production Trial
+- Start Of Production
