@@ -5,6 +5,7 @@
 * Referrs
 - https://github.com/collabH/repository/blob/master/bigdata/olap/clickhouse/ClickHouseOverView.md
 - https://clickhouse.tech/docs/zh/
+- https://zhuanlan.zhihu.com/p/453705083
 * Overview
 俄罗斯 Yandex 2016 开源的列式存储数据库 DBMS.
    
