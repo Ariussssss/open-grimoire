@@ -8,6 +8,7 @@
 - https://www.bilibili.com/video/BV1JK4y1D7Wb?p=66
 - https://www.youtube.com/channel/UC2ggjtuuWvxrHHHiaDH1dlQ
 - 艺术风格转换实操 https://www.cnblogs.com/massquantity/p/9621393.html
+- https://github.com/fchollet/deep-learning-with-python-notebooks
 * 方法
 ** 卷积神经网络 – CNN
 ** 生成对抗网络 – GANs Generative adversarial networks

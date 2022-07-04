@@ -26,3 +26,4 @@ https://github.com/Yqnn/svg-path-editor
 * IPA reader http://ipa-reader.xyz/
 * ml training data https://www.kaggle.com/
 * vpn https://10davpn.cn.com/
+* 声音资源 https://soundcloud.com/
