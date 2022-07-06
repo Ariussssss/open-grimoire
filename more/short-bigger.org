@@ -25,3 +25,5 @@ DYOR is defined as the process of doing your own damn research before putting yo
 - Engineering Trial
 - Production Trial
 - Start Of Production
+* FOSS
+Free and open-source software

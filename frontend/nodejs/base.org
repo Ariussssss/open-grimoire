@@ -1,4 +1,4 @@
-#+STARTUP: all
+#+STARTUP: content
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: node 基础
 #+DATE: [2020-11-17 03:03]
@@ -227,3 +227,16 @@ API 网关封装了系统内部架构，为每个客户端提供一个定制的 
 [[https://www.jianshu.com/p/b1d7ca178691][数据库介绍和比较]]
     
      
+
+* import
+
+** 12.10.0
+之后支持内部库关键字
+#+begin_src js
+  import fs from 'node:fs/promises';
+#+end_src
+MIME 类型数据路由
+#+begin_src js
+  import 'data:text/javascript,console.log("hello!");';
+  import _ from 'data:application/json,"world!"';
+#+end_src
