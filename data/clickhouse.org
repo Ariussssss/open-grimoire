@@ -29,9 +29,9 @@
 常见的列式数据库有： Vertica、 Paraccel (Actian Matrix, Amazon Redshift)、 Sybase IQ、 Exasol、
 Infobright、 InfiniDB、 MonetDB (VectorWise,  Actian Vector)、
 LucidDB、 SAP HANA、 Google Dremel、 Google PowerDrill、 Druid、 kdb+.
-** OLAP
+** OLAP On-Line Analytical Processing.
 
-联机分析处理 OLAP On-Line Analytical Processing.
+联机分析处理 OLAP 
 其特点是查询频率较 OLTP 系统更低, 但通常会涉及到非常复杂的聚合计算.
 OLAP 系统以维度模型来存储历史数据, 其主要存储描述性的数据并且在结构上都是同质的.
 
