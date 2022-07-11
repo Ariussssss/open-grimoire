@@ -3,6 +3,14 @@
 #+TITLE:常用工具变更历史
 #+DATE: [2021-05-18 11:03]
 * Refers
+* ✍🏼 font
+** comic-shanns
+https://github.com/shannpersand/comic-shanns
+
+#+DOWNLOADED: screenshot @ 2022-07-11 11:48:23
+[[file:images/20220711-114823_screenshot.png]]
+** nerd
+https://github.com/ryanoasis/nerd-fonts
 * 📦 包
 ** 🦋 ink
 代替 ~console.log~ + ~chalk~ 实现基于 ~react~ 的命令行 UI. 
