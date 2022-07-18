@@ -26,5 +26,7 @@ https://github.com/Yqnn/svg-path-editor
 * IPA reader http://ipa-reader.xyz/
 * ml training data https://www.kaggle.com/
 * vpn https://10davpn.cn.com/
+** https://www.webhostingsecretrevealed.net/zh-CN/blog/web-tools/best-vpn/
+** v2board
 * 声音资源 https://soundcloud.com/
 * python ml sharing https://github.com/fly51fly/aicoco/issues/3
