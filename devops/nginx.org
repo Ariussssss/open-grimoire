@@ -143,7 +143,7 @@
  本地转发
  #+begin_src conf
    location ~ ^/(api|track) {
-       proxy_pass  http://real.xbrain:8080;
+       proxy_pass  http://real:8080;
    }
    location ~ ^/(?!(api|track)) {
        proxy_pass  http://localhost:3000;
