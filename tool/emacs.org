@@ -251,6 +251,17 @@ Refers:
   make -j4 && sudo make install
 #+end_src
 
+* ag
+#+begin_src bash
+  brew install the_silver_searcher
+#+end_src
+
+counsel-ag
+
+- ~C-c C-o~ ivy-occur
+- ~f~ ivy-occur-press
+- ~RET~ ivy-occur-press-and-switch
+
 * ssh
 find-file
 #+begin_src bash

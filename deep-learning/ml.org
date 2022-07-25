@@ -12,6 +12,9 @@
 - https://github.com/axetroy/ml-KNN-flower
 - https://github.com/nndl/exercise
 - https://github.com/dragen1860/Deep-Learning-with-TensorFlow-book
+- https://github.com/fchollet/deep-learning-with-python-notebooks
+- https://github.com/cbamls/AI_Tutorial
+- https://github.com/KichangKim/DeepDanbooru
 * nlp
 https://github.com/fighting41love/funNLP
 * Intro
