@@ -48,6 +48,8 @@ client, server 还不健全.
 Go cli.
 *** medis
 redis gui
+*** SwitchAudioSource
+控制 device
 *** rome
 js cli
 https://rome.tools/blog/2021/09/21/rome-will-be-rewritten-in-rust

@@ -3,4 +3,5 @@
 #+TITLE: mysql
 #+DATE: [2021-12-01 11:45]
 * Refers
+- https://github.com/dunwu/db-tutorial
 * cheatsheets
