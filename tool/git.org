@@ -60,6 +60,10 @@
     https://github.com/ElaWorkshop/awesome-cn-cafe/blob/master/shenzhen.geojson
     支持 map 信息.
 
+** current branch name as default
+#+begin_src bash
+   git config --global push.default current
+#+end_src
 * cli
    https://cli.github.com/
 
