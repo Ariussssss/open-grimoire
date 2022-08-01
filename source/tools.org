@@ -30,3 +30,4 @@ https://github.com/Yqnn/svg-path-editor
 ** v2board
 * 声音资源 https://soundcloud.com/
 * python ml sharing https://github.com/fly51fly/aicoco/issues/3
+* qrcode https://www.nayuki.io/page/creating-a-qr-code-step-by-step
