@@ -31,3 +31,4 @@ https://github.com/Yqnn/svg-path-editor
 * 声音资源 https://soundcloud.com/
 * python ml sharing https://github.com/fly51fly/aicoco/issues/3
 * qrcode https://www.nayuki.io/page/creating-a-qr-code-step-by-step
+* math problem https://oeis.org/
