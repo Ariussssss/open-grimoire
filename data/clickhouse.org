@@ -127,6 +127,12 @@ part 内文件作用:
   - 压缩 max_compress_block_size (默认 1MB) 和 min_compress_block_size (默认 64k) 
 - {column_name}.mrk2：每一列数据的列存数据标记
 
+* mysql
+
+** MaterializedMySQL
+
+创建一个拷贝数据库
+
 
 * data block
 https://github.com/ClickHouse/ClickHouse/issues/10352

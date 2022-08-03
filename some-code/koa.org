@@ -3,86 +3,86 @@
 #+TITLE: koa
 #+DATE: [2021-06-10 08:32]
 * Refers
-   - https://juejin.cn/post/6882309889478098951
+- https://juejin.cn/post/6882309889478098951
 * 与 Express 区别
-   - 异步传递处理中间件, Express 使用回调一直 ~next~
-   - Koa 必须走完所有中间件, Express 只要遇到调用 ~res.send~
+- 异步传递处理中间件, Express 使用回调一直 ~next~
+- Koa 必须走完所有中间件, Express 只要遇到调用 ~res.send~
 * Steps
 ** app.use
-    注册中间件
-    #+begin_src js
-      this.middleware.push(fn);
-    #+end_src
+注册中间件
+#+begin_src js
+  this.middleware.push(fn);
+#+end_src
 ** app.listen
-    监听端口和回调
-    #+begin_src js
-      listen(...args) {
-	debug('listen');
-	const server = http.createServer(this.callback());
-	return server.listen(...args);
-      }
-    #+end_src
+监听端口和回调
+#+begin_src js
+  listen(...args) {
+    debug('listen');
+    const server = http.createServer(this.callback());
+    return server.listen(...args);
+  }
+#+end_src
 
-   1. 闯将上下文 ~ctx~
-   2. 合并中间件
-   3. 处理请求
-    #+begin_src js
-      callback() {
-	// 包装所有的中间件，返回一个可执行的函数。koa-compose 实现了洋葱圈模型
-	const fn = compose(this.middleware);
-	if (!this.listenerCount('error')) this.on('error', this.onerror);
-	const handleRequest = (req, res) => {
-	  // req res 是 node 原生请求参数
-	  const ctx = this.createContext(req, res);
-	  // 将创建的 ctx 返回，传给所有中间件，作为整个请求的上下文
-	  return this.handleRequest(ctx, fn);
-	};
-	return handleRequest;
-      }
-    #+end_src
+1. 闯将上下文 ~ctx~
+2. 合并中间件
+3. 处理请求
+   #+begin_src js
+     callback() {
+       // 包装所有的中间件，返回一个可执行的函数。koa-compose 实现了洋葱圈模型
+       const fn = compose(this.middleware);
+       if (!this.listenerCount('error')) this.on('error', this.onerror);
+       const handleRequest = (req, res) => {
+         // req res 是 node 原生请求参数
+         const ctx = this.createContext(req, res);
+         // 将创建的 ctx 返回，传给所有中间件，作为整个请求的上下文
+         return this.handleRequest(ctx, fn);
+       };
+       return handleRequest;
+     }
+   #+end_src
 ** compose 洋葱模型
-    闭包记录中间件执行进度索引, 异步执行.
+闭包记录中间件执行进度索引, 异步执行.
 
-    因为有 ~next~ 的存在 指向下个 中间件, FILO
-    #+begin_src js
-      function compose (middleware) {
-	return function (context, next) {
-	  // 上一次被执行的中间件
-	  let index = -1
-	  return dispatch(0)
-	  function dispatch (i /*表示预期想要执行哪个中间件*/) {
-	    if (i <= index) return Promise.reject(new Error('next() called multiple times'))
-	    index = i
-	    let fn = middleware[i]
-	    if (i === middleware.length) fn = next
-	    // 没有fn的话，直接返回一个已经reolved的Promise对象
-	    if (!fn) return Promise.resolve()
-	    try {
-	      /*
-	      原代码是一行，为了方便理解拆成了三行
-	      const next = dispatch.bind(null, i + 1);
-	      const fnResult = fn(context, next);
-	      return Promise.resolve(fnResult);
-	      ,*/
-	      return Promise.resolve(fn(context, dispatch.bind(null, i + 1)));
-	    } catch (err) {
-	      return Promise.reject(err)
-	    }
-	  }
-	}
+因为有 ~next~ 的存在 指向下个 中间件, FILO
+#+begin_src js
+  function compose (middleware) {
+    return function (context, next) {
+      // 上一次被执行的中间件
+      let index = -1
+      return dispatch(0)
+      function dispatch (i /*表示预期想要执行哪个中间件*/) {
+        if (i <= index) return Promise.reject(new Error('next() called multiple times'))
+        index = i
+        let fn = middleware[i]
+        if (i === middleware.length) fn = next
+        // 没有fn的话，直接返回一个已经reolved的Promise对象
+        if (!fn) return Promise.resolve()
+        try {
+          /*
+            原代码是一行，为了方便理解拆成了三行
+            const next = dispatch.bind(null, i + 1);
+            const fnResult = fn(context, next);
+            return Promise.resolve(fnResult);
+          ,*/
+          return Promise.resolve(fn(context, dispatch.bind(null, i + 1)));
+        } catch (err) {
+          return Promise.reject(err)
+        }
       }
+    }
+  }
 
-    #+end_src
+#+end_src
 ** handleRequest
-    初始化报错信息, 处理执行结果
-    #+begin_src js
-      handleRequest(ctx, fnMiddleware) {
-	const res = ctx.res;
-	res.statusCode = 404;
-	const onerror = err => ctx.onerror(err);
-	const handleResponse = () => respond(ctx);
-	onFinished(res, onerror);
-	// 执行 compose 后的中间件函数，最后执行 respond
-	return fnMiddleware(ctx).then(handleResponse).catch(onerror);
-      }
-    #+end_src
+初始化报错信息, 处理执行结果
+#+begin_src js
+  handleRequest(ctx, fnMiddleware) {
+    const res = ctx.res;
+    res.statusCode = 404;
+    const onerror = err => ctx.onerror(err);
+    const handleResponse = () => respond(ctx);
+    onFinished(res, onerror);
+    // 执行 compose 后的中间件函数，最后执行 respond
+    return fnMiddleware(ctx).then(handleResponse).catch(onerror);
+  }
+#+end_src
