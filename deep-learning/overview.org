@@ -10,10 +10,17 @@
 - 艺术风格转换实操 https://www.cnblogs.com/massquantity/p/9621393.html
 - https://github.com/fchollet/deep-learning-with-python-notebooks
 * methods
-** 卷积神经网络 – CNN
-** 生成对抗网络 – GANs Generative adversarial networks
-** 循环神经网络 – RNN
+** DNNs Deep Neural Networks
+FFNNs Feed Forward Networks
+
+layer 往前传递, 不会回归. 
+** CNNs Convolutional Neural Network 卷积神经网络
+卷积和池化, 多维数据卷积操作
+** RNNs Recurrent Neural Network 循环神经网络
+依赖上下文, 区域记忆
+** GANs Generative adversarial networks 生成对抗网络
 ** 深度强化学习 – RL
+** LSTM Long Short Term Memory
 * domain
 ** NLP Natural language processing 自然语言处理
 *** MNL The Multi-Genre Natural Language Inference Corpus 自然语言推理

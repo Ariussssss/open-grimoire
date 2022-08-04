@@ -1,4 +1,4 @@
-#+STARTUP: all
+ #+STARTUP: all
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: koa
 #+DATE: [2021-06-10 08:32]
