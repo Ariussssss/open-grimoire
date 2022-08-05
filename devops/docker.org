@@ -47,5 +47,12 @@ https://pm2.keymetrics.io/docs/usage/docker-pm2-nodejs/
 #+begin_src bash
   docker build . -f Dockerfile.server
 #+end_src
+** volumne
+如本地日期
+#+begin_src bash
+  docker run -it -v /etc/localtime:/etc/localtime <image>
+#+end_src
+** network host
+下载或者运行时需要外网
 * awesome-conmpose
 https://github.com/docker/awesome-compose
