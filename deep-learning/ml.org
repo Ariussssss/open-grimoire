@@ -175,3 +175,5 @@ Bad reputation because the rumor history.
 
 *** Overfitting
 Better on training data, bad on unseen data
+
+* backpropagation

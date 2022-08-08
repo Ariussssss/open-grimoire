@@ -220,5 +220,8 @@ attach 到 console,  ~Ctrl-P Ctrl-Q~ 不好用(环境 tmux + linux)
 #+begin_src bash
    kubectl exec --stdin --tty -n namespace <pod> -- /bin/bash
 #+end_src
-
-
+* scale
+关掉和启动多 pod
+#+begin_src bash
+  kubectl scale --replicas=0 deployment/<your-deployment>
+#+end_src
