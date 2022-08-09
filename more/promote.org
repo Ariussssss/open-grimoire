@@ -1,4 +1,7 @@
-#+STARTUP: content
-* promote
-** Refers
-   - https://www.jianshu.com/p/030e10564810
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: promote
+#+DATE: [2022-08-09 17:06]
+* Refers
+* content farm 内容农场
+是指为了牟取广告费等商业利益或出于控制舆论, 带风向等特殊目的, 快速生产大量网络文章来吸引流量的网站

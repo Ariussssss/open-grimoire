@@ -1,0 +1,19 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: advanced-mathematics
+#+DATE: [2022-08-09 09:23]
+* Refers
+* Calculus 微积分
+Like relation between two function, distance and speed.
+
+Find func1 from func2, two curves same infomation.
+
+slope in axis
+
+pronounce dy dx: $dx/dy$
+
+delta means changes $\Delta$
+
+
+
+
