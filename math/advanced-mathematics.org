@@ -4,6 +4,8 @@
 #+DATE: [2022-08-09 09:23]
 * Refers
 * pre
+** Fraction
+A fraction having an integer as a numerator and an integer as a denominator. （分数：一个有整数分子和整数分母的分数。）
 ** func type
 - Cubic 三次
 - Quadratic 二次
@@ -50,12 +52,21 @@ $y = e^x$ $\frac{dy}{dx} = e^x$
 Location the maximum and the minimum, tells goes up or down.
 
 Key value we should look for at the first time we meet the graph.
+
+Maybe local maximum.
+
+** chain rule
+$\frac{dy}{dx}=\frac{dy}{du} \frac{du}{dx}$
 ** the derivative of derivative 二阶导数
 *** purpose
 Tells the bending (弯曲度和方向) of the graph.
 
 Bending up, bending down
 
-Inflection point(拐点)
+Inflection point(拐点), $y'' = 0$
 
 Acceleration to speed $\frac{d^2f}{dt^2}$
+
+Set derivative to zero, find the answer
+** exponential 指数函数
+
