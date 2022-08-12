@@ -4,8 +4,12 @@
 #+DATE: [2022-08-09 09:23]
 * Refers
 * pre
+** multiply multiplication 乘
 ** Fraction
 A fraction having an integer as a numerator and an integer as a denominator. （分数：一个有整数分子和整数分母的分数。）
+** Factorial 阶乘
+$n! = nfactorial  = (n)(n...1)(1)$
+** Binomial Theorem 二项式定理
 ** func type
 - Cubic 三次
 - Quadratic 二次
@@ -13,6 +17,8 @@ A fraction having an integer as a numerator and an integer as a denominator. （
 - Constant 常数
 ** exponent 自然常数 e
 E, exponent, 表示以 10 为底的指数, 自然对数的底 $\exp$
+
+$e^x=y(x)=1+x+\frac{1}{2}x^2...+\frac{x^n}{n(n-1)....1}}$
 
 $e^{\ln x}=x$
 
