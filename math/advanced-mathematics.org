@@ -15,16 +15,7 @@ $n! = nfactorial  = (n)(n...1)(1)$
 - Quadratic 二次
 - Linear 一次, 线性
 - Constant 常数
-** exponent 自然常数 e
-E, exponent, 表示以 10 为底的指数, 自然对数的底 $\exp$
 
-$e^x=y(x)=1+x+\frac{1}{2}x^2...+\frac{x^n}{n(n-1)....1}}$
-
-$e^{\ln x}=x$
-
-5 个基本常数, $e^{\pi i} + 1 = 0$
-
-i 为虚数单位
 * Trigonometric functions 三角函数
 
 $\sin\alpha = \frac{2\tan{\frac{\alpha}{2}}} {1 + \tan^2{\frac{\alpha}{2}} }$
@@ -76,3 +67,22 @@ Acceleration to speed $\frac{d^2f}{dt^2}$
 Set derivative to zero, find the answer
 ** exponential 指数函数
 
+自然常数 e Euler
+
+E, exponent, 表示以 10 为底的指数, 自然对数的底 $\exp$
+
+E xponential series 指数级数: 第二重要的无穷级数
+
+$e^x=y(x)=1+x+\frac{1}{2}x^2...+\frac{x^n}{n(n-1)....1}}$
+
+geometric series 几何指数
+
+$y(x)=1+x+x^2...+x^n$
+
+$e^{\ln x}=x$
+
+5 个基本常数, $e^{\pi i} + 1 = 0$
+
+i 为虚数单位
+** integral
+$$
