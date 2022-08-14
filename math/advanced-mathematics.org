@@ -4,7 +4,22 @@
 #+DATE: [2022-08-09 09:23]
 * Refers
 * pre
-** multiply multiplication 乘
+** base
+- multiply multiplication 乘
+- minus 减
+- plus
+- divide
+- negative 负
+- tan sin/cos
+- sine
+- cosine
+  - oscillation 振动
+  - growing motion, opponent
+- radius 弧度
+  - circumference of angle when 1 as radius 半径
+- angles 角度
+** algebra 代数
+引用字母
 ** Fraction
 A fraction having an integer as a numerator and an integer as a denominator. （分数：一个有整数分子和整数分母的分数。）
 ** Factorial 阶乘
@@ -31,6 +46,8 @@ Like relation between two function, distance and speed.
 Find func1 from func2, two curves same infomation.
 
 slope in axis
+
+D for delta
 
 pronounce dy dx: $dx/dy$,  can be wrote as y'
 
@@ -84,5 +101,11 @@ $e^{\ln x}=x$
 5 个基本常数, $e^{\pi i} + 1 = 0$
 
 i 为虚数单位
-** integral
-$$
+** integral 积分
+
+导数的原函数 $y(x)=\int s(x)dx$
+
+integral $\int$, $sum(\Delta y)$ when delta x goes to 0 (limit for caculus)
+
+distance is the integral of speed
+** 
