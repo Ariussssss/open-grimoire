@@ -168,6 +168,7 @@ bool, char, int, float, double, void.
    2. 如果无符号的不小于带符号的位宽, 则带符号的转换为无符号数对应类型.
 
 成员访问 ~ptr->mem~ 等价于 ~(*ptr).mem~ 
+*** operator as function, like <<
 ** 对象重写运算
 声明返回类型, 定义运算方式. 
 #+begin_src cpp
@@ -258,7 +259,7 @@ header file 用来包含这些描述信息, 被引用的时候只需要吧 heade
   - ~#ifndef~ 相反, 如果未定义, 避免重复定义
 - ~endif~ 结束
 - ~#define~ 宏替换
-- ~#include~ 插入对应的源码
+- ~#include~ 插入对应的源码, 直接复制粘贴
 
 标记对应行数文件, 为之后的错误信息
 
@@ -272,6 +273,15 @@ header file 用来包含这些描述信息, 被引用的时候只需要吧 heade
 可分开编译打包, 生成静态库, 给其他包调用.
 
 编译和汇编最终生成目标文件 object file, 也就是机械码
+
+只有 CPP 会被编译.
+
+声明和描述分开, 只要有声明(函数), 编译器会相信你知道你在干嘛这个东西真的存在
+#+begin_src cpp
+  void log(const char* message);
+#+end_src
+
+
 ** 链接 Linking ~ld~
 链接器将编译器产物的引用替换成对应的 object file 链接起来
 ** 产物

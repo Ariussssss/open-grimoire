@@ -90,7 +90,7 @@ E, exponent, 表示以 10 为底的指数, 自然对数的底 $\exp$
 
 E xponential series 指数级数: 第二重要的无穷级数
 
-$e^x=y(x)=1+x+\frac{1}{2}x^2...+\frac{x^n}{n(n-1)....1}}$
+$e^x=y(x)=1+x+\frac{1}{2}x^2...+\frac{x^n}{n(n-1)...1}$
 
 geometric series 几何指数
 
@@ -108,4 +108,14 @@ i 为虚数单位
 integral $\int$, $sum(\Delta y)$ when delta x goes to 0 (limit for caculus)
 
 distance is the integral of speed
-** 
+** limit
+approach A,  close to A
+
+Danger cases:
+1. $\infty - \infty$
+2. $0 * \infty$
+3. $\frac{0}{0}$
+   1. $\frac{\infty}{\infty}$
+4. ${a_n}^{b_n}$ unstable
+   - $(1+\frac{1}{n})^n=e$ 
+   - $(1+\frac{1}{n^2})^n=1$ 

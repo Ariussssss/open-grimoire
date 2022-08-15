@@ -6,7 +6,3 @@
   - https://pabloinsente.github.io/intro-linear-algebra
   - https://hefferon.net/linearalgebra/
 * vector 向量
-
-#+begin_src latex
-
-#+end_src
