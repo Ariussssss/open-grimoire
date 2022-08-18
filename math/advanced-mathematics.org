@@ -119,3 +119,22 @@ Danger cases:
 4. ${a_n}^{b_n}$ unstable
    - $(1+\frac{1}{n})^n=e$ 
    - $(1+\frac{1}{n^2})^n=1$ 
+*** L'Hospital's Rule 洛必达法则
+for $\frac{0}{0}$ and $\frac{\infty}{\infty}$
+
+$\lim_{x \to a}\frac{f(x)}{g(x)} = \lim_{x \to a}\frac{f'(x)}{g'(x)}$
+
+Only if the slope of secant to origin and origin line equals, $u(x) = u'(x)$
+
+Slops equals When overlap or parallel.
+
+The limit secant (割线) is tangent (切线)
+
+- $\frac{0}{0}$, secant and origin line overlap
+- $\frac{\infty}{\infty}$, secant and origin line parallel
+
+*** continuous 连续性
+For continuous func, for any $\epsilon$, $\delta$ exists.
+
+$|x - a| < \delta$, $|f(x) - f(a)| < \epsilon$
+
