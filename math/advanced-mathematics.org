@@ -122,7 +122,7 @@ Danger cases:
 *** L'Hospital's Rule 洛必达法则
 for $\frac{0}{0}$ and $\frac{\infty}{\infty}$
 
-$\lim_{x \to a}\frac{f(x)}{g(x)} = \lim_{x \to a}\frac{f'(x)}{g'(x)}$
+$\lim_{x\to{a}}\frac{f(x)}{g(x)}=\lim_{x\to{a}}\frac{f'(x)}{g'(x)}$
 
 Only if the slope of secant to origin and origin line equals, $u(x) = u'(x)$
 
