@@ -138,3 +138,5 @@ For continuous func, for any $\epsilon$, $\delta$ exists.
 
 $|x - a| < \delta$, $|f(x) - f(a)| < \epsilon$
 
+** inverse function
+$x=f^{-1}(y)$
