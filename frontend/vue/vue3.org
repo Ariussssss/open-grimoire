@@ -6,6 +6,7 @@
 - https://github.com/cuixiaorui/mini-veu
 - https://github.com/HcySunYang/vue-design
 - https://codepen.io/collection/DkxpbE
+- https://vue3js.cn/interview/
 * setup
 * svg
 #+begin_src typescript
