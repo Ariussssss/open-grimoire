@@ -140,3 +140,17 @@ $|x - a| < \delta$, $|f(x) - f(a)| < \epsilon$
 
 ** inverse function
 $x=f^{-1}(y)$
+
+*** proof
+$y=lnx$
+
+$\frac{d}{dx}[e^y]=\frac{dx}{dx}$
+
+$\frac{d(e^y)}{dy}\frac{dy}{dx}=1$
+
+$e^y•\frac{dy}{dx}=1$
+
+$e^{lnx}\frac{dy}}{dx}=1$
+
+$\frac{dy}{dx}=\frac{1}{x}$
+
