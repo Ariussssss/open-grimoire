@@ -139,9 +139,8 @@ For continuous func, for any $\epsilon$, $\delta$ exists.
 $|x - a| < \delta$, $|f(x) - f(a)| < \epsilon$
 
 ** inverse function
-$x=f^{-1}(y)$
 
-*** proof
+*** $x=f^{-1}(y)$ derivative
 $y=lnx$
 
 $\frac{d}{dx}[e^y]=\frac{dx}{dx}$
@@ -154,3 +153,17 @@ $e^{lnx}\frac{dy}}{dx}=1$
 
 $\frac{dy}{dx}=\frac{1}{x}$
 
+*** $y=\sin^{-1}{x}$ derivative
+$y=\sinx$
+
+$y=\sin(sin^{-1}y)$
+
+$1=\frac{d}{dy}(\sin(sin^{-1}y))$
+
+$1=\frac{d(sin(sin^{-1}))}{d(sin^{-1})}\frac{d(sin^{-1})}{dy}$
+
+$1=\cos{sin^{-1}y}\frac{d(sin^{-1})}{dy}$
+
+$\cos\theta=\sqrt{1 - y^2}$
+
+$\frac{1}{\sqrt{1 - y^2}}=\frac{d(sin^{-1})}{dy}$
