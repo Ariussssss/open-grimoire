@@ -167,3 +167,9 @@ $1=\cos{sin^{-1}y}\frac{d(sin^{-1})}{dy}$
 $\cos\theta=\sqrt{1 - y^2}$
 
 $\frac{1}{\sqrt{1 - y^2}}=\frac{d(sin^{-1})}{dy}$
+
+** Log Graph
+Another way to show growth without derivative
+
+** Linear Approximation, Newton method
+
