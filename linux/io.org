@@ -1,6 +1,6 @@
 #+STARTUP: all
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
-#+TITLE: net
+#+TITLE: io
 #+DATE: [2022-04-28 14:55]
 * 测试网络
 
@@ -27,3 +27,7 @@ client
 #+begin_src bash
   networksetup
 #+end_src
+* bandwidth
+** Tx/Rx
+Tx/Rx rate – displays the transmit/receive data rates (in Mbps).
+

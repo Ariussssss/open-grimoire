@@ -172,4 +172,14 @@ $\frac{1}{\sqrt{1 - y^2}}=\frac{d(sin^{-1})}{dy}$
 Another way to show growth without derivative
 
 ** Linear Approximation, Newton method
+approximate f(x)
 
+$f(x)\approx f(a) + (x+a)f'(a)$
+
+approximate x
+
+$x - a \approx - \frac{F(a)}{F'(a)}$
+
+repeat to get closer
+
+** Power Senes/Euler's Great Formula
