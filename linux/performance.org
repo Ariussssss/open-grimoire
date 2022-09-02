@@ -1,6 +1,6 @@
 #+STARTUP: all
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
-#+TITLE: io
+#+TITLE: performance
 #+DATE: [2022-04-28 14:55]
 * 测试网络
 
@@ -30,4 +30,11 @@ client
 * bandwidth
 ** Tx/Rx
 Tx/Rx rate – displays the transmit/receive data rates (in Mbps).
-
+* top
+** cpu
+*** frame
+*** idle
+CPU 
+*** load
+与 CPU 关系:
+- load高, cpu低:说明CPU 使用率低, 排队同学多

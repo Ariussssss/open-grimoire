@@ -20,7 +20,7 @@
   - 不带 u 为特定 cpu 的 worker
 - 然后是 work_pool ID
 
-*  CMWQ Concurrency Managed Workqueue
+* CMWQ Concurrency Managed Workqueue
 最新的 workerqueue 实现.
 
 概念:
@@ -34,4 +34,12 @@
 
 #+DOWNLOADED: screenshot @ 2022-04-13 18:53:31
 [[file:images/20220413-185331_screenshot.png]]
+
+* coredump
+core dump 是程序在被操作系统杀掉以后, 保留的一份内存快照.
+
+#+begin_src bash
+  >:~$ sysctl kernel.core_pattern
+  kernel.core_pattern = |/usr/share/apport/apport %p %s %c %d %P %E
+#+end_src
 
