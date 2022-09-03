@@ -25,3 +25,31 @@
 8. 极限激情飞车 https://github.com/XINCGer/FURIOUS_MOTORSPORT
 9. 太空大战 https://github.com/XINCGer/Unity3DTraining/tree/master/SpaceShooter
 10. 天天萌泡泡 https://github.com/XINCGer/BubbleShooter
+* usage
+** 2D, 3D
+Not that different, almost all about 3D game and some limits.
+** tool
+*** flythough mode
+Hover right click, wasd, qe
+** game object
+Every thing is a game object.
+
+More like a container and transform.
+
+Quick create: ~Ctrl-shift-N~
+*** Components
+**** Mesh
+Visible.
+
+Contain vertex information, geo of model.
+**** Collider
+Physic interaction
+** Metrical
+Container of shader and textures.
+** Shader
+*** Albedo
+Work with Unity's PBR (physically based rendering) system.
+*** Metallic
+*** Smoothness
+Look more or less shiny
+*** Normal

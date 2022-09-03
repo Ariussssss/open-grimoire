@@ -1,0 +1,18 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: computer
+#+DATE: [2022-09-03 18:01]
+* Refers
+* 基础
+- CPU
+- 内存
+- IO 设备
+- 总线
+* 芯片
+Intel 公司共同创始人 Gordon Moore
+
+Moore 定律: 芯片中晶体管的数量, 每 18 个月翻一番
+* shortcut
+** BIOS Basic Input Output System
+** PCI Peripheral  Component Interconnect
+** ISA Industry Standard Architecture
