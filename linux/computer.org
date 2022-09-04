@@ -3,6 +3,7 @@
 #+TITLE: computer
 #+DATE: [2022-09-03 18:01]
 * Refers
+- 现代操作系统
 * 基础
 - CPU
 - 内存
@@ -12,7 +13,33 @@
 Intel 公司共同创始人 Gordon Moore
 
 Moore 定律: 芯片中晶体管的数量, 每 18 个月翻一番
+* unit
+- 10^-3: milli
+- 10^-6: micro
+- 10^-9: nano
+- 10^-12: pico
+- 10^-15: femto
+- 10^-18: atto
+- 10^-21: zepto
+- 10^-24: yocto
+
+- 10^3: Kilo
+- 10^6: Mega
+- 10^9: Giga
+- 10^12: Tera
+- 10^15: Peta
+- 10^18: Exa
+- 10^21: Zetta
+- 10^24: Yotta
+
+- 1Kbps 指 1000 个 位 (Bit), 8 字节
+
 * shortcut
 ** BIOS Basic Input Output System
 ** PCI Peripheral  Component Interconnect
 ** ISA Industry Standard Architecture
+** POSIX The Portable Operating System Interface
+ A set of standard operating system interfaces based on the Unix operating system.
+* process
+** daemon 守护进程
+等待结果, 收到结果唤醒
