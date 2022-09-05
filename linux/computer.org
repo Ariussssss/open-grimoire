@@ -13,7 +13,7 @@
 Intel 公司共同创始人 Gordon Moore
 
 Moore 定律: 芯片中晶体管的数量, 每 18 个月翻一番
-* unit
+* Unit
 - 10^-3: milli
 - 10^-6: micro
 - 10^-9: nano
@@ -34,12 +34,46 @@ Moore 定律: 芯片中晶体管的数量, 每 18 个月翻一番
 
 - 1Kbps 指 1000 个 位 (Bit), 8 字节
 
-* shortcut
+* Shortcut
 ** BIOS Basic Input Output System
 ** PCI Peripheral  Component Interconnect
 ** ISA Industry Standard Architecture
 ** POSIX The Portable Operating System Interface
  A set of standard operating system interfaces based on the Unix operating system.
-* process
-** daemon 守护进程
+* Process and Thread
+** Daemon 守护进程
 等待结果, 收到结果唤醒
+** Process
+避免阻塞, 规划调用资源和共享存储指针地址
+
+私有部分:
+- 地址空间
+- 全局变量
+- 打开文件
+- 紫禁城
+- 报警, 信号, 信号处理
+- 账户信息
+** Thread
+避免阻塞, 规划 CPU 运算分配, 区分执行线程和 IO 线程协同.
+
+具有部分进程的线程, 又称更轻量级进程(lightweight process).
+其实设计和进程相似, 每个线程有自己的内存空间, 堆栈.
+CPU 快速切换, 在运算不密集的多线程中, 模拟达到并行的效果. 
+
+部分硬件支持多线程, 纳秒级线程切换
+
+私有部分:
+- 程序计数器
+- 寄存器
+- 堆栈
+- 状态
+** Pthread POSIX Thread
+IEEE 在 IEEE 标准 1003.1c 中定义了线程的标准
+
+主要接口
+- create
+- exit
+- join 等待一个线程
+- yield 释放 CPU
+- attr_init 创建初始化属性
+- attr_destroy

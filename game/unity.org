@@ -30,6 +30,8 @@
 Not that different, almost all about 3D game and some limits.
 ** tool
 *** flythough mode
+Press ~2~, switch between 2D to 3D.
+
 Hover right click, wasd, qe
 ** game object
 Every thing is a game object.

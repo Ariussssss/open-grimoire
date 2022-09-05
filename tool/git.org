@@ -3,75 +3,80 @@
 #+TITLE: git
 #+DATE: [2021-01-11 21:43]
 * ssh
-   生成.
-   #+begin_src bash
-     ssh-keygen -t ed25519 -f ~/.ssh/key_name -C "name@example.com"
-   #+end_src
+生成.
+#+begin_src bash
+  ssh-keygen -t ed25519 -f ~/.ssh/key_name -C "name@example.com"
+#+end_src
    
-   管理多个 ssh key.
-   #+begin_src conf
-     Host github.com
-	  Hostname github.com
-	  User git
-	  AddKeysToAgent yes
-	  UseKeychain yes
-	  IdentityFile ~/.ssh/key_name
-   #+end_src
+管理多个 ssh key.
+#+begin_src conf
+  Host github.com
+  Hostname github.com
+  User git
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/key_name
+#+end_src
 * 多身份
-   个人使用目录管理身份, 内部在 ~\~/code~ , 外部在 ~\~/packages~ .
-   #+begin_src conf
-     # ~/.gitconfig
-     [user]
-             email = some@company.com
-             name = realname
+个人使用目录管理身份, 内部在 ~\~/code~ , 外部在 ~\~/packages~ .
+#+begin_src conf
+  # ~/.gitconfig
+  [user]
+  email = some@company.com
+  name = realname
 
-     [includeIf "gitdir:~/Packages/"]
-             path = ~/.config/git/.gitconfig_personal
-   #+end_src
+  [includeIf "gitdir:~/Packages/"]
+  path = ~/.config/git/.gitconfig_personal
+#+end_src
 
-   然后 ~.gitconfig_personal~
-   #+begin_src conf
-     [user]
-	     email = ariussssss37@gmail.com
-	     name = arius
-   #+end_src
+然后 ~.gitconfig_personal~
+#+begin_src conf
+  [user]
+  email = ariussssss37@gmail.com
+  name = arius
+#+end_src
 * Tips
 
 ** get commit msg
-    Cli 获取单行 ~commit~
-    #+begin_src shell
-      git log -1 HEAD --pretty=format:%s
-    #+end_src
+Cli 获取单行 ~commit~
+#+begin_src shell
+  git log -1 HEAD --pretty=format:%s
+#+end_src
 
 ** Star history
-    利用 ~https://starchart.cc/<namespace>/<repo_name>~ 可以展示对应的图片
-    使用方式如下
+利用 ~https://starchart.cc/<namespace>/<repo_name>~ 可以展示对应的图片
+使用方式如下
 
-    #+begin_src markdown
-      ## Stargazers over time
+#+begin_src markdown
+  ## Stargazers over time
 
-      [![Stargazers over time](https://starchart.cc/halfrost/Halfrost-Field.svg)](https://starchart.cc/halfrost/Halfrost-Field)
-    #+end_src
+  [![Stargazers over time](https://starchart.cc/halfrost/Halfrost-Field.svg)](https://starchart.cc/halfrost/Halfrost-Field)
+#+end_src
+
+查看谁 star 了
+
+~https://github.com/<namespace>/<repo_name>/stargazers~
 
 ** 行为记录
-    ~https://gitstalk.netlify.app/<user_name>~
+~https://gitstalk.netlify.app/<user_name>~
 
 ** geojson
-    https://github.com/ElaWorkshop/awesome-cn-cafe/blob/master/shenzhen.geojson
-    支持 map 信息.
+https://github.com/ElaWorkshop/awesome-cn-cafe/blob/master/shenzhen.geojson
+支持 map 信息.
 
 ** current branch name as default
 #+begin_src bash
-   git config --global push.default current
+  git config --global push.default current
 #+end_src
 * cli
-   https://cli.github.com/
+https://cli.github.com/
 
 * comment
-   基于 issue 的评论区  https://utteranc.es/
+基于 issue 的评论区  https://utteranc.es/
    
 * COMMENT 加速
 https://gitclone.com/
 #+begin_src bash
   git config --global url."https://gitclone.com/".insteadOf https://
 #+end_src
+
