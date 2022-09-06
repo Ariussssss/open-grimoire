@@ -60,3 +60,7 @@
   ClientAliveCountMax 3
 #+end_src
 
+* sshfs 挂在远程目录
+#+begin_src bash
+  sshfs work@192.168.0.1:/home/work/logs /home/work/logs
+#+end_src

@@ -2,6 +2,8 @@
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: performance
 #+DATE: [2022-04-28 14:55]
+* Refers
+- http://veithen.io/2013/11/18/iowait-linux.html
 * 测试网络
 
 server
@@ -35,6 +37,32 @@ Tx/Rx rate – displays the transmit/receive data rates (in Mbps).
 *** frame
 *** idle
 CPU 
-*** load
-与 CPU 关系:
-- load高, cpu低:说明CPU 使用率低, 排队同学多
+*** iowait
+
+和 idle 区分开, CPU 空闲时,  判断内核上 ~rq.nr_iowait~ 是否为 0, 是则为 idle, 否则为 iowait
+
+线程执行 io 操作时, ~task_stuct.in_iowait~ 置为 1, 同时更新 ~rq.nr_iowait~ + 1
+*** 系统负载 load average
+值包括使用 CPU 的进程和阻塞(S, IO 或者锁)的进程, 占用的时间平均值, 对应不同核数意义不同
+
+繁忙程度
+
+~uptime~  也可以看
+
+#+begin_src bash
+  $ uptime
+  # 17:41:36 up 11 days,  2:09, 35 users,  load average: 6.22, 6.76, 6.71
+#+end_src
+分别代表 1 分钟、5分钟、15 分钟的系统平均负载
+
+**** cpu 核数
+linux
+#+begin_src bash
+  nproc --all 
+#+end_src
+mac
+#+begin_src bash
+  sysctl -n hw.ncpu
+#+end_src
+* blktrace
+追踪 IO
