@@ -105,7 +105,7 @@ E, exponent, 表示以 10 为底的指数, 自然对数的底 $\exp$
 
 E xponential series 指数级数: 第二重要的无穷级数
 
-$e^x=y(x)=1+x+\frac{1}{2}x^2...+\frac{x^n}{n(n-1)...1}$
+$e^x=y(x)=1+x+\frac{1}{2}x^2\dots+\frac{x^n}{n(n-1)\dots1}$
 
 geometric series 几何指数
 
@@ -164,12 +164,12 @@ $\frac{d(e^y)}{dy}\frac{dy}{dx}=1$
 
 $e^y•\frac{dy}{dx}=1$
 
-$e^{lnx}\frac{dy}}{dx}=1$
+$e^{lnx}\frac{dy}{dx}=1$
 
 $\frac{dy}{dx}=\frac{1}{x}$
 
 *** $y=\sin^{-1}{x}$ derivative
-$y=\sinx$
+$y=\sin{x}$
 
 $y=\sin(sin^{-1}y)$
 
@@ -205,7 +205,7 @@ Key: match the value at nth deriavative (the first one), when x as 0.
 *** e^x
 For $e^x$, $e^0 = 1$
 
-$e^{x} = 1 + x + \frac{1}{2}(x)^{2}+\dots+\frac{1}{n!}(x)^{n}$
+$e^{x}=1+x+\frac{1}{2}(x)^{2}+\dots+\frac{1}{n!}(x)^{n}$
 
 *** sinx
 $f(x)=\sin{x}$, $f(0)=0$
@@ -244,7 +244,7 @@ Integral:
 
 $-ln(1-x)=x+\frac{x^2}{2} + \dots + \frac{x^n}{n}$
 ** differential equation 微分方程
-
+*** Motion
 $my''+2ry'+ky=0$
 
 1. Identify exponential, when derivative equals function
@@ -264,5 +264,5 @@ $\lambda=\frac{-r\pm{\sqrt{r^2-km}}}{m}$
 - same number: like $y''+6y'+9y=0$
   - $\lambda=-3$
   - $y=Ce^{-3t}+Dte^{-3t}$
-
-    
+*** Growth
+$\frac{dy}{dx}=cy+s $
