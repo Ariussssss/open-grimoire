@@ -55,3 +55,15 @@ Work with Unity's PBR (physically based rendering) system.
 *** Smoothness
 Look more or less shiny
 *** Normal
+** light
+Bake: pre-render
+** camera
+Viewport setting for multi camera
+** layer
+- Light, culling mask
+- Physic, layer collision matrix
+** tile
+- 
+- Ctrl select and draw
+  - [] rotate
+
