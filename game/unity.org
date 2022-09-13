@@ -63,7 +63,8 @@ Viewport setting for multi camera
 - Light, culling mask
 - Physic, layer collision matrix
 ** tile
-- 
-- Ctrl select and draw
+- Group png to map set
+  - Ctrl select and draw
   - [] rotate
+- composite collider for a large map
 
