@@ -265,4 +265,20 @@ $\lambda=\frac{-r\pm{\sqrt{r^2-km}}}{m}$
   - $\lambda=-3$
   - $y=Ce^{-3t}+Dte^{-3t}$
 *** Growth
-$\frac{dy}{dx}=cy+s $
+$\frac{dy}{dx}=cy$
+
+$\frac{dy}{du}=e^u$
+
+$u'=c$
+
+$y(0)=C$
+
+$y(x)=y(0)e^{cx}$
+
+Same
+
+$\frac{dy}{dx}=cy+s$
+
+$u=c(y+\frac{s}{c})$
+
+$y(t)+\frac{s}{c}=(y(0)+\frac{s}{c})e^{ct}$
