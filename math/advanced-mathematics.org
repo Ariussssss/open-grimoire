@@ -84,8 +84,6 @@ Key value we should look for at the first time we meet the graph.
 
 Maybe local maximum.
 
-** chain rule
-$\frac{dy}{dx}=\frac{dy}{du} \frac{du}{dx}$
 ** the derivative of derivative 二阶导数
 *** purpose
 Tells the bending (弯曲度和方向) of the graph.
@@ -116,6 +114,11 @@ $e^{\ln x}=x$
 5 个基本常数, $e^{\pi i} + 1 = 0$
 
 i 为虚数单位
+** important limit
+
+$lim_{x\rightarrow{\infty}}(1+\frac{1}{x})^x = e$
+
+$lim_{x\rightarrow{\infty}}\frac{\sin{x}}{x} = 1$
 ** integral 积分
 
 导数的原函数 $y(x)=\int s(x)dx$
@@ -282,3 +285,10 @@ $\frac{dy}{dx}=cy+s$
 $u=c(y+\frac{s}{c})$
 
 $y(t)+\frac{s}{c}=(y(0)+\frac{s}{c})e^{ct}$
+** theorems
+1. $af(x)+bg(x)\rightarrow{af'(x)+bg'(x)}$
+2. $f(x)g(x)\rightarrow{g(x)f'(x)+f(x)g'(x)}$
+3. $f(x)/g(x)\rightarrow{\frac{[g(x)f'(x)-f(x)g'(x)]}{g^2}}$
+4. $x=f^{-1}(y)\rightarrow{\frac{dx}{dy} = \frac{1}{\frac{dy}{dx}}}$
+5. Chain Rule $f(g(x))\rightarrow{\frac{df}{dy}\frac{dy}{dx}}$
+6. L'Hospital's Rule 
