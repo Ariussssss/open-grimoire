@@ -4,6 +4,7 @@
 #+TITLE: advanced-mathematics
 #+DATE: [2022-08-09 09:23]
 * Refers
+- https://www.youtube.com/playlist?list=PLBE9407EA64E2C318
 * pre
 ** base
 - multiply multiplication 乘
@@ -21,6 +22,7 @@
 - angles 角度
 - odd 奇, even 偶
 - image number, imaginary 虚数
+- converge, diverge 聚合发散
 ** algebra 代数
 引用字母
 ** Fraction
@@ -291,4 +293,7 @@ $y(t)+\frac{s}{c}=(y(0)+\frac{s}{c})e^{ct}$
 3. $f(x)/g(x)\rightarrow{\frac{[g(x)f'(x)-f(x)g'(x)]}{g^2}}$
 4. $x=f^{-1}(y)\rightarrow{\frac{dx}{dy} = \frac{1}{\frac{dy}{dx}}}$
 5. Chain Rule $f(g(x))\rightarrow{\frac{df}{dy}\frac{dy}{dx}}$
-6. L'Hospital's Rule 
+6. L'Hospital's Rule
+7. Mean value Theorem, if f(x) has a derivative, $\frac{f(b)-f(a)}{b-1}=\frac{df}{dx}(c)$
+8. Taylor series
+   1. Binomial Theorem, Pascal's Triangle with negative power, infinite derivative

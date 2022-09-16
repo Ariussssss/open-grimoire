@@ -6,3 +6,13 @@
   - https://pabloinsente.github.io/intro-linear-algebra
   - https://hefferon.net/linearalgebra/
 * vector 向量
+* matrix
+Find independent columns
+
+Rank: number of independent columns
+
+Basis: all independent columns
+
+origin matrix = Basis x R
+
+column rank = row rank 
