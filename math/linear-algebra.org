@@ -16,3 +16,5 @@ Basis: all independent columns
 origin matrix = Basis x R
 
 column rank = row rank 
+* multiply
+
