@@ -5,3 +5,9 @@
 * Refers
 * content farm 内容农场
 是指为了牟取广告费等商业利益或出于控制舆论, 带风向等特殊目的, 快速生产大量网络文章来吸引流量的网站
+* SPU
+SPU=Standard Product Unit 标准化产品单位, 产品无关配置
+* SKU
+SKU=stock keeping unit, 配置相关
+
+用最低价格引流, 用中间价格做利润, 用最高的价格去做品牌影响

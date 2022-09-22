@@ -33,3 +33,4 @@ https://github.com/Yqnn/svg-path-editor
 * qrcode https://www.nayuki.io/page/creating-a-qr-code-step-by-step
 * math problem https://oeis.org/
 * 象形文字https://tw.piliapp.com/cool-text/square/
+* 网盘搜索 https://jujuso.com/

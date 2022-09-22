@@ -6,6 +6,8 @@
   - https://pabloinsente.github.io/intro-linear-algebra
   - https://hefferon.net/linearalgebra/
 * vector 向量
+* Ax = b linear conbination
+
 * matrix
 Find independent columns
 
