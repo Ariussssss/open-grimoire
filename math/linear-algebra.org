@@ -5,9 +5,27 @@
 * Referrs
   - https://pabloinsente.github.io/intro-linear-algebra
   - https://hefferon.net/linearalgebra/
-* vector 向量
+* translation
+- pivot 主元
+- elimination 消元
+- P permutaion 置换矩阵
+- U upper triangular 三角矩阵
+- Augment 增广矩阵
+- linear conbination 
+- vector 向量
 * Ax = b linear conbination
+* matrix elimination
+Pivot can't be zero.
+Exchange rows to make sure that not happen.
+Use pivot to clean to column.
 
+permutaion: matrix to exchange rows or columns.
+
+Left multiply, get row exchange opertaion.
+Right get column.
+
+Order counts, combination still follow same order.
+* Inverse Matrix
 * matrix
 Find independent columns
 
