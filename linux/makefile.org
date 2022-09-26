@@ -16,4 +16,12 @@ make 是用来解释 makefile 的工具, 不同 IDE 不同
 
 链接使用中间文件, 需要指出中间文件名.
 中间文件过多可以打包,  windows 下是库文件 Library File ~.lib~ , unix 下的 Archive File  ~.a~ . 
-
+* variable
+- = 是最基本的赋值
+- := 是覆盖之前的值
+- ?= 是如果没有被赋值过就赋予等号后面的值
+- += 是添加等号后面的值
+* parameters
+#+begin_src bash 
+  make DEFINE_VRE=true OPT=define 
+#+end_src

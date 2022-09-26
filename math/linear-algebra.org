@@ -1,4 +1,4 @@
-#+STARTUP: content
+#+STARTUP: all
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: linear-algebra
 #+DATE: [2021-01-06 21:59]
@@ -9,10 +9,14 @@
 - pivot 主元
 - elimination 消元
 - P permutaion 置换矩阵
-- U upper triangular 三角矩阵
+- U upper triangular 上三角矩阵, 上非 0
+- L lower triangular 下三角矩阵
+- diagonal 对角三角阵, 上下都是 0
+- I identity matrix 单位阵
 - Augment 增广矩阵
 - linear conbination 
 - vector 向量
+- determinant 行列式
 * Ax = b linear conbination
 * matrix elimination
 Pivot can't be zero.
@@ -25,7 +29,6 @@ Left multiply, get row exchange opertaion.
 Right get column.
 
 Order counts, combination still follow same order.
-* Inverse Matrix
 * matrix
 Find independent columns
 
@@ -37,4 +40,32 @@ origin matrix = Basis x R
 
 column rank = row rank 
 * multiply
+$A_{mn}•B_{np}=C_{mp}$
 
+$C_{MN}=\sum_{k=1}^n(A_{Mk}•B_{Np})$
+* Inverse Matrix
+$A•A^{-1}=I=A^{-1}•A$
+** When inverse not exist
+1. Take determinant and get zero
+2. Find a vector x, with $Ax=0$
+   1. $AA^{-1}x=0$, $x\neq{0}$
+** Gauss-Jordan idea
+1. A augment I
+2. Downside elimination
+3. Upside elimination
+4. Get I augment with $A^{-1}$
+* A=LU
+$EA=U$
+
+$A=LU$
+
+Get inverse of E,
+if no row exchange, multipiers go directly to L
+* Permutaion
+$A^{-1}A=I$
+
+$(A^{-1})^{T}A^T=I$
+* Elimination times
+$n^2+(n-1)^2\dots{1^2}$
+
+Integral $1/3n^3$

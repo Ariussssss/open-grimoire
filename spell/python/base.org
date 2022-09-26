@@ -124,3 +124,6 @@ python 主动注入.
       print(sys.argv[-1])
       excute(sys.argv[-1])
 #+end_src
+* is, ==
+is 比较的是内存地址是否相同, ==比较值是否相同, 并可以自定义
+

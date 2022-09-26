@@ -1,4 +1,4 @@
-#+STARTUP: content
+#+STARTUP: all
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: kubernetes
 #+DATE: [2022-01-05 11:08]
@@ -225,3 +225,5 @@ attach 到 console,  ~Ctrl-P Ctrl-Q~ 不好用(环境 tmux + linux)
 #+begin_src bash
   kubectl scale --replicas=0 deployment/<your-deployment>
 #+end_src
+* 68 道面试题
+https://github.com/kubernetes-cn/k8s-books/blob/main/k8s-book/67%E9%81%93kubernetes%E9%9D%A2%E8%AF%95%E9%A2%98.md
