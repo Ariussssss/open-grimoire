@@ -16,7 +16,11 @@
 - Augment 增广矩阵
 - linear conbination 
 - vector 向量
+- scaler 标量
 - determinant 行列式
+- T transpose 转置
+- S symmetric 对称阵
+- Factorization 分解
 * Ax = b linear conbination
 * matrix elimination
 Pivot can't be zero.
@@ -61,11 +65,39 @@ $A=LU$
 
 Get inverse of E,
 if no row exchange, multipiers go directly to L
+* Elimination times
+If first line change, $n^2+(n-1)^2\dots{1^2}$ times operation
+
+Integral $1/3n^3$
+* 2.7
 * Permutaion
+Execute row exchanges, n! counts
 $A^{-1}A=I$
 
 $(A^{-1})^{T}A^T=I$
-* Elimination times
-$n^2+(n-1)^2\dots{1^2}$
 
-Integral $1/3n^3$
+- $PA=LU$
+  - $P^{-1}=P^T$
+  - $P^TP=I$
+- $P^TP=S$
+  - $(R^TR)^T=R^TR^{TT}=R^TR$
+* Vector Spaces
+$R^2$ all 2-dimension real vector
+
+Every vector spaces need 0, because has to be allowed to muliply by 0.
+
+Subspace rules:
+- Addition, multiples still in space, no extending
+
+All subspaces in $R^2$:
+- All $R^2$
+- All lines though origin
+- origin
+
+$R^n$ the same, with $R^{n-1}$ though origin
+** Column Space
+A = 3X2 matrix
+
+All linear conbination of A, called $C(A)$ column space, form a subspace
+
+Conbine subspace, get a plane, 3 - 1 dimension space.
