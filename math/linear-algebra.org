@@ -2,11 +2,13 @@
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: linear-algebra
 #+DATE: [2021-01-06 21:59]
+* 
 * Referrs
   - https://pabloinsente.github.io/intro-linear-algebra
   - https://hefferon.net/linearalgebra/
 * translation
 - pivot 主元
+  - pivot column 主列
 - elimination 消元
 - P permutaion 置换矩阵
 - U upper triangular 上三角矩阵, 上非 0
@@ -100,4 +102,12 @@ A = 3X2 matrix
 
 All linear conbination of A, called $C(A)$ column space, form a subspace
 
-Conbine subspace, get a plane, 3 - 1 dimension space.
+Conbine subspace, get a plane, 3 - 1 dimension space. ($n\rightarrow{1}$)
+
+Linear combination work, Ax = b
+*** Check solution existed
+Ax = 0, x in a subspace not zero
+
+Av = 0, Aw = 0, A(v + w) = 0
+
+if 0 is not the solution, no space existed
