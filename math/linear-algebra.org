@@ -23,6 +23,7 @@
 - T transpose 转置
 - S symmetric 对称阵
 - Factorization 分解
+- rank 秩
 * Ax = b linear conbination
 * matrix elimination
 Pivot can't be zero.
@@ -111,3 +112,10 @@ Ax = 0, x in a subspace not zero
 Av = 0, Aw = 0, A(v + w) = 0
 
 if 0 is not the solution, no space existed
+*** Elimination
+When column all zero, means column is depdent on others
+
+Rank: counts of pivots
+
+- Pivot column
+- Free column, assgin free variable

@@ -3,6 +3,16 @@
 #+TITLE: Emacs 笔记
 #+DATE: [2021-05-18 11:42]
 * Refers
+* base
+** cursor
+- ~M-c-a/e~ function start/end
+- ~M-c-d/u/up/down~ deep/out
+- ~M-c-f/b/left/right~ prev/next
+* lsp
+** unity + charp
+1. Lsp install server omnisharp
+2. Unity "Generate .csproj files", disabled all option for performance
+3. Show ui doc for Unity package, implement for scripts
 * Mac 优化
 [[https://github.com/railwaycat/homebrew-emacsmacport][homebrew-emacsmacport repo]]
    
