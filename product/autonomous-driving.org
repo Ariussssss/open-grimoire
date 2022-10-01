@@ -28,6 +28,7 @@ Tesla 的自动驾驶汽车采用 RADAR 技术作为主要传感器.
 ** LCC, Lane Centering Control, 车道剧中辅助
 ** ACC, Adaptive Cruise Control, 自适应巡航
 ** NGP, Navigation Guided Pilot
+** APA, Auto Parking Assist System, 自动泊车系统
 * Company
 ** Tesla
 马斯克对纯视觉路线有非常系统和深度的思考, 并且一直坚持初心和实践.
