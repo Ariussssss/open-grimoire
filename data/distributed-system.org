@@ -4,6 +4,7 @@
 #+DATE: [2021-09-29 10:38]
 * Refers
   - https://juejin.cn/post/6844903894384902158
+  - https://github.com/dreamhead/patterns-of-distributed-systems
 * 幂等 idempotent, idempotence
   幂等操作, 指多次运算执行结果一致, 影响和一次相同
 ** 解决方案

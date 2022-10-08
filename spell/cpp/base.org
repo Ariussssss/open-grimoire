@@ -5,6 +5,7 @@
 * Refers
 - https://github.com/applenob/Cpp_Primer_Practice
 - build a server in 30 days https://github.com/yuesong-feng/30dayMakeCppServer
+- https://github.com/CnTransGroup/EffectiveModernCppChinese
 * version
 mac
 #+begin_src bash

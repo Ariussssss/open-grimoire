@@ -28,6 +28,7 @@ https://github.com/floating-ui/floating-ui/
 
 useless, 依赖服务端
 ** 调研中
+甚至没有一个能常用.. 
 *** esno 代替 ts-node
 https://github.com/antfu/esno
 *** 开源的 mongo
@@ -53,6 +54,8 @@ redis gui
 *** rome
 js cli
 https://rome.tools/blog/2021/09/21/rome-will-be-rewritten-in-rust
+*** gifsicle
+compress gif
 ** 历史
 *** 👻 tauri => electron
 Rust 后端代替 node, 更快更小
