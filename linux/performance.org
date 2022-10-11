@@ -64,5 +64,10 @@ mac
 #+begin_src bash
   sysctl -n hw.ncpu
 #+end_src
+
+*** memory peak
+#+begin_src bash
+  grep VmPeak /proc/$PID/status
+#+end_src 
 * blktrace
 追踪 IO
