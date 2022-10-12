@@ -15,7 +15,7 @@
 - L lower triangular 下三角矩阵
 - diagonal 对角三角阵, 上下都是 0
 - I identity matrix 单位阵
-- Augment 增广矩阵
+- Augmented matrix 增广矩阵
 - linear conbination 
 - vector 向量
 - scaler 标量
@@ -24,6 +24,7 @@
 - S symmetric 对称阵
 - Factorization 分解
 - rank 秩
+- solution 解, 对应的等式为 基
 * Ax = b linear conbination
 * matrix elimination
 Pivot can't be zero.
@@ -119,3 +120,25 @@ Rank: counts of pivots
 
 - Pivot column
 - Free column, assgin free variable
+*** Solution
+Rank tells number of solution
+
+- Solubility: zero row equation
+- Particular solution, free variable as zero
+- Complete solution, add up solution of special solution of zero
+  - Solution for $Ax=b$, special solution of $Ax=0$ with free variable
+
+Condition:
+- r = m = n
+  - R = I
+  - 1 solution
+- r = n < m
+  - $R=\begin{bmatrix} I \\ 0 \end{bmatrix}$
+  - 0 or 1 solution
+- r = m < n
+  - $R=\begin{bmatrix} I & F \end{bmatrix}$
+  - infinite solution
+- r < n, r < m
+  - $R=\begin{bmatrix} I & F \\ 0 & 0 \end{bmatrix}$
+  - 0 or infinte
+
