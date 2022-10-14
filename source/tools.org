@@ -35,3 +35,4 @@ https://github.com/Yqnn/svg-path-editor
 * 象形文字https://tw.piliapp.com/cool-text/square/
 * 网盘搜索 https://jujuso.com/
 * https://github.com/tldraw/tldraw
+* model and dataset for ml https://huggingface.co/models

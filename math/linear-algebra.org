@@ -24,7 +24,8 @@
 - S symmetric 对称阵
 - Factorization 分解
 - rank 秩
-- solution 解, 对应的等式为 基
+- solution 解
+- basis 基
 * Ax = b linear conbination
 * matrix elimination
 Pivot can't be zero.
@@ -141,4 +142,25 @@ Condition:
 - r < n, r < m
   - $R=\begin{bmatrix} I & F \\ 0 & 0 \end{bmatrix}$
   - 0 or infinte
+* independent
+Any vector conbination except zero, summary is zero, means dependent.
 
+For matrix, Ac = null space:
+- Independent: c only , rank = column n
+- Dependent: c is not zero, rank < n, free variable
+
+Dimension of null space N(A) = n - r
+** Basis
+1. Independent
+2. Span the space
+** Span
+
+Span the space with all linear conbination of vectors.
+
+The column of matric span the column space.
+
+Independent vector span the space.
+
+Number of space basis vector is dimension.
+
+Rank of *matrix* = dimension of *column space*
