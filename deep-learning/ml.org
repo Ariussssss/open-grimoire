@@ -15,8 +15,12 @@
 - https://github.com/fchollet/deep-learning-with-python-notebooks
 - https://github.com/cbamls/AI_Tutorial
 - https://github.com/KichangKim/DeepDanbooru
+- 程序员的实用深度学习 https://course.fast.ai/
+- 深度学习面试 https://github.com/BoltzmannEntropy/interviews.ai
+- 论文精读 https://github.com/mli/paper-reading
 * nlp
-https://github.com/fighting41love/funNLP
+- https://github.com/fighting41love/funNLP
+- simple NLP https://github.com/flairNLP/flair
 * match
 
 * Intro
