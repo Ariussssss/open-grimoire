@@ -164,3 +164,39 @@ Independent vector span the space.
 Number of space basis vector is dimension.
 
 Rank of *matrix* = dimension of *column space*
+* 4 fundamental subspace
+for A as m * n matrix
+
+Null space means special solution y, make $yA = 0$
+
+1. Column space C(A)
+2. Null space N(A)
+3. Row space $C(A^T)$
+4. Left null space $N(A^T)$
+   1. $A^Ty = 0$ -> $y^TA=0$, $y^T$ is on the left of A
+   
+
+Column space and row space has same dimension equals rank r.
+
+Null space use free variables, others use pivot.
+
+Null space, n - r dimension
+
+Left null space, m - r dimension
+
+Row exchange wont change row space, but change column space
+
+Best basis, as clean as possible, example  0 1 1 0.
+
+When in same basis and row space, they can transform to each other.
+** Find left null space
+$A^Ty = 0$ -> $y^TA=0$, $y^T$ is on the left of A
+
+Left null space support to be y, with the spacial solution
+
+1. Use identity matrix to permutaion, [AI]=>[RE]
+2. Make R as clean as possible, find the rank(identity matrix), free matrix and zero.
+3. EA = R, get the zero row
+4. $(E_{m3})^T$ as y
+
+$E_{MN}$ gets a sub space, rank($E_{MN}$) = m - r = counts of free variable
