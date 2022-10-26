@@ -200,3 +200,9 @@ Left null space support to be y, with the spacial solution
 4. $(E_{m3})^T$ as y
 
 $E_{MN}$ gets a sub space, rank($E_{MN}$) = m - r = counts of free variable
+* subspaces
+For 3 x 3 matrix space
+
+$dim(S) + dim(U) = dim(S\cup{U}) + dim(S+U)$
+
+A conbination of rank(N) counts rank 1 matrix can build a rank(N) martix
