@@ -285,3 +285,6 @@ OPPO 实践, 印度印尼等地区网络覆盖较差, https 成功率低, 下载
 将与 RFC 9204（QPACK header 压缩）和 RFC 9218 （可扩展的优先级）一起开启 Web 的新篇章！”,
 这意味着该协议已经进入了稳定的状态, 而 HTTP/3 是 HTTP 超文本传输协议的第三个主要版本.
 同时 HTTP/2 也更新为新的 RFC 9113 标准.
+
+* TLS 细节
+- https://tls13.xargs.org/
