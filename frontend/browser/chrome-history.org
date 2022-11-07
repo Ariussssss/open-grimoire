@@ -16,6 +16,39 @@
    - 禁用端口 10080
    - 支持关联站点共享凭据，通过在 /.well-known/assetlinks.json 声明实现
 * chrome 更新
+** 107 September 29, 2022
+- https://developer.chrome.com/blog/chrome-107-beta/
+*** Performance API
+#+begin_src js
+  // 获取所有资源
+  const res = window.performance.getEntriesByType('resource');
+
+  // 过滤出阻塞渲染的资源
+  const blocking =   res.filter(({renderBlockingStatus}) =>
+        renderBlockingStatus === 'blocking');
+#+end_src
+** 106 September 27, 2022
+- https://developer.chrome.com/blog/new-in-chrome-106/
+*** ic css unit
+Size of full width glyphs
+*** Remove HTTP/2 Server Push
+** 105 August 30, 2022
+*** css has, container
+https://developer.chrome.com/blog/has-with-cq-m105/
+~:has()~, ~:not()~, and ~@container~
+#+begin_src css
+.card:not(:has(.visual)) h2 {
+  font-size: clamp(2rem, 15cqi, 4rem);
+  font-weight: 300;
+}
+
+@container (max-width: 400px) {
+  .card:has(.visual) {
+    grid-template-columns: 1fr;
+  }
+}
+#+end_src
+
 ** 96 2021.11.16
 - CaptureTimestamp senderCapture Time, RTCRtpContributingSource 新增属性
 - 本地缓存历史页, 下次直接打开(Safari, Firefox 早就支持)
@@ -28,7 +61,7 @@
   
 *** WebAssembly Reference Types
 
-之前仅支持整数(32, 64位), 传递复杂数据很困难
+之前仅支持整数(32, 64 位), 传递复杂数据很困难
 
 之前想传递, 步骤:
 1. 字符串转换为证书, 使用 TextEncoder

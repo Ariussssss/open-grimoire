@@ -1,0 +1,26 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: virtual-reality
+#+DATE: [2022-11-07 10:51]
+* Refers
+- https://mp.weixin.qq.com/s/i9uduikZQbwLegIqasyRJA
+* AR Augmented Reality 增强现实
+可以让屏幕上的虚拟世界能够与现实世界场景进行结合与交互, e.g. Pokémon GO
+* VR Virtual Reality 虚拟现实
+由电脑创建虚拟的 3D 世界, 用户看不到现实环境, 完全沉浸在虚拟世界中, e.g. 电影头号玩家。
+* MR Mixed Reality 混合现实
+可以看成 AR 和 VR 的融合, 用户可以看见现实环境, 和额外的虚拟物件, 并可以进行交互, e.g. Quest 的 MR 头盔
+* XR Extended Reality
+扩展现实。它是一个总称, 任何虚拟和现实等技术, 如 AR, VR 和 MR 都可以看成 XR 的一部分
+* WebXR
+Demo: https://moonrider.xyz/
+Chrome extension https://github.com/MozillaReality/WebXR-emulator-extension
+
+利用 WebXR Device API 可以在 Web 环境访问到 XR 设备,
+它主要分为 3 种模式 inline、immersive-vr 和 immersive-ar,
+inline 模式还是在渲染在浏览器页面中,
+而 immersive-vr 则是访问 VR 设备,
+将画面渲染到 VR 设备中,
+整体渲染过程与普通 WebGL 程序差不多,
+只不过画面要渲染到 XRWebGLLayer 的 framebuffer 中,
+并且区分左右眼
