@@ -206,6 +206,21 @@ Refers:
   ,* Refers
 #+end_src
 
+** property
+Property key
+- ~C-c C-x p/s~ choose property
+- ~M-tab~ complete
+
+Property value
+- org-property-previous-allowed-value
+- org-property-next-allowed-value
+
+Example
+#+begin_src org
+  :PROPERTIES:
+  :VISIBILITY: all
+  :END:
+#+end_src
 * dired
 ** base
 - ~><~ 移动光标到 dir
