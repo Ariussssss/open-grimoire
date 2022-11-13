@@ -1,0 +1,22 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: manjaro
+#+DATE: [2022-11-12 22:40]
+* Refers
+* init
+
+* pacman
+System upgrade
+~pacman -Syu~
+mirror
+ ~pacman-mirrors -c China~
+* Clash
+#+begin_src bash
+  sudo pacman -Sy clash
+#+end_src
+
+Update config ~~/.config.clash/~ 
+
+Network Proxy, http 7890, socks to 7891
+** 
+* Terminal
