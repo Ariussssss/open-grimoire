@@ -6,3 +6,8 @@
 * boot usb
 1. Use balenaEtcher with iso, create a boot usb
 2. ~F11~ change boot source order
+* graphic cards
+Nvidia provide linux and Windows Closed source drivers, but Mac don't.
+
+So hackintosh can't use Nvidia over 1060, but AMD whick is open-source.
+* nvidia smi
