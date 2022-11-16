@@ -71,3 +71,11 @@ mac
 #+end_src 
 * blktrace
 追踪 IO
+* disk
+#+begin_src bash
+  lsblk -d -o name,rota
+#+end_src
+* memory
+#+begin_src bash
+  free -g -h -t
+#+end_src
