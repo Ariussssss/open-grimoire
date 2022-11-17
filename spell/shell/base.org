@@ -317,3 +317,20 @@ list open files 一切皆文件. 系统会为每个应用分配一个描述符, 
   END
   )
 #+end_src
+* history
+No 100 command in history
+#+begin_src bash
+  !100
+#+end_src
+
+Easy search
+#+begin_src bash
+  hi() {
+      keyword=$1
+      if [ $keyword ]; then
+          history -i | grep $keyword
+      else
+          history -i -100
+      fi
+  }
+#+end_src
