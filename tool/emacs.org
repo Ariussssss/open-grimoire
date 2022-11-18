@@ -225,6 +225,11 @@ Example
 ** base
 - ~><~ 移动光标到 dir
 - ~o~ 打开到新的 frame
+** file
+- ~R~ rename
+- ~=~ diff
+** dir
+- ~l~ reload
 
 ** subdirectory
 - ~i~ 将目标文件夹路径引入  ~subdirectory~ list 中  
