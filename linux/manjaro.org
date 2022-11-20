@@ -4,13 +4,12 @@
 #+DATE: [2022-11-12 22:40]
 * Refers
 * init
-
-* pacman
+** pacman
 System upgrade
 ~pacman -Syu~
 mirror
- ~pacman-mirrors -c China~
-* Clash
+~pacman-mirrors -c China~
+** Clash
 #+begin_src bash
   sudo pacman -Sy clash
 #+end_src
@@ -18,5 +17,141 @@ mirror
 Update config ~~/.config.clash/~ 
 
 Network Proxy, http 7890, socks to 7891
-** 
-* Terminal
+** Expressvpn
+Disable proxy setting first.
+
+Login on website and get the activate code
+#+begin_src bash
+  expressvpn activate
+  expressvpn connect
+#+end_src
+** Git
+~ssh-keygen~
+#+begin_src bash
+   git config push.default current    
+#+end_src
+** Appearance
+*** Font
+Font https://github.com/yangchuoxian/SauceCodeProNerdFont
+
+Copy to ~~/.local/share/fonts~
+
+#+begin_src bash
+  fc-cache -fv
+#+end_src
+*** Background
+#+begin_src bash
+  while true
+  do
+      Display=(~/Images/bg/*)
+      x=$((0 + RANDOM % ${#Display[@]})) 
+      gsettings set org.gnome.desktop.background picture-uri-dark "${Display[$x]}"
+      sleep 10m
+  done
+#+end_src
+** Shortcut
+Represent ~hammerspoon~
+
+*** Replace ~M-S-<LEFT/RIGHT>~ 
+
+Replace default workspace navigate action shortcut, move to left/right workspace as default behavior.
+
+#+begin_quote
+Because can't find settings in both system settings and Tweaks settings.
+#+end_quote
+
+Weird way to replace default shortcut:
+1. System settings, custom shortcut
+2. Input any command with the shortcut you want to replace
+3. Save and try, then reset
+
+Set ~right super~ as override menu key, ~left super~ work for other shortcuts.
+
+*** Launch or open
+#+begin_src bash
+  sudo pacman -S wmctrl xdotool
+#+end_src
+
+Set custom shortcut with below command
+#+begin_src bash
+  bash -c "wmctrl -a chrome ; [ "$?" == "1" ] && xdotool set_desktop 0 && google-chrome"
+#+end_src
+
+Or try i3status.
+** Crontab
+#+begin_src bash
+    systemctl enable --now cronie.service
+    systemctl status cronie
+  # ● cronie.service - Periodic Command Scheduler
+  #      Loaded: loaded (/usr/lib/systemd/system/cronie.service; enabled; preset: disabled)
+  #      Active: active (running) since Thu 2022-11-17 00:21:21 EST; 40s ago
+  #    Main PID: 47518 (crond)
+  #       Tasks: 1 (limit: 19084)
+  #      Memory: 984.0K
+  #         CPU: 13ms
+  #      CGroup: /system.slice/cronie.service
+  #              └─47518 /usr/bin/crond -n
+    crontab arius-cron
+#+end_src
+** NeoVim
+#+begin_src bash
+  sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+#+end_src
+
+Install
+#+begin_src bash
+  :PlugInstall
+#+end_src
+** Emacs
+*** ispell
+#+begin_src bash
+  sudo pacman -S aspell aspell-en
+  cp /usr/bin/aspell /usr/local/bin/aspell
+#+end_src
+** Alacritty
+*** install
+#+begin_src bash
+  sudo pacman -S alacitty tmux
+#+end_src
+*** oh my zsh
+#+begin_src bash
+  git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+  git clone https://github.com/paulirish/git-open.git $ZSH_CUSTOM/plugins/git-open
+#+end_src
+** Program language environment
+*** python
+#+begin_src bash
+  sudo pacman -S pyenv
+#+end_src
+*** node
+Node version manager
+#+begin_src bash 
+  curl -fsSL https://fnm.vercel.app/install | bash
+  fnm ls-remote
+  fnm install
+#+end_src
+*** golang
+Download https://go.dev/dl/, to ~/usr/local/go~ 
+
+Settings ~~/.zshrc~
+#+begin_src shell
+  export GOROOT=/usr/local/go 
+  export GOBIN=$GOPATH/bin
+  export GO111MODULE=on
+  export PATH=$GOBIN:$GOROOT/bin:$PATH
+#+end_src
+** App
+*** chrome
+#+begin_src bash
+  makepkg -si
+  yay -S google-chrome
+#+end_src
+*** telegram
+#+begin_src bash
+  sudo pacman -S telegram-desktop
+#+end_src
+*** others
+#+begin_src bash
+
+#+end_src

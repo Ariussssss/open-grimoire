@@ -76,6 +76,7 @@ The difference between is not change into insert mode after delete regions.
 **** G go operation
 *** 0-9 number counts
 line start
+**** + G go to line
 *** r read
  ~:r !ls~ 
 ** command

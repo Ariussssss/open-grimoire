@@ -11,3 +11,5 @@ Nvidia provide linux and Windows Closed source drivers, but Mac don't.
 
 So hackintosh can't use Nvidia over 1060, but AMD whick is open-source.
 * nvidia smi
+* xrandr
+
