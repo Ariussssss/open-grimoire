@@ -4,6 +4,8 @@
 #+DATE: [2021-01-05 21:43]
 * Refers
 - https://linuxtools-rst.readthedocs.io/zh_CN/latest/index.html
+- https://effective-shell.com/
+- https://talk.linuxtoy.org/using-cli
 * syntax
 参数
 #+begin_src shell
@@ -340,4 +342,38 @@ Easy search
           history -i -100
       fi
   }
+#+end_src
+
+Settings
+#+begin_src bash
+  echo $HISTSIZE
+  echo $HISTFILE
+  echo $SAVEHIST # zsh
+  echo $HISTFILESIZE # bash
+#+end_src
+
+Reference:
+1. ~!!~
+2. ~!?[-string]~
+3. ~![-number]~
+4. ~!:[number-number]~ last argument
+* construct string {}
+#+begin_src bash
+  echo {1..10..-2}
+  # 9 7 5 3 1
+#+end_src
+* command string replacement
+#+begin_src bash
+  grep -l . *.el
+  vim `grep -l . *.el`
+  vim $(grep -l . *.el)
+#+end_src
+* iteration
+#+begin_src bash
+  % cd /usr/share/figlet
+  % for font in *.flf
+  > do
+  >   echo $font
+  >   figlet -f $font Linux
+  > done
 #+end_src

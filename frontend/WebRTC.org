@@ -1,0 +1,188 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: WebRTC
+#+DATE: [2022-11-21 14:40]
+* Refers
+- https://github.com/webrtc/samples
+* RTMP Real Time Messaging Protocol 实时消息传输协议
+- 延迟几秒到几十秒
+- Adobe 公司开发的音视频数据传输的实时消息传送协议
+- 基于 TCP, 包括 RTMP 基本协议及 RTMPT/RTMPS/RTMPE 等多种变种
+- 不支持浏览器, 且苹果 ios 不支持, Adobe 已停止对其更新
+- PC 广泛
+* HLS Http Live Streaming
+- 由苹果公司定义的基于 HTTP 的流媒体实时传输协议
+- 广泛的应用于视频点播和直播领域
+- HLS 规范规定播放器至少下载一个 ts 切片才能播放,  一个 ts 的延迟
+- 整个流氛围多个小文件来下载, 用户任何时间连进来任何时刻都是新的内容
+- 延迟较高
+- 内容分为: M3U8 索引文件，TS 文件
+* Choices
+- 流媒体推流, RTMP
+- 移动端, 网页浏览器, HLS
+- iOS 不支持 RTMP
+* structure
+** Client
+- 采集
+- 编码
+- 推流
+- 拉流
+- 解码
+- 播放
+** Signaling 信令服务器
+信令 业务逻辑
+- 创建房间
+- 加入
+- 离开
+- 文字聊天
+** CDN 网络
+媒体数据分发
+* Unit 单位
+** ArrayBuffer
+** ArrayBufferView
+基于 ArrayBuffer, 分为 Int32Array, Uint8Array, DataView
+** Blob
+Binary Large Object, 大型二进制对象类型, 主要存储多媒体的文件
+
+~MediaRecorder.ondataavailable~ 的 data 类型就是 Blob
+* WebRTC Web Real-Time Communication
+** Track 轨
+音频轨, 视频轨
+** 音频采集
+#+begin_src js
+  const mediaStreamContrains = {
+      video: {
+         frameRate: {min: 15}, // 视频的帧率最小 15 帧每秒
+         width: {min: 320, ideal: 640}, // 宽度最小是 320，理想的宽度是 640
+         height: {min: 480, ideal: 720}，// 高度最小是 480，最理想高度是 720
+         facingMode: 'user'， // 优先使用前置摄像头
+         deviceId: '' // 指定使用哪个设备
+      },
+      audio: {
+         echoCancellation: true, // 对音频开启回音消除功能
+         noiseSuppression: true // 对音频开启降噪功能
+      }
+  }
+
+  const promise = navigator.mediaDevices.getUserMedia(mediaStreamContrains).then(
+      gotLocalMediaStream
+  )
+
+  const $video = document.querySelector('video');
+ 
+  function gotLocalMediaStream(mediaStream){
+      $video.srcObject = mediaStream;
+  }
+ 
+  function handleLocalMediaStreamError(error){
+      console.log('getUserMedia 接口调用出错: ', error);
+  }
+#+end_src
+** 录制采集
+流程如下：
+- 使用 getUserMedia 接口获取视频流数据
+- 使用 MediaRecorder 接口进行录制（视频流数据来源上一步获取的数据）
+- 使用 MediaRecorder 的 ondataavailable 事件获取录制的 buffer 数据
+- 将 buffer 数据转成 Blob 类型，然后使用 createObjectURL 生成可访问的视频地址
+** example
+#+begin_src html
+  <!DOCTYPE html>
+  <html>
+    <body>
+      <video autoplay playsinline controls id="video-show"></video>
+      <video id="video-replay"></video>
+      <button id="record">开始录制</button>
+      <button id="stop">停止录制</button>
+      <button id="recplay">录制播放</button>
+      <button id="download">录制视频下载</button>
+
+      <script lang="text/javascript">
+           let buffer;
+           const $videoshow = document.getElementById('video-show');
+           const promise = navigator.mediaDevices.getUserMedia({
+             video: true
+           }).then(
+             stream => {
+        console.log('stream', stream);
+        window.stream = stream;
+        $videoshow.srcObject = stream;
+           })
+
+           function startRecord(){
+             buffer = [];
+             // 设置录制下来的多媒体格式
+             const options = {
+        mimeType: 'video/webm;codecs=vp8'
+             }
+
+             // 判断浏览器是否支持录制
+             if(!MediaRecorder.isTypeSupported(options.mimeType)){
+        console.error(`${options.mimeType} is not supported!`);
+        return;
+             }
+
+             try{
+        // 创建录制对象
+        mediaRecorder = new MediaRecorder(window.stream, options);
+        console.log('mediaRecorder', mediaRecorder);
+             }catch(e){
+        console.error('Failed to create MediaRecorder:', e);
+        return;
+             }
+
+             // 当有音视频数据来了之后触发该事件
+             mediaRecorder.ondataavailable = handleDataAvailable;
+             // 开始录制
+             mediaRecorder.start(2000); // 若设置了 timeslice 这个毫秒值，那么录制的数据会按照设定的值分割成一个个单独的区块
+           }
+
+           // 当该函数被触发后，将数据压入到 blob 中
+           function handleDataAvailable(e){
+             console.log('e', e.data);
+             if(e && e.data && e.data.size > 0){
+        buffer.push(e.data);
+             }
+           }
+
+           document.getElementById('record').onclick = () => {
+             startRecord();
+           };
+
+           document.getElementById('stop').onclick = () => {
+             mediaRecorder.stop();
+             console.log("recorder stopped, data available");
+           };
+
+           // 回放录制文件
+           const $video = document.getElementById('video-replay');
+           document.getElementById('recplay').onclick = () => {
+             const blob = new Blob(buffer, {type: 'video/webm'});
+             $video.src = window.URL.createObjectURL(blob);
+             $video.srcObject = null;
+             $video.controls = true;
+             $video.play();
+           };
+
+           // 下载录制文件
+           document.getElementById('download').onclick = () => {
+             const blob = new Blob(buffer, {type: 'video/webm'});
+             const url = window.URL.createObjectURL(blob);
+             const a = document.createElement('a');
+
+             a.href = url;
+             a.style.display = 'none';
+             a.download = 'video.webm';
+             a.click();
+           };
+      </script>
+    </body>
+  </html>
+#+end_src
+** 连接传递
+*** RTCPeerConnection
+类似 socket
+** 编解码
+重要的编解码标准:
+- H.26x
+- MPEG
+- Apple 公司的 QuickTime
