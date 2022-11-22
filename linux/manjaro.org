@@ -156,3 +156,14 @@ Settings ~~/.zshrc~
 #+begin_src bash
 
 #+end_src
+* nvidia
+Dashboard
+#+begin_src bash
+  nvidia-smi
+#+end_src
+
+Switch graphical
+#+begin_src bash
+  systemctl isolate multi-user.target
+  systemctl start graphical.target
+#+end_src
