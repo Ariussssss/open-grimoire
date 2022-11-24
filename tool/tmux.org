@@ -3,9 +3,14 @@
 #+TITLE: tmux
 #+DATE: [2021-08-10 21:36]
 * keybinding
-   -  ~ctrl-s~ search
+-  ~ctrl-s~ search
+
+Copy<vim>:
+- ~<leader> [~ visual mode
+- ~hjkl~, ~SPC~ start select, ~y~ end
+- ~<leader> ]~ paste
 * source
-   插件主题等: https://github.com/rothgar/awesome-tmux
+插件主题等: https://github.com/rothgar/awesome-tmux
 8192
 * pane init script
 #+begin_src sh
