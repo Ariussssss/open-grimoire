@@ -1,0 +1,31 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: window-manager
+#+DATE: [2022-11-28 10:48]
+* Refers
+- https://fedoramagazine.org/getting-started-i3-window-manager/
+* i3
+** install
+#+begin_src bash
+  sudo dnf install i3 picom polybar variety i3-gaps
+#+end_src
+- i3:  the main window manager package
+- picom: a lightweight compositor for X11
+- polybar: pretty bar
+- variety: background image update
+- i3-gaps
+** start
+Logout, change to i3 before login
+** shortcut
+- ~$mod~
+  - navigation
+    - ~Enter~ new terminal
+    - ~d~ drun, like spotlight
+    - ~shift+q~  close
+    - ~h/v~ split direction
+    - ~shift+<number>~ move to group
+  - config
+    - ~shift+e~ quit window manager
+    - ~shift+c~ reload config
+** customize
+~~/.config/i3/config~ 

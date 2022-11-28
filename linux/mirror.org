@@ -1,0 +1,125 @@
+#+STARTUP: content
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: mirror
+#+DATE: [2022-11-28 10:34]
+* Refers
+* os
+** Centos
+1. backup
+   #+begin_src bash
+     mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+   #+end_src
+2. aliyun repo
+   
+#+begin_src bash
+  wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+  # or
+  curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+#+end_src
+
+3. cache
+   #+begin_src bash
+     yum makecache
+   #+end_src
+** Ubuntu
+1. backup
+   #+begin_src bash
+     sudo cp /etc/apt/sources.list /etc/apt/sources_init.list
+   #+end_src
+
+2. permission
+   #+begin_src bash
+     sudo  chmod  777  /etc/apt/source.list
+   #+end_src
+3. mirror
+   #+begin_src bash
+     sudo nano /etc/apt/sources.list
+   #+end_src
+** Debian
+1. backup
+   #+begin_src bash
+     sudo cp /etc/apt/sources.list /etc/apt/sources.list_bak
+   #+end_src
+2. mirror
+#+begin_src bash
+  sudo sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
+#+end_src
+deb http://mirrors.ustc.edu.cn/debian stable main contrib non-free
+# deb-src http://mirrors.ustc.edu.cn/debian stable main contrib non-free
+deb http://mirrors.ustc.edu.cn/debian stable-updates main contrib non-free
+# deb-src http://mirrors.ustc.edu.cn/debian stable-updates main contrib non-free
+
+# deb http://mirrors.ustc.edu.cn/debian stable-proposed-updates main contrib non-free
+# deb-src http://mirrors.ustc.edu.cn/debian stable-proposed-updates main contrib non-free
+3. update
+   #+begin_src bash
+     sudo apt-get update
+   #+end_src
+** Fedora
+#+begin_src bash
+  su
+  cd /etc/yum.repos.d/
+  mv fedora.repo fedora.repo.backup
+  mv fedora-updates.repo fedora-updates.repo.backup
+  wget -O /etc/yum.repos.d/fedora.repo http://mirrors.aliyun.com/repo/fedora.repo
+  wget -O /etc/yum.repos.d/fedora-updates.repo http://mirrors.aliyun.com/repo/fedora-updates.repo
+  dnf clean all
+  dnf makecache
+#+end_src
+** OpenSUSE
+1. ban origin
+   #+begin_src bash
+     sudo zypper mr -da
+   #+end_src
+2. others
+   #+begin_src bash
+     sudo zypper ar -fc https://mirrors.ustc.edu.cn/opensuse/distribution/leap/42.1/repo/oss USTC:42.1:OSS
+     sudo zypper ar -fc https://mirrors.ustc.edu.cn/opensuse/distribution/leap/42.1/repo/non-oss USTC:42.1:NON-OSS
+     sudo zypper ar -fc https://mirrors.ustc.edu.cn/opensuse/update/leap/42.1/oss USTC:42.1:UPDATE-OSS
+     sudo zypper ar -fc https://mirrors.ustc.edu.cn/opensuse/update/leap/42.1/non-oss USTC:42.1:UPDATE-NON-OSS
+   #+end_src
+3. refresh
+   #+begin_src bash
+     sudo zypper ref
+   #+end_src
+4. update
+   #+begin_src bash
+     sudo zypper up
+   #+end_src
+** FreeBSD
+1. mirror
+
+#+begin_src bash
+  mkdir -p /usr/local/etc/pkg/repos
+  vim /usr/local/etc/pkg/repos/FreeBSD.conf
+#+end_src
+content of FreeBSD.conf
+#+begin_src conf
+FreeBSD: {
+    url: "pkg+http://mirrors.ustc.edu.cn/freebsd-pkg/${ABI}/quarterly",
+}
+#+end_src
+2. ports
+#+begin_src bash
+  vim /etc/make.conf
+#+end_src
+
+content of make.conf
+#+begin_src conf
+  FETCH_CMD=axel -n 10 -a
+  DISABLE_SIZE=yes
+  MASTER_SITE_OVERRIDE?=http://mirrors.ustc.edu.cn/freebsd-ports/distfiles/${DIST_SUBDIR}/
+#+end_src
+
+3. portsnap source
+#+begin_src bash
+  vim /etc/portsnap.conf
+#+end_src
+
+content of porsnap.conf
+#+begin_src conf
+  SERVERNAME=porsnap.tw.freebsd.org
+#+end_src
+* lang
+** node
+nrm

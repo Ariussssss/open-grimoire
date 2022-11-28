@@ -2,7 +2,6 @@
 # #+STARTUP: latexpreview
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: ml
-#+OPTIONS: tex:t
 #+DATE: [2021-11-26 10:55]
 * Refers
 - https://github.com/microsoft/ML-For-Beginners
@@ -18,6 +17,7 @@
 - 程序员的实用深度学习 https://course.fast.ai/
 - 深度学习面试 https://github.com/BoltzmannEntropy/interviews.ai
 - 论文精读 https://github.com/mli/paper-reading
+- 深度学习在图像处理中的应用教程https://github.com/WZMIAOMIAO/deep-learning-for-image-processing
 * nlp
 - https://github.com/fighting41love/funNLP
 - simple NLP https://github.com/flairNLP/flair
