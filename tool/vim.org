@@ -1,4 +1,4 @@
-#+STARTUP: all
+j#+STARTUP: all
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: vim
 #+DATE: [2021-03-01 20:52]

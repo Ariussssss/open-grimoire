@@ -22,7 +22,22 @@
 - https://github.com/fighting41love/funNLP
 - simple NLP https://github.com/flairNLP/flair
 * match
+* short
+** MAE mean absolute error
+平均绝对误差
 
+$MAE=\frac{1}{n}\sum_{i-1}^n|fi-yi|$
+** MSE mean square error
+均方误差
+
+$MSE=\frac{1}{n}\sum_{i-1}^n(fi-yi)^2$
+** RMSE root mean square error
+均方根误差
+
+$RMSE=\sqrt{MSE}$
+** $r^2$ 决定系数
+- SSres: residual sum of squares
+- SStot: total sum of squares
 * Intro
 Let machine create a function work for our result.
 ** Simple overview

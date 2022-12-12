@@ -11,5 +11,11 @@ Nvidia provide linux and Windows Closed source drivers, but Mac don't.
 
 So hackintosh can't use Nvidia over 1060, but AMD whick is open-source.
 * nvidia smi
+- GeForce RTX 40 series cards works with 525.xx, 520.xx NVIDIA drivers, (RTX 4090)
+- GeForce RTX 30 series cards works with 525.xx, 520.xx, 515.xx, 510.xx and 470.xx NVIDIA drivers, (RTX 3090, RTX 3080 and RTX 3070, RTX 3060, RTX 3060 Ti)
+- GeForce RTX 20 series cards works with 525.xx, 520.xx, 515.xx, 510.xx and 470.xx NVIDIA drivers (RTX 2080 Ti, RTX 2080, RTX 2070 Ti, RTX 2070, RTX 2060)
+- GeForce GT/GTX 600/700/800/900/10 series cards works with 510.xx, 470.xx, and 390.xx NVIDIA drivers (GTX 1080 Ti, GTX 1080, GTX 1070, GTX 1060, GTX 1660 …)
+- GeForce GT/GTX 400/500 series cards works with 390.xx NVIDIA drivers
+- GeForce GT 8/9/200/300 series cards works with 340.xx NVIDIA drivers
 * xrandr
 

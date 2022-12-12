@@ -1,15 +1,15 @@
 #+STARTUP: all
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
-#+TITLE: manjaro
+#+TITLE: linux OS basic usage
 #+DATE: [2022-11-12 22:40]
 * Refers
 - https://wiki.archlinux.org/title/main_page_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
-* init
-** pacman
+* pacman
 System upgrade
 ~pacman -Syu~
 mirror
 ~pacman-mirrors -c China~
+* vpn
 ** Clash
 #+begin_src bash
   sudo pacman -Sy clash
@@ -26,13 +26,17 @@ Login on website and get the activate code
   expressvpn activate
   expressvpn connect
 #+end_src
-** Git
+** proxychains
+https://github.com/haad/proxychains
+
+Update vpn settings ~/etc/proxychains.conf~
+* Git
 ~ssh-keygen~
 #+begin_src bash
-   git config push.default current    
+  git config push.default current    
 #+end_src
-** Appearance
-*** Font
+* Appearance
+** Font
 Font https://github.com/yangchuoxian/SauceCodeProNerdFont
 
 Copy to ~~/.local/share/fonts~
@@ -40,7 +44,7 @@ Copy to ~~/.local/share/fonts~
 #+begin_src bash
   fc-cache -fv
 #+end_src
-*** Background
+** Background
 #+begin_src bash
   while true
   do
@@ -50,10 +54,38 @@ Copy to ~~/.local/share/fonts~
       sleep 10m
   done
 #+end_src
-** Shortcut
+* Window Manager
+** i3
+*** install
+#+begin_src bash
+  sudo dnf install i3 picom polybar variety i3-gaps
+#+end_src
+- i3:  the main window manager package
+- picom: a lightweight compositor for X11
+- polybar: pretty bar
+- variety: background image update
+- i3-gaps
+*** start
+Logout, change to i3 before login
+*** shortcut
+- ~$mod~
+  - navigation
+    - ~Enter~ new terminal
+    - ~d~ drun, like spotlight
+    - ~shift+q~  close
+    - ~h/v~ split direction
+    - ~shift+<number>~ move to group
+  - config
+    - ~shift+e~ quit window manager
+    - ~shift+c~ reload config
+*** customize
+~~/.config/i3/config~ 
+
+** GNOME
+*** Shortcut
 Represent ~hammerspoon~
 
-*** Replace ~M-S-<LEFT/RIGHT>~ 
+***** Replace ~M-S-<LEFT/RIGHT>~ 
 
 Replace default workspace navigate action shortcut, move to left/right workspace as default behavior.
 
@@ -68,7 +100,7 @@ Weird way to replace default shortcut:
 
 Set ~right super~ as override menu key, ~left super~ work for other shortcuts.
 
-*** Launch or open
+***** Launch or open
 #+begin_src bash
   sudo pacman -S wmctrl xdotool
 #+end_src
@@ -78,11 +110,10 @@ Set custom shortcut with below command
   bash -c "wmctrl -a chrome ; [ "$?" == "1" ] && xdotool set_desktop 0 && google-chrome"
 #+end_src
 
-Or try i3status.
-** Crontab
+* Crontab
 #+begin_src bash
-    systemctl enable --now cronie.service
-    systemctl status cronie
+  systemctl enable --now cronie.service
+  systemctl status cronie
   # ● cronie.service - Periodic Command Scheduler
   #      Loaded: loaded (/usr/lib/systemd/system/cronie.service; enabled; preset: disabled)
   #      Active: active (running) since Thu 2022-11-17 00:21:21 EST; 40s ago
@@ -92,9 +123,9 @@ Or try i3status.
   #         CPU: 13ms
   #      CGroup: /system.slice/cronie.service
   #              └─47518 /usr/bin/crond -n
-    crontab arius-cron
+  crontab arius-cron
 #+end_src
-** NeoVim
+* NeoVim
 #+begin_src bash
   sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
          https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
@@ -104,35 +135,35 @@ Install
 #+begin_src bash
   :PlugInstall
 #+end_src
-** Emacs
-*** ispell
+* Emacs
+** ispell
 #+begin_src bash
   sudo pacman -S aspell aspell-en
   cp /usr/bin/aspell /usr/local/bin/aspell
 #+end_src
-** Alacritty
-*** install
+* Alacritty
+** install
 #+begin_src bash
   sudo pacman -S alacitty tmux
 #+end_src
-*** oh my zsh
+** oh my zsh
 #+begin_src bash
   git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
   git clone https://github.com/paulirish/git-open.git $ZSH_CUSTOM/plugins/git-open
 #+end_src
-** Program language environment
-*** python
+* Program language environment
+** python
 #+begin_src bash
   sudo pacman -S pyenv
 #+end_src
-*** node
+** node
 Node version manager
 #+begin_src bash 
   curl -fsSL https://fnm.vercel.app/install | bash
   fnm ls-remote
   fnm install
 #+end_src
-*** golang
+** golang
 Download https://go.dev/dl/, to ~/usr/local/go~ 
 
 Settings ~~/.zshrc~
@@ -142,28 +173,48 @@ Settings ~~/.zshrc~
   export GO111MODULE=on
   export PATH=$GOBIN:$GOROOT/bin:$PATH
 #+end_src
-** App
-*** chrome
+* App
+** chrome
 #+begin_src bash
   makepkg -si
   yay -S google-chrome
 #+end_src
-*** telegram
+** telegram
 #+begin_src bash
   sudo pacman -S telegram-desktop
 #+end_src
-*** others
-#+begin_src bash
+** variety
+Update background image
+** polybar
+** layout-manager
+https://github.com/klaxalk/i3-layout-manager
 
-#+end_src
-* nvidia
-Dashboard
-#+begin_src bash
-  nvidia-smi
-#+end_src
+i3 layout manager
+** picom
+Compositor for transparent and animation
+** fcitx
+Input method ~RIME~ for chinese, ~mozc~ for Japanese
 
-Switch graphical
-#+begin_src bash
-  systemctl isolate multi-user.target
-  systemctl start graphical.target
+~F4~ to switch between simplify and transitional
+** ranger
+File manager
+** mpv
+** eog
+** youtube-viewer
+* Settings
+** dpi
+~~/.Xresources~
+#+begin_src conf
+  Xft.dpi: 120
 #+end_src
+* problems
+** Random crash/freeze
+https://github.com/coreos/fedora-coreos-tracker/issues/1164
+
+Setting memlock to unlimited in ~/etc/security/limits.conf~ (or ~/etc/security/limits.d/$USER.conf~)
+#+begin_src conf
+  soft    memlock             unlimited
+  hard    memlock             unlimited 
+#+end_src
+Looks like it works.
+
