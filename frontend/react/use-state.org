@@ -1,0 +1,279 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: use-state
+#+DATE: [2023-01-10 12:40]
+* Refers
+* useState
+:PROPERTIES:
+:CUSTOM_ID: usestate
+:END:
+值不能为函数，函数会被执行，赋值返回结果
+
+setState 时，可以用函数，值为前一次的值，*优先使用函数*
+
+每一次 set 不会改变本身，而是创建一个新的值，一个独立的闭包
+
+initial 可以是一个函数，依赖于 props 等，初始化渲染时生成
+* 性能优化
+:PROPERTIES:
+:CUSTOM_ID: 性能优化
+:END:
+*1.浅比较*
+
+- hooks 内会做 浅比较（=Object.is=），控制 rerender
+- 与 class =setState= 不同，一致的时候，不会 rerender
+- 对象不会自动合成，直接覆盖
+
+*2.减少渲染次数*
+
+默认情况下，父组件状态变了，子组件都会重新刷新
+
+- 类组件 =pureComponent= 组件刷新时，如果 state 和 props
+  都没变就不会触发刷新 自动浅比较，key 是否都有，是否是同一个引用
+- 函数组件 =React.memo= 返回一个新组件（HOC），props
+  不变（浅比较），不重新渲染
+
+使用 =useState= 后每个更新，值都是独立的，哪怕没有变化，使用
+=React.memo=依然会重新渲染可以用 =useMemo=
+对数据进行缓存，这样可以避免刷新
+
+* 简单实现
+:PROPERTIES:
+:CUSTOM_ID: 简单实现
+:END:
+#+begin_example
+let memoizedState: any[] = [] // hooks 的值存放在这个数组里
+let cursor = 0 // 当前 memoizedState 的索引
+
+function useState(initialValue: any) {
+    memoizedState[cursor] = memoizedState[cursor] || initialValue
+    const currentCursor = cursor
+    function setState(newState: any) {
+        memoizedState[currentCursor] = newState
+        cursor = 0
+        render(<App />, document.getElementById('root'))
+    }
+    return [memoizedState[cursor++], setState] // 返回当前 state，并把 cursor 加 1
+}
+#+end_example
+
+利用闭包存储数据，每次 render 重新对所有缓存赋值，新的值或者初始化
+
+memoizedState 是 按顺序存放数据的，数组 index 对应每个数据，跟 render
+时函数引用的执行位置关联 如果
+调用顺序改变的话不会被感知到，所以不要循环，条件，嵌套中调用 hooks
+
+要求每次 更新 需要执行整个 函数组件
+
+* 源码
+:PROPERTIES:
+:CUSTOM_ID: 源码
+:END:
+执行逻辑 =react-dom/src/server/ReactPartialRendererHooks.js=
+
+#+begin_example
+function resolveDispatcher() {
+  const dispatcher = ReactCurrentDispatcher.current;
+  return dispatcher;
+}
+export function useState<S>(
+  initialState: (() => S) | S,
+): [S, Dispatch<BasicStateAction<S>>] {
+  const dispatcher = resolveDispatcher();
+  return dispatcher.useState(initialState);
+}
+#+end_example
+
+传入初始化函数或者值，调用 dispatcher 执行逻辑，类似 redux 的思想
+
+** 类型
+:PROPERTIES:
+:CUSTOM_ID: 类型
+:END:
+#+begin_example
+type Dispatch<A> = A => void;
+
+type Hook = {|
+  memoizedState: any,
+  queue: UpdateQueue<any> | null,
+  next: Hook | null,
+|};
+#+end_example
+
+可以看到 Hook 是一个连表结构，每个节点储存一个更新队列，和当前的所有数据
+
+FIXME： currentObject.
+
+调用 =useState= 会用 =useReducer=
+
+#+begin_example
+return useReducer(basicStateReducer, (initialState: any))
+
+function basicStateReducer<S>(state: S, action: BasicStateAction<S>): S {
+  return typeof action === 'function' ? action(state) : action;
+}
+#+end_example
+
+类型接受三个参数，第二个为默认对象，第三个是初始化的方法，可以作为初始化回调
+
+* 上层居民 (闭包)
+:PROPERTIES:
+:CUSTOM_ID: 上层居民-闭包
+:END:
+#+begin_example
+let currentlyRenderingComponent: Object | null = null;
+// 指向当前渲染的组件
+
+let firstWorkInProgressHook: Hook | null = null;
+// 第一次使用 hook 时会构建一个初始化
+
+let workInProgressHook: Hook | null = null;
+// 当前执行的 hook 上下文
+
+let isReRender: boolean = false;
+// 当前 hook 是否是一个需要重新执行渲染的上下文（是否有视图不同步的数据，需要更新）
+
+let didScheduleRenderPhaseUpdate: boolean = false;
+// 标志函数结束是否是否有渲染需要做，函数结束轮训是否还有
+
+let renderPhaseUpdates: Map<UpdateQueue<any>, Update<any>> | null = null;
+// 懒缓存？后置，缓存所有 hooks 结束时候的更新;
+// 是一个 map，一个更新队列指向一个更新链表？？
+
+
+// 避免死循环，最多可重绘次数
+// 函数组件执行完成时，执行 finishHook 使用
+let numberOfReRenders: number = 0;
+const RE_RENDER_LIMIT = 25;
+#+end_example
+
+每一个上层居民都是函数内沟通的信号，同步 hook 的执行状态
+
+* 执行 useState
+:PROPERTIES:
+:CUSTOM_ID: 执行-usestate
+:END:
+#+begin_example
+export function useReducer<S, I, A>(
+  reducer: (S, A) => S,
+  initialArg: I,
+  init?: I => S,
+)
+#+end_example
+
+内部判断，如果 =reducer= 是 =basicStateReducer= 则允许函数初始化
+
+=useRender= 对当前环境进行检测， =currentlyRenderingComponent=
+找出最近的组件，必须要求在组件内部执行
+
+=createWorkInProgressHook= 如果是通过闭包判断，是否有
+=workInProgressHook=(正在工作，使用的 Hook 结构体)更新 上层变量
+=isReRender= 和 =workInProgressHook= 标记 是否第一次渲染，同时
+正在工作的 不能使用，需要获取下一个=workInProgressHook.next=
+第一次需要创建需要先 构建 hook，同时使用更新上层变量
+=firstWorkInProgressHook= =createHook= 没有什么操作，只是生成一个空的
+结构体，同时监控 上层变量 =numberOfReRenders= 保证每次渲染的 hook
+数量一致
+
+=createWorkInProgressHook= 创建当前 hook 节点的结构体，内部绑定
+=memorizeState= 记录初始化值，=queue=
+记录（初始化）变更链表，=queue.dispatch= 指向的 =dispatch=, 由
+=dispatchAction=.生成，绑定当前渲染的组件和更新队列 =quque=,
+然后返回当前的 =memorizeState= 和 =dispatch= ，作为 =state= 和
+=setState=；
+
+*初始化 Steps:*
+
+1. 检测 环境，判断是否在组件内部使用，创建空对象给上层居民生存
+2. 创建 =hook= 上下文，缓存初始化值
+3. 标记更新队列，将返回的 =setState= 绑定到 当前组件 和
+   =workInProgressHook= 的更新队列
+4. 返回 state 和 dispatch 函数
+
+而调用一次 =useState= 或者其他带依赖的 hooks 相当于创建一个
+=workInProgressHook= 链表节点 =workInProgressHook=
+其实可以理解成当前游标位置 表头是 上层居民 =firstWorkInProgressHook=
+，按固定顺序获取每个定义的值 =isReRender=
+用来判断是否是第一次的值，需要对同一个节点进行初始化以后的第二次操作，这时候
+=isReRender= 为 =true= 这个情况只有在 =finishHooks=
+中被执行到，因为单个函数流程的访问顺序都是按定义的顺序访问，不会有重复的访问机会，只可能是在函数执行完成，但是
+=firstWorkInProgressHook= 不变和 =workInProgressHook= 刷新的
+=finishHooks= 中可以重复遍历。
+
+区分：
+
+- 渲染： 结束一次 hook
+  流程，渲染出真实画面，整个周期结束，其中所有上层居民重制一遍。
+- 重绘： 根据 未完成更新，保存当前的 上下文，对其继续进行修改。
+
+=dispatchAction= 只会执行当前组件的
+更新，重绘后的组件不需要再处理这个更新。如果有东西需要更新 设置 上层居民
+=didScheduleRenderPhaseUpdate= 为 =true= 表示函数执行结束的时候需要更新
+
+创建 一个 =update= 作为 key 为 =queue= 的 Map 的 value, 如果存在则加到
+链表节点的 next 其中 =action= 可以为值或者函数
+
+#+begin_example
+type Update<A> = {|
+  action: A,
+  next: Update<A> | null,
+|};
+
+type UpdateQueue<A> = {|
+  last: Update<A> | null,
+  dispatch: any,
+|};
+#+end_example
+
+函数组件执行完成后，会调用 =finishHooks= ，会返回一个 =children=，
+就是这一次渲染生成的组件 执行完成后，下列上层居民会被初始化
+
+#+begin_example
+// 环境判定
+currentlyRenderingComponent = null;
+
+// 完成一次渲染，清除表头
+firstWorkInProgressHook = null;
+// 刷新单次渲染允许重绘次数
+numberOfReRenders = 0;
+
+renderPhaseUpdates = null;
+// 每次重绘都会刷新 游标 和 是否需要刷新
+// 渲染也是
+workInProgressHook = null;
+didScheduleRenderPhaseUpdate = false;
+#+end_example
+
+执行的时候会通过判断上层居民 =didScheduleRenderPhaseUpdate=
+决定是否需要重绘，重绘即使重新调用一遍函数组件，这时候执行 =useReducer=
+的 =re-render= 逻辑
+
+回到 useReducer， 第二次执行重绘的时候 会执行不一样的逻辑 首先遍历
+renderrenderPhaseUpdates queue， key 为当前上下文的 queue 的链表。，
+如果是 =basicStateReducer=
+的话，值则是直接赋值，函数则是对应上一个值执行，循环直到遍历完这个链表，直接修改上下文
+的 =memoizedState= 为最后的值 返回新的值和 =dispatch= ，=dispatch= 和
+=queue= 都基本不变对应当前上下文（或者说游标）
+
+=finishHooks= 每次从新执行一遍组件，都会重新执行 N
+遍内部更新，直到这个更新链表遍历完为止
+
+*异步 =dispatch= 如何通知组件刷新渲染？？ FinishHooks 触发？？*
+
+=react-dom/src/server/ReactPartialRenderer.js#417 resolve=
+
+通过引用 =finishHook= 的找到触发函数 =resolve= , 被
+=ReactDOMServerRenderer.render= 调用
+
+step：
+
+1. 判断这个 =Component= ，类型是否函数
+2. 如果是，则为上层居民创建空间，初始化执行一次函数和调用一次
+   =finishHook=
+   3.
+
+* Algebraic Effects
+:PROPERTIES:
+:CUSTOM_ID: algebraic-effects
+:END:
+As a mental mode for React.

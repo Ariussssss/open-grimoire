@@ -1,26 +1,27 @@
-#+STARTUP: content
-#+CREATED: [2021-06-30 11:31]
-* sse
-** Refers
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: sse
+#+DATE: [2021-06-30 11:31]
+* Refers
    - http://www.ruanyifeng.com/blog/2017/05/server-sent_events.html
-** 本质
+* 本质
    SSE Server-Sent Events
 
    客户端建立链接后不关闭, 一直等待服务器传输新数据, 类似视频播放
 
    通信基于流, 不同于 WebSocket 全双工, SSE 是单向的
-** 特点
+* 特点
    - 使用 http, websocket 是独立协议
    - 轻量级, 简单
    - 支持断线重连
    - 一般传输文本
      必须是 UTF-8 编码文本, 字段使用"\n"来做分割
    - 自定义消息类型
-** 使用场景
+* 使用场景
    - 股票行情
    - 网站自动更新 Twitter
-** 实现
-*** 客户端 
+* 实现
+** 客户端 
 
     消息可以自定义, 不一定总是 message
     #+begin_src js
@@ -43,7 +44,7 @@
     #+end_src
 
    
-*** 服务端 
+** 服务端 
     #+begin_src js
       var http = require("http");
 

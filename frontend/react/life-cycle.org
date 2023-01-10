@@ -1,0 +1,37 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: life-cycle
+#+DATE: [2023-01-10 12:47]
+* Refers
+* Reconciliation
+:PROPERTIES:
+:CUSTOM_ID: reconciliation
+:END:
+
+- componentWillMount
+- componentWillReceiveProps
+- shouldComponentUpdate
+- componentWillUpdate
+
+* Commit
+:PROPERTIES:
+:CUSTOM_ID: commit
+:END:
+
+- componentDIdMount
+- componentDidUpdate
+- componentWillUnmount
+
+* advice
+:PROPERTIES:
+:CUSTOM_ID: advice
+:END:
+
+- constructor 初始化 state
+- componentDIdMount 中实现事件监听 componentWillUnmount 解绑
+- componentDIdMount 进行数据请求，而不是 willMount
+- props 更新 state，使用 getDerivedStateFromProps(nextProps, prevState)
+- componentDidUpdate 中 setState 必须加条件
+- =getSnapshotBeforeUpdate(prevProps, prevState)=可以在更新之前获取最新的渲染数据，它的调用是在
+  render 之后， update 之前
+- shouldComponentUpdate 可以在返回 false时，阻止后面的逻辑

@@ -5,3 +5,11 @@
 * Refers
 - https://github.com/dunwu/db-tutorial
 * cheatsheets
+* 聚簇索引 Clustered Index
+- 是一种数据存储方式, B+树按顺序存储所有数据, 每个索引对应一个树
+- 默认主建, InnoDB, 索引不压缩
+** 劣势
+- 非递增主键存在时, 数据插入会引起页裂
+* 二级索引 Secondary Index
+- 通过一个二级索引, 找到一个主键索引, 再找到正行数据(回表查询)
+- MyISAM

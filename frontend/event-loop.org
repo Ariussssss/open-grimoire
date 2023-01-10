@@ -1,4 +1,4 @@
-#+STARTUP: content
+#+STARTUP: all
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: event-loop
 #+DATE: [2021-06-21 02:06]
@@ -87,9 +87,9 @@
    2. 一个 watchdog 监控线程用于处理调试信息
    3. 一个 v8 task scheduler 线程用于调度任务优先级。
       加速敏感任务执行
-   4. 4个 v8线程
+   4. 4 个 v8 线程
       主要用于执行代码调优与 GC 等后台任务
-   5. 以及用于异步 I/O 的libuv 线程池
+   5. 以及用于异步 I/O 的 libuv 线程池
 
    网络 I/O 不占用线程池
 
