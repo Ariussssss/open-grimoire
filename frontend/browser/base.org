@@ -1,9 +1,10 @@
-
-#+STARTUP: content
-* browser
-** Refers
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: base
+#+DATE: [2021-07-04 13:56]
+* Refers
    - https://segmentfault.com/a/1190000012925872
-** 进程 process
+* 进程 process
    每个 tab 单独维护浏览器进程
 
    非绝对, 多个时有循环优化, 如空白页面进程合并等
@@ -14,15 +15,15 @@
      - 管理页面行为和资源下载管理, 渲染进程创建和销毁
    - 第三方插件
      - 每个插件对应一个进程 
-   - GPU 用于3D绘制
+   - GPU 用于 3D 绘制
    - 浏览器渲染进程
      - 内置多线程, 每个 tab 一个, 负责页面渲染, 脚本执行和事件处理(理解中的浏览器进程)
 
    其中 渲染进程 最终会将结果交给 Browser 进程, 绘制结果
    
-** 线程 thread
+* 线程 thread
 
-***  渲染进程中
+**  渲染进程中
     常驻线程:
     - GUI 渲染线程
       - 负责解析 HTML, CSS, 构建 DOM 树, RenderObject 树,
@@ -40,9 +41,9 @@
       - 异步请求处理 callback 交给 JS 引擎
 
 	
-** 渲染 render
+* 渲染 render
 
-*** 基本步骤
+** 基本步骤
     - 解析 css 和 HTML 过程并行
       - css 单独下载线程异步下载, 不阻塞 DOM 构建和解析, 但是阻塞渲染
     - 解析完成构建 DOM 树, 和 CSS 树
@@ -56,7 +57,7 @@
       - 几何尺寸变化, 重新计算渲染树
       - 损耗最大
    
-*** 图层
+** 图层
     图层氛围 普通 和 复合 (composite) 图层
 
     普通文档流可以理解成一个默认的复合图层
