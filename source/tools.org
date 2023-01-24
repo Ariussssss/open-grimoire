@@ -37,3 +37,6 @@ https://github.com/Yqnn/svg-path-editor
 * https://github.com/tldraw/tldraw
 * model and dataset for ml https://huggingface.co/models
 * achievement https://www.trueachievements.com/achievement-meme-maker#canvas
+* 曲线系数 https://cubic-bezier.com/#.17,.67,.83,.67
+* css animation debug https://animejs.com/documentation/#staggeringEasing
+* world perdiction https://2050.earth/
