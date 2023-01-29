@@ -64,3 +64,6 @@
 
 ** 免费 drawio
 https://app.diagrams.net/?src=about
+
+** d2
+https://github.com/terrastruct/d2
