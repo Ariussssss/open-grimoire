@@ -1,0 +1,89 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: ui
+#+DATE: [2023-02-05 19:59]
+* Refers
+* intro
+游戏内所有可操作的界面元素
+
+对比 APP:
+- 高性能要求, 主题风格, 表现效果灵活
+- 底层, 简单
+* type
+** csd
+- ui 结构文件
+- 高规格
+- 拆分不足, 单个文件过大, 加载卡顿
+** png
+- 图片
+- 高规格
+- 尺寸超标会占用高内存
+** ttf/ttc
+- 字体
+- 高规格
+- 种类, 有效性
+** fnt
+- 字体
+- 低规格
+** plist
+- cocos 粒子
+- 低规格
+- 计算复杂占用 CPU
+** json/skel
+- Spine
+- 骨骼数
+** spm
+- Splendor
+- Shader 复杂度
+** moc3
+- Live2D
+- 骨骼数
+* ui 树
+- 抽象逻辑概念
+- 便于表示 UI 归属和定位, relative/absolute
+* Pivot 锚点
+* zorder 层级
+* resolution 分辨率
+- 抽象一个分辨率, 再相对计算资源尺寸, rem
+* Node 节点, 组件 Widget
+- 提供能力的基本 UI 单位
+* animation 动画
+** UI 属性帧动画
+- 每帧修改节点属性
+- 性能好, 容易实现
+- 实现性很大, 很多效果实现不了
+** 图片序列帧
+- 简单
+- 内存压力大
+** 代码动画
+- 开发成本高, 还原难
+** 视频动画
+- 体积小, 内存可控, 还原
+- 灵活性差
+** Spine/Live2d
+- 性能可控和效果好
+- 开发成本和学习成本高
+** Shader 动画
+- 性能好
+* Performance 性能
+** 卡顿
+*** 时机
+- 转换为不敏感时期
+- loading 动画
+*** 方案
+- update flag,  useEffect
+- 错开时间, 分开加载时间
+- 拆分 import
+** 内存占用高, 爆内存闪退, IOS
+*** 节点大
+- 拆分按需加载
+*** 贴图占用过高
+- 尺寸规格控制
+- 拆分页面按需加载
+*** 字体占用高
+- 去除非常用字形, 减少种类
+*** 脚本循环调用
+- onUnmount 销毁处理
+** 渲染压力大, 发热
+** CPU 消耗大
+** 爆体积大, 下载慢, 玩家流失
