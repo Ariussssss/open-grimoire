@@ -40,3 +40,5 @@ https://github.com/Yqnn/svg-path-editor
 * 曲线系数 https://cubic-bezier.com/#.17,.67,.83,.67
 * css animation debug https://animejs.com/documentation/#staggeringEasing
 * world perdiction https://2050.earth/
+* 虚拟信息 https://www.myfakeinfo.com/
+* 外国手机号 https://sms-activate.org/

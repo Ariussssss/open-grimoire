@@ -56,6 +56,11 @@ js cli
 https://rome.tools/blog/2021/09/21/rome-will-be-rewritten-in-rust
 *** gifsicle
 compress gif
+*** dns-detector
+#+begin_src shell
+  npm i -g dns-detector
+  dns-detector --host=google.com
+#+end_src
 ** 历史
 *** 👻 tauri => electron
 Rust 后端代替 node, 更快更小
