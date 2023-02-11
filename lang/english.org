@@ -1,0 +1,7 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: English
+#+DATE: [2023-02-11 02:37]
+* Refers
+* words
+* sentences
