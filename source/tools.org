@@ -42,3 +42,7 @@ https://github.com/Yqnn/svg-path-editor
 * world perdiction https://2050.earth/
 * 虚拟信息 https://www.myfakeinfo.com/
 * 外国手机号 https://sms-activate.org/
+* 视频取水印 https://watermark.liumingye.cn/
+* pwa list: apps, games etc https://appsco.pe/
+** 国内 https://pwapp.net/
+* custom official website https://userstyles.org/

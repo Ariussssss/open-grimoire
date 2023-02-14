@@ -197,8 +197,7 @@ Release js-process after re-render which bring bad experience to user.
 
    1. If do, deal with it first.
    2. If not, continue deal with the others.
-      ([[https://link.juejin.im/?target=https://www.w3.org/TR/requestidlecallback/][cooperative
-      scheduling 合作式调度]]).
+      ([[https://www.w3.org/TR/requestidlecallback/][cooperative scheduling 合作式调度]]).
 
 * What For
 :PROPERTIES:
@@ -274,3 +273,10 @@ const fiber = {
     return,       // Parent Node
 }
 #+end_example
+
+* Summary
+1. Compile JSX to ~React.createElement~, execute to vdom
+2. Reconcile: Transfer vdom to fiber, mark tag for add or remove mutation
+3. Commit mutation to dom
+   1. before mutaion
+   2. layout(useLayoutEffect: sync, useEffect: async)

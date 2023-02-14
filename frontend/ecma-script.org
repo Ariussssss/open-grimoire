@@ -67,6 +67,12 @@ nodejs 默认使用 CommonJS 规范
 4. 异步
    引入不会打断执行,  ~import~ 执行会插入事件队列而不是像 CJS 一样直接打断等待引用模块执行完成.
 
+* 2023
+** findLast().findLastIndex()
+** hashbang
+#+begin_src js
+  // #!/usr/bin/env node
+#+end_src
 
 * 2022
 
