@@ -46,3 +46,4 @@ https://github.com/Yqnn/svg-path-editor
 * pwa list: apps, games etc https://appsco.pe/
 ** 国内 https://pwapp.net/
 * custom official website https://userstyles.org/
+* diffusion model and pics https://civitai.com/
