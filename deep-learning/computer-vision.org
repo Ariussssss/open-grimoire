@@ -1,0 +1,75 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: computer-vision
+#+DATE: [2023-02-24 01:43]
+* Refers
+* Models
+* Stable Diffusion
+** prompt
+*** nice
+ best quality, masterpiece, highres, original, extremely detailed wallpaper
+*** negetive
+NSFW, lowres,bad anatomy,bad hands, text, error, missing fingers,extra digit, fewer digits, cropped, worstquality, low quality, normal quality,jpegartifacts,signature, watermark, username,blurry,bad feet
+*** buff
+- 使用符号 {}. 你可以添加许多花括号来强调某个元素
+- (maid)提升对 maid 的注意力到 1.1 倍
+- ((maid))提升对 maid 的注意力到 1.21 倍(= 1.1 * 1.1)
+- [maid]降低对 maid 的注意力到 1/1.1 倍
+- (maid:1.5)提升对 maid 的注意力到 1.5 倍
+- (maid:0.25)提升对 maid 的注意力到 0.25 倍
+*** base
+ {best quality}, {{masterpiece}}, {highres}, original, extremely detailed wallpaper, 1girl
+*** style
+- {an extremely delicate and beautiful}
+- chibi 可以画出低头身比的效果(二头身, 三头身)
+- {{watercolor pencil}}可以生成彩铅画
+- {{faux traditional media}}可以做出签绘的风格
+- anime screeshot，可以让画面变成动画风格
+- {{{retro artstyle}}}赛璐璐风
+- {photorealistic}, {painting}, {realistic}, {sketch}, {oil painting} 厚涂
+- pastel color 和 sketch 搭配会有速涂的质感
+- detailed, beautiful detailed
+*** artist
+- Velazquez
+
+*** draft
+- sketch 可以让图片看起来像随手画的草稿
+- {{lineart}}可以让线条变得很粗
+- {{{posing sketch}}}, {{monochrome}} 黑白草图
+- {rough sketch} 上了颜色的草图
+- monochrome+lineart 情况下一般只会让眼睛上色，强调发色后头发也可以上色
+- {{{monochrome}}}, {{{gray scale}}}, {{{pencil sketch lines}}}做出的铅笔速写的感觉利用
+- sketch，pastel color，lineart 的 tag 模拟一张图的绘画过程
+
+*** example
+- {best quality}, {{masterpiece}}, {highres}, original, extremely detailed 8K wallpaper, 1girl, black tights, cat ears, white hair, red eyes, maid, {an extremely delicate and beautiful}
+- an extremely delicate and beautiful girl, cold attitude, dark cyan pupils, long blue green hair, choker, hair ornament hair clip, she looks very relaxed, close-up, half-body drawing, fashion loose sweater with delicat
+- {profile picture},{an extremely delicate and beautiful girl}, cg 8k wallpaper, masterpiece, cold expression, handsome, upper body, looking at viewer, school uniform, sailor suit, insanity, white hair, messy long hair, red eyes, beautiful detailed eyes {{a black cross hairpin}}, handsome，Hair glows,dramatic angle
+- best quality, cold attitude, red eyes, short hair, white hair, white shirt, black jacket, bowtie, hair ornament hair clip, she looks very relaxed, side face, white atmosphere, high quality, masterpiece, flat color, 1girl, not looking at viewer, an extremely delicate and beautiful girl, full body portrait,holding gun, assault rifle, reflex sight , heads-up display ,gun , military
+- best quality, extremely detailed CG unity 8k wallpaper, girl, purple eyes, white hair, ponytail, long hair, light powder inner color hair, white trench coat, inner cyan coat, studio photography, masterpiece, cinematic highlight hair, Lift the hood by hand, looking at camera,
+
+
+
+* Disco Diffusion
+* Midjourney
+太空歌剧得奖模型
+* DALL-E 2
+* NovelAI
+** prompt
+* control net
+*** OpenPose 骨螺绑定
+图像 prompt 生成骨架, 从而生成姿势图
+*** Canny
+线稿精细复原
+*** Hed
+线稿抽象还原
+*** Scribble
+线稿抽象还原
+*** Seg
+区域标注, 上色
+*** Mlsd
+建筑物
+** Install
+1. https://github.com/Mikubill/sd-webui-controlnet extensions
+2. https://huggingface.co/lllyasviel/ControlNet/tree/main/annotator/ckpts extensions/annotator/ckpts
+3. https://huggingface.co/webui/ControlNet-modules-safetensors/tree/main models
