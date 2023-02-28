@@ -147,6 +147,8 @@ https://github.com/ClickHouse/ClickHouse/issues/10352
 
 ~WITH~ 一般用来存常量和普通类型, 反过来可以存 table
 
+其实并不是存数据或者 rows, 相当于一个 snippet, 不使用会跳过, 反之使用的时候会每次都跑一边
+
 #+begin_src sql
   WITH TOPTEN AS (
     SELECT *,

@@ -4,6 +4,7 @@
 #+DATE: [2021-11-17 20:12]
 * Refers
 - https://www.cnblogs.com/zhangziqiu/archive/2011/03/30/computercode.html
+- https://evanw.github.io/float-toy/
 * 基础
 1 字节 byte = 8 位 bit 比特
 

@@ -4,3 +4,4 @@
 #+DATE: [2022-07-25 11:32]
 * Refers
 - https://github.com/makelove/Blockchain_Study
+- https://github.com/bitcoinbook/bitcoinbook

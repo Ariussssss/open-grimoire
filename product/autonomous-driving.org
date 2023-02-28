@@ -25,7 +25,7 @@ Tesla 的自动驾驶汽车采用 RADAR 技术作为主要传感器.
 后续会演变成纯视觉(2022 已更新系统, 就算装有 Radar 也不会使用, 纯摄像头). 
 ** IMU, IMU inertial motion unit 惯性运动单元 传感器
 * Mode
-** LCC, Lane Centering Control, 车道剧中辅助
+** LCC, Lane Centering Control, 车道居中辅助
 ** ACC, Adaptive Cruise Control, 自适应巡航
 ** NGP, Navigation Guided Pilot
 ** APA, Auto Parking Assist System, 自动泊车系统

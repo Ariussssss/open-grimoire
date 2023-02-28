@@ -2,48 +2,54 @@
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: tools
 #+DATE: [2021-12-01 11:50]
-* https://devhints.io/ 代码片段速查
-* https://openbase.com/ 项目打分
-* https://github.com/codemayq/chinese_chatbot_corpus 中文 chatbot 语录
-* https://toolbox.googleapps.com/apps/dig/#A/ 谷歌域名检索
-* https://gitcode.net/mirrors github 国内镜像加速
-* Unicode Emoji https://emojipedia.org/unicode-1.1/
-* nert font list https://www.nerdfonts.com/font-downloads
-* golang 文档 <2020-11-23 Mon>                                       :golang:
-* game ui <2021-01-04 Mon>                                           :design:
-https://www.gameuidatabase.com/
-* svg editor <2021-01-06 Wed>                                            :fe:
-https://github.com/Yqnn/svg-path-editor
-* bt 下载器 https://cjting.me/2020/10/31/tinytorrent-a-deno-bt-downloader/
-* 免费 cs 书籍 https://csgordon.github.io/books.html
-* design tool http://chuangzaoshi.com/index
-* free icon https://www.flaticon.com/
-* pop os laptop https://system76.com/laptops/darp7/configure
-* 电子书 https://z-lib.org/   
-* 国内镜像加速 https://github.com/eryajf/Thanks-Mirror
-* 语音转换 https://app.xunjiepdf.com/text2voice/
-* remote jobs https://github.com/levelsio/awesome-remote-job
-* IPA reader http://ipa-reader.xyz/
-* ml training data https://www.kaggle.com/
-* vpn https://10davpn.cn.com/
-** https://www.webhostingsecretrevealed.net/zh-CN/blog/web-tools/best-vpn/
-** v2board
-* 声音资源 https://soundcloud.com/
-* python ml sharing https://github.com/fly51fly/aicoco/issues/3
-* qrcode https://www.nayuki.io/page/creating-a-qr-code-step-by-step
-* math problem https://oeis.org/
-* 象形文字https://tw.piliapp.com/cool-text/square/
-* 网盘搜索 https://jujuso.com/
-* https://github.com/tldraw/tldraw
-* model and dataset for ml https://huggingface.co/models
-* achievement https://www.trueachievements.com/achievement-meme-maker#canvas
-* 曲线系数 https://cubic-bezier.com/#.17,.67,.83,.67
-* css animation debug https://animejs.com/documentation/#staggeringEasing
-* world perdiction https://2050.earth/
-* 虚拟信息 https://www.myfakeinfo.com/
-* 外国手机号 https://sms-activate.org/
-* 视频取水印 https://watermark.liumingye.cn/
-* pwa list: apps, games etc https://appsco.pe/
-** 国内 https://pwapp.net/
-* custom official website https://userstyles.org/
-* diffusion model and pics https://civitai.com/
+* coding
+** https://devhints.io/ 代码片段速查
+** https://github.com/codemayq/chinese_chatbot_corpus 中文 chatbot 语录
+** https://toolbox.googleapps.com/apps/dig/#A/ 谷歌域名检索
+** https://gitcode.net/mirrors github 国内镜像加速
+** 国内镜像加速 https://github.com/eryajf/Thanks-Mirror
+** golang 文档 <2020-11-23 Mon>                                     :golang:
+** css animation debug https://animejs.com/documentation/#staggeringEasing
+** vpn https://10davpn.cn.com/
+*** https://www.webhostingsecretrevealed.net/zh-CN/blog/web-tools/best-vpn/
+*** v2board
+* ml
+** model and dataset for ml https://huggingface.co/models
+** python ml sharing https://github.com/fly51fly/aicoco/issues/3
+** ml training data https://www.kaggle.com/
+** diffusion model and pics https://civitai.com/
+* assets
+** free svg icon https://tabler-icons.io/
+** free icon https://www.flaticon.com/
+** Unicode Emoji https://emojipedia.org/unicode-1.1/
+** nert font list https://www.nerdfonts.com/font-downloads
+** game ui https://www.gameuidatabase.com/
+** 电子书 https://z-lib.org/   
+** bt 下载器 https://cjting.me/2020/10/31/tinytorrent-a-deno-bt-downloader/
+** 声音资源 https://soundcloud.com/
+** 网盘搜索 https://jujuso.com/
+** 免费 cs 书籍 https://csgordon.github.io/books.html
+* tools
+** 密码学工具 https://crypto-online.cn/playground/hash/
+** 外国手机号 https://sms-activate.org/
+** 曲线系数 https://cubic-bezier.com/#.17,.67,.83,.67
+** 语音转换 https://app.xunjiepdf.com/text2voice/
+** https://github.com/tldraw/tldraw
+** qrcode https://www.nayuki.io/page/creating-a-qr-code-step-by-step
+** design tool http://chuangzaoshi.com/index
+* fun
+** math problem https://oeis.org/
+** https://openbase.com/ 项目打分
+** 象形文字https://tw.piliapp.com/cool-text/square/
+** custom official website https://userstyles.org/
+** 虚拟信息 https://www.myfakeinfo.com/
+** 视频取水印 https://watermark.liumingye.cn/
+** svg editor https://github.com/Yqnn/svg-path-editor
+** achievement https://www.trueachievements.com/achievement-meme-maker#canvas
+** world perdiction https://2050.earth/
+** pronounce IPA reader http://ipa-reader.xyz/
+* index
+** remote jobs https://github.com/levelsio/awesome-remote-job
+** pwa list: apps, games etc https://appsco.pe/
+*** 国内 https://pwapp.net/
+** pop os laptop https://system76.com/laptops/darp7/configure

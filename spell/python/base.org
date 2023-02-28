@@ -1,10 +1,21 @@
-#+STARTUP: all
+a#+STARTUP: all
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: python 基础
 #+DATE: [2021-04-06 10:33]
 * Refers
    - https://github.com/trekhleb/learn-python 速查表
-* map array
+* grammar
+** dict
+[[https://mail.python.org/pipermail/python-dev/2017-December/151283.html][Dict keeps insertion order]] in 3.7
+
+#+begin_src python
+  a = dict(name=2)
+
+  a.get('name1', 3)
+  print(a.pop('name'))
+#+end_src
+
+** map array
   #+begin_src python
     [x * 4 for x in [1]]
 
@@ -14,16 +25,6 @@
     for i in range(1, 10):
 	print(i)
   #+end_src
-* type
-** List
-    #+begin_src python
-      from typing import List
-
-      def s(a: List[str]) -> str:
-	  return "".join(a)
-
-      s(["1", "2"])
-    #+end_src
 ** heapq
     #+begin_src python
       import heapq
@@ -34,6 +35,38 @@
       # using heapify to convert list into heap 
       heapq.heapify(li) 
     #+end_src
+* type
+** demo
+#+begin_src python
+  from typing import Dict, List, Tuple, Any
+
+  primes: List[int] = [2,3,5,7,11,13]
+
+  primes_dict: Dict[str, int] = {
+      "two": 2,
+      "three": 3,
+      "five": 5,
+      "seven": 7,
+      "eleven": 11,
+      "thirteen": 13
+  }
+
+  isPrime_tuple: Tuple[str, int, bool] = ("one", 1, False)
+
+  Vector = Tuple[float,float,float]
+
+  vector: Vector = (1.0,1.0,1.0)
+
+  Matrix = Tuple[Vector,Vector,Vector]
+  matrix: Matrix = (
+      (1.0,0.0,0.0),
+      (0.0,1.0,0.0),
+      (0.0,0.0,1.0)
+  )
+
+  def s(a: List[str]) -> str:
+      return "".join(a)
+#+end_src
 * math
    阶乘
    #+begin_src python
