@@ -11,7 +11,7 @@
 　　　　　　　　　　　　　　由于不能改写信息，不能升级，现已很少使用。
 * RAM RamdomAccessMemory
 
-* Memory Monitoring vmstat
+* vmstat
 In addition to CPU monitoring and I/O monitoring you can monitor your memory usage with vmstat
 
 
@@ -53,3 +53,20 @@ cpu
 - sy - Time spent in kernel time
 - id - Time spent idle
 - wa - Time spent waiting for IO
+
+* free
+#+begin_src bash
+  $ free -h
+                total        used        free      shared  buff/cache   available
+  Mem:           247G        128G        3.0G         56M        116G        121G
+  Swap:            0B          0B          0B
+#+end_src
+
+- total	Total installed memory
+- used	Memory currently in use by running processes (used= total – free – buff/cache)
+- free	Unused memory (free= total – used – buff/cache)
+- shared	Memory shared by multiple processes
+- buffers	Memory reserved by the OS to allocate as buffers when process need them
+- cached	Recently used files stored in RAM
+- buff/cache	Buffers + Cache
+- available	Estimation of how much memory is available for starting new applications, without swapping.
