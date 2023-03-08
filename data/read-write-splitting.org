@@ -1,0 +1,24 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: read-write-splitting
+#+DATE: [2023-03-07 23:16]
+* Refers
+* Intro
+- 主从库, 主库写入, 多从库完成读, 数据库内部完成数据同步
+- 业务经常多读少写, 提高读性能瓶颈
+- 作为最终优化方案, 有很高的研发和维护成本
+* Problem
+** 连接池分离, 研发难度增加
+对比缓存策略
+** 保证高可用性, 读连接池故障自动恢复
+一般添加代理, 主流使用的 MySQL 代理有 ShardingJDBC、ProxySQL 以及 MyCat
+** 主从一致性
+出现一致性问题
+- 写操作后, 定义睡眠时间, 基本不用
+- 搭建全同步集群, 写操作包含全从库同步流程
+- 通过代理强制走主库
+* Proxy
+** ProxySQL
+- 通过 monitor 用户设置高权限定期执行健康检查, 重试 3 次
+* 相关
+** MGR MySQL Group Replication 集群
