@@ -1,9 +1,0 @@
-#+STARTUP: all
-#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
-#+TITLE: cache
-#+DATE: [2023-03-07 23:28]
-* Refers
-* Intro
-- 让访问速度更快
-- 处理经常读取的数据, 频繁查询的数据, 热点数据, I/O 瓶颈数据, 计算昂贵的数据等
-- 符合 5 分钟法则和局部性原理的数据都可以用来缓存
