@@ -3,6 +3,11 @@
 #+TITLE: high-concurrency
 #+DATE: [2023-03-08 23:08]
 * Refers
+* words
+- QPS query per second 每秒查询数
+- TPS Transaction Per Second 每秒事务数
+- RT Response Time 响应时间
+  - 网络, 逻辑, 数据库, 缓存, IO 等
 * cache 缓存
 - 让访问速度更快
 - 二八定律, 处理经常读取的数据, 频繁查询的数据, 热点数据, I/O 瓶颈数据, 计算昂贵的数据等
