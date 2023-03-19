@@ -13,11 +13,14 @@
 ** vpn https://10davpn.cn.com/
 *** https://www.webhostingsecretrevealed.net/zh-CN/blog/web-tools/best-vpn/
 *** v2board
+* database
+** https://github.com/pingcap/awesome-database-learning 
 * ml
 ** model and dataset for ml https://huggingface.co/models
 ** python ml sharing https://github.com/fly51fly/aicoco/issues/3
 ** ml training data https://www.kaggle.com/
 ** diffusion model and pics https://civitai.com/
+** 神经网络与深度学习 https://nndl.github.io/
 * assets
 ** free svg icon https://tabler-icons.io/
 ** free icon https://www.flaticon.com/

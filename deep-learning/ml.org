@@ -18,6 +18,7 @@
 - 深度学习面试 https://github.com/BoltzmannEntropy/interviews.ai
 - 论文精读 https://github.com/mli/paper-reading
 - 深度学习在图像处理中的应用教程https://github.com/WZMIAOMIAO/deep-learning-for-image-processing
+- 机器学习简介 https://zgjx6.github.io/2019/03/06/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%80%E4%BB%8B/
 * nlp
 - https://github.com/fighting41love/funNLP
 - simple NLP https://github.com/flairNLP/flair

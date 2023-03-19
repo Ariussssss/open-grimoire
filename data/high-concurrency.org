@@ -33,7 +33,7 @@
   - Write Though 直写, 写入缓存, 同时写入数据源, 然后返回
   - Write Back 写入缓存,直接返回, 异步更新数据源
 ** 相关
-- CPU L1, L2, L3, 实时系统, 大规模计算模拟, 图像处理领域常用
+- CPU L1, L2, L3 cache, 实时系统, 大规模计算模拟, 图像处理领域常用
 -  system-of-record (SOR)
 * async 异步
 - 拆分流程

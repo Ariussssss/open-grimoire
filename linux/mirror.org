@@ -41,8 +41,8 @@
      sudo cp /etc/apt/sources.list /etc/apt/sources.list_bak
    #+end_src
 2. mirror
-#+begin_src bash
   sudo sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
+#+begin_src bash
 #+end_src
 deb http://mirrors.ustc.edu.cn/debian stable main contrib non-free
 # deb-src http://mirrors.ustc.edu.cn/debian stable main contrib non-free
