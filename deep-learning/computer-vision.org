@@ -48,8 +48,6 @@ NSFW, lowres,bad anatomy,bad hands, text, error, missing fingers,extra digit, fe
 - best quality, cold attitude, red eyes, short hair, white hair, white shirt, black jacket, bowtie, hair ornament hair clip, she looks very relaxed, side face, white atmosphere, high quality, masterpiece, flat color, 1girl, not looking at viewer, an extremely delicate and beautiful girl, full body portrait,holding gun, assault rifle, reflex sight , heads-up display ,gun , military
 - best quality, extremely detailed CG unity 8k wallpaper, girl, purple eyes, white hair, ponytail, long hair, light powder inner color hair, white trench coat, inner cyan coat, studio photography, masterpiece, cinematic highlight hair, Lift the hood by hand, looking at camera,
 
-
-
 * Disco Diffusion
 * Midjourney
 太空歌剧得奖模型

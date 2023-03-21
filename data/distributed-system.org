@@ -3,13 +3,13 @@
 #+TITLE: distributed-system
 #+DATE: [2021-09-29 10:38]
 * Refers
-  - https://juejin.cn/post/6844903894384902158
-  - https://github.com/dreamhead/patterns-of-distributed-systems
+- https://juejin.cn/post/6844903894384902158
+- https://github.com/dreamhead/patterns-of-distributed-systems
 * 幂等 idempotent, idempotence
-  幂等操作, 指多次运算执行结果一致, 影响和一次相同
+幂等操作, 指多次运算执行结果一致, 影响和一次相同
 ** 解决方案
-   - 唯一索引: 重复数据, 数据库报异常
-   - 乐观锁: 业务通过 version 判断获取更新
-   - 悲观锁: 获取数据时加锁
-   - 分布式锁: redis 或者 zookeeper 锁定全局唯一资源
-   - token: 每个 token 只有一次操作机会, 一次执行权
+- 唯一索引: 重复数据, 数据库报异常
+- 乐观锁: 业务通过 version 判断获取更新
+- 悲观锁: 获取数据时加锁
+- 分布式锁: redis 或者 zookeeper 锁定全局唯一资源
+- token: 每个 token 只有一次操作机会, 一次执行权
