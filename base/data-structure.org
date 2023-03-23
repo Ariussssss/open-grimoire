@@ -1,0 +1,6 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: data-structure
+#+DATE: [2023-03-22 23:37]
+* Refers
+- https://oi-wiki.org/ds/
