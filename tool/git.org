@@ -80,6 +80,22 @@ https://gitclone.com/
   git config --global url."https://gitclone.com/".insteadOf https://
 #+end_src
 
+http 一般插件下载用
+#+begin_src bash
+git config --global http.proxy socks5://127.0.0.1:7890
+#+end_src
+
+ssh 加速, ~~/.ssh/config~
+#+begin_src conf
+  Host github.com
+    ProxyCommand nc -v %h %p
+    User git
+    Port 22
+    Hostname github.com
+    IdentityFile "/home/arius/.ssh/id_rsa"
+    TCPKeepAlive yes
+    IdentitiesOnly yes
+#+end_src
 * config
 #+begin_src bash
   # ignore newline ^M
@@ -87,4 +103,6 @@ https://gitclone.com/
   # don't need to set branch as pushing
   git config --global push.default current
 #+end_src
+
+
 

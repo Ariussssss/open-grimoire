@@ -1,4 +1,4 @@
-#+STARTUP: content
+#+STARTUP: all
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: Emacs 笔记
 #+DATE: [2021-05-18 11:42]
@@ -452,3 +452,30 @@ theme 都是以 symbol 来制定和读取
 * plugins
 - avy 删了, 用的太少了
 - ace-window 完全没卵用
+
+* build
+- https://github.com/emacs-mirror/emacs
+- http://git.savannah.gnu.org/r/emacs.git
+
+v29  alpha-background 需要这个 ~--with-cairo --with-x-toolkit=yes~ 
+#+begin_src bash
+  cd emacs-29
+  ./autogen.sh
+  ./configure --with-native-compilation --
+  make -j16
+  make -j16 check
+  src/emacs -Q # try it out!
+  sudo make install
+#+end_src
+
+Fedora dependents:
+- autoconf
+- texinfo
+- gtk4-devel
+- gtk+-devel
+- libXaw-devel
+- libtiff-devel
+- giflib-devel
+- jpeglib-devel
+- gnutls-devel
+- ncurses-devel

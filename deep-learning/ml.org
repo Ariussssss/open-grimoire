@@ -199,3 +199,11 @@ Bad reputation because the rumor history.
 Better on training data, bad on unseen data
 
 * backpropagation
+
+* Linear Regression
+
+** Empirical Risk 经验风险
+Based on example, description degree between model and data
+
+** Structural Risk 结构风险
+Prevent overfitting
