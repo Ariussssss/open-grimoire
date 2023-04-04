@@ -1,9 +1,0 @@
-#+STARTUP: all
-#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
-#+TITLE: base
-#+DATE: [2022-07-12 10:52]
-* Refers
-* Overview
-JIT Just In Time 高级语言, 而非解释型脚本语言, 可直接在 CPU 运行.
-
-Julia 运行时会生成 LLVM 中间代码, 交给 LLVM JIT 编译器处理, 生成机械代码. 

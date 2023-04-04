@@ -1,4 +1,0 @@
-#+STARTUP: content
-* Performance
-* Refers
-  - [[https://github.com/geektutu/high-performance-go][high-performance-go]]

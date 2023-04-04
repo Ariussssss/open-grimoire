@@ -1,9 +1,0 @@
-#+STARTUP: content
-#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
-#+TITLE: plan9
-#+DATE: [2021-10-09 16:54]
-* Refers
-  - https://xargin.com/plan9-assembly/
-  - https://segmentfault.com/a/1190000021126576
-  - https://xargin.com/go-and-plan9-asm/
-  - https://github.com/yangyuqian/technical-articles/blob/master/asm/golang-plan9-assembly-cn.md

@@ -1,5 +1,0 @@
-#+STARTUP: content
-#+CREATED: [2021-06-20 10:56]
-* base
-** Refers
-   - https://github.com/answershuto/learnVue

@@ -1,4 +1,0 @@
-#+STARTUP: content
-* base
-** Refers
-   - https://gexijin.github.io/learnR/

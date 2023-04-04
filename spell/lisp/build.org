@@ -1,4 +1,0 @@
-#+STARTUP: content
-* build
-** Refers
-   - http://buildyourownlisp.com/chapter1_introduction#about

@@ -1,8 +1,0 @@
-#+STARTUP: content
-#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
-#+TITLE: music
-#+DATE: [2021-10-24 22:10]
-* Refers
-* 音效
-** 资源
-   - https://gamesounds.xyz/

@@ -1,4 +1,0 @@
-#+STARTUP: content
-* elm
-** Refers
-   - https://dev.to/lucamug/elm-6m8

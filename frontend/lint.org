@@ -1,4 +1,0 @@
-#+STARTUP: content
-* lint
-** Refers
-   - https://www.cnblogs.com/xianyulaodi/p/5755079.html

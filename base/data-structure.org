@@ -5,4 +5,4 @@
 * Refers
 - https://oi-wiki.org/ds/
 * 栈 stack LIFO
-* 
+* 队列 queue FIFO

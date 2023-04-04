@@ -1,5 +1,0 @@
-#+STARTUP: content
-* hmr
-** Refers
-   - https://www.ruanyifeng.com/blog/2017/05/server-sent_events.html
-   - https://juejin.cn/post/6844904008432222215

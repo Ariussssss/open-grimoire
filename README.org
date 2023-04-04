@@ -1,5 +1,0 @@
-* Open Grimoire
-  
-  #+begin_quote
-  If the Fool would persist his folly he would become wise.
-  #+end_quote

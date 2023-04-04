@@ -1,7 +1,0 @@
-#+STARTUP: content
-* vscode
-** link
-   create publisher: https://marketplace.visualstudio.com/manage/publishers/ariussssss?auth_redirect=True
-
-   create token: https://dev.azure.com/ariussssss/_usersSettings/tokens
-   

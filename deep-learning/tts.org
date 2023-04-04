@@ -1,8 +1,0 @@
-#+STARTUP: all
-#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
-#+TITLE: tts
-#+DATE: [2021-10-09 17:40]
-* Refers
-  - https://huailiang.github.io/blog/2019/tts/
-* Tacotron2
-  

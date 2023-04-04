@@ -1,6 +1,0 @@
-#+STARTUP: all
-#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
-#+TITLE: recommender-system
-#+DATE: [2022-08-03 15:16]
-* Refers
-- https://github.com/datawhalechina/fun-rec

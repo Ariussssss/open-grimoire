@@ -1,5 +1,0 @@
-#+STARTUP: content
-* Elixir
-** Refers
-  - https://github.com/caicaishmily/elixirschool_blogs
-    

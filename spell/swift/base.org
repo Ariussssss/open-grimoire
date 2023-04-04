@@ -1,9 +1,0 @@
-#+STARTUP: all
-#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
-#+TITLE: base
-#+DATE: [2021-11-26 10:52]
-* Refers
-- https://github.com/ochococo/Design-Patterns-In-Swift
-- https://github.com/ochococo/Design-Patterns-In-Swift/blob/master/README-CN.md
-- https://github.com/ming1016/SwiftPamphletApp
-- swift playground, 支持 ipad https://www.apple.com/swift/playgrounds/

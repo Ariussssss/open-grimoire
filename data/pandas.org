@@ -7,3 +7,8 @@
 #+begin_src python
   b = a.groupby(['id', 'name']).size().reset_index(name='counts')
 #+end_src
+* asof left join
+Series must be sort by time
+#+begin_src bash
+  merged = pd.merge_asof(a_data, bl_data, on='time', direction='backward')
+#+end_src

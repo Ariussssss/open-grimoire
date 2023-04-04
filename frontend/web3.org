@@ -1,7 +1,0 @@
-#+STARTUP: all
-#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
-#+TITLE: web3
-#+DATE: [2022-06-22 10:54]
-* Refers
-- https://github.com/bynil/web3-intro-for-programmers
-* 

@@ -1,8 +1,0 @@
-#+STARTUP: all
-#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
-#+TITLE: renpy
-#+DATE: [2021-10-12 17:33]
-* Refers
-  - https://github.com/renpy
-  - 中文文档 https://www.renpy.cn/doc/
-  - 英文文档 https://www.renpy.org/doc/html/quickstart.html

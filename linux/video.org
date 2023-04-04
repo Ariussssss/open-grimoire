@@ -1,0 +1,19 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: video
+#+DATE: [2023-03-24 00:10]
+* Refers
+* application
+** ffmpeg
+录制屏幕
+#+begin_src bash
+  ffmpeg -video_size 2560x1440 -framerate 25 -f x11grab -i :0.0 output.mp4
+#+end_src
+
+gif
+#+begin_src bash
+  ffmpeg -ss 30 -t 3 -i input.mp4 \
+      -vf "fps=10,scale=320:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" \
+      -loop 0 output.gif
+#+end_src
+** mpv

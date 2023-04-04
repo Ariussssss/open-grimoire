@@ -1,6 +1,0 @@
-#+STARTUP: all
-#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
-#+TITLE: server
-#+DATE: [2022-05-16 11:53]
-* Refers
-- 大型系统设计https://github.com/donnemartin/system-design-primer/blob/master/README-zh-Hans.md

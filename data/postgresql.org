@@ -1,6 +1,0 @@
-#+STARTUP: content
-#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
-#+TITLE: postgresql
-#+DATE: [2021-12-02 10:07]
-* Refers
-** 简介

@@ -1,6 +1,0 @@
-#+STARTUP: all
-#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
-#+TITLE: crypto
-#+DATE: [2023-02-06 11:23]
-* Refers
-- https://helpthisbook.com/sunny/the-newbies-guide-to-crypto

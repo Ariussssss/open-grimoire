@@ -1,9 +1,0 @@
-#+STARTUP: content
-#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
-#+TITLE: js-parser
-#+DATE: [2021-12-07 14:34]
-* Refers
-- parsimmon https://github.com/jneen/parsimmon/blob/master/API.md
-- https://github.com/chaosmail/prototxt-parser/blob/master/src/parser.ts
-* how
-基于 parsimmon 轻量级库, 通过前后开关括号和字段匹配进行解析. 

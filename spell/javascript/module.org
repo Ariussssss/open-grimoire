@@ -1,7 +1,0 @@
-#+STARTUP: content
-#+CREATED: [2021-07-09 15:16]
-* module
-** Refers
-** ES Module
-   - 浏览器原生(chrome 61)支持, 运行时解析引用和加载, 同步执行
-   - 依赖解析, 不允许循环依赖, 需要工具级优化

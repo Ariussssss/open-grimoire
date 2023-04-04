@@ -1,6 +1,0 @@
-#+STARTUP: content
-#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
-#+TITLE: base
-#+DATE: [2021-12-09 14:06]
-* Refers
-- todo demo https://github.com/cpettitt/haskell-todo

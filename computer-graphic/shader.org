@@ -1,7 +1,0 @@
-#+STARTUP: all
-#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
-#+TITLE: shader
-#+DATE: [2022-07-25 11:20]
-* Refers
-- https://github.com/EmbarkStudios/rust-gpu
-- https://github.com/ekzhang/graphics-workshop

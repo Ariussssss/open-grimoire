@@ -1,6 +1,0 @@
-#+STARTUP: content
-#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
-#+TITLE: ethereum
-#+DATE: [2021-12-21 10:27]
-* Refers
-- https://github.com/xianfeng92/Love-Ethereum

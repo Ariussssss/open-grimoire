@@ -1,7 +1,0 @@
-#+STARTUP: content
-* module-federation
-** 用途
-   - 共享模块, 依赖管理
-** 需求
-   - webpack 5
-   - devServer 要求

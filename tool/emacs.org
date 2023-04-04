@@ -61,8 +61,8 @@ alist 也是 list 类型，可以用 mapcar 之类的方式改变形式。
 #+begin_src org
   ,#+STARTUP: overview | content | showall
 #+end_src
-
 ** font style
+
 - *粗体*
 - /斜体/
 - +删除线+
@@ -423,6 +423,9 @@ theme 都是以 symbol 来制定和读取
   (while custom-enabled-themes
     (disable-theme (car custom-enabled-themes)))
 #+end_src
+
+* font
+- ~c-u c-x =~ current cursor font
 
 * 自定义 header-line mode-line
 自定义

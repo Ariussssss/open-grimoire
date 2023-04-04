@@ -26,6 +26,31 @@
   1 // 2
   # Output 0
 #+end_src
+* 复杂度
+** 基本操作数
+加减乘除, 访问, 赋值都可以看作基本操作
+** 时间复杂度
+忽略基本操作之间和操作次数的区别
+- 最坏时间复杂度, 一般用 O 小于
+- 平均期望时间复杂度
+- 常量不考虑, 直接当 O(1) 处理
+** 渐进符号
+- 含等于用大写, 不含等于用小写
+- 相等是 $\Theta$ 小于是 O，大于是 $\Omega$
+- 大 O 和小 o 原本是希腊字母 Omicron
+*** Theta $\Theta$
+对于函数 f(n) 和 g(n)，$f(n)=\Theta(g(n))$,
+当且仅当 $\exists c_1,c_2,n_0>0$,
+使得 $\forall n \ge n_0$, $0\le c_1\cdot g(n)\le f(n) \le c_2\cdot g(n)$
+*** O
+f(n)=O(g(n))
+当且仅当 $\exists c,n_0$
+使得 $\forall n \ge n_0,0\le f(n)\le c\cdot g(n)$
+*** Omega $\Omega$
+S$f(n)=\Omega(g(n))$
+当且仅当 $\exists c,n_0$
+使得 $\forall n \ge n_0,0\le c\cdot g(n)\le f(n)$
+** 主定理 Master Theorem
 
 * Trie 字典树 单词查找树
 特征:

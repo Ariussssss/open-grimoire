@@ -47,3 +47,8 @@
 单精度 32 Bit, 1 Bit 符号 8 Bit 指数 23 Bit 小数, 即 7 位小数
 
 双精度 64 Bit, 1 Bit 符号 11 Bit 指数 52 Bit 小数, 即 16 位小数
+* unicode
+- https://www.compart.com/en/unicode/U+2027
+- ~c-s-u~, 2027 enter
+  
+
