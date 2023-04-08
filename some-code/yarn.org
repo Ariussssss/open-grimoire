@@ -1,0 +1,12 @@
+#+STARTUP: content
+#+CREATED: [2021-07-27 17:36]
+* yarn
+** commands
+   内部指令按照一定的范式输出, 暴露一些接口, 以及最后执行对应的 run.  
+** create
+   拉取对应的 repo, 解析包名称, 执行 bin 中对应的指令.   
+   如 ~@vitejs/app~, 拉取 ~@vitejs/create-app~
+   如果只有 scope 就是 ~create~
+
+   对应包名查询地址是否存在, 如果不存在 同步更新 即 ~yarn add~  
+   执行 bin 中的 ~create-app~ 的命令

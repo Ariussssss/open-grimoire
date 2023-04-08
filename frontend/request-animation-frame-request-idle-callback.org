@@ -1,0 +1,115 @@
+#+STARTUP: content
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: requestAnimationFrame 和 requestIdleCallback
+#+DATE: [2021-10-26 13:40]
+* Refers
+  - https://juejin.cn/post/7011034511576137736
+* requestAnimationFrame
+** 概述
+   js 单线程, 间隔时间判断不可靠.
+
+   出于对浏览器 js 实现动画流畅动画的需求设计.
+** 细节
+*** 原理
+    API 告知浏览器需要执行动画, 浏览器收到通知后优化代码并执行更新.
+
+    动画仅执行一帧, 会在下一次绘制图像之前执行.
+
+    因为一般的屏幕硬件设备的刷新频率都是 60Hz, 然后每执行一次大约是 16.6 ms.
+    使用 requestAnimationFrame 的时候, 只需要反复调用它就可以实现动画效果.
+
+    同时 requestAnimationFrame 会返回一个请求 ID, 是回调函数列表中的一个唯一值.
+    可以使用 cancelAnimationFrame 通过传入该请求 ID 取消回调函数.
+
+    优点:
+    1. requestAnimationFrame 会把每一帧中的所有 DOM 操作集中起来, 在一次重绘(回流)中完成.
+       时间间隔与浏览器刷新频率相关.
+    2. 隐藏或者不可见元素, requestAnimationFrame 不会触发重绘.
+    3. 在页面隐藏非激活状态下, 会自动停止. 
+*** 对比
+    setTimeout 执行间隔设置为 0, 可以用来模仿 requestAnimationFrame.
+
+    执行速度不同, 如果代码执行运算量少, 则 setTimeout 会比 requestAnimationFrame 快.
+
+*** 浏览器细节
+   
+    Event Loop 在浏览器中分为:
+    - window event loop
+    - worker event loop
+    - worklet event loop
+*** task queue
+    1. 从任务队列中取出一个可运行的任务
+       1. 如果没有跳第三步
+    2. pop 出可运行任务, FIFO
+    3. 执行 task
+    4. 执行 microtask 检查
+    5. 设置 hasARenderingOpportunity 为 false
+    6. 完成一次循环, 更新执行渲染
+    7. 如果 window event loop 没有 task 且没有 microtask, 
+       同时 hasARenderingOpportunity 为 false.
+       执行 idle period, hasARenderingOpportunity. 
+    8. 返回第一步
+
+*** 渲染
+    1. 遍历 document
+    2. 渲染时机 Rendering opportunities
+       1. 如果没到, 则删除 docs, 取消渲染.
+	  可能被硬件刷新率或者页面性能, 后台隐藏等限制.
+       2. 如果文档不为空, 设置 hasARenderingOpportunity 为 true.
+    3. 不必要的渲染 Unnecessary rendering
+       1. 如果浏览器更新上下文, 更新效果不可见.
+	  或者  animation frame callbacks 为空.
+       2. 取消渲染
+    4. docs 删除性能优化相关判定, 跳过更新的文档
+    5. 以下执行操作传入  performance.now() 时间戳
+    6. 处理 resize
+    7. 处理 scroll
+    8. 处理媒体查询
+    9. CSS 动画
+    10. 处理全屏事件
+    11. 执行 requestAnimationFrame
+    12. 执行 intersectionObserver
+    13. 绘制 document
+    14. 更新 ui 展示
+
+    setTimeout 执行可能会被优化, 即数据更新, 渲染被判断高效省略跳过.
+    执行完成后, 可能被刷新频率, 性能, 渲染时机限制, 但不会限制 js 执行, 所以会比 requestAnimationFrame 快.
+    一般屏幕的显然频率是 16 hz, 所以在 16.6 ms 内可能执行多次 setTimeout 而只能执行一次 requestAnimationFrame.
+
+    #+DOWNLOADED: screenshot @ 2021-10-27 17:11:48
+ [[file:images/20211027-171148_screenshot.png]]
+
+** 不同浏览器兼容性
+   #+begin_src js
+     var vendors = ['webkit', 'moz'];
+     for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+       window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
+       window.cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame'] ||    // Webkit中此取消方法的名字变了
+	 window[vendors[x] + 'CancelRequestAnimationFrame'];
+     }
+   #+end_src
+
+** demo
+   点击转动
+   #+begin_src js
+     var deg = 0;
+     var id;
+     var div = document.getElementById("div");
+     div.addEventListener('click', function () {
+	 var self = this;
+	 requestAnimationFrame(function change() {
+	     self.style.transform = 'rotate(' + (deg++) + 'deg)';
+	     id = requestAnimationFrame(change);
+	 });
+     });
+     document.getElementById('stop').onclick = function () {
+	 cancelAnimationFrame(id);
+     };
+
+   #+end_src
+
+** 结论
+   setTimeout 处理动画容易丢帧(动画合并), 尽量使用 requestAnimationFrame
+
+* requestIdleCallback
+  ~requestIdleCallback~ 会在每次帧结束并且有空闲时间, 或者用户不在与页面交互时执行回调. 

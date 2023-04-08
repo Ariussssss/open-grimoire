@@ -1,0 +1,40 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: webar
+#+DATE: [2021-12-13 09:58]
+* Refers
+* 概述
+主要实现分为三个部分, 识别, 追踪, 渲染. 
+* 识别
+基于 WebRTC
+- 获取摄像头授权
+- 实时图像视频以流的对象表示
+- 分音视频流轨道
+* 追踪
+前端图像处理, 特征点匹配.
+识别算法和框架都很成熟, 难点在于稳定的高质量的追踪. 
+
+
+tracking.js, deeplearn.js, ConveNetJS.
+* 渲染
+成熟的渲染引擎: A-Frame, Three.js, Pixi.js, Babylon.js.
+* 资源
+** A-frame
+- 官方网站：https://aframe.io/
+- A-Frame 中文教程：https://www.techbrood.com/aframe
+
+一个构建虚拟现实 VR 体验的 Web 框架.
+支持 VR, 同时可用于增强现实. 
+
+
+特点:
+1. 降低难度, HTML 语义化
+2. 跨平台 VR, 兼容 web 和眼睛控制器等.
+3. 使用 DOM 不影响布局, 3D 对象在内存中完成.
+4. 包含大多数 unity 组件, 如灯光, 材质, 光线等. 
+** 8th
+- https://www.8thwall.com/
+- https://www.8thwall.com/tutorials
+** AR Quick Look
+apple 原声支持, 降低开发体验门槛, 通过 usdz 作为数据承载. 
+** 

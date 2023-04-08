@@ -1,0 +1,25 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: deep-in
+#+DATE: [2022-03-02 16:57]
+* Refers
+* dis
+python 需要从源文件转换为机器指令, 编译成 python 字节码 (bytecode, .pyc)
+
+byte  code 类似汇编指令的中间语言, dis 可以用来分析字节码
+#+begin_src bash
+  >>> import dis
+  >>> def test():
+  ...     a = 1
+  ...     
+  ... 
+  >>> dis.dis(test)
+    3           0 LOAD_CONST               1 (1)
+                3 STORE_FAST               0 (a)
+                6 LOAD_CONST               0 (None)
+                9 RETURN_VALUE        
+#+end_src
+行号，地址，指令，操作参数, 参数解释（识别变量名称，常量值等）
+
+指令介绍 https://docs.python.org/2/library/dis.html#python-bytecode-instructions
+

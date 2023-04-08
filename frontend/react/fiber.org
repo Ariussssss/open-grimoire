@@ -1,0 +1,282 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: fiber
+#+DATE: [2023-01-10 12:45]
+* Refers
+* Fiber
+:PROPERTIES:
+:CUSTOM_ID: fiber
+:END:
+
+#+begin_quote
+A new task reconciliation for React.
+#+end_quote
+
+* Why Fiber
+:PROPERTIES:
+:CUSTOM_ID: why-fiber
+:END:
+纤维
+
+Smaller than thread and process, fiber means higher accuracy control to
+concurrency.
+
+* Reconciliation
+:PROPERTIES:
+:CUSTOM_ID: reconciliation
+:END:
+协调
+
+The key algorithm of React.C
+
+* Compare
+:PROPERTIES:
+:CUSTOM_ID: compare
+:END:
+*Tranditional diff*
+
+Complexity O(n^3)
+
+*React diff*
+
+Implement with virtual-dom. Search for difference based on two
+javascript object.
+
+Three diff strategy:
+
+- Tree diff: Ignore DOM-node change in different level (path).
+- Component diff: similar tree structure for components with same class.
+- Element diff: spectify element in the same level by unique ID.
+
+Three kinds of react-node:
+
+- Text: Directly update content.
+  =ReactDOMTextComponent.prototype.receiveComponent=
+- React component: Run =shouldComponentUpdate= and pass to the children
+  elments.
+- DOM: =ReactDOMComponent.prototype.updateComponent=
+
+  - Update attires, like event bindings.
+  - Children Element update.
+
+    - Find diff object from children, use =shouldUpdateReactComponent=
+      check whether need to update.
+    - Recursion this update with different types.
+
+Do diff
+
+#+begin_example
+_updateChildren: function(nextNestedChildrenElements, transaction, context) {
+    var prevChildren = this._renderedChildren;
+    var removedNodes = {};
+    var mountImages = [];
+
+    // get the next children list
+    var nextChildren = this._reconcilerUpdateChildren(
+      prevChildren,
+      nextNestedChildrenElements,
+      mountImages,
+      removedNodes,
+      transaction,
+      context
+    );
+
+    if (!nextChildren && !prevChildren) {
+      return;
+    }
+
+    var updates = null;
+    var name;
+    var nextIndex = 0;
+    var lastIndex = 0;
+    var nextMountIndex = 0;
+    var lastPlacedNode = null;
+
+    for (name in nextChildren) {
+      if (!nextChildren.hasOwnProperty(name)) {
+        continue;
+      }
+      var prevChild = prevChildren && prevChildren[name];
+      var nextChild = nextChildren[name];
+      if (prevChild === nextChild) {
+        // same memory location, means movement.
+        updates = enqueue(
+          updates,
+          this.moveChild(prevChild, lastPlacedNode, nextIndex, lastIndex)
+        );
+
+        lastIndex = Math.max(prevChild._mountIndex, lastIndex);
+        prevChild._mountIndex = nextIndex;
+
+      } else {
+        if (prevChild) {
+          lastIndex = Math.max(prevChild._mountIndex, lastIndex);
+        }
+
+        updates = enqueue(
+          updates,
+          this._mountChildAtIndex(
+            nextChild,
+            mountImages[nextMountIndex],
+            lastPlacedNode,
+            nextIndex,
+            transaction,
+            context
+          )
+        );
+
+
+        nextMountIndex++;
+      }
+
+      nextIndex++;
+      lastPlacedNode = ReactReconciler.getHostNode(nextChild);
+    }
+
+    for (name in removedNodes) {
+      if (removedNodes.hasOwnProperty(name)) {
+        updates = enqueue(
+          updates,
+          this._unmountChild(prevChildren[name], removedNodes[name])
+        );
+      }
+    }
+  }
+#+end_example
+
+*Better performance based on the strategy*
+
+- Tree diff
+
+  - Try not to change tree structure or do level change.
+  - Hide element by CSS, when change frequently.
+
+- Component diff
+
+  - Use =shouldComponentUpdate= and =pureComponent= to stop useless
+    update.
+  - Use common components, reduce repeat code and performance costed by
+    component diff.
+
+- Element diff
+
+  - For list, try not to move the first element to the end of the list.
+
+ Fiber
+:PROPERTIES:
+:CUSTOM_ID: fiber-1
+:END:
+*Stack reconciler* before React@16
+
+*Fiber reconciler* after
+
+* Stack reconciler
+:PROPERTIES:
+:CUSTOM_ID: stack-reconciler
+:END:
+Slow traverse all v-dom, after that pass the change infomation to
+renderer.
+
+*Block whole page as traversing.*
+
+Release js-process after re-render which bring bad experience to user.
+
+* Fiber reconciler
+:PROPERTIES:
+:CUSTOM_ID: fiber-reconciler
+:END:
+#+caption: img
+[[./1*d8GcL9UNG0w9n_WW5TCWRw.png]]
+
+=packages/react-reconciler/src=
+
+1. Split task into serval mini task in =scheduling=.
+
+2. After one finish, release js-process and listen to the main-process
+   asking for high priority task.
+
+   1. If do, deal with it first.
+   2. If not, continue deal with the others.
+      ([[https://www.w3.org/TR/requestidlecallback/][cooperative scheduling 合作式调度]]).
+
+* What For
+:PROPERTIES:
+:CUSTOM_ID: what-for
+:END:
+Async update for v-diff.
+
+* Points
+:PROPERTIES:
+:CUSTOM_ID: points
+:END:
+
+- Each fiber node keeps a priority (not work, async, sync) and
+  =expirationTime=. The smaller =expirationTime= is, the higher priority
+  it can be.
+
+For lifescope:
+
+#+begin_example
+// render/reconciliation, with low priority.
+// Stop and do later as high priority task came.
+componentWillMount
+componentWillReceiveProps
+shouldComponentUpdate
+componentWillUpdate
+
+// commit
+componentDidMount
+componentDidUpdate
+componentWillUnmount
+#+end_example
+
+Abandon lifescopes, will be remove at React@17
+
+Reason: aysnc render make everything goes without sort of life scope but
+priority.
+
+- +componentWillMount+
+- +componentWillReceiveProps+
+- +componentWillUpdate+
+
+* Priority
+:PROPERTIES:
+:CUSTOM_ID: priority
+:END:
+
+- Synchronous: Same as stack rec. Sync job.
+- Task: Before next tick.
+- Animation: Before next frame.
+- High: In future.
+- Low: Minor delay.
+- Offscrean: Excute as next render, or scroll.
+
+ Implentment
+:PROPERTIES:
+:CUSTOM_ID: implentment
+:END:
+React can split with three modules.
+
+- Virtual DOM. Structure described the Dom.
+- Reconciler. Calling components lifescope handler and diff.
+- Renderer Render VDOM to different view.
+
+=react-reconciler/src/ReactInternalTypes.js=
+
+Fiber includes lots of information can be conclused in a object.
+
+#+begin_example
+const fiber = {
+    stateNode,    // Node Instance
+    child,        // Children Node
+    sibling,      // Sibling Node
+    return,       // Parent Node
+}
+#+end_example
+
+* Summary
+1. Compile JSX to ~React.createElement~, execute to vdom
+2. Reconcile: Transfer vdom to fiber, mark tag for add or remove mutation
+3. Commit mutation to dom
+   1. before mutaion
+   2. layout(useLayoutEffect: sync, useEffect: async)

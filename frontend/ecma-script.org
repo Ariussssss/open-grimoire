@@ -1,0 +1,358 @@
+#+STARTUP: content
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: ecma-script
+#+DATE: [2021-01-20 22:05]
+* Refers 规范
+- https://jelly.jd.com/article/5febdfbb846cc00148ae36d7
+- https://backbencher.dev/javascript/es2021-new-features
+- https://codeburst.io/exciting-features-of-javascript-es2021-es12-1de8adf6550b
+
+* ECMAScript 和 JavaScript 到底是什么关系？ 
+要讲清楚这个问题，需要回顾历史.
+   
+1996 年 11 月，JavaScript 的创造者 Netscape 公司，
+决定将 JavaScript 提交给标准化组织 ECMA，
+希望这种语言能够成为国际标准.
+
+次年，ECMA 发布 262 号标准文件（ECMA-262）的第一版，
+规定了浏览器脚本语言的标准，并将这种语言称为 ECMAScript, 
+这个版本就是 1.0 版.
+该标准从一开始就是针对 JavaScript 语言制定的, 
+但是之所以不叫 JavaScript, 有两个原因.
+
+一是商标, Java 是 Sun 公司的商标, 根据授权协议, 
+只有 Netscape 公司可以合法地使用 JavaScript 这个名字, 
+且 JavaScript 本身也已经被 Netscape 公司注册为商标.
+
+二是想体现这门语言的制定者是 ECMA, 不是 Netscape, 
+这样有利于保证这门语言的开放性和中立性.
+   
+因此, ECMAScript 和 JavaScript 的关系是, 
+前者是后者的规格, 后者是前者的一种实现（另外的 ECMAScript 方言还有 Jscript 和 ActionScript）.
+日常场合, 这两个词是可以互换的.
+
+* nodejs
+nodejs 默认使用 CommonJS 规范
+
+通过 ~.mjs~ 后缀或者指定 ~package.json~  ~"type": "module"~  屬性.
+** 与 CJS 的不同
+1. strict mode
+2. 浏览器兼容
+   可以通过设置 ~type~ 来使用, 当且仅当有 ~mjs~ 后缀时可用.
+   不支持路径检索.
+
+   #+begin_src html
+     <script type="module" src="esm-module.mjs"></script>;
+   #+end_src
+
+   可以通过 [[*https://github.com/WICG/import-maps][Import Maps]] 来控制依赖
+
+   #+begin_src html
+     <script type="module">
+       import _ from 'lodash';
+     </script>
+
+     <script type="importmap">
+       {
+       "imports": {
+       "lodash": "./node_modules/lodash-es/lodash.js"
+       }
+       }
+     </script>
+   #+end_src
+
+3. 静态解析
+   CJS 引用模块的时候, 会把模块当成文件解析之行, 直到报错.
+   ESM 不会执行任何模块, 直到加载解析完所有模块.
+4. 异步
+   引入不会打断执行,  ~import~ 执行会插入事件队列而不是像 CJS 一样直接打断等待引用模块执行完成.
+
+* 2023
+** findLast().findLastIndex()
+** hashbang
+#+begin_src js
+  // #!/usr/bin/env node
+#+end_src
+
+* 2022
+
+** .at method on built-in indexables 📕.
+#+begin_src js
+  const cart = ['🍎', '🍌', '🍍'];
+
+  // first element
+  cart.at(0); // '🍎'
+
+  // last element
+  cart.at(-1); // '🍍'
+
+  // out of bounds
+  cart.at(-100); // undefined 
+  cart.at(100); // undefined 
+#+end_src
+
+** RegExp Match Indices
+additional information about the start and end indices of captured substrings 📕
+
+#+begin_src js
+  /(?<xs>x+)(?<ys>y+)/.exec('xxxyyxx');
+  /*[
+    'xxxyy',
+    'xxx',
+    'yy',
+    index: 0,
+    input: 'xxxyyxx',
+    groups: [Object: null prototype] { xs: 'xxx', ys: 'yy' }
+    ]*/
+#+end_src
+
+** Object.hasOwn
+Object.hasOwn 📕
+
+#+begin_src js
+  let books = {}
+  books.prop = 'exists';
+
+  // `hasOwn` will only return true for direct properties:
+  Object.hasOwn(books, 'prop');             // returns true
+  Object.hasOwn(books, 'toString');         // returns false
+  Object.hasOwn(books, 'hasOwnProperty');   // returns false
+
+  // The `in` operator will return true for direct or inherited properties:
+  'prop' in books;                          // returns true
+  'toString' in books;                      // returns true
+  'hasOwnProperty' in books;                // returns true
+#+end_src
+
+** Error cause
+#+begin_src js
+  async function doJob() {
+    const rawResource = await fetch('//domain/resource-a')
+          .catch(err => {
+            throw new Error('Download raw resource failed', { cause: err });
+          });
+    const jobResult = doComputationalHeavyJob(rawResource);
+    await fetch('//domain/upload', { method: 'POST', body: jobResult })
+      .catch(err => {
+        throw new Error('Upload job result failed', { cause: err });
+      });
+  }
+
+  try {
+    await doJob();
+  } catch (e) {
+    console.log(e);
+    console.log('Caused by', e.cause);
+  }
+  // Error: Upload job result failed
+  // Caused by TypeError: Failed to fetch
+#+end_src
+
+** Top-Level await
+#+begin_src js
+  console.log(await Promise.resolve('🍎'));
+#+end_src
+
+** Class field declarations
+Orthogonally-informed combination of public and private fields. 📕
+#+begin_src js
+  class SampleClass {
+      /*
+        instead of:
+        constructor() { this.publicID = 42; }
+      ,*/
+      publicID = 42; // public field
+
+      /*
+        instead of:
+        static get staticPublicField() { return -1 }
+      ,*/
+      static staticPublicField = -1;
+
+      // static private field
+      static #staticPrivateField = 'private';
+
+      //private methods
+      #privateMethod() {}
+
+      // static block
+      static {
+        // executed when the class is created
+      }
+  }
+#+end_src
+* 2021 Features
+- String.prototype.replaceAll( )
+- 私有方法 Private Methods 与私有访问者 Private Accessors
+- Promise.any 与 AggregateError
+- WeakRefs 弱引用
+- 逻辑运算符和赋值表达式
+
+** String.prototype.replaceAll( )
+~replace~ 可以做单个替换, 之前都是 ~split~ 再 ~join~ 的方式做到, 但没办法对正则比较好的处理.
+
+#+begin_src js
+  const str = "The brown fox is really brown";
+
+  //Instead of doing this...
+  const newStr = str.replace(/brown/g, "White");
+
+  //You'll be able to do this...
+  const newStr = str.replaceAll("brown", "White");
+#+end_src
+    
+** 私有方法 Private Methods
+
+私有方法只能在定义它的类内部访问, 专用方法名称以开头 ~#~
+
+#+begin_src js
+  class Person {
+
+    // Private method
+    #setType() {
+      console.log("I am Private");
+    }
+
+    // Public method
+    show() {
+      this.#setType();
+    }
+
+  }
+
+  const personObj = new Person()
+  personObj.show() // "I am Private"
+  personObj.setType() // TypeError: personObj.setType is not a function
+#+end_src
+    
+** 私有访问者 Private Accessors
+
+可以通过 ~#~ 在函数名称前添加访问器函数来使其私有
+
+#+begin_src js
+  class Person {
+    // Public accessor
+    get name() { return "Backbencher" }
+    set name(value) {}
+
+    // Private accessor
+    get #age() { return 42 }
+    set #age(value) {}
+  }
+
+  const obj = new Person()
+  console.log(obj.name) // "Backbencher"
+  console.log(obj.age) // undefined
+#+end_src
+
+** Promise.any 和 AggregateError
+
+当列表中的任意一个 ~promise~ 成功 ~resolve~ 则返回第一个 ~resolve~ 的结果状态, 
+如果所有的 ~promise~ 均 ~reject~ , 则抛出异常表示所有请求失败.
+
+与 ~race~ 相似, 但 ~any~ 强调必须第一个 ~resolve~, ~race~ 只是第一个完成也可以是 ~reject~ .
+
+当所有 ~promise~ 都是 ~reject~ 时, 会返回一个 ~AggregateError~
+
+** WeakRefs
+
+使用 ~WeakRef~ 的 ~Class~ 类可以创建对对象的弱引用.
+类似的还有 ~WeakMap~, ~WeakSet~ .
+
+因为是弱引用，所以 ~WeakMap~ 、 ~WeakSet~ 的键值对是不可枚举的 ~WeakSet~ 和 ~WeakMap~ 相似，
+但是每个对象在 ~WeakSet~ 中的每个对象只可能出现一次， ~WeakSet~ 中所有对象都是唯一的.
+    
+~WeakRef~ 实例有一个方法 ~deref~ ，返回引用的原始对象，如果原始对象被回收，则返回 ~undefined~
+    
+~WeakSet~ 与 ~Set~ 相比有以下两个区别：
+- ~WeakSet~ 只能是对象集合，而不能是任何类型的任意值
+- ~WeakSet~ 弱引用，集合中对象引用为弱引用，如果没有其他对 ~WeakSet~ 对象的引用，则会被 GC 回收
+
+  #+begin_src js
+    class MyCache {
+
+      constructor() {
+        this.cache = {}
+      }
+
+      add(key, obj) {
+        this.cache[key] = new WeakRef(obj)
+      }
+
+      get(key) {
+        let cachedRef = this.cache[key].deref()
+        if(cachedRef) return cachedRef;
+        return false;
+      }
+    }
+  #+end_src
+
+  好处可以减少复杂递归，循环造成的内存溢出，存储到不必要的对象和数据.
+  缺点是每次调用都要查询一遍是否可用.（心智负担大于价值？）
+** 新的逻辑判断符
+- a ||= b：当 a 值不存在时，将 b 变量赋值给 a
+- a &&= b：当 a 值存在时，将 b 变量赋值给 a
+- a ??= b：当 a 值为 null 或者 undefined 时，将 b 变量赋值给 a
+
+** Numeric Separators
+提高可读性
+
+#+begin_src js
+  let number = 100_000 // 100000
+#+end_src
+
+** List Format
+
+#+begin_src js
+  const arr = ['Pen', 'Pencil', 'Paper']
+  let obj = new Intl.ListFormat('zh', { style: 'short', type: 'conjunction' })
+  console.log(obj.format(arr)) // "Pen、Pencil和Paper"
+#+end_src
+
+** Date Format
+
+#+begin_src js
+  // Time only with short format
+  let o = new Intl.DateTimeFormat('en' , { timeStyle: 'short' })
+  console.log(o.format(Date.now()))
+  // 11:27 PM
+
+
+  // Time only with medium format
+  o = new Intl.DateTimeFormat('en' , { timeStyle: 'medium'})
+  console.log(o.format(Date.now()))
+  // 11:27:57 PM
+
+
+  // Time only with long format
+  o = new Intl.DateTimeFormat('en' , { timeStyle: 'long' })
+  console.log(o.format(Date.now()))
+  // 11:27:57 PM GMT+11
+
+
+  // Date only with short format
+  o = new Intl.DateTimeFormat('en' , { dateStyle: 'short'})
+  console.log(o.format(Date.now()))
+  // 10/6/20
+
+
+  // Date only with medium format
+  o = new Intl.DateTimeFormat('en' , { dateStyle: 'medium'})
+  console.log(o.format(Date.now()))
+  // Oct 6, 2020
+
+
+  // Date only with long format
+  o = new Intl.DateTimeFormat('en' , { dateStyle: 'long'})
+  console.log(o.format(Date.now()))
+  // October 6, 2020
+#+end_src
+
+* 2020 Features
+
+** nullish coalescing assignment
+#+begin_src js
+  x ??= y;
+  // =
+  x ?? (x = y);
+#+end_src

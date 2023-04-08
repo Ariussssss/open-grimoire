@@ -1,0 +1,39 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: tools
+#+DATE: [2022-03-02 17:11]
+* Refers
+* pyright
+静态语法校验, mspyls pyls 的替代
+
+emacs
+#+begin_src lisp
+  (use-package lsp-pyright
+    :ensure t
+    :hook (python-mode . (lambda ()
+                            (require 'lsp-pyright)
+                            (lsp))))
+#+end_src
+
+~<M-x>~, ~lsp-install-server~, pyright.
+* format
+black
+#+begin_src bash
+  pip install git+https://github.com/psf/black 
+#+end_src
+* video editor
+moviepy
+** transfer
+#+begin_src python
+  import moviepy.editor as moviepy
+  clip = moviepy.VideoFileClip("myvideo.avi")
+  clip.write_videofile("myvideo.mp4")
+#+end_src
+* monitor and restart
+#+begin_src bash
+  pip install watchdog
+  watchmedo auto-restart \
+      --patterns="*.py" \
+      python index.py
+#+end_src
+

@@ -1,0 +1,14 @@
+#+STARTUP: content
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: web
+#+DATE: [2021-12-22 09:43]
+* Refers
+- https://pizzaparty.substack.com/p/the-metaverse-abstracted-reality
+* history
+web1.0 是单向的, 用户浏览和使用, 如新闻网站.
+web2.0 是双向的, 用户写入和创作内容, 如微信, 抖音. 
+web3.0 目前定义是多元 (Metaverse), 更倾向于用户生活在 web 中. 
+
+web3.0 基于分布式, 理想概念是每种服务有多个提供商可以提供切换.
+用户持有节点(数字钱包), 进行与不同服务进行数据交换.
+虚拟物品靠区块链记录(NFT). 

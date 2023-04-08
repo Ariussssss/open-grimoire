@@ -1,0 +1,19 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: graphic-card
+#+DATE: [2022-11-29 09:05]
+* Refers
+* nvidia
+Dashboard
+#+begin_src bash
+  nvidia-smi
+#+end_src
+
+Download https://www.nvidia.com/download/index.aspx
+
+Switch graphical
+#+begin_src bash
+  systemctl isolate multi-user.target
+  sudo /path/to/file/***.run
+  systemctl start graphical.target
+#+end_src

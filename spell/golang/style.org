@@ -1,0 +1,39 @@
+#+STARTUP: content
+#+CREATED: [2021-05-22 18:33]
+* 代码规范
+** Refers
+   - https://golang.org/doc/effective_go
+   - https://github.com/Tencent/secguide/blob/main/Go%E5%AE%89%E5%85%A8%E6%8C%87%E5%8D%97.md
+** 属性函数直接命名
+   如 ~Owner~ 而不是 ~GetOwner~
+** 如果一致功能一致则同名.
+   有一些通用的函数像, ~Read~, ~Write~, ~Close~, ~String~.
+   函数类型尽量与其他类似函数保持一致. 
+** switch 可以用值, 也可以用判断
+
+   #+begin_src go
+     func fmt(c byte) byte {
+	 switch {
+	 case '0' <= c && c <= '9':
+	     return c - '0'
+	 case 'a' <= c && c <= 'f':
+	     return c - 'a' + 10
+	 case ' ', '?', '&', '=', '#', '+', '%':
+	     return 1
+	 }
+	 return 0
+     }
+   #+end_src
+** 可以定义一个 break, continue 的区域名, 大写
+   #+begin_src go
+     Loop:
+     for {
+	 switch {
+	 case true:
+	     fmt.Println("Hello Arius")
+	     continue Loop
+	 }
+     }
+   #+end_src
+** return 可以定义值, 并初始化, 和入参一样
+** Deferred LIFO, 参数会被直接执行, 就像 js 的 promise

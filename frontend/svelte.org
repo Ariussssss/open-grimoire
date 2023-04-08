@@ -1,0 +1,58 @@
+#+STARTUP: content
+* svelte
+** Refers
+   - https://lutaonan.com/blog/svelte/
+   - https://svelte.dev/tutorial/basics
+** What is Svelte
+*** Summary
+    区别: 构建时插入干预逻辑, 而非运行时监控. 
+
+    #+begin_center
+    But there's a crucial difference: 
+
+    Svelte converts your app into ideal JavaScript at build time, 
+    rather than interpreting your application code at run time. 
+    This means you don't pay the performance cost of the framework's abstractions, 
+    and you don't incur a penalty when your app first loads.
+    #+end_center
+
+   在编译时实现了 Reactivity (反应式) 的框架，所以它既是一个框架，同时也是一个 Compiler
+*** Reactivity
+    JavaScript 没有 Reactivity 能力，
+    实现类似 Vue 里面 get 行为需要借助 ~defineProperty~ 或者 ~proxy~ .
+
+    svelte 不一样的地方在于, 它使用let手动执行更新, 然后交给 compiler做这件事, 即多余的代码
+
+    然后再做优化, 将多个更新放到同一个 ~microtask~ 中
+
+    #+begin_src js
+      let a = 1
+      let b = 2
+      let c = a + b
+
+      function update() {
+	c = a + b
+      }
+
+      console.log(c) //=> 3
+
+      a = 2; update()
+      console.log(c) //=> 4
+
+    #+end_src
+*** virtual dom
+    Reactivity 是现代框架的标配.
+    React 主张 视图 view 是 状态数据 state 的函数.
+    所以每次更新的时候都会重新执行一边, 通过 useMemo, useCallback 或者 shouldComponentUpdate 来控制.
+    Vue 的注册, 依赖收集机制让他不用重新执行整个函数.
+
+    两者都用了 virtual dom, 好处是:
+    1. 可以 render 到任意宿主
+    2. diff 算法快, diff 和修改交给算法
+
+    但是如果不使用的话, 还是可以操作 dom.
+    就是直接用原声 js 操作, 因为有 update 可以确定更新的东西, 就不需要 diff.
+    因为没有 diff vdom 算法, 也就不需要消耗时间和性能, 以及包体积.
+
+    而 svelte 就是这个编译器, 帮助将 html 和 逻辑 编译成 构造, 以及更新 dom 的原生 js 代码.
+*** 

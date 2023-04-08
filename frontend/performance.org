@@ -1,0 +1,103 @@
+#+STARTUP: content
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: performance
+#+DATE: [2021-12-14 09:55]
+* Refers
+* Google 网站用户三大核心指标
+- LCP
+- FID
+* Tools
+- Lighthouse
+- web-vitals-extension
+- web-vitals lib
+- Chrome Devtools > Perfomance
+* Metrics
+** CLS
+** DCL DOMContentLoad Event
+** FP first paint 首次绘制
+第一出现绘制像素, 如背景
+** FCP first contentful paint 首次内容绘制
+DOM 出现内容
+** [MAIN] LCP larget contentful paint 最大内容绘制
+- 出现最大元素的绘制时间
+- metrics
+  - GOOD: 2.5sec
+  - NEEDS IMPROVEMENT 4.0sec
+  - POOR
+  
+** TTI Time to Interactive 首次可交互时间
+资源加载成功且 5 秒内无长任务(50ms)
+** [MAIN] FID First Input Delay 首次输入延迟
+FCP - TTI 之间
+- metrics
+  - GOOD: 100ms
+  - NEEDS IMPROVEMENT 300ms
+  - POOR
+** TBT Total BLocking Time 阻塞总时间
+FID 中长任务阻塞总时间
+** [MAIN] CLS Cumulative Layout Shift 累计位移偏移
+DOM 渲染导致屏幕比例的元素偏移, 如插入广告, 期望是 0.1
+- metrics
+  - GOOD: 0.1
+  - NEEDS IMPROVEMENT 0.25
+  - POOR
+** L onLoad event
+* Suggestion
+** Source
+- Compress, Tree-shaking code
+- Set Gzip for server static file
+- Load if only required
+- Inline major css style
+- CDN
+- Preconnect
+- Cache for file or data
+- Image improvement: size, webp, svg
+** Network
+- HTTP2.0
+- TLS 1.3
+- QUIC
+** Frontend Code Style
+- Web Worker for CPU-intensive jobs
+- Schedule jobs and slice time frame
+  - Split long task to mini jobs
+** Stop Inserting Content Dynamically
+- Skeleton screen when loading
+- Image size limit
+- 
+* Console
+** Close devtool can stop memory leaking
+Test
+#+begin_src html
+  <!DOCTYPE html>
+  <html lang="en">
+  <body>
+      <button id="btn">点我</button>
+      <div id="box"></div>  
+      <script>
+          const btn = document.getElementById('btn');
+          const box = document.getElementById('box');
+
+          btn.addEventListener('click', function() {
+              const MB = 1024 * 1024;
+              log();
+
+              function log() {
+                  const memory = performance.memory.totalJSHeapSize;
+                  const usagedMemory = Math.floor(memory / MB);
+                  box.insertAdjacentHTML('beforeend', `<span>${usagedMemory} </span>`);
+
+                  const obj = {usagedMemory, str: 'g'.repeat(50 * MB)};
+                  console.log(obj); 
+
+                  setTimeout(() => log(), 50);
+              }
+          });
+      </script>
+  </body>
+  </html>
+#+end_src
+
+Constant string will store in chrome constant pool, which would not cause leaking.
+But useing ~String()~ does.
+
+Nodejs print serialization text, no memory problem.

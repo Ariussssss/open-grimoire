@@ -1,0 +1,13 @@
+#+STARTUP:all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: v8
+#+DATE: [2021-02-09 19:30]
+* Refers
+   - https://mp.weixin.qq.com/s/XB3n7aGz6ntPRJwwaDSRMw
+   - https://mp.weixin.qq.com/s?__biz=MzI4NjI2OTI0Nw==&mid=2247483983&idx=1&sn=69ebe415938299f1ab458acff7259ce1&scene=21#wechat_redirect
+* 浏览器隔离
+   浏览器代码块之间隔离独立执行, 共享变量
+
+   分预编译期和执行期, 先变量提升和代码检测再执行
+
+   函数会在预编译期被声明

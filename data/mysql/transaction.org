@@ -1,0 +1,283 @@
+#+STARTUP: content
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: transaction
+#+DATE: [2023-01-10 13:04]
+* Refers
+* ACID 四大特性
+:PROPERTIES:
+:CUSTOM_ID: acid 四大特性
+:END:
+
+- 原子性（Atomicity）
+- 一致性（Consistency）
+- 隔离性（Isolation）
+- 持久性（Durability）
+
+* 事务状态
+:PROPERTIES:
+:CUSTOM_ID: 事务状态
+:END:
+
+- Commited 成功执行整个事务
+- Active 初始状态，正在执行
+- Failed 无法正常执行
+
+细分后还有
+
+- Partially Commited 最后一条语句执行之后
+- Aborted 事务回滚，并且使数据库恢复到事务进行之前的状态后
+
+* 原子性
+:PROPERTIES:
+:CUSTOM_ID: 原子性
+:END:
+发生错误时，及时进行回滚 恢复通过回滚日志（undo log）实现
+
+* 级联回滚 cascading rollback
+:PROPERTIES:
+:CUSTOM_ID: 级联回滚 cascading-rollback
+:END:
+多层事务相互依赖 其中依赖的事物需要回滚会触发所有事务回滚
+
+* 持久性
+:PROPERTIES:
+:CUSTOM_ID: 持久性
+:END:
+提交了的事务，就无法再进行修改，只能提交反事务进行补偿
+
+事务的原子性和持久性是由事务日志保证的
+
+1. 原子性：发生错误需要回滚时，可以回滚
+2. 持久性：事务提交后，数据没写磁盘宕机，重启时可以成功恢复事务
+
+两种日志同时工作
+
+* 重做日志 redo log
+:PROPERTIES:
+:CUSTOM_ID: 重做日志 redo-log
+:END:
+回滚日志本身只是逻辑修改 即对所有操作生成一条翻操作
+
+当我们在事务中对数据进行修改时 会先将数据存入内存
+然后更新内存中缓存的数据 生成一条重做日志并写入重做日志缓存
+再将数据更新到硬盘
+
+innoDB 中，重做日志以 512 字节的块形式进行存储，同时
+
+* 回滚日志 undo log
+:PROPERTIES:
+:CUSTOM_ID: 回滚日志 undo-log
+:END:
+所有事务变更操作会产生 undo log 用于维护多版本信息
+
+insert undolog 只在事务回滚需要 所以事务提交后可删除
+
+update/delete 为 update undo log 不仅用于事务回滚，在一致性读也需要
+只有当快照不设计该日志记录，才会被删除
+
+* 隔离型
+:PROPERTIES:
+:CUSTOM_ID: 隔离型
+:END:
+保证数据库处理数据的基础之一 依靠隔离型减少并行事务级联回滚的问题
+减少性能损失
+
+多个事务同时并发执行 事务的隔离性会被违反
+
+* 隔离级别
+:PROPERTIES:
+:CUSTOM_ID: 隔离级别
+:END:
+每个事务隔离级别比上一级多解决了一个问题
+
+** READ UNCOMMITED 未授权读取
+:PROPERTIES:
+:CUSTOM_ID: read-uncommited-未授权读取
+:END:
+使用查询语句不加锁，可能读到未提交行，脏读（dirty read）
+
+** READ COMMITED 授权读取
+:PROPERTIES:
+:CUSTOM_ID: read-commited-授权读取
+:END:
+只记录加记录锁，不会对记录之间加间隙锁
+允许差距新的记录到锁定记录的附近
+再多次使用查询语句可能达到不同的结果（Non-Repeatable Read）
+
+** REPEATABLE READ 可重复读取
+:PROPERTIES:
+:CUSTOM_ID: repeatable-read-可重复读取
+:END:
+多次读取同一范围的数据会返回第一次查询的快照，可能出现幻读（phantom read）
+
+同时上双锁，读取事务禁止写事务但允许读, 写事务禁止所有
+
+** SERIALIZABLE 序列化
+:PROPERTIES:
+:CUSTOM_ID: serializable-read-序列化
+:END:
+innodb 隐式将全部的查询语句加上共享锁，解决幻读的问题
+
+事务一个个进行，不允许并发
+
+*不可重复读的重点是修改* *:* 同样的条件 , 你读取过的数据 ,
+再次读取出来发现值不一样了 *幻读的重点在于新增或者删除* 同样的条件 , 第
+1 次和第 2 次读出来的记录数不一样
+
+所有事务级别不允许脏写（Dirty Write）
+即当前事务更新了另一个事务已经更新但是还未提交的数据
+
+大部分事务是默认 read commit MySQL 使用 repeatable read 做默认配置
+
+事务隔离级别变得越来越严格，对并发执行事务的性能也会逐渐降低
+
+* 隔离级别的实现
+:PROPERTIES:
+:CUSTOM_ID: 隔离级别的实现
+:END:
+就是使用并发控制机制对同一时间执行的事务进行控制
+限制不同的事务对同一资源进行的访问和更新
+
+三种重要的并发控制机制：锁，时间戳，多版本和快照隔离
+
+* 并发控制, 锁
+:PROPERTIES:
+:CUSTOM_ID: 锁
+:END:
+- 锁粒度的选择:锁定对象更具选择性的时候即锁粒度越小,系统并发性越高,但是加锁(获得锁、检查锁是否释放、释放锁)也需要消耗资源,
+- 如果系统花费了大量的时间来管理锁,而不是存取数据,那么系统的性能可能会受到影响.
+
+- 而锁策略就是在锁开销与数据安全性之间寻求平衡.
+** 乐观锁
+:PROPERTIES:
+:CUSTOM_ID: 乐观锁
+:END:
+- 非自带，需要实现 在操作数据库时，想法很乐观 认为不会冲突，不加锁
+- 进行更新后再判断是否冲突
+
+*** 实现：
+:PROPERTIES:
+:CUSTOM_ID: 实现
+:END:
+- 查询时,查询版本号(可以用 timestamp 等其他信息)
+- update 的时候 update 根据版本号做判断
+
+** 悲观锁
+:PROPERTIES:
+:CUSTOM_ID: 悲观锁
+:END:
+- 每次都认为会出现数据冲突 每次操作获取锁才能进行操作
+- 耗时较多，由数据库自己实现 其中包含共享锁和排它锁
+
+** 共享锁（读锁）
+:PROPERTIES:
+:CUSTOM_ID: 共享锁读锁
+:END:
+- 多个不同事务，对同一资源共享一把锁 不同事务都可以用
+- 共享锁，读锁，shared 互斥锁，写锁，exclusive
+- 读锁保证了读的并发不受影响
+- 写锁保证了更新数据不会有其他的事务的访问，或者更改记录造成的不可预知的问题
+- 写锁可以实现隔离性，阻止级联回滚问题
+- MVCC 特性中，正常的读是不需要获取锁的，当然可以读也用 =for update= 开锁如果需要的话
+
+*** 实现
+:PROPERTIES:
+:CUSTOM_ID: 实现-1
+:END:
+在执行语句后加入 =lock in share mode= 即可 他会锁住，等待事务释放(commit)
+
+** 排他锁（写锁）
+:PROPERTIES:
+:CUSTOM_ID: 排他锁写锁
+:END:
+多个不同事务，对同一资源只能有一把锁 在执行语句后加入 =for update= 即可
+
+** 表锁
+
+- 是 MySQl 最基本的锁策略也是开销最小的策略,表锁通常和存储引擎实现相关
+- 某些特定场景,如 READ LOCAL 表锁支持某些类型的并发操作
+- 服务器会为 ALTER TABLE 之类的语句加表锁,忽略具体表存储引擎的锁机制
+
+** 行级锁
+
+- 行级锁可以最大程度的支持并发处理
+- 行级锁只在存储引擎层实现(InnoDB、XtraDB 等)
+- 会出现死锁
+- MyISAM 不支持, 建立在索引响应行上(否则锁全表), 不同行之间并发不影响
+  
+** 死锁
+InnoDB: 将持有最少行级排他锁的事务进行回滚
+* 时间戳
+:PROPERTIES:
+:CUSTOM_ID: 时间戳
+:END:
+如 PostgreSQL，为每条记录保留两个字段
+读时间戳中包括所有访问该记录事务中的最大时间戳
+记录行中的写时间戳保存记录改到当前事务的时间戳
+
+时间戳，乐观锁，思想，而非机制 先对数据进行修改，然后判断时间戳是否修改
+如果没有，就写入 如果有就生成一个新的时间戳，然后再次更新新数据
+
+* 多版本和快照隔离 MultiVersion Concurrency Control MVCC
+:PROPERTIES:
+:CUSTOM_ID: 多版本和快照隔离
+:END:
+- 很多数据库系统都实现了 MVCC , 没有统一标准
+- 通过维护多版本数据，数据库允许事务在数据被事务更新时对旧数据进行读取
+- 行级锁变种
+
+** MySQL
+- 典型的乐观并发控制, 悲观并发控制
+- 为了读的性能，不再需要等待写锁释放
+
+*** InnoDB
+- 每行记录后有两个隐藏列: 行的创建时间, 行的过期时间(删除时间)
+- 两列存储的都不是实际时间值而是系统版本号.
+- 每开始一个新事务系统版本号递增, 作为事务的版本号
+- 仅 REPEATABLE READ 和 READ COMMITTED 两个隔离级别下工作
+
+**** REPEATABLE READ
+- select
+  - 扫描小于当前事务版本行
+  - 行的删除版本不存在, 或大于当前事务版本
+- insert 存当前版本, 行版本号
+- delete 存当前版本, 删除标志
+- update
+  - insert 新纪录和行版本号
+  - delete 原记录, 设删除标志
+
+* 一致性
+:PROPERTIES:
+:CUSTOM_ID: 一致性
+:END:
+ACID，CAP
+
+** ACID
+:PROPERTIES:
+:CUSTOM_ID: acid
+:END:
+如果事务原子执行完成，数据库状态一定是一致的
+
+数据完整性约束
+
+* Bug 概念
+:PROPERTIES:
+:CUSTOM_ID: bug-概念
+:END:
+** 脏读
+:PROPERTIES:
+:CUSTOM_ID: 脏读
+:END:
+一个事务中访问到另一个事务未提交的数据（eg: udpate）
+
+** 幻读
+:PROPERTIES:
+:CUSTOM_ID: 幻读
+:END:
+一个(范围内)事务读取两次，得到的记录条数不同（eg: insert, delete）
+
+** 不可重复读
+:PROPERTIES:
+:CUSTOM_ID: 不可重复读
+:END:
+一个事务读取两次，得到结果不一样（eg: update）

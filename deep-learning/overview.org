@@ -1,0 +1,40 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: overview
+#+DATE: [2022-04-22 10:39]
+* Refers
+- https://github.com/d2l-ai/d2l-zh
+  - https://www.bilibili.com/video/BV1u64y1i75a?spm_id_from=333.999.0.0
+- https://www.bilibili.com/video/BV1JK4y1D7Wb?p=66
+- https://www.youtube.com/channel/UC2ggjtuuWvxrHHHiaDH1dlQ
+- 艺术风格转换实操 https://www.cnblogs.com/massquantity/p/9621393.html
+- https://github.com/fchollet/deep-learning-with-python-notebooks
+* methods
+** DNNs Deep Neural Networks
+FFNNs Feed Forward Networks
+
+layer 往前传递, 不会回归. 
+** CNNs Convolutional Neural Network 卷积神经网络
+卷积和池化, 多维数据卷积操作
+** RNNs Recurrent Neural Network 循环神经网络
+依赖上下文, 区域记忆
+** GANs Generative adversarial networks 生成对抗网络
+** 深度强化学习 – RL
+** LSTM Long Short Term Memory
+* domain
+** NLP Natural language processing 自然语言处理
+*** MNL The Multi-Genre Natural Language Inference Corpus 自然语言推理
+*** SQuAD Stanford Question Answering Dataset 文本理解挑战
+* model
+** BERT Bidirectional Encoder Representations from Transformers
+Pre-training of Deep Bidirectional Transformers for Language Understanding
+
+- Bidirection: BERT 的整个模型结构是双向的
+- Encoder: 是一种编码器，BERT 只是用到了 Transformer 的 Encoder 部分
+- Representation: 做词的表征
+- Transformer: Transformer 是 BERT 的核心内部元素
+** Masked Language Model (MLM)
+** GPT-3
+Generative Pre-trained Transformer 3 is an autoregressive language model that uses deep learning to produce human-like text.
+
+Given an initial text as prompt, it will produce text that continues the prompt.

@@ -1,0 +1,300 @@
+#+STARTUP: all
+# #+STARTUP: latexpreview
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: advanced-mathematics
+#+DATE: [2022-08-09 09:23]
+* Refers
+- https://www.youtube.com/playlist?list=PLBE9407EA64E2C318
+- https://proofwiki.org/wiki/Main_Page
+* pre
+** base
+- multiply multiplication 乘
+- minus 减
+- plus
+- divide
+- negative 负
+- tan sin/cos
+- sine
+- cosine
+  - oscillation 振动
+  - growing motion, opponent
+- radius 弧度
+  - circumference of angle when 1 as radius 半径
+- angles 角度
+- odd 奇, even 偶
+- image number, imaginary 虚数
+- converge, diverge 聚合发散
+** algebra 代数
+引用字母
+** Fraction
+A fraction having an integer as a numerator and an integer as a denominator. （分数：一个有整数分子和整数分母的分数。）
+** Factorial 阶乘
+$n! = nfactorial  = (n)(n...1)(1)$
+** Binomial Theorem 二项式定理
+** func type
+- Cubic 三次
+- Quadratic 二次
+- Linear 一次, 线性
+- Constant 常数
+* tools
+** matlab
+** python+scipy+numpy+sympy
+最方便
+** mou+pandoc
+** endnote
+文献论文
+** COMSOL
+物理建模
+* Trigonometric functions 三角函数
+
+$\sin\alpha = \frac{2\tan{\frac{\alpha}{2}}} {1 + \tan^2{\frac{\alpha}{2}} }$
+
+$\cos\alpha = \frac{1 - \tan^2{\frac{\alpha}{2}}} {1 + \tan^2{\frac{\alpha}{2}}}$
+
+$\tan\alpha = \frac{2\tan{\frac{\alpha}{2}}} {1 - \tan^2{\frac{\alpha}{2}} }$
+
+* Calculus 微积分
+** derivative 导数
+Like relation between two function, distance and speed.
+
+Find func1 from func2, two curves same infomation.
+
+slope in axis
+
+D for delta
+
+pronounce dy dx: $dx/dy$,  can be wrote as y'
+
+$\lim_{\Delta x \rightarrow 0}$
+
+delta means changes $\Delta$
+
+*** example
+$y = x^n$ $\frac{dy}{dx} = nx^{n-1}$
+
+$y = \sin x$
+
+$\frac{dy}{dx} = \cos x$
+
+$y'' = -\sin x$
+
+$y = e^x$ $\frac{dy}{dx} = e^x$
+
+*** purpose
+Location the maximum and the minimum, tells goes up or down.
+
+Key value we should look for at the first time we meet the graph.
+
+Maybe local maximum.
+
+** the derivative of derivative 二阶导数
+*** purpose
+Tells the bending (弯曲度和方向) of the graph.
+
+Bending up, bending down
+
+Inflection point(拐点), $y'' = 0$
+
+Acceleration to speed $\frac{d^2f}{dt^2}$
+
+Set derivative to zero, find the answer
+** exponential 指数函数
+
+自然常数 e Euler
+
+E, exponent, 表示以 10 为底的指数, 自然对数的底 $\exp$
+
+E xponential series 指数级数: 第二重要的无穷级数
+
+$e^x=y(x)=1+x+\frac{1}{2}x^2\dots+\frac{x^n}{n(n-1)\dots1}$
+
+geometric series 几何指数
+
+$y(x)=1+x+x^2...+x^n$
+
+$e^{\ln x}=x$
+
+5 个基本常数, $e^{\pi i} + 1 = 0$
+
+i 为虚数单位
+** important limit
+
+$lim_{x\rightarrow{\infty}}(1+\frac{1}{x})^x = e$
+
+$lim_{x\rightarrow{\infty}}\frac{\sin{x}}{x} = 1$
+** integral 积分
+
+导数的原函数 $y(x)=\int s(x)dx$
+
+integral $\int$, $sum(\Delta y)$ when delta x goes to 0 (limit for caculus)
+
+distance is the integral of speed
+** limit
+approach A,  close to A
+
+Danger cases:
+1. $\infty - \infty$
+2. $0 * \infty$
+3. $\frac{0}{0}$
+   1. $\frac{\infty}{\infty}$
+4. ${a_n}^{b_n}$ unstable
+   - $(1+\frac{1}{n})^n=e$ 
+   - $(1+\frac{1}{n^2})^n=1$ 
+*** L'Hospital's Rule 洛必达法则
+for $\frac{0}{0}$ and $\frac{\infty}{\infty}$
+
+$\lim_{x\to{a}}\frac{f(x)}{g(x)}=\lim_{x\to{a}}\frac{f'(x)}{g'(x)}$
+
+Only if the slope of secant to origin and origin line equals, $u(x) = u'(x)$
+
+Slops equals When overlap or parallel.
+
+The limit secant (割线) is tangent (切线)
+
+- $\frac{0}{0}$, secant and origin line overlap
+- $\frac{\infty}{\infty}$, secant and origin line parallel
+
+*** continuous 连续性
+For continuous func, for any $\epsilon$, $\delta$ exists.
+
+$|x - a| < \delta$, $|f(x) - f(a)| < \epsilon$
+
+** inverse function
+
+*** $x=f^{-1}(y)$ derivative
+$y=lnx$
+
+$\frac{d}{dx}[e^y]=\frac{dx}{dx}$
+
+$\frac{d(e^y)}{dy}\frac{dy}{dx}=1$
+
+$e^y•\frac{dy}{dx}=1$
+
+$e^{lnx}\frac{dy}{dx}=1$
+
+$\frac{dy}{dx}=\frac{1}{x}$
+
+*** $y=\sin^{-1}{x}$ derivative
+$y=\sin{x}$
+
+$y=\sin(sin^{-1}y)$
+
+$1=\frac{d}{dy}(\sin(sin^{-1}y))$
+
+$1=\frac{d(sin(sin^{-1}))}{d(sin^{-1})}\frac{d(sin^{-1})}{dy}$
+
+$1=\cos{sin^{-1}y}\frac{d(sin^{-1})}{dy}$
+
+$\cos\theta=\sqrt{1 - y^2}$
+
+$\frac{1}{\sqrt{1 - y^2}}=\frac{d(sin^{-1})}{dy}$
+
+** Log Graph
+Another way to show growth without derivative
+
+** Linear Approximation, Newton method
+approximate f(x)
+
+$f(x)\approx f(a) + (x+a)f'(a)$
+
+approximate x
+
+$x - a \approx - \frac{F(a)}{F'(a)}$
+
+repeat to get closer
+
+** Power Senes
+$f(x)=a_0+a_1x+a_2x^2+\dots+a_nx^n$ match any function
+
+Key: match the value at nth deriavative (the first one), when x as 0.
+
+*** e^x
+For $e^x$, $e^0 = 1$
+
+$e^{x}=1+x+\frac{1}{2}(x)^{2}+\dots+\frac{1}{n!}(x)^{n}$
+
+*** sinx
+$f(x)=\sin{x}$, $f(0)=0$
+
+$f'(x)=\cos{x}$, 1
+
+$f''(x)=-\sin{x}$, 0
+
+$f'''(x)=-\cos{x}$, -1
+
+$f''''(x)=\sin{x}$, 0, loop
+
+$\sin{x}=x-\frac{1}{3!}x^3\dots$
+
+*** cosx
+Same
+
+1, 0, -1, 0, 1
+
+$\cos{x}=1-\frac{1}{2!}x^2\dots$
+
+** Euler's Great Formula
+Image number $i^2=-1$
+
+$e^{ix} = 1 + ix + \frac{1}{2}(ix)^{2}+\dots+\frac{1}{n!}(ix)^{n}$
+
+$=(1 -\frac{1}{2}x^2 + \frac{1}{4!}x^4 + \dots) + i(x - \frac{1}{3!}x^3 \dots)$
+
+$=\cos{x} + i\sin{x}$
+** geometric series
+when $0<|x|<1$
+
+$\frac{1}{1-x} = 1 + x^2 + \dots +x^n$
+
+Integral:
+
+$-ln(1-x)=x+\frac{x^2}{2} + \dots + \frac{x^n}{n}$
+** differential equation 微分方程
+*** Motion
+$my''+2ry'+ky=0$
+
+1. Identify exponential, when derivative equals function
+2. Nth derivative equals negative function, sin or cos
+
+try exponential, because $y'=y$ is exponential function
+
+$y=e^{\lambda{t}}$
+
+$m\lambda^2{e^{\lambda{t}}} + 2r\lambda{e^{\lambda{t}}} + k{e^{\lambda{t}}}=0$
+
+$\lambda=\frac{-r\pm{\sqrt{r^2-km}}}{m}$
+
+3 cases:
+- two number: exponential
+- imaginary number: sin cos
+- same number: like $y''+6y'+9y=0$
+  - $\lambda=-3$
+  - $y=Ce^{-3t}+Dte^{-3t}$
+*** Growth
+$\frac{dy}{dx}=cy$
+
+$\frac{dy}{du}=e^u$
+
+$u'=c$
+
+$y(0)=C$
+
+$y(x)=y(0)e^{cx}$
+
+Same
+
+$\frac{dy}{dx}=cy+s$
+
+$u=c(y+\frac{s}{c})$
+
+$y(t)+\frac{s}{c}=(y(0)+\frac{s}{c})e^{ct}$
+** theorems
+1. $af(x)+bg(x)\rightarrow{af'(x)+bg'(x)}$
+2. $f(x)g(x)\rightarrow{g(x)f'(x)+f(x)g'(x)}$
+3. $f(x)/g(x)\rightarrow{\frac{[g(x)f'(x)-f(x)g'(x)]}{g^2}}$
+4. $x=f^{-1}(y)\rightarrow{\frac{dx}{dy} = \frac{1}{\frac{dy}{dx}}}$
+5. Chain Rule $f(g(x))\rightarrow{\frac{df}{dy}\frac{dy}{dx}}$
+6. L'Hospital's Rule
+7. Mean value Theorem, if f(x) has a derivative, $\frac{f(b)-f(a)}{b-1}=\frac{df}{dx}(c)$
+8. Taylor series
+   1. Binomial Theorem, Pascal's Triangle with negative power, infinite derivative

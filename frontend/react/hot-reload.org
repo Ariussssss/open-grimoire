@@ -1,0 +1,119 @@
+#+STARTUP: content
+#+CREATED: [2021-07-18 15:27]
+* hot-reload
+** Refers
+   - https://github.com/pmmmwh/react-refresh-webpack-plugin/
+   - https://github.com/gaearon/react-hot-loader
+   - https://www.webpackjs.com/concepts/hot-module-replacement/
+** HMR
+*** Runtime
+    通过 parents 和 children 跟踪模块, 暴露 check 和 apply 方法.
+
+    check:
+    1. 发送 http 更新 manifest
+    2. 如果失败则不更新
+    3. 如果成功待更新 chunk 会和加载 chunk 进行比较.  
+    4. 所有 chunk 加载完成后, 进入 ready 状态. 
+
+    apply:
+    1. 将所有被更新模块标记为无效
+       1. 内部模块有 update handler 或者往上传
+       2. 往上冒泡, 直到入口
+    2. 失效模块通过 dispose 处理, 更新 hash 调用 accept
+    3. runtime 回归闲置 idle
+    
+** HotModuleReplacementPlugin
+   热更新基础.
+   HotReplacementPlugin 会在依赖树中给每个依赖注入一个 module 对象
+   #+begin_src js
+     {
+	 id: string, //路径
+	 loaded: boolean,
+	 exports: boolean,
+	 webpackPolyfill: number,
+	 exports: 导出,
+	 __proto__: {
+	     parents: string[], // 父级引用
+	     children: string[], // 依赖
+	     hot: 下面会介绍
+	     exports: 导出
+	     i: 路径,
+	     l: 不清楚,
+	 }
+     }
+   #+end_src
+
+   主要通过  ~module.hot.accept~ ,  ~module.hot.addStatusHandler~
+   #+begin_src js
+     module.hot.accept('./App.js', () => {
+       ...dosomething    
+     })
+
+     module.hot.addStatusHandler(status => {
+       // 响应当前状态……
+       // idle: 该进程正在等待调用 check
+       // check: 该进程正在检查以更新
+       // prepare: 该进程正在准备更新（例如，下载已更新的模块）
+       // ready: 此更新已准备并可用
+       // dispose: 该进程正在调用将被替换模块的 dispose 处理函数
+       // apply: 该进程正在调用 accept 处理函数，并重新执行自我接受(self-accepted)的模块
+       // abort: 更新已中止，但系统仍处于之前的状态
+       // fail: 更新已抛出异常，系统状态已被破坏
+     })
+   #+end_src
+
+
+   
+** react-hot-loader
+*** usage
+    #+begin_src js
+      // App.js
+      import { hot } from 'react-hot-loader/root';
+      const App = () => <div>Hello World!</div>;
+      export default hot(App);
+    #+end_src
+    
+    #+begin_src js
+      // webpack.config.js
+      module.exports = {
+	entry: ['react-hot-loader/patch', './src'],
+	resolve: {
+	  alias: {
+	    // react 16 相关支持
+	    'react-dom': '@hot-loader/react-dom',
+	  },
+	},
+	// ...
+      };
+    #+end_src
+*** 实现
+**** root.js
+     根部模块 HOC.  
+     获取模块缓存, 查找父模块, 将本模块更新指向父模块, 清楚当前模块缓存. 
+**** hot.js
+     功能细分:
+     - runInRenderQueue, 更新队列
+     - makeHotExport,  热更新处理
+     - hot, 生成 HOC
+
+     异步队列实现
+     #+begin_src js
+       export const createQueue = (runner = a => a()) => {
+	 let promise;
+	 let queue = [];
+	 const runAll = () => {
+	   const oldQueue = queue;
+	   oldQueue.forEach(cb => cb());
+	   queue = [];
+	 };
+	 const add = cb => {
+	   if (queue.length === 0) {
+	     promise = Promise.resolve().then(() => runner(runAll));
+	   }
+	   queue.push(cb);
+	   return promise;
+	 };
+	 return add;
+       };
+
+     #+end_src

@@ -1,0 +1,242 @@
+#+STARTUP: content
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: node 基础
+#+DATE: [2020-11-17 03:03]
+* Refers
+- https://github.com/theanarkh/understand-nodejs
+- https://github.com/semlinker/node-deep
+- https://github.com/lio-mengxiang/node-interview
+* 基础
+** 特点
+*** 适合构建 WEB 应用
+I/O 密集
+*** 高性能
+v8 引擎，动态语言算快
+     
+天生异步
+*** 简单可拓展
+语法并发编程简单，部署开发简单
+     
+有大量可用 npm 模块，且对于 CPU 密集任务可以用 C++ 实现
+** 并发
+*** 定义
+- 进程 在内存上运行的程序
+- 多进程 多个程序一起执行多个任务，统一管理
+- 线程 进程中相对独立的执行单元，共享进程资源
+- 多线程 线程一起执行任务
+*** 对比
+传统 java apache IO 同步，请求之后获取数据会一直占进程
+     
+一个服务器最大进程数有限
+     
+CPU 严重浪费
+*** node
+基于事件循环，主进程只有一个线程是阻塞的
+     
+操作系统调度的多进程多线程与 node 无关，IO 是系统底层的调度
+     
+单线程并不影响多进程，可以开多个 cluster
+*** 应对
+传统的方法：
+- 增加机器，负载均衡
+- 提高机器质量，硬盘质量好一点，提高 IO 效率
+  这种需求 node 都可以比较好的满足
+** 非阻塞 I/O
+* 事件循环
+~libuv~ 提供事件循环和线程池，两者共同构建异步非阻塞 I/O
+   
+事件驱动是 整个非阻塞 I/O 模型中，线程池 通知 事件循环 它已经完成 I/O 操作的机制
+** 阶段
+[[file:images/node_eventLoop_six.png]]
+反复执行 6 个阶段
+- timers
+
+  执行 timer 回调， ~setTimeout,setInterval~
+- I/O callbacks
+
+  处理上一轮循环为执行的 I/O 回调
+- idle，prepare
+
+  仅 node 内部使用
+- poll
+
+  获取新的 I/O 事件，适当的条件下 node 阻塞
+- check
+
+  执行 ~setImmediate~ 回调
+- close callback
+
+  执行 socket 的 close 事件回调
+
+  其中每个阶段都是 FIFO 执行顺序，每次执行会从回调队列中拉取任务
+    
+  直到队列内容耗尽，或者执行数量到达最大
+  #+begin_quote
+  6 个阶段不包括 ~process.nextTick~
+  #+end_quote
+** timer
+受 poll 控制， 执行回调。
+    
+定时器并不是精准时间，只是尽快执行
+** poll
+这个阶段会做的事：
+- 回到 timer 阶段执行回调
+- 执行 I/O 回调并且进入该阶段时，如果没有设定 timer 的话
+  - 如果 poll 队列不为空，会遍历回调队列并同步执行
+
+    直到队列为空，或者达到系统限制
+  - 如果为空
+    - 如果有 setImmediate 回调需要执行，poll 停止，进入人 check 执行回调
+    - 如果没有，会等待回调加入队列，并立即执行回调
+
+      有超时事件，防止一直等待	 
+** check
+~setImmediate~ 的回调会被放到 check 队列中，在 poll 之后执行
+    
+不推荐使用
+** Micro-Task 与 Macro-Task
+异步队列分成 macro 宏任务，micro 微任务队列
+- 常见的 macro：setTimeout, setInterval, setImmediate, script, I/O
+- 常见的 micro：process.nextTick, promise.then
+
+  事件循环中执行的 回调任务 都来自各个阶段的宏任务队列
+    
+  微任务是在事件循环的 各个阶段 之间执行，或者说各个阶段之间的宏队列之间执行
+    
+  [[file:images/node_event_macrotaskandmicrotask.png]]
+*** 版本变化
+- node 10 或者之前
+
+  会等待所有宏任务执行完成，再执行微任务
+- node 11 之后
+
+  一旦一个阶段中，执行完一个宏任务（setTimeout, setInterval, setImmediate）之一
+
+  然后立即执行所有微任务，执行完成后，返回执行下一个微任务
+
+  和浏览器一致
+  #+begin_quote
+  这个切换不会改变阶段，执行完所有微任务后，会返回当前阶段继续执行宏任务
+  #+end_quote
+** process.nextTick
+函数独立于事件循环，有自己的队列
+    
+每个阶段完成之后，如果有 nextTick 队列，优先执行，清空所有回调函数
+    
+优先于其他微任务
+* 发展
+** 架构升级
+Web 开发从 LAMP 到 MEAN 的技术演变
+- LAMP: Linux, Apache, mysql, PHP
+- MEAN: Mongodb, Express, Angular, Node
+  MEAN 演变成阿里开源 Egg.js 服务化，包括 RPC 服务，服务组装，页面即服务
+** 前后端分离
+应用采用三层架构：
+          - 表现层：处理 HTTP 请求，返回 API 结果，和 HTML 渲染
+          - 业务逻辑层：处理业务逻辑，应用的核心部分
+          - 数据访问层：访问基础数据，数据库，缓存，消息队列等
+            Vue/React 本质上也是 node 启动的服务，单页面应用是 页面即服务 的典型应用
+
+            node 擅长的场景：
+            - 大前端： Node 做前后端服务分离
+            - API 接口：擅长大部分 I/P 密集应用
+            - RPC 服务：针对 OLTP 数据库进行操作
+
+              场景区分
+              1. 静态 API
+                 就是普通的接口开发，固定 url 固定返回风格。
+
+                 风格上有很多种，如 Github v3 rest 风格，微博自定义式风格，GraphQL 风格等
+              2. 现代 web 开发
+
+                 就是框架 + 各类工具，依靠 Node 模块
+              3. 后端开发
+                 1. API 代理（网关）
+
+                    一般的后端开发是承担与试图渲染无关的部分逻辑，大部分以数据库交互为主
+
+                    发展：
+                    - 开发带视图的传统 Web 应用（过去）
+
+                    - 面向 API 的接口应用（当前）
+
+                    - 通过 RPC 调用封装对数据库进行操作（BFF，当前和未来）
+
+                    - 提供前端 API 代理（API Gateway） 和网关，服务组装等（当前和未来）
+
+                    这是因为当前，传统的 API 接口的应用，有不少问题：
+
+                    - 一个页面需要请求很多不同的 API
+
+                    - 跨域问题，身份问题
+
+                    - 接口数据不友好。更新需要分开更新，反馈不及时
+
+                    更理想的事，提供一个基于模型的定制 API，在 Node 层提供统一的模型
+
+                    分成 单节点 API 网关 (API Gateway) 和 BFF 网关
+
+*** API 网关
+API 网关是一个服务器，是系统的唯一入口。
+
+从面向对象设计的角度看，它与外观模式类似。
+
+API 网关封装了系统内部架构，为每个客户端提供一个定制的 API。
+
+它可能还具有其它职责，如身份验证、监控、负载均衡、缓存、请求分片与管理、静态响应处理。
+
+核心要点是： *所有客户端都通过统一的网管接入微服务，网关层处理所有非业务功能*
+
+**** 单节点
+单节点的 API 网关为每个客户端提供不同的 API，而不是提供一种万能风格的 API
+      
+**** BFF
+不同客户端使用不同的 API 网关
+
+*** 服务组装
+
+* 其他相关
+** gRPC
+一个高性能，通用的开源 RPC 框架
+   
+由 Google 主要面向移动应用开发并基于 HTTP/2 协议标准设计
+   
+基于 ProtoBuf 序列化协议开发
+   
+支持多语言
+   
+** OLAP 与 OLTP
+数据处理可以分成两大类：
+- OLTP (On-Line Transaction Processing) 联机事务处理
+
+  传统的关系型数据库 主要应用，负责基本的日常事务处理
+
+  OLTP 系统，强调数据库内存效率，内存指标命令率，绑定变量，并发操作
+
+  举例：银行，电子商务系统，eBay 业务数据库
+
+- OLAP (On-Line Analytical Processing) 联机数据分析处理
+
+  OLAP 系统强调数据分析，强调 SQL 执行市场，磁盘 I/O，分区
+
+  有的是有也叫 DSS 决策支持系统，数据仓库
+
+  因为一个语句执行需要很长，读取数据量也很多，所以考量的是磁盘子系统吞吐量
+
+*** OLAP 优化
+[[https://www.jianshu.com/p/b1d7ca178691][数据库介绍和比较]]
+    
+     
+
+* import
+
+** 12.10.0
+之后支持内部库关键字
+#+begin_src js
+  import fs from 'node:fs/promises';
+#+end_src
+MIME 类型数据路由
+#+begin_src js
+  import 'data:text/javascript,console.log("hello!");';
+  import _ from 'data:application/json,"world!"';
+#+end_src

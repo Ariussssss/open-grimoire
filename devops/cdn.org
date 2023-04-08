@@ -1,0 +1,22 @@
+#+STARTUP: content
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: cdn
+#+DATE: [2021-10-09 16:56]
+* Refers
+- https://lutaonan.com/blog/aliyun-cdn-tutorial/
+* 图床 image hosting
+** 原理
+OSS 和 CDN.OSS 存储服务.
+
+OSS 的下载成本高, 价格昂贵, 需要 cdn 来分发. 除了首次访问需要回源, 其他都会从 cdn 读取. 
+** 阿里云使用
+1. 创立 OSS Bucket, 上传文件, 设置私有
+2. 备案域名, 或者使用已有域名分配二级域名
+3. 设置 域名 CNAME
+4. 开启 HTTPS
+5. 开启私有 Bucket 回源
+6. 配置 Refer 防盗链
+** 价格
+每 GB 0.24 元.
+** 免费方案
+- https://www.backblaze.com/blog/free-image-hosting-with-cloudflare-transform-rules-and-backblaze-b2/

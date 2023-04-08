@@ -1,0 +1,70 @@
+#+STARTUP: all
+#+DATE: [2021-10-15 05:29]
+#+TITLE: unity
+* Refers
+- https://github.com/QianMo/Game-Programmer-Study-Notes
+* 资源
+* FAQ
+** VCRUNTIME140.dll, MSVCP140.dll 丢失
+   缺少 vc++ 2015, 官网下载
+** error refreshing packages
+   1. 登出登入, 刷新证书
+   2. 重启系统
+* 多人游戏解决方案
+** UNet (deprecated)
+   已废弃
+** MLAPI
+* demo
+1. 月光跑酷 3D 版 https://github.com/XINCGer/3DMoonRunner
+2. 我的世界 https://github.com/XINCGer/Unity3DTraining/tree/master/Minecraft
+3. 水果忍者 https://github.com/XINCGer/Unity3DTraining/tree/master/Fruit_Ninja
+4. 2048 https://github.com/dgkanatsios/2048
+5. 暗黑破坏神 2 https://github.com/mofr/Diablerie
+6. 方块消消乐 https://gitee.com/Foldcc/FangKuaiXiaoXiaoLe
+7. 坦克大战 https://gitee.com/hupeng_admin/Tank
+8. 极限激情飞车 https://github.com/XINCGer/FURIOUS_MOTORSPORT
+9. 太空大战 https://github.com/XINCGer/Unity3DTraining/tree/master/SpaceShooter
+10. 天天萌泡泡 https://github.com/XINCGer/BubbleShooter
+* usage
+** 2D, 3D
+Not that different, almost all about 3D game and some limits.
+** tool
+*** flythough mode
+Press ~2~, switch between 2D to 3D.
+
+Hover right click, wasd, qe
+** game object
+Every thing is a game object.
+
+More like a container and transform.
+
+Quick create: ~Ctrl-shift-N~
+*** Components
+**** Mesh
+Visible.
+
+Contain vertex information, geo of model.
+**** Collider
+Physic interaction
+** Metrical
+Container of shader and textures.
+** Shader
+*** Albedo
+Work with Unity's PBR (physically based rendering) system.
+*** Metallic
+*** Smoothness
+Look more or less shiny
+*** Normal
+** light
+Bake: pre-render
+** camera
+Viewport setting for multi camera
+** layer
+- Light, culling mask
+- Physic, layer collision matrix
+** tile
+- Group png to map set
+  - Ctrl select and draw
+  - [] rotate
+- composite collider for a large map
+

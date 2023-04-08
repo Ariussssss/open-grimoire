@@ -1,0 +1,16 @@
+#+STARTUP: content
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: notebook
+#+DATE: [2021-11-10 17:41]
+* Refers
+* install
+#+begin_src bash
+  pip install notebook jupyter jupyterlab
+#+end_src
+
+运行
+#+begin_src bash
+  jupyter notebook
+  # 或者
+  jupyter-lab
+#+end_src

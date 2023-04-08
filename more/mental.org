@@ -1,0 +1,8 @@
+#+STARTUP: content
+* mental
+** Refers
+** 普罗泰戈拉
+   Die Dinge erscheinen ihm so, wie sie ihm seinem eigenen Zustand nach erscheinen müssen
+
+   每个事物对于每个个人而言，只是它所呈现给他的样子，而它呈现给他这个样子，决定于它在他所处在的这个状态下所必然应该呈现给他的样子
+   

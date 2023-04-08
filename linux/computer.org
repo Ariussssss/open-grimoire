@@ -1,0 +1,101 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: computer
+#+DATE: [2022-09-03 18:01]
+* Refers
+- 现代操作系统
+* 基础
+- CPU
+- 内存
+- IO 设备
+- 总线
+* 芯片
+Intel 公司共同创始人 Gordon Moore
+
+Moore 定律: 芯片中晶体管的数量, 每 18 个月翻一番
+* Unit
+- 10^-3: milli
+- 10^-6: micro
+- 10^-9: nano
+- 10^-12: pico
+- 10^-15: femto
+- 10^-18: atto
+- 10^-21: zepto
+- 10^-24: yocto
+
+- 10^3: Kilo
+- 10^6: Mega
+- 10^9: Giga
+- 10^12: Tera
+- 10^15: Peta
+- 10^18: Exa
+- 10^21: Zetta
+- 10^24: Yotta
+
+- 1Kbps 指 1000 个 位 (Bit), 8 字节
+
+* Shortcut
+** BIOS Basic Input Output System
+** PCI Peripheral  Component Interconnect
+** ISA Industry Standard Architecture
+** POSIX The Portable Operating System Interface
+ A set of standard operating system interfaces based on the Unix operating system.
+* Process and Thread
+** Daemon 守护进程
+等待结果, 收到结果唤醒
+** Process
+避免阻塞, 规划调用资源和共享存储指针地址
+
+状态: 运行, 就绪, 阻塞
+
+私有部分:
+- 地址空间
+- 全局变量
+- 打开文件
+- 紫禁城
+- 报警, 信号, 信号处理
+- 账户信息
+** Thread
+避免阻塞, 规划 CPU 运算分配, 区分执行线程和 IO 线程协同.
+
+具有部分进程的线程, 又称更轻量级进程(lightweight process).
+其实设计和进程相似, 每个线程有自己的内存空间, 堆栈.
+CPU 快速切换, 在运算不密集的多线程中, 模拟达到并行的效果. 
+
+部分硬件支持多线程, 纳秒级线程切换
+
+状态: 运行(R, 跑 CPU), 可运行(S, sleep), 阻塞等待(D, 锁或者 IO 释放)
+
+私有部分:
+- 程序计数器
+- 寄存器
+- 堆栈
+- 状态
+** Pthread POSIX Thread
+IEEE 在 IEEE 标准 1003.1c 中定义了线程的标准
+
+主要接口
+- create
+- exit
+- join 等待一个线程
+- yield 释放 CPU
+- attr_init 创建初始化属性
+- attr_destroy
+* 存储 IO 栈
+** 文件系统
+提供 orw 文教操作调用
+
+ext4、btrfs、zfs、fat32、ntfs 等
+
+linux 提供统一抽象 vfs
+** 卷管理
+磁盘多合一, 一分多
+** 块存储
+实现 IO 调度, 拆分大 IO 请求, 相邻 IO 合并
+
+常用的 IO 调度算法 CFQ, NOOP, Deadline, AS
+** 存储驱动
+硬盘驱动,  如 SCI, ACHI, NVME,  ~/dev/sda~ 
+** 硬件
+实物, ATA, SATA, SCSI 等
+

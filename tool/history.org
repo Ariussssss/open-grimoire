@@ -11,8 +11,6 @@ https://github.com/shannpersand/comic-shanns
 [[file:images/20220711-114823_screenshot.png]]
 ** nerd
 https://github.com/ryanoasis/nerd-fonts
-
-- Mono Comic NF
 * 📦 包
 ** 🦋 ink
 代替 ~console.log~ + ~chalk~ 实现基于 ~react~ 的命令行 UI. 
@@ -28,7 +26,7 @@ https://github.com/floating-ui/floating-ui/
 *** +atuin+
 易用版 history
 
-useless, 依赖服务端, ~C-r~ 快捷键
+useless, 依赖服务端
 ** 调研中
 甚至没有一个能常用.. 
 *** esno 代替 ts-node

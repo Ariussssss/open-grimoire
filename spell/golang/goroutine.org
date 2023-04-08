@@ -1,0 +1,200 @@
+#+STARTUP: content
+#+CREATED: [2021-05-18 11:02]
+* goroutine
+** Refer
+   - https://mp.weixin.qq.com/s/r0y4Fweq-YGo1FZrsNsl3A
+   - https://medium.com/a-journey-with-go/go-goroutine-os-thread-and-cpu-management-2f5a5eaf518a
+   - https://codeburst.io/why-goroutines-are-not-lightweight-threads-7c460c1f155f
+   - https://mp.weixin.qq.com/s/_Tl1cGTdPxwSF1ctHc1yZg
+   - https://web.archive.org/web/20160128221609/https://air.unipr.it/retrieve/handle/11381/2297671/6288/camp2000.pdf
+   - https://mp.weixin.qq.com/s?__biz=MjM5MDUwNTQwMQ==&mid=2257485825&idx=1&sn=daae56d68d8b418d90f64161c24c6ce8&chksm=a539e0d7924e69c177f7c8eb6ad596354c09019afff2358e5dc1666487ddccb80140f639c68e&cur_album_id=1690026440752168967&scene=189#rd
+   - https://draveness.me/golang/docs/part3-runtime/ch06-concurrency/golang-goroutine/
+** 概念
+   #+begin_quote
+   Each goroutine (G) runs on an OS thread (M) that is assigned to a logical CPU (P).
+
+   G - goroutine.
+   M - 线程, 或者机器. 
+   P - 执行用的进程, M 必须依靠一个 P 来执行 G.
+   #+end_quote
+
+   Go 首先根据机器物理 GPU 数量, 创建进程, 存储到一个闲置的列表里面.  
+   新的 goroutine 生成会唤起一个闲置的进程去执行, 进程会创建一个带线程的 ~M~.
+   其中操作系统的线程最大数量为 ~GOMAXPROCS~ 个. 
+   没有 goroutine 运行的, 或者被 GC 强制停止的 ~P~, ~M~ 会回到闲置队列.  
+
+   当 goroutine 创建时:
+   1. 检索当前 ~P~ 是否能用来执行
+   2. 查看是否有闲置的 ~P~ 用来执行
+   3. 将 goroutine 挂到全局队列里面, 并且归还所附属的 ~M~
+
+   像 ~http.Get~ 这种情况, 当前 ~G0~ 会等待 http 构建的 ~G1~ 返回结果且停止执行.  
+   这个时候当前 ~P~ 和 ~M~ 都闲置, 可以用来执行新构建的 ~G1~ 不需要重新构建.  
+   等待执行完成后, 释放当前 ~P~ 和 ~M~ 归还给之前的等待 ~G0~ 继续执行.  
+** 对比线程
+   线程慢的原因(可以优化的部分):
+   1. 线程需要消耗他们栈大小的内存, 最少 1MB. 
+   2. 线程注册需要很多初始化工具,影响性能, 像:
+      - AVX( Advanced vector extension)
+      - SSE (Streaming SIMD Ext.) 或者 MMX
+      - Floating Point registers
+      - Program Counter (PC)
+      - Stack Pointer (SP)
+   3. 启动和注销需要系统分配资源, 需要调度操作系统就会慢
+
+   相比:
+   1. 而 goroutines 是存在于 go 运行时分配的虚拟空间里面而非操作系统中.
+      所以调度调度也是通过 go 运行时来完成.
+   2. goroutine 初始化只需要 2KB 栈大小.
+      不需要的栈会被内存二次服用, 减小内存损耗.
+   3. goroutine 阻塞不等于线程阻塞 ~M~, 上面有👆.
+   4. goroutine 闲置或者 block 不同于打断.
+      受调度器管理, 当再次恢复时只需要 PC, SP, DX (Data Register) 不需要更多初始化流程. 
+** 调度
+   分三级运行队列:
+   - ~runnext~
+     接受下一个 ~G~, 仅一个大小的数组, 如果有则按顺序排到 ~local queue~
+   - ~local queue~
+     大小 256 的数组, 满则分一半到 ~global queue~ 给其他 ~P~ 消费. 
+   - ~global queue~
+
+   #+begin_src go
+     package main
+
+     import (
+	 "fmt"
+	 "runtime"
+     )
+
+     func main() {
+	 runtime.GOMAXPROCS(1)
+	 for i := 0; i < 10; i++ {
+	     i := i
+	     go func() {
+		 fmt.Println(i)
+	     }()
+	 }
+
+	 var ch = make(chan int)
+	 <-ch
+     }
+     // 9
+     // 0
+     // 1
+     // 2
+     // 3
+     // 4
+     // 5
+     // 6
+     // 7
+     // 8
+     // fatal error: all goroutines are asleep - deadlock!
+
+     // goroutine 1 [chan receive]:
+     // main.main()
+     //         /Users/arius/lib/go-test/goroutime-sort.go:18 +0x96
+     // exit status 2
+   #+end_src
+   用 ~channel~ 锁死等待超时.  
+   每一个新生成的 ~G~ 会抢占 ~runnext~ , 被抢占的 ~G~ 会在按 ~FIFO~ 顺序进入 ~load queue~.
+
+   PS: 1.14 前 ~time~ 包会有一个 ~timerproc~ 的 ~G~ 抢占 ~runnext~.
+   所以直接调 ~time.Sleep~ 导致次序不一致.
+   
+*** history
+    - 单线程调度器 0.x
+      - G-M 模型
+    - 多线程调度器 1.0
+      - 允许多线程, 全局锁竞争
+    - 任务窃取调度器 1.1
+      - 引入 P, 出现 G-M-P模型
+      - Goroutine 等待不会让出线程
+      - STW 超长
+    - 抢占式调度器 1.2 ~ 至今
+      - 基于协作 1.2 ~ 1.13
+	- 在函数调用时插入抢占检查指令, 判断挡墙 Goroutine 是否可用
+	- STW 超级长导致程序暂停
+      - 基于信号 1.14 ~ 至今
+	- 基于信号的真抢占调度
+	- 垃圾回收扫描栈触发调度
+	- 时间点不多, 不能覆盖所有边缘
+*** 单线程调度
+    40 行代码:
+    1. 获取全局锁
+    2. ~gosave~ 保存栈寄存器和程序计数器
+    3. ~nextgandunlock~ 获取下一个需要运行的 Gorotine 解锁调度器
+    4. 修改 m 上执行的 Goroutine
+    5. 调用 ~gogo~ 运行最新的 Goroutine
+       
+    #+begin_src c
+      static void scheduler(void) {
+	  G* gp;
+	  lock(&sched);
+
+	  if(gosave(&m->sched)){
+	      lock(&sched);
+	      gp = m->curg;
+	      switch(gp->status){
+	      case Grunnable:
+	      case Grunning:
+		  gp->status = Grunnable;
+		  gput(gp);
+		  break;
+	      ...
+	      }
+	      notewakeup(&gp->stopped);
+	  }
+
+	  gp = nextgandunlock();
+	  noteclear(&gp->stopped);
+	  gp->status = Grunning;
+	  m->curg = gp;
+	  g = gp;
+	  gogo(&gp->sched);
+      }
+    #+end_src
+*** 多线程调度
+    和之前差不多, 增加 ~GOMAXPROCS~ 管理最大处理器数
+
+    问题:
+    1. 调度器和锁是全局资源, 中心化管理
+    2. 线程之间需要传递 Goroutine, 延迟
+    3. 每个线程需要处理内存缓存
+    4. 系统频繁阻塞和释放线程
+*** 任务窃取
+    - 引入 P, 增加中间层
+    - 实现工作窃取的调度器
+
+    流程:
+    1. 如果在运行时等待垃圾回收, 则调用 ~gcstopm~
+    2. 从当前处理器或者其他处理器获取 Goroutine
+    3. 执行
+*** 抢占式
+    之前 Goroutine 需要主动让出 CPU 资源才能触发调度, 造成问题:
+    - 某些 G 长时间占用, 其他 G 饥饿
+    - STW 暂停整个程序, 最长可能要几分钟
+**** 协作式
+     STW 检查  Goroutine 运行是否超过 10ms 会被标记. 
+     在函数执行前, 会被编译插入 ~morestack~. 
+     在执行时, 调用 ~newStack~ 检查 Goroutine 是否被标记, 然后抢占. 
+**** 信号式
+     特点:
+     1. 信号需要被调试器偷穿
+     2. 不会被内部 libc 拦截和使用
+     3. 可以出现在任意位置且不触发后果
+     4. 处理多平台不同信号
+
+
+     特点是 STW 和 栈扫描是可以被抢占的.
+     解决了这两个一直卡住程序的问题. 
+** A goroutine cannot recover from a panic in another goroutine.
+   #+begin_quote
+   While executing a function F, an explicit call to panic or a run-time panic terminates the execution of F. 
+   Any functions deferred by F are then executed as usual. 
+   Next, any deferred functions run by F's caller are run, and so on up to any deferred by the top-level function in the executing goroutine. 
+   At that point, the program is terminated and the error condition is reported, including the value of the argument to panic. 
+   This termination sequence is called panicking.
+   #+end_quote
+
+** MORE
+

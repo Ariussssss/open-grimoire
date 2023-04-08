@@ -1,0 +1,125 @@
+#+STARTUP: all
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://gongzhitaao.org/orgcss/org.css"/>
+#+TITLE: three
+#+DATE: [2021-09-30 11:31]
+* Refers
+- https://threejs.org/
+- https://juejin.cn/post/6981249521258856456
+- playground https://codepen.io/tompeham/pen/ZWomey?editors=0010
+* 概述
+基于原声 WebGL API 和着色器封装的 3D 引擎.
+
+让开发不用写原生的 WebGL, 学习 WebGL 帮助理解 three 原理和可以自定义着色器相关. 
+* base
+** scene
+三维时间容器
+** camera
+三维时间的镜头眼睛
+
+一般有:
+- PerspectiveCamera 透视相机
+- OrthographicCamera 正交相机
+** renderer
+把
+** 周边生态
+https://threejs.org/docs/#manual/en/introduction/Libraries-and-Plugins
+* glb 文件压缩
+#+begin_src bash
+  npm i -g gltf-pipeline
+  # glb转为gltf
+  gltf-pipeline -i demol.glb -o demol.gltf
+  # gltf压缩
+  gltf-pipeline -i demol.gltf -o modelDraco.gltf -d
+
+#+end_src
+* react-tree/fiber
+https://docs.pmnd.rs/react-three-fiber/getting-started/introduction
+Three in react. react 管理数据更新和绑定,  three 执行控制渲染. 
+
+box demo
+#+begin_src js
+  import { useRef } from 'react';
+  import { Canvas, useFrame } from '@react-three/fiber';
+
+  function Box(props) {
+    const mesh = useRef();
+    // rotate the box
+    useFrame((state, delta) => {
+      mesh.current.rotation.x = mesh.current.rotation.y += 0.01
+    });
+    // draw the box
+    return (
+        <mesh {...props} ref={mesh}>
+        <boxGeometry args={[1, 1, 1]} />
+        <meshStandardMaterial color="#FFAE00" />
+        </mesh>
+    );
+  }
+
+  export default function Scene() {
+    return (
+        <Canvas dpr={window.devicePixelRatio}>
+        <ambientLight />
+        <pointLight position={[10, 10, 10]} />
+        <Box position={[0, 0, 0]} />
+        </Canvas>
+    );
+  }
+#+end_src
+
+NoiseMaterial demo
+#+begin_src js
+  import { useRef } from "react";
+  import * as THREE from 'three';
+  import { Canvas, extend, useFrame } from '@react-three/fiber';
+  import { Center, shaderMaterial, Plane } from '@react-three/drei';
+  import { vertexShader, fragmentShader } from './shader';
+
+  const NoiseMaterial = shaderMaterial(
+    {
+      scale: 1.5,
+      size: 0.2,
+      density: 4.0,
+      time: 0.0,
+      bg: new THREE.Color('#111033'),
+      yellow: new THREE.Color('#ffd600'),
+      orange: new THREE.Color('#ff7300'),
+    },
+    vertexShader,
+    fragmentShader
+  );
+
+  extend({ NoiseMaterial });
+
+  function Data() {
+    const material = useRef();
+
+    useFrame(({ clock }) => {
+      material.current.uniforms.time.value = Math.sin(
+        (2 * Math.PI * clock.getElapsedTime()) / 10
+      );
+    });
+
+    return (
+        <Plane args={[12, 14.75]}>
+        <noiseMaterial ref={material} side={THREE.DoubleSide} />
+        </Plane>
+    );
+  }
+
+  export default function Scene() {
+    return (
+        <Canvas dpr={window.devicePixelRatio} camera={{ position: new THREE.Vector3(0, 0, 10) }}>
+        <Center>
+        <Data />
+        </Center>
+        </Canvas>
+    );
+  }
+
+#+end_src
+
+more demo:
+- https://codesandbox.io/s/threejs-journey-level-1-forked-er9t3
+* game demo
+- https://github.com/Mugen87/nier

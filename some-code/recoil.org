@@ -1,0 +1,34 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: recoil
+#+DATE: [2021-09-26 11:32]
+* Refers
+   - https://juejin.cn/post/7009268500153761805
+   - https://recoiljs.org/docs/introduction/getting-started
+* 概念
+   数据流流派:
+   - redux 流派, 如 dva,  rematch
+   - mobx 流派, 基于 proxy 劫持数据, 响应式, 如 dob
+   - context,  基于 React 的 context api, 如 unstated,  constate
+* 使用
+   高阶组件 RecoilRoot, 和四个常用 Api:
+   - atom, 创建原子数据
+   - selector, 类似 get, computed, 更新变化数据
+   - useRecoilState, 类似 useState
+   - useRecoilValue, 不允许修改的使用, 对 selector
+
+   其他:
+   - useSetRecoilState 可只获取变更函数, set 通常不变
+** selector
+    get 支持异步, 支持 set 
+    同时设置 get 和 set, 类似一个自定义 hooks (get, set 相当于, useMemo, useCallback)
+    #+begin_src js
+      const addFood = selector({
+	  key: 'addFood',
+	  set: ({ set, get }, newFood) => {
+	      set(order, [...get(order), newFood])
+	  },
+      });
+    #+end_src
+
+    其中 get 支持 getCallback, 可以通过返回实现 useCallback. 

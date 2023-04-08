@@ -1,0 +1,4 @@
+#+STARTUP: content
+* skeleton
+** Refers
+   - https://github.com/Jocs/jocs.github.io/issues/22

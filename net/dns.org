@@ -1,0 +1,168 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: dns
+#+DATE: [2022-01-24 10:31]
+* Refers
+- 所有类型 https://en.wikipedia.org/wiki/List_of_DNS_record_types
+* DNS Domain Name System
+name 域名 domain name, SLD + TLD
+常规 url https://www.baidu.com, 其中:
+- https protocol
+- www Subdomain, CNAME 标记
+- baidu SLD Second Level Domain, 顶级域名, 基础域名, 根域名
+- com TLD
+- . Subdirectory
+
+一般 NS 记录会被存储在 顶级域名服务器上 (TLD Top Level Domain server).
+一共有 1000 多个 TLD, 一个 com, 其他 gov domain. 
+* DNS 查询路径
+如果没返回则下一步:
+1. 浏览器查询 ip 记录
+2. 逐层询问解析器, 知道根服务器(ISP 互联网服务提供商)
+3. 被告知域名所属 TLD 服务器
+4. TLD 告知 权威域名服务 Authoritative nameserver 地址, 记录 NS 的所有 ip
+* A 记录  IPv4 address record
+单个域名指向单个 ip.
+
+一般包括:
+- name
+- description
+- ttl
+
+
+examples:
+#+begin_src bash
+  google.com. 300 IN A 173.194.222.101
+#+end_src
+
+300 s, TTL Time-to-live.
+* CNAME 记录, 别名记录 Canonical Name record
+多个域名映射到另一个域名, 别名记录需要有 A 记录.
+** 和地址记录区别
+CNAME 稳定, 修改 IP 只需要修改别名的 A 记录即可, 不需要每个都改.
+
+CNAME 访问必须要 www 别名前缀, A 记录可以不用. 
+* AAAA 记录 IPv6 address record
+类似 A 记录, IPv6
+* TXT record
+任意文字记录, 一般用于域名拥有校验(domain ownership verification)
+
+服务商提供, txt 对应域名或 IP 唯一, 保密. 
+
+测试:
+#+begin_src bash
+  dig -t txt salesforce.com
+
+  # ;; ANSWER SECTION:
+  # salesforce.com.         300     IN      TXT     "atlassian-domain-verification=vTF7JaBo8Jpp/uhUFDPztkIr5aildFzbq9aLIcBbwK5aIdI9s8WQRGPTnKRONIiM"
+  # salesforce.com.         300     IN      TXT     "stripe-verification=9ca4e73f9b5286bdcdbd5b91f97ad519544e5ee56eebb2f2dc6b48dbec579fe0"
+  # salesforce.com.         300     IN      TXT     "pardot1=6eae4d5ab80fc91a64539164ab421392a58d97551b230b12152dffb7553ea905"
+  # salesforce.com.         300     IN      TXT     "google-site-verification=XHgruaJj29eI7YjqDkEWZivuT0wlakIWgB2N4DRa_QM"
+  # salesforce.com.         300     IN      TXT     "pardot220122=922f8d6c355d7ff72ed3e771a2eca71656d0249cfdc70a8cebb481d367d6f006"
+#+end_src
+
+或者网页端: https://www.nslookup.io/domains/salesforce.com/dns-records/
+
+可以知道公司域名用了哪些服务
+
+* NS Nameserver 域名记录
+NS 记录域名指向 DNS 服务器, 存储各种域名记录信息.
+examples:
+#+begin_src bash
+  ns1.arius.com
+  ns2.arius.com
+#+end_src
+* MX Record Mail Exchanger Record
+邮箱, 包括:
+- name
+- priority 越小越优先
+- description
+- ttl
+
+#+begin_src bash
+  google.com. 600 IN MX 10 alt1.aspmx.l.google.com.
+  google.com. 600 IN MX 20 alt2.aspmx.l.google.com.
+  google.com. 600 IN MX 30 alt3.aspmx.l.google.com.
+#+end_src
+* Certificate
+** Not a extension
+Can be any file, with same content.
+
+General:
+- ~.key~ private key
+- ~.pem~ public key
+- ~.p12~ both halves of the key embedded
+- ~.cert~ or ~.crt~  the signed certificates
+- ~.csr~ a certificate signing request
+  - Verify challenge for access to private key
+
+Convert example
+#+begin_src bash
+  openssl x509 -outform der -in your-cert.pem -out your-cert.crt
+#+end_src
+** Generate Self-signed SSL Certificate
+*** Mkcert
+https://github.com/FiloSottile/mkcert
+**** Generate
+#+begin_src bash
+  mkcert -key-file key.pem -cert-file cert.pem example.com *.example.com
+#+end_src
+*** Openssl
+**** Generate
+#+begin_src bash
+  openssl version
+  openssl req -x509 -sha256 -nodes -newkey rsa:2048 -days 365 -keyout localhost.key -out localhost.crt
+#+end_src
+
+Params:
+- Country Name
+- State or Province Name
+- Locality Name
+- Organization Name
+- Organizational Unit Name
+- Common Name*
+- Email Address
+
+Common Name value should be the domain name of the website, ~*.example.com~ for sub domain
+**** Trust
+#+begin_src bash
+  security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain /path/to/file/localhost.crt
+#+end_src
+** Config Server
+*** node server
+#+begin_src js
+   const https = require('https');
+   const fs = require('fs');
+   const options = {
+     key: fs.readFileSync('{PATH/TO/CERTIFICATE-KEY-FILENAME}.pem'),
+     cert: fs.readFileSync('{PATH/TO/CERTIFICATE-FILENAME}.pem'),
+   };
+   https
+     .createServer(options, function (req, res) {
+       // server code
+     })
+     .listen({PORT});
+#+end_src
+*** nginx
+#+begin_src conf
+  http {
+      upstream backend {
+          server 127.0.0.1:8000;
+      }
+      server {
+          server_name local.website.dev;
+          rewrite ^(.*) https://local.website.dev$1 permanent;
+      }
+      server {
+          listen               443;
+          ssl                  on;
+          ssl_certificate      /path/to/file/localhost.crt;
+          ssl_certificate_key  /path/to/file/localhost.key;
+          ssl_ciphers          HIGH:!aNULL:!MD5;
+          server_name          local.website.dev;
+          location / {
+              proxy_pass  http://backend;
+          }
+      }
+  }
+#+end_src

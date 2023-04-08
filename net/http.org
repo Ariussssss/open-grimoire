@@ -1,0 +1,290 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: http
+#+DATE: [2021-04-09 10:33]
+* Refers
+- https://segmentfault.com/a/1190000039308474
+- https://juejin.cn/post/6844903489596833800
+- https://zhuanlan.zhihu.com/p/53374516
+- https://www.nearform.com/blog/a-quic-update-for-node-js/
+- https://juejin.cn/post/6844903604868874247
+* HTTP 0.9 1991
+* key points
+主要有两点: 带宽和延迟
+
+带宽可以和只能靠基础建设得到优化提升.
+
+延迟:
+- 浏览器阻塞 HOL blocking
+  同一个域只能有 4 个链接, 超过阻塞
+- DNS 查询 DNS Lookup
+  缓存可以提升
+- 建立连接 Initial connection
+  HTTP 基于 TCP 协议
+* TCP
+
+** 三次握手 / 四次挥手
+三次握手, 四次挥手.
+三次握手:
+1. 第一次: 确认客户端发送能力, 服务端接收能力正常
+2. 第二次: 确认服务端接收和发送能力, 客户端接受和发送能力正常
+3. 第三次: 确认客户端接受和发送能力, 服务端接收和发送能力正常
+   第二次没办法让服务端知道自己发送和接收能力是否正常
+
+   因为 TCP 是双向的, 任意一方可以关闭.  
+   而接受 FIN 后仍可以继续传输数据, FIN 只能对应返回 ACK 而不是 FIN .
+   因为本身的 FIN 与另一方无关是上层主动控制, 本地数据发送结束时 FIN. 
+
+   信号量:
+   1. ACK 确认
+   2. RST 重置连接
+   3. SYN 初始化一个连接序列号
+   4. FIN 结束发送数据
+   5. ISN Initial Sequence Number
+      #+begin_src bash
+        ISN = M + F(localhost, localport, remotehost, remoteport)
+      #+end_src
+      M 是计时器, 间隔 4ms
+      F 是 Hash 算
+
+
+状态切换, Client:
+1. CLOSE
+2. SYNSENT
+3. ESTAB 开始通讯
+4. FIN-WAIT-1
+5. FIN-WAIT-2
+6. TIME-WAIT
+
+   Server:
+   1. LISTEN
+   2. SYN-RCVD
+   3. ESTAB
+   4. CLOSE-WAIT
+   5. LAST-ACK 发送 FIN 后等待最后的 ACK
+   6. CLOSE
+
+   Steps:
+   Client - Server
+   1. SYN     ->  ISN(c)
+   2. SYN+ACK <-  ISN(s), ISN(c) + 1
+   3. ACK     ->  ISN(s)
+   4. Communication
+   5. FIN     ->  K
+   6. DATA    <-  未结束的一方还可以继续传输
+   7. ACK     <-  K + 1
+   8. FIN     <-  L
+   9. ACK     ->  L + 1
+
+** 安全
+*** syn flood 攻击
+基础的 DoS 攻击, 占用服务资源.
+使服务器打开大量半开连接, 分配 TCB Transmission Control Block
+*** 防治
+** 超时
+TCP 每个请求都会按需发确认号, 也默认需要确认应答.
+没收到应答, 也可能是应答丢失了而不是没收到.
+
+所以可以根据平均网络环境, 设置重发时延, 到点重发.
+** 滑动窗口
+因为每个包都等待接受响应, 就很慢.
+滑动窗口可以让多个数据包按序发送, 然后对应单个进行重发.
+
+** 流控制
+容易出现滑动窗口个数不对应的问题, 导致处理不过来, 反复重发浪费流量.
+
+TCP 首部会有一个字段用来通知窗口大小. 
+** 拥塞控制
+一下子涌入大量数据包, 可能引起网络阻塞和瘫痪.
+
+- 一般慢启动定义一个最小单位 1 的窗口, 去获取接收端窗口大小
+- 收到应答后指数递增, 直到达到接收端窗口大小
+** RTT
+Round-Trip Time 往返时延. 
+表示从发送端发送数据开始, 到发送端收到接收端确认.
+    
+** 优化
+- 通过时延, 组合应答, 组合应答和数据为一个请求等方式, 减少应答次数, 减少 RTT 耗时
+- 通过窗口大小减少同步耗时
+
+** 选择
+和 UDP 的区别就在于数据准确性是应用处理还是传输协议处理. 
+
+* HTTP 1.0 1996
+* HTTP 1.1 1999
+- 缓存, Entity tag，If-Unmodified-Since, If-Match, If-None-Match
+- 允许部分请求, 206 Partial Content
+- 错误处理, 新增 24 个错误处理码
+- Host 头处理, 允许同一个 IP 由多个 虚拟主机 Multi-homed Web Server
+- 长链接 Persistent Connection 请求流水线 Pipelining  
+  同一个 TCP 链接多个 HTTP 请求和相应  
+  默认 Keep Alive
+** Keep Alive
+因为之前每次都需要 TLS, 很慢.
+同一个域名, 一定时间内, 只建立一次 HTTP 请求, 其他请求可以复用最近建立的连接通道
+时间可配置
+
+效率问题:
+- 串行的文件传输, 上一个文件没传输完会 block 住下一个
+  且传输必须按顺序, 接收端不知道顺序
+- 连接数过多, 使用或者闲置的会因为没有及时回收而闲置最高并发
+
+* SPDY
+Google 优化 HTTP.1X, 层级变成:
+HTTP > SPDY > SSL > TCP
+   
+具体:
+- 降低延迟, 多路复用   
+  多个请求 stream 共享一个 TCP 连接
+- 指定优先级, 网页优先, 静态资源, 脚本
+- header 压缩, 减少多余的 header
+- 强制 HTTPS 加密运输
+* HTTPS
+Hypertext Transfer Protocol Secure
+多了个 Secure, 基于 HTTP 再利用 SSL/TLS 来加密数据包
+   
+- HTTP 建立在 TCP 之上, 本来都是明文
+  HTTPS 建立在 SSL/TLS 上, 运输内容经过加密
+- 有效防止劫持
+
+  [[file:images/20210615-103352_screenshot.png]]
+
+  采用非堆成加密, 分成公私钥. 
+** TLS/SSL
+TLS Transport Layer Security 传输层安全性
+   
+SSL Secure Socket Layer 安全套接字层
+
+独立协议, 除了 HTTP 外 SMTP Telnet 也可以用
+   
+主要实现三类基本算法: 散列函数 Hash, 对称加密和非对称加密
+   
+*** hash
+常见的有 MD5, SHA1, SHA256
+
+单向不可逆, 明文传输, 任何修改影响结果
+因此需要信息和信息摘要同时加密
+
+*** 对称加密
+常见的有 AES-CBC, DES, 3DES, AES-GCM 等
+
+1 对 1 共享密钥, 防止信息监听 t
+
+*** 非对称加密
+常见的 RSA 算法，还包括 ECC, DH 等算法
+
+分成公私钥, 可以互相解开加密的信息
+1 对多, 服务端掌握一把私钥
+   
+*** 身份验证 CA 和证书
+
+因为直接使用 RSA 需要生成和交换公私钥.  
+容易被中间人攻击.
+
+证书在申请时返回给客户端, 不包含 私钥.  
+证书 = 公钥 + 申请者和颁发者信息 + 签名
+证书内容为私钥加密信息, 客户端使用公钥对证书信息解密核对信息.
+     
+*** 优化
+多次握手可以通过非堆成加密维护一个对称加密的密钥, 双方持有
+
+之后在通过对称加密的密钥进行传输, 可以减少不必要的握手和对称加密泄露的中间人攻击
+     
+* HTTP 2 2015
+基于 SPDY 设计, 升级  
+与 SPDY 区别:
+- 支持明文 HTTP 而非强制 HTTPS
+- 头部压缩算法不同  
+  HTTP2.0 消息头的压缩算法采用 HPACK http://http2.github.io/http2-spec/compression.html，而非
+  SPDY 采用的 DEFLATE http://zh.wikipedia.org/wiki/DEFLATE
+
+  对比 HTTP 1.X:
+  - 二进制格式, 更方便和健壮
+  - 多路复用, 解决 1.X 的问题, 二进制数据帧和流允许服务器并行随机传输数据
+  - header 压缩使用 encoder , 缓存 header 表, 减少重复传输
+  - 同一个域名请求都是基于流, 不管多少个文件都是一路连接, 提高服务器利用率
+  - server push 一次请求多个返回
+    #+begin_src conf
+      server {
+      listen 443 ssl http2;
+      server_name  localhost;
+
+      ssl                      on;
+      ssl_certificate          /etc/nginx/certs/example.crt;
+      ssl_certificate_key      /etc/nginx/certs/example.key;
+
+      ssl_session_timeout  5m;
+
+      ssl_ciphers HIGH:!aNULL:!MD5;
+      ssl_protocols SSLv3 TLSv1 TLSv1.1 TLSv1.2;
+      ssl_prefer_server_ciphers   on;
+
+      location / {
+      root   /usr/share/nginx/html;
+      index  index.html index.htm;
+      http2_push /style.css;
+      http2_push /example.png;
+      }
+      }
+    #+end_src
+
+    因此升级到 2 之后, JS 文件不再需要为了减少请求数合并, 也不需要资源分多域名提高下载速度. 
+
+* QUIC Quick UDP Internet Connection
+设计目标, 基于 UDP, 替代所有 TCP 的 HTTP 通信.
+QUIC 在 UDP 基础上再定义了一层, 为 UDP 处理错误处理, 可靠性, 流控制, 内置安全性 (通过 TLS 1.3).
+
+背景是因为 UDP 不可靠, 容易丢失, 乱序, 重复.
+和 TCP 区别: 在于可不按顺序传输数据包.
+
+因为 QUIC 可以数据包独立, 能够以任意方式重传,  解决 TCP 堵塞的问题.
+
+QUIC 协议集合, 主要包括:
+- 传输协议 Transport
+- 丢包检测与流量控制 Recovery
+- 安全传输协议 TLS
+- HTTP3 协议
+- HTTP 头部压缩协议 QPACK
+- 负载均衡协议 Load Balance
+
+  主要功能/特点:
+  - 有序传输, 同个 stream 内数据有序
+    steam connection 运行与 互联网拓扑结构独立, IP 和 端口修改无需重新连接.
+    connectionID 对应连接状态, 切换网路依然可用. 
+    有利于移动端设备切换网络.
+  - 安全可靠, 默认加密,  TLS 1.3.
+  - 流控制和错误处理, 防止服务攻击.
+  - 支持零行程 HTTP 请求.
+    HTTP 基于 TCP 的 TLS, 要求客户端和服务器多次交换数据建立 TLS 回话, 然后启动传输数据.
+    QUIC 允许 HTTP 请求头作为 TLS 握手的一部分发送, 就是不用单独 TCP TLS 而是包含 HTTP 请求在内.
+
+    [[./images/1160672222-603c9c9b0f3b7_fix732.png]]
+  - 向前纠错, 本次上报带之前丢失的数据, 减少数据上限, 减少重发次数
+
+* 使用场景
+QQ 为例子, PC 主要是用 HTTP/2 + QUIC, 移动端因为 QUIC 支持一般, 主要为 HTTP/2.
+   
+阿里云也支持, 目前有 Tbps 级别流量在验证.
+主要使用场景: 图片小文件, 大文件下载, 视频音频点播, 动态内容分发加速
+
+OPPO 实践, 印度印尼等地区网络覆盖较差, https 成功率低, 下载延迟较高
+
+优势:
+- 图片小文件, 明显降低文件下载总耗时
+- 视频点播, 首屏秒开, 降低卡顿
+- 弱网环境, 丢包卡顿优化
+- 加密连接
+- 大并发量资源请求
+
+* HTTP 3
+基于 QUIC, 又称 HTTP-over-QUIC
+
+** news
+2022.06.06, IETF QUIC（Internet Engineering Task Force, 互联网工程任务组, 简称 IETF）,
+比利时的 HTTP 工作组成员 Robin Mark 在 Twitter 上宣布“历时 5 年, HTTP/3 终于被标准化为 RFC 9114.
+将与 RFC 9204（QPACK header 压缩）和 RFC 9218 （可扩展的优先级）一起开启 Web 的新篇章！”,
+这意味着该协议已经进入了稳定的状态, 而 HTTP/3 是 HTTP 超文本传输协议的第三个主要版本.
+同时 HTTP/2 也更新为新的 RFC 9113 标准.
+
+* TLS 细节
+- https://tls13.xargs.org/

@@ -1,0 +1,11 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: probability-theory
+#+DATE: [2023-03-21 00:19]
+* Refers
+* likelihood function 似然函数
+$p(A|B) = \frac{p(A, B)}{p(B)}$ 
+* iid Independent and identically distributed random variables 独立同分布
+随机变量取值不受影响,  概率分布函数相同
+* MLE maximum likelihood estimation 最大似然估计
+

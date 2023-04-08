@@ -1,0 +1,5 @@
+#+STARTUP: content
+#+CREATED: [2021-09-22 09:09]
+* alacritty
+** short-cut
+    ~c-l~ 清屏

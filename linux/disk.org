@@ -1,0 +1,60 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: disk
+#+DATE: [2022-12-01 23:25]
+* Refers
+* fdisk
+Part settings
+#+begin_src bash
+  sudo fdisk /dev/sda
+#+end_src
+* lsblk
+Preview all block devices
+* parted
+Change part size or label
+* mount
+Mount device to a path
+#+begin_src bash
+  sudo mount /dev/sda1 /mnt/somewhere
+#+end_src
+* cfdisk
+Delete or change part type
+* mkfs
+Change fs type
+#+begin_src bash
+  sudo mkfs.ext4 /dev/sda
+#+end_src
+* /etc/fstab
+Describe mount information
+- Column 1: Device name.
+- Column 2: Default mount point.
+- Column 3: Filesystem type.
+- Column 4: Mount options.
+- Column 5: Dump options.
+- Column 6: Filesystem check options.
+* COMMENT large size disk example
+Delete all parts
+#+begin_src bash
+  sudo fdisk /dev/sda
+#+end_src
+
+Create parts
+#+begin_src bash
+  sudo parted /dev/sda
+#+end_src
+
+1. ~mklabel gpt~
+2. ~unit TB~ , ~mkpart primary 0 7.3~
+3. ~q~ 
+
+Setup file system
+#+begin_src bash
+  mkfs.ext4 /dev/sda1
+#+end_src
+
+Mount
+#+begin_src bash
+  mkdir /data
+  sudo mount /dev/sda1 /data
+#+end_src
+   

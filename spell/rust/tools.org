@@ -1,0 +1,79 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: tools
+#+DATE: [2021-12-03 09:50]
+* Refers
+- https://github.com/ascoders/weekly/blob/master/%E5%89%8D%E6%B2%BF%E6%8A%80%E6%9C%AF/218.%E7%B2%BE%E8%AF%BB%E3%80%8ARust%20%E6%98%AF%20JS%20%E5%9F%BA%E5%BB%BA%E7%9A%84%E6%9C%AA%E6%9D%A5%E3%80%8B.md
+- https://github.com/i5ting/rust-fe
+* swc
+https://swc.rs/
+Rust 开发的编译, 打包, 压缩工具.
+
+功能类似 babel, 性能快 20 倍.
+#+begin_src bash
+  # const a = 1
+  npx swc ./main.ts
+  # output:
+  # Successfully compiled 1 file with swc.
+  # var a = 1;
+#+end_src
+** @swc/core
+自定义编译上层抽象
+#+begin_src js
+  const swc = require("@swc/core");
+
+  swc
+    .transform("source code", {
+      // Some options cannot be specified in .swcrc
+      filename: "input.js",
+      sourceMaps: true,
+      // Input files are treated as module by default.
+      isModule: false,
+
+      // All options below can be configured via .swcrc
+      jsc: {
+        parser: {
+          syntax: "ecmascript",
+        },
+        transform: {},
+      },
+    })
+    .then((output) => {
+      output.code; // transformed code
+      output.map; // source map (in string)
+    });
+#+end_src
+** @swc/wasm-web
+浏览器端编译, 低代码或者在线编译. 
+#+begin_src js
+  import { useEffect, useState } from "react";
+  import initSwc, { transformSync } from "@swc/wasm-web";
+
+  export default function App() {
+    const [initialized, setInitialized] = useState(false);
+
+    useEffect(() => {
+      async function importAndRunSwcOnMount() {
+        await initSwc();
+        setInitialized(true);
+      }
+      importAndRunSwcOnMount();
+    }, []);
+
+    function compile() {
+      if (!initialized) {
+        return;
+      }
+      const result = transformSync(`console.log('hello')`, {});
+      console.log(result);
+    }
+
+    return (
+      <div className="App">
+        <button onClick={compile}>Compile</button>
+      </div>
+    );
+  }
+#+end_src
+* napi-rs
+Node 和 Rust 的衔接层

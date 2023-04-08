@@ -1,0 +1,23 @@
+#+STARTUP: content
+* devbox
+** Refers
+** 流程
+*** 安装
+
+    安装 zsh
+
+    #+begin_src bash
+      sudo apt-get install zsh
+      wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+      git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+      sh install.sh
+    #+end_src
+    
+    安装 starship
+
+    #+begin_src bash
+      curl -fsSL https://starship.rs/install.sh | bash
+    #+end_src
+
+    
+    

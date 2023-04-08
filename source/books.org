@@ -1,0 +1,20 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: books
+#+DATE: [2021-10-09 15:59]
+* Refers
+- 大佬的书籍分享 https://xargin.com/readings/
+- https://github.com/EbookFoundation/free-programming-books
+- https://blog.jiayuanzhang.com/post/naval-reading/
+* article
+- https://coolshell.cn/articles/19464.html
+- https://www.cntofu.com/
+- https://ursocute.github.io/2019/01/12/article2/
+- https://github.com/staltz/ama/issues/35
+- 
+** [[https://mp.weixin.qq.com/s?__biz=Mzg3OTUzMjgxNw==&mid=2247483684&idx=1&sn=bfd5c8cee293ec0de98d97133bf917b1&chksm=cf024f5af875c64c69eba84c86eb3096fffb09f88c986510d053ee52d216d5d372ba0f69a86a&scene=21#wechat_redirect][资深技术Leader曹乐：如何成为技术大牛]]
+- 不要失去思考能力成为纯粹的开发
+- 工作要和学习相结合, 效率翻倍
+- 
+* book
+- 重来 https://www.v2ex.com/rework

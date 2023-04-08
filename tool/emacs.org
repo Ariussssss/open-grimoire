@@ -61,8 +61,8 @@ alist 也是 list 类型，可以用 mapcar 之类的方式改变形式。
 #+begin_src org
   ,#+STARTUP: overview | content | showall
 #+end_src
-** font style
 
+** font style
 - *粗体*
 - /斜体/
 - +删除线+
@@ -424,9 +424,6 @@ theme 都是以 symbol 来制定和读取
     (disable-theme (car custom-enabled-themes)))
 #+end_src
 
-* font
-- ~c-u c-x =~ current cursor font
-
 * 自定义 header-line mode-line
 自定义
 #+begin_src lisp
@@ -464,9 +461,9 @@ v29  alpha-background 需要这个 ~--with-cairo --with-x-toolkit=yes~
 #+begin_src bash
   cd emacs-29
   ./autogen.sh
-  ./configure --with-native-compilation --
-  make -j16
-  make -j16 check
+  ./configure --with-native-compilation
+  make
+  make check
   src/emacs -Q # try it out!
   sudo make install
 #+end_src

@@ -1,0 +1,18 @@
+#+STARTUP: content
+* Pack Up
+  
+** 优化开发流程
+   - webpack 4 的 cache 属性
+
+** 优化打包流程
+   打包 ~speed-measure-webpack-plugin~
+
+** 流程
+   ~factory~ webpack 4 的旧接口, ~module~ 的来源.
+   一般用于直接拦击请求, 其实 ~module~ 前后的也可以, ~factorize~ 会更前.
+
+   ~module~ 根据 ~request~ 到的数据返回的资源数据结构.
+   ~request~ 一般为被引用模块 ~package.json~ 被 ~node~ 解析的文件绝对路径. 
+   
+   ~chunks~ 一般对应分包情况的数据结构, 内置 ~Set<modules>~ .
+   ~static~ 

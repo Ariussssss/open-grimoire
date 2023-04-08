@@ -1,0 +1,4 @@
+#+STARTUP: content
+* Ruby
+* Referrs
+  - https://poignant.guide/book/chapter-2.html

@@ -1,0 +1,28 @@
+#+STARTUP: content
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: 绘图工具
+#+DATE: [2021-10-09 16:13]
+* Refers
+  - https://xargin.com/diagram-tools-intro/
+* https://textik.com/  
+  ascii 图在线绘制
+* https://asciiflow.com/
+  ascii , 或者 extended 模式
+* monodraw
+  mac app, unicode 模式或者 ascii 模式. 
+* https://technicism.github.io/Charaster/
+  绘制 ascii 图像
+* draw.io
+* sketch
+  #eeeeee 和 helvetica 极简审美
+* graphviz
+http://magjac.com/graphviz-visual-editor/
+
+dot 文件生成图像
+
+#+begin_src bash
+  brew install graphviz
+  dot ./test.dot -T png -o pic.png
+#+end_src
+* plantuml
+  代码生成 uml 图像

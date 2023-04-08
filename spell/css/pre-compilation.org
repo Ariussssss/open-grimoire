@@ -1,0 +1,56 @@
+#+STARTUP: content
+* pre-compilation
+** playground
+   - sass https://www.sassmeister.com/
+   - less https://lesscss.org/less-preview/
+   - stylus https://stylus-lang.com/try.html
+** less
+
+*** 使用变量属性和 ~JavaScriptEnable~ 实现 rem
+     #+begin_src less-css
+       @pxtorem: ~`pxtorem = function(value) {
+	 var useRem = @{use-rem};
+	 var baseFontSize = @{base-font-size};
+	 if (value === 0) {
+	   return 0;
+	 }
+	 if (typeof value === 'number') {
+	   return Number(useRem) === 0 ? value + 'px' : Math.round(value / baseFontSize * 1000000) / 1000000 + 'rem';
+	 }
+	 return value;
+       }`;
+
+       .rem(@property; @values...) {
+	 @{property}: ~`(function () {
+	   var baseFontSize=@{base-font-size};
+	   var sizeList = @{values};
+	   if (!Array.isArray(sizeList)) {
+	     sizeList = [sizeList];
+	   }
+	   return sizeList.map(function (item) {
+	   return pxtorem(item);
+	 }).join(' ');
+	 }())`;
+       }
+     #+end_src
+
+*** loop
+    #+begin_src less-css
+      @list: top, bottom;
+      @size: 10px, 20px;
+
+      .set-border(@index) when (@index > 0) {
+	@s: extract(@size, @index);
+	@k: extract(@list, @index);
+  
+	&-@{k} {
+	  border-@{k}: @s solid red;
+	}
+  
+	.set-border(@index - 1);
+      }
+
+      .foo {
+	.set-border(length(@list));
+      }
+    #+end_src

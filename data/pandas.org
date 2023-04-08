@@ -12,3 +12,8 @@ Series must be sort by time
 #+begin_src bash
   merged = pd.merge_asof(a_data, bl_data, on='time', direction='backward')
 #+end_src
+* render option
+#+begin_src bash
+  pd.set_option('expand_frame_repr', False) 
+#+end_src
+

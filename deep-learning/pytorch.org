@@ -1,0 +1,57 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: pytorch
+#+DATE: [2022-06-18 18:47]
+* Refers
+* overview
+** Goods
+- use GPU for Tensor computation (高纬运算) Numpy
+* Process
+** Train
+*** Define
+*** Loss function
+*** Organize
+** Validation
+** Testing
+* Dataset
+Store data samples and expected values
+* Dataloader
+Group data and load dataset in batch by size, enables multiprocessing
+* Tensors 
+High dimensional matrices
+
+dim in pytorch, axis in numpy 
+* base training setup
+#+begin_src python
+
+  dataset = MyDataset(file)
+  tr_set = DataLoader(dataset, 16, shuffle=True)
+  model = MyModel().to(device)
+  criterion = nn.MSELoss()
+  optimizer = torch.optim.SGD(model.parameters(), 0.1)
+
+  for epoch in range(n_epochs):
+    model.train()
+    for x, y in tr_set:
+      optimizer.zero_grad()
+      x, y = x.to(device), t.to(device)
+      pred = model(x)
+      loss = criterion(pred, y)
+      loss.backward()
+      optimizer.step()
+#+end_src
+
+test
+
+#+begin_src python
+  model.eval()
+  total_loss = 0
+  for x,y in dv_set:
+    optimizer.zero_grad()
+    x, y = x.to(device), t.to(device)
+    with torch.no_grad():
+      pred = model(x)
+      loss = criterion(pred, y)
+    total_loss += loss.cpu().item() * len(x)
+    avg_loss = total_loss / len(dv_set.dataset)
+#+end_src

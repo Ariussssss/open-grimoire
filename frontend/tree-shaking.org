@@ -1,0 +1,65 @@
+#+STARTUP: content
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: tree-shaking
+#+CREATED: [2021-07-05 11:06]
+* Refers
+  - https://zhuanlan.zhihu.com/p/32831172
+  - https://juejin.cn/post/6844903544756109319
+  - https://mp.weixin.qq.com/s/SbJNbSVzSPSKBe2YStn2Zw
+  - https://webpack.js.org/concepts/dependency-graph/
+* history
+  rollup 提出, webpack 2 在基于 uglify 实现
+* 失效原因
+** babel
+   类的构造函数会被转译 ~Object.defineProperty~
+    
+   区分默认模式(es6)和宽松模式(loose)
+   #+begin_src js
+     // .babelrc
+     {
+       "presets": [["env", { "loose": false }]]
+     }
+   #+end_src
+** effect
+   函数执行, 或者赋值对外部产生影响, 如 ~_createClass~ 默认有副作用  
+
+   webpack 4 可以通过 ~sideEffects~ 设为 false 取消判定
+** 类型
+   只有 ~esm~ 格式支持
+
+   rollup 提案, 在 ~package.json~ 中, 除了 ~main~ 另外指定 ~module~
+* 原理(webpack)
+** webpack 标记
+   主要能力:
+   1. 标记到处值, 哪些没用到
+   2. 使用 Terser 删除没用到的导出语句
+
+   标记过程:
+   1. Make 阶段, 收集模块导出标量, 记录依赖关系图 ModuleGraph 变量
+   2. Seal 阶段, 遍历 ModuleGraph, 标记模块是否被使用
+   3. 生成产物, 根据标记, 删除导出
+  
+   标记功能需要配置  ~optimization.usedExports = true~  开启
+
+   Make 步骤:
+   1. 将 esm 导出语句变成对象, 记录模块的所有依赖:
+      - 具名导出转换为 ~HarmonyExportSpecifierDependency~ 对象
+      - ~default~ 导出转换为 ~HarmonyExportExpressionDependency~ 对象
+   2. 完成后,  触发  ~compilation.hooks.finishModules~  和  ~FlagDependencyExportsPlugin~ 回调
+   3. ~FlagDependencyExportsPlugin~ 从 entry 中读取 ModuleGraph 存储的对象
+   4. 遍历所有对象, 找到所有依赖对象信息, 转换为 ~ExportInfo~ 存入 ModuleGraph.
+
+   Seal 步骤:
+   1. ~compilation.hooks.optimizeDependencies~ 钩子触发, 执行 ~FlagDependencyUsagePlugin~ 逻辑
+   2. 遍历 module, 对应的 exportInfo
+   3. 为每个 exportInfo 对象执行  ~compilation.getDependencyReferencedExports~ 判断是否被执行使用
+   4. 如果被使用过, 则调用  ~exportInfo.setUsedConditionally~  标记为已被使用, 同时修改记录 ~exportInfo._usedInRuntime~
+
+   生成产物步骤:
+   1. 调用 ~HarmonyExportXXXDependency.Template.apply~ 方法生成代码
+      1. apply 读取判断 ModuleGraph 中哪些被使用, 哪些没有.
+   2. 创建不同 ~HarmonyExportInitFragment~ 对象到 ~initFragments~ 数组, 导出
+** dead code
+   没有标记导出的语句, 只会保留定义.
+   再通过 Terser、UglifyJS 等 DCE 工具删掉这部分无效代码
+   

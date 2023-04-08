@@ -1,0 +1,87 @@
+#+STARTUP: content
+* deno
+** Refers
+   - https://deno.land/manual@v1.6.3/linking_to_external_code
+** 特点及可以发展的地方
+   包足够小试错成本较低。
+   
+   用法简单，高效，其模块引入的方式衍生出了 CDN for JavaScript 的思考。
+   同时也是 React Server Component 的思考方式。
+
+   deno 允许 ~--allow-net~ 参数从远程拉取依赖到磁盘缓存，默认的缓存依赖 ~$HOME/Library/Caches/deno~ 。
+
+   类似的实现 https://github.com/egoist/import-http 。
+   允许行内使用链接引用依赖。
+   本地会在第一次的 build 的时候缓存依赖，之后都不会更新，直到执行 ~reload~ 。
+   代码也很简单只是 Webpack 层定制了 ~compiler.resolverFactory.hooks.resolver~ 的执行方式，拦截 http 请求。
+   对应 node 实现也不难，只是在 loader 层加入这层逻辑和缓存。
+   
+   对推广 import-http 和模块化起了直接或者间接的作用。
+** snippets
+*** cli 请求
+    #+begin_src typescript
+      const url = Deno.args[0]; // 取得第一个命令行参数，存储到变量 url。
+      const res = await fetch(url); // 向指定的地址发出请求，等待响应，然后存储到变量 res。
+      const body = new Uint8Array(await res.arrayBuffer()); // 把响应体解析为一个 ArrayBuffer，等待接收完毕，将其转换为 Uint8Array，最后存储到变量 body。
+      await Deno.stdout.write(body); // 把 body 的内容写入标准输出流 stdout。
+    #+end_src
+
+    #+begin_src bash
+      deno run --allow-net=api.github.com http.ts https://api.github.com/users/google
+    #+end_src
+    
+*** RESTful 服务 
+    #+begin_src typescript
+      // restful.ts
+      import { Application, Router } from "https://deno.land/x/oak/mod.ts";
+
+      const books = new Map<string, any>();
+      books.set("1", {
+	id: "1",
+	title: "平凡的世界",
+	author: "路遥",
+      });
+
+      const router = new Router();
+      router
+	.get("/", (context) => {
+	  context.response.body = "Hello world!";
+	})
+	.get("/book", (context) => {
+	  context.response.body = Array.from(books.values());
+	})
+	.get("/book/:id", (context) => {
+	  if (context.params && context.params.id && books.has(context.params.id)) {
+	    context.response.body = books.get(context.params.id);
+	  }
+	});
+
+      const app = new Application();
+      app.use(router.routes());
+      app.use(router.allowedMethods());
+
+      await app.listen({ hostname: '127.0.0.1', port: 8000 });
+    #+end_src
+
+    #+begin_src bash
+      > deno run  --allow-net restful.ts
+    #+end_src
+*** 静态资源服务
+    #+begin_src typescript
+      // static.ts
+      import { Application } from "https://deno.land/x/oak/mod.ts";
+
+      const app = new Application();
+
+      app.use(async (context) => {
+	await context.send({
+	  root: Deno.cwd(), // 静态资源的根路径
+	});
+      });
+
+      await app.listen({ hostname: "127.0.0.1", port: 8000 });
+    #+end_src
+
+    #+begin_src bash
+      > deno run --allow-net --allow-read static.ts
+    #+end_src

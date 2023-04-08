@@ -1,0 +1,46 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: history
+#+DATE: [2021-11-28 22:29]
+* Refers
+* 16
+** Error handle
+Error inside re-render will be catched.
+1. Check ~error.then~ callable as a function and mark component suspended.
+   1. ~hanldeError~, ~throwException~
+2. ~Promise.then~ as wakeable function and add to ~Fiber.updateQueue~.
+3. ~attachSuspenseRetryListeners~
+   1. Bind wakeable functions as a link
+   2. Call one by one and then attempt a re-render in the primary state
+
+** Suspense
+Sync process way for request promise.
+Get data cache if existed, or throw Error if not.
+Fallback for Error statement.
+
+After promise resolve and correct data has been set, re-render.
+
+Designed a error statement render for loading.
+Render function is no longer a pure function.
+
+* 17
+** 不再需要 import React from 'react'
+需关闭对应的 eslint 报错
+
+* 18
+
+** startTransition
+*** Refers
+- New feature: startTransition https://github.com/reactwg/react-18/discussions/41
+*** intro
+Updates classified in two categories:
+- Urgent update: input, interaction as default
+- Transition update: UI update
+
+Mark update inside as transition event.
+May serve after ~DefaultEventPriority~ which means urgent.
+
+** useTransition => [isPending, startTransition]
+Catch exception just like ~Suspense~ does.
+
+SetIsPending as true when error in callback has been resolved.

@@ -1,0 +1,209 @@
+#+STARTUP: all
+# #+STARTUP: latexpreview
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: ml
+#+DATE: [2021-11-26 10:55]
+* Refers
+- https://github.com/microsoft/ML-For-Beginners
+- https://github.com/purocean/tensorflow-simple-captcha
+- https://github.com/datawhalechina/pumpkin-book
+- https://github.com/abhisheksoni27/machine-learning-with-js
+- https://github.com/axetroy/ml-KNN-flower
+- https://github.com/nndl/exercise
+- https://github.com/dragen1860/Deep-Learning-with-TensorFlow-book
+- https://github.com/fchollet/deep-learning-with-python-notebooks
+- https://github.com/cbamls/AI_Tutorial
+- https://github.com/KichangKim/DeepDanbooru
+- 程序员的实用深度学习 https://course.fast.ai/
+- 深度学习面试 https://github.com/BoltzmannEntropy/interviews.ai
+- 论文精读 https://github.com/mli/paper-reading
+- 深度学习在图像处理中的应用教程https://github.com/WZMIAOMIAO/deep-learning-for-image-processing
+- 机器学习简介 https://zgjx6.github.io/2019/03/06/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%80%E4%BB%8B/
+* nlp
+- https://github.com/fighting41love/funNLP
+- simple NLP https://github.com/flairNLP/flair
+* match
+* short
+** MAE mean absolute error
+平均绝对误差
+
+$MAE=\frac{1}{n}\sum_{i-1}^n|fi-yi|$
+** MSE mean square error
+均方误差
+
+$MSE=\frac{1}{n}\sum_{i-1}^n(fi-yi)^2$
+** RMSE root mean square error
+均方根误差
+
+$RMSE=\sqrt{MSE}$
+** $r^2$ 决定系数
+- SSres: residual sum of squares
+- SStot: total sum of squares
+* Intro
+Let machine create a function work for our result.
+** Simple overview
+Steps:
+1. Create an unknown function, such as $y = b + c^T\sigma(b + Wx)$
+2. Define Loss from training data
+3. Optimization to minima loss and get the function
+* Type
+** Regression
+** Classification
+** Structure learning
+Create something
+* Concept
+** Model
+Unknown parameters function.
+** Feature
+Real variable may bring effect to result.
+** Unknown parameters
+*** weight
+*** bias
+Amend result base on weight and feature.
+** Loss
+Function: $L(b,w)$
+
+Define the how good of the parameters set.
+
+Value based on the training data, type
+- MAE. mean absolute error
+- MSE, mean square error
+
+Example:
+
+$L = \frac{ 1 }{ N }\sum_{n} e_n$
+
+For multi unknown parameters $\theta$:
+
+$g = \nabla L(\theta^0)$
+
+With times different:
+- Update: Change parameters one time with Differential and one batch of training data
+  - $\theta^1 \leftarrow \theta^0 - \eta g$
+- Epoch: see all batch once
+
+** Label
+The correct value from training data.
+
+** Error Surface
+Chart of Loss base on different parameters a
+
+** Hyperparamters
+Manual value
+
+** Optimization
+Process to caculate a set of parameters let L as small as possible
+
+*** Gradient Descent 梯度下降法
+Steps:
+1. Random pick a initial value for weight
+2. Compute differential $\frac{\partial L}{\partial w}|_{w=w^o}$
+   1. Negative, increase w, step size bese on differential
+   2. Positive, decrease w
+   3. Learning rate $\eta$ (hyperparamters) $\eta\frac{\partial L}{\partial W}|_{w=w^o}$
+
+$w^1 \leftarrow w^0 - \eta\frac{ \partial L }{ \partial W}|_{w=w^o}$
+
+3. Get next $w^{n+1}$ and iterative update
+   1. Base on patience (Hyperparameter)
+   2. Find a parameter set with minima $L$, differential as 0
+
+Disadvantage:
+- Local minima, Global minima, which is not the key point.
+
+PS:
+- Differential always has been set up and can be done in one line with most deep learning frameworks.
+
+*** Domain knowledge
+Change features base on domain knowledge
+
+*** Linear model
+
+**** Model Bias
+Model limitation. 
+
+**** Sigmoid Function, S curve function
+
+$y = c\frac{ 1 }{ 1 + e^{-(b+wx_1)}}$
+$y = c sigmoid(b+wx_1)}$
+
+Parameters:
+- w slope
+- b shift horizontal
+- c height
+
+**** ReLU Rectified Linear Unit
+Hard, Better
+
+$c max(0,b + wx_1)$
+
+**** Activation Function
+Both ReLU and Sigmoid are activation function
+
+**** Piecewise Linear Curves
+Constant + a set of linear function.
+
+Approximate any continuous curve.
+
+$y = b + \sum_i C_i sigmoid(b_i + w_i x_i)$
+**** Matrix
+- Sample no. as i.
+- Sigmoid no. as j.
+
+Piecewise Function:
+
+$y = b + \sum_iC_i sigmod(bi + \sum_jw_{ij}x_j)$
+
+Limit in 3:
+  
+$$
+r1 = b1 + w_{11}x_1 + w_{12}x_2 + w_{13}x_3 \\
+r2 = b2 + w_{21}x_1 + w_{22}x_2 + w_{23}x_3 \\
+r3 = b2 + w_{31}x_1 + w_{32}x_2 + w_{33}x_3 \\
+$$
+
+
+In Matrix:
+
+$\begin{bmatrix} r_1 \\ r_2 \\ r_3 \end{bmatrix}
+=\begin{bmatrix} b_1 \\ b_2 \\ b_3 \end{bmatrix}
++\begin{bmatrix} w_{11} & w_{12} & w_{13} \\ w_{21} & w_{22} & w_{23} \\ w_{31} & w_{32} & w_{33} \end{bmatrix}
+\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}$
+
+In shorthand:
+
+$r = b + Wx$
+
+$a = \sigma(r)$
+
+$y = b + c^Ta$
+
+$y = b + c^T\sigma(b + Wx)$
+**** Unknown Parameters
+AKA $\theta$
+*** Layer
+Result as a new feature, iterative run the same process.
+
+Hidden layer, same as *Neuron*
+
+Many layers means *Deep*, process called *Deep learning*
+
+*** Neural Network
+The function node of one unknown parameters set called *Neuron* (神经元)
+
+Total process called *Neural Network*
+
+Bad reputation because the rumor history.
+
+*** Overfitting
+Better on training data, bad on unseen data
+
+* backpropagation
+
+* Linear Regression
+
+** Empirical Risk 经验风险
+Based on example, description degree between model and data
+
+** Structural Risk 结构风险
+Prevent overfitting

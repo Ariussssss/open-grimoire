@@ -1,0 +1,10 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: dbt
+#+DATE: [2023-01-16 17:58]
+* Refers
+* ELT Extract, Load, Transform
+* DBT data build tool
+- Transform in ELT
+- Take code, compile to sql, run against
+- A compiler and a runner

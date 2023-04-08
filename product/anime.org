@@ -1,0 +1,38 @@
+#+STARTUP: content
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: 动漫全景图
+#+DATE: [2021-10-09 15:11]
+* Refers
+  漫画工作室:
+  - 神界
+  - 有妖气
+  - 夏天岛
+
+  游戏:
+  - 晨之科
+  - 米哈游
+  - 哩咕游戏
+  - 乐元素
+  - 字节跳动
+    - 朝夕光年
+    - 沐瞳科技
+    - 有爱互娱
+
+  社区:
+  - 天使动漫
+  - 半次元
+  - 第一弹
+  - 次元社
+* 游戏
+** 偶像大师-闪耀祭典
+   基于 pixi.js 函数库的纯页游偶像大师-闪耀祭典
+   基于 pixi.js 函数库的纯页游
+* 技术
+** live2D
+   日本 Cybernoids 开发, 类似三维模型的二维图像
+** 嘴形
+   1. 音量. 温和度不高
+   2. 美术手动. 工作量大
+   3. LipSync 语音识别, 基本吻合, 需要人工辅助. 
+
+   https://github.com/huailiang/LipSync

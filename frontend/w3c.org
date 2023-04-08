@@ -1,0 +1,20 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: w3c World Wide Web Consortium
+#+DATE: [2022-07-11 10:57]
+* Refers
+* concept
+** TR
+TR (Technical Report) is W3C‘s term/namespace for specifications (or standards), no matter which maturity level they have.
+* Status of This Document
+1. WD
+   1. Publication of the First Public Working Draft
+   2. Publication of zero or more revised Public Working Drafts.
+2. CR
+   1. Publication of a Candidate Recommendation.
+   2. A stable Working Draft that the Director has proposed to the community for implementation experience and feedback
+3. PR
+   1. Publication of a Proposed Recommendation.
+4. REC
+   1. Publication as a W3C Recommendation.
+   2. Possibly, Publication as an Edited Recommendation
