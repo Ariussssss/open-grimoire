@@ -10,6 +10,10 @@ Operation and motion.
 Motion can be no arguments operation or argument of other operation.
 
 A command can be constitute by a motion or an operation with several motion.
+
+#+begin_src bash
+  vimtutor
+#+end_src
 * check all keymap
 #+begin_src vimrc
   :help index
@@ -64,17 +68,22 @@ Language spell check
 
 Work same as ~coc-word~.
 * operation, motions
+** a append after line
+** b back
 ** c change
 The difference between is not change into insert mode after delete regions.
 ** d delete
+** e end
+end of word
+** x delete
 ** f find <keyword>
 ** exec
-** b back
 ** w word
+next word
 ** n next
 ** v visual and select
 *** V visual line
-** i in <keyword>
+** i insert <keyword>
 ** g go
 *** G go operation
 ** 0-9 number counts
@@ -86,6 +95,8 @@ line start
 ~q <letter> q~, ~@<letter>~ repeat
 * command
 ** TOhtml
+** :Ex, :Sex current path
+** :Edit! reload
 * variable
 ** % current file
 * window
