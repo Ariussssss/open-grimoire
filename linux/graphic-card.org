@@ -3,6 +3,82 @@
 #+TITLE: graphic-card
 #+DATE: [2022-11-29 09:05]
 * Refers
+- https://color.viewsonic.com/zh-cn/explore/content/What-is-High-Dynamic-Range-Improved-Viewing-with-HDR-Image-Enhancement_90.html
+* check
+#+begin_src bash
+  lshw -c display
+#+end_src
+* interface
+** VGA Video Graphics Array
+
+极限带宽: 1920x1200x60Hz, 最便宜
+
+#+DOWNLOADED: screenshot @ 2023-04-10 14:22:01
+[[file:images/20230410-142201_screenshot.png]]
+
+** DVI
+
+#+DOWNLOADED: screenshot @ 2023-04-10 14:21:53
+[[file:images/20230410-142153_screenshot.png]]
+
+** HDMI High Definition Multimedia Interface
+- HDMI 1.4:
+  - 4K 24Hz 4,096 x 2,160
+  - 4K 30Hz 3,840 x2,160
+  - 1080P 120Hz
+- HDMI 2.0：4K 60Hz
+  - HDR High Dynamic Range Imaging 高动态范围成像
+- HDMI 2.1：4K 100Hz
+  - 动态 HDR
+  - 增强的音频通道允许传输杜比 Atmos 和 DTS:X 音频
+
+#+DOWNLOADED: screenshot @ 2023-04-10 14:20:58
+[[file:images/20230410-142058_screenshot.png]]
+
+** DP Display Port
+
+#+DOWNLOADED: screenshot @ 2023-04-10 14:31:41
+[[file:images/20230410-143141_screenshot.png]]
+
+游戏厂商, 显卡厂商
+- 不宜过长, 一般 1.8 m, 影响音像丢失和延迟
+- DP 1.2-1.2a:
+  - 5K 30Hz
+  - 4K 75Hz
+  - 1080P240Hz
+- DP 1.3:
+  - 8K 30Hz
+  - 4K 120Hz
+  - 1080P 360Hz
+  - HDR
+- DP 1.4:
+  - 8K 60Hz
+  - 4K 144Hz
+  - 动态 HDR
+  - 兼容 Type-C，可以在输出画面的时候传输数据
+  - 支持「菊花链」
+
+** Type-C
+- USB3.1
+  - 4K 60Hz, = HDMI 1.4
+- 雷电
+  - 性能比 USB3.1 更强, 在 4K 60Hz 显示的同时还支持 USB 3.0 满速传输数据
+  - 常用于外接显卡
+  - 支持菊花链
+
+** Variable Refresh Rate (VRR) 可变刷新率技术
+FreeSync 和 G-Sync 分别是 AMD 和 Nvidia 的 VRR, 用于解决画面撕裂和卡顿问题.
+
+HDMI 从 2.0b 开始可通过 AMD 扩展支持 FreeSync, 但不支持 Nvidia 的 G-Sync.
+
+据说 HDMI2.1 将支持。而 DP 线则同时支持 FreeSync 和 G-Sync, 对游戏玩家比较有帮助。当然前提是显卡和显示器都支持.
+
+** 
+
+* 3d controller vs  VGA compatible controller
+The Nvidia GPU in many laptops does not actually drive the display.
+The integrated graphics is responsible for that.
+Nvidia GPU is secondary render device.
 * nvidia
 Dashboard
 #+begin_src bash

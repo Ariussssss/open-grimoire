@@ -4,6 +4,21 @@
 #+DATE: [2022-04-28 14:55]
 * Refers
 - http://veithen.io/2013/11/18/iowait-linux.html
+* 基本信息
+#+begin_src bash
+  # name, cpu
+  uname -a
+  # cpu
+  lscpu
+  # memory
+  free -h
+  # disk
+  lsblk
+  # pci device
+  lspci
+  # all hardware
+  lshw
+#+end_src
 * 测试网络
 
 server
