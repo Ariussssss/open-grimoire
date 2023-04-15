@@ -35,6 +35,7 @@ Always keep in normal mode.
 ** insert
 ** command
 ** visual
+~:~ start command for selected region
 ~:'<,'>normal <input>~ input to each region
 ~:'<,'>A <input>~ input to each region end
 *** visual
@@ -68,6 +69,9 @@ Language spell check
 
 Work same as ~coc-word~.
 * operation, motions
+** 0-9 number counts
+0 line start
+*** + G go to line
 ** a append after line
 ** b back
 ** c change
@@ -75,28 +79,36 @@ The difference between is not change into insert mode after delete regions.
 ** d delete
 ** e end
 end of word
-** x delete
 ** f find <keyword>
-** exec
-** w word
-next word
-** n next
-** v visual and select
-*** V visual line
 ** i insert <keyword>
+** o open line
+** exec
+** n next
 ** g go
 *** G go operation
-** 0-9 number counts
-line start
-*** + G go to line
-** r read
- ~:r !ls~ 
 ** q record
 ~q <letter> q~, ~@<letter>~ repeat
+** r read
+ ~:r !ls~ 
+** v visual and select
+*** V visual line
+** w word
+next word
+** x delete
+** y yank
+** % match parentheses
 * command
 ** TOhtml
 ** :Ex, :Sex current path
 ** :Edit! reload
+** :help :<F1> key
+** :s replace
+~:s/old/new/g~
+- <line_num>,<line_num>s line range
+- g line
+- gc whole file
+** :! <execute command>
+** :w <write filename>
 * variable
 ** % current file
 * window
