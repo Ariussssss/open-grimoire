@@ -4,6 +4,7 @@ j#+STARTUP: all
 #+DATE: [2021-03-01 20:52]
 * Refers
 - https://www.keycdn.com/blog/vim-commands#:~:text=Open%20a%20new%20or%20existing,and%20back%20to%20command%20mode.
+- https://begriffs.com/pdf/vim-user-manual.pdf
 * base
 Operation and motion.
 
@@ -13,10 +14,6 @@ A command can be constitute by a motion or an operation with several motion.
 
 #+begin_src bash
   vimtutor
-#+end_src
-* check all keymap
-#+begin_src vimrc
-  :help index
 #+end_src
 * vimrc
 ** set
@@ -102,6 +99,10 @@ next word
 ** :Ex, :Sex current path
 ** :Edit! reload
 ** :help :<F1> key
+check all keymap
+#+begin_src vimrc
+  :help index
+#+end_src
 ** :s replace
 ~:s/old/new/g~
 - <line_num>,<line_num>s line range
