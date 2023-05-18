@@ -77,9 +77,30 @@ uniq -c：打印每一重复行出现的次数。（并去掉重复行）
 sort -n -r：按照重复行出现的次序倒序排列。
 
 head -n 1：取排在第一位的 ip 地址
+* grep
 * awk
+逐行分割遍历
+#+begin_src bash
+    awk [options] 'script' file1 file2, ...
+    awk [options] 'PATTERN {acticon}' file1 file2, ...
+#+end_src
+常用 options:
+- FS：split char, -F
+- OFS：ending, -v
+- NF：column count
+- NR：row number
+
+condtion pattern
+#+begin_src bash
+  awk -F '#' 'NF==5 {print $1}' test
+#+end_src
 #+begin_src bash
   echo something | awk '{ print $1 }'
+#+end_src
+* sed
+filter 获取
+#+begin_src shell
+  git diff --name-only | sed -E '*.org'
 #+end_src
 * xargs
 #+begin_src bash
@@ -111,11 +132,6 @@ regex
 到本地
 #+begin_src sh
   scp username@domain:~/file.ext .
-#+end_src
-* sed
-filter 获取
-#+begin_src shell
-  git diff --name-only | sed -E '*.org'
 #+end_src
 * tail
 监听文末
