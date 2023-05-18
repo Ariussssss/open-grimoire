@@ -59,7 +59,7 @@ depth
 * tools
 ** cloc Count Lines of Code
 
-从 Draven blog 里看到的，统计词数
+从 Draven blog 里看到的, 统计词数
 *  set -o allexport
 env 失效问题根源, 需要允许 env 相关 source 来源允许导出
 * count
@@ -68,7 +68,7 @@ env 失效问题根源, 需要允许 env 相关 source 来源允许导出
   cat demo.txt | awk '{print $2}' | sort | uniq -c | sort -n -r | head -n 1
 #+end_src
    
-awk '{ print $2}'：取数据的第 2 域（第 2 列），第一列是标号（1，2，3...）,第二列是 ip 地址
+awk '{ print $2}'：取数据的第 2 域（第 2 列）, 第一列是标号（1, 2, 3...）,第二列是 ip 地址
 
 sort：对 IP 部分进行排序。
 
@@ -90,7 +90,7 @@ head -n 1：取排在第一位的 ip 地址
 - NF：column count
 - NR：row number
 
-condtion pattern
+condtion pattern, ~&&~, ~||~ 
 #+begin_src bash
   awk -F '#' 'NF==5 {print $1}' test
 #+end_src
@@ -98,8 +98,24 @@ condtion pattern
   echo something | awk '{ print $1 }'
 #+end_src
 * sed
-filter 获取
+会先读取到缓冲区
+#+begin_src bash
+  sed [options]... 'script' inputfile
+#+end_src
+- d 删除模式空间匹配的行, 并立即启用下一轮循环
+- p 显示符合条件的行, 追加到默认输出之后
+- a [\]text1 在指定行后面追加文本,支持使用\n 实现多行追加
+- i [\]text 在行前面插入文本
+- c [\]text 替换行为单行或多行文本
+- w /path/somefile 保存模式匹配的行至指定文件
+- r /path/somefile 读取指定文件的文本至模式空间中匹配到的行后
+- = 为模式空间中的行打印行号
+- ! 模式空间中匹配行取反处理
+- s///：查找替换,支持使用其它分隔符, s@@@, s###
+
+
 #+begin_src shell
+  sed -n 2p test
   git diff --name-only | sed -E '*.org'
 #+end_src
 * xargs
