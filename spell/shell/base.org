@@ -122,7 +122,7 @@ condtion pattern, ~&&~, ~||~
 Edit
 #+begin_quote
 mac 会报错, 必须指定一个 output 备份名  
-sed -i '.bak' 's/a/v/g' test
+sed -i '.bak' '2s/a/v/g' test
 #+end_quote
 * xargs
 #+begin_src bash
