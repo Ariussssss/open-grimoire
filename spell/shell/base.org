@@ -104,7 +104,7 @@ condtion pattern, ~&&~, ~||~
 #+end_src
 - d 删除模式空间匹配的行, 并立即启用下一轮循环
 - p 显示符合条件的行, 追加到默认输出之后
-- a [\]text1 在指定行后面追加文本,支持使用\n 实现多行追加
+- a [\]text 在指定行后面追加文本,支持使用\n 实现多行追加
 - i [\]text 在行前面插入文本
 - c [\]text 替换行为单行或多行文本
 - w /path/somefile 保存模式匹配的行至指定文件
@@ -115,9 +115,15 @@ condtion pattern, ~&&~, ~||~
 
 
 #+begin_src shell
-  sed -n 2p test
+  sed -n 2,5p test
   git diff --name-only | sed -E '*.org'
 #+end_src
+
+Edit
+#+begin_quote
+mac 会报错, 必须指定一个 output 备份名  
+sed -i '.bak' 's/a/v/g' test
+#+end_quote
 * xargs
 #+begin_src bash
   xargs git branch -d < ./branch.txt
