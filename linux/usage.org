@@ -44,7 +44,9 @@ Copy to ~~/.local/share/fonts~
 #+begin_src bash
   fc-cache -fv
 #+end_src
+
 ** Background
+Replaced by ~Variety~
 #+begin_src bash
   while true
   do
@@ -58,13 +60,26 @@ Copy to ~~/.local/share/fonts~
 ** i3
 *** install
 #+begin_src bash
-  sudo dnf install i3 picom polybar variety i3-gaps
+  sudo dnf install i3 picom polybar variety bluem playerctl wmctrl
 #+end_src
 - i3:  the main window manager package
 - picom: a lightweight compositor for X11
 - polybar: pretty bar
 - variety: background image update
-- i3-gaps
+- bluem: bluetooth manager
+**** build i3-gaps
+#+begin_src bash
+  mkdir /tmp/build 
+  cd /tmp/build
+  git clone https://www.github.com/Airblader/i3 i3-gaps
+  cd i3-gaps
+  git checkout gaps && git pull
+  sudo apt install meson asciidoc
+  meson -Ddocs=true -Dmans=true ../build
+  # install bunch of deps
+  eson compile -C ../build
+  sudo meson install -C ../build
+#+end_src
 *** start
 Logout, change to i3 before login
 *** shortcut
@@ -102,12 +117,46 @@ Set ~right super~ as override menu key, ~left super~ work for other shortcuts.
 
 ***** Launch or open
 #+begin_src bash
-  sudo pacman -S wmctrl xdotool
+  sudo pacman -S wmctrl xdotool xdg-open
+  sudo cp /path/to/xdg-open /path/to/open
 #+end_src
 
 Set custom shortcut with below command
+
+* Monitor
 #+begin_src bash
-  bash -c "wmctrl -a chrome ; [ "$?" == "1" ] && xdotool set_desktop 0 && google-chrome"
+  xrandr
+  xrandr --auto --output DVI-I-2 --mode 1920x1200 --left-of DVI-I-1
+#+end_src
+Update i3 init exec
+
+* Mouse / Touchpad
+#+begin_src bash
+  xinput list-props
+  xinput set-prop <touchpad id> <enable tap> 1
+#+end_src
+
+* Remap keyboard
+#+begin_src bash
+  xmodmap -pke > ~/.Xmodmap
+  xmodmap ~/.Xmodmap
+#+end_src
+
+Swap ~ctrl_left~ with ~capslock~ if don't use HHKB.
+
+Start, end line.
+#+begin_src bash
+  clear control
+  clear lock
+  clear mod1
+
+  add control = Control_L Control_R
+  add mod1 = Alt_L
+#+end_src
+
+Check mod keys and update i3 config.
+#+begin_src bash
+  xmodmap -pm
 #+end_src
 
 * Crontab
@@ -138,14 +187,20 @@ Install
 * Emacs
 ** ispell
 #+begin_src bash
-  sudo pacman -S aspell aspell-en
+  sudo pacman -S aspell aspell-en the_silver_searcher
   cp /usr/bin/aspell /usr/local/bin/aspell
 #+end_src
 * Alacritty
 ** install
 #+begin_src bash
-  sudo pacman -S alacitty tmux
+  sudo pacman -S alacritty
+  cargo install alacrity
 #+end_src
+** tmux
+#+begin_src bash
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+#+end_src
+~<leader>I~ isntall plugins.
 ** oh my zsh
 #+begin_src bash
   git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
@@ -155,6 +210,7 @@ Install
 ** python
 #+begin_src bash
   sudo pacman -S pyenv
+  curl https://pyenv.run | bash
 #+end_src
 ** node
 Node version manager
@@ -193,11 +249,20 @@ i3 layout manager
 ** picom
 Compositor for transparent and animation
 ** fcitx
+- ~fcitx5~
+- ~fcitx5-rime~
+- theme https://github.com/ch3n9w/fcitx5-Tokyonight
+  
 Input method ~RIME~ for chinese, ~mozc~ for Japanese
+
+#+begin_src ini
+[Hotkey/TriggerKeys]
+0=Control+Shift+Super+space
+#+end_src
 
 ~F4~ to switch between simplify and transitional
 ** ranger
-File manager
+File manager with ~fzf~
 ** mpv
 ** eog
 ** youtube-viewer
