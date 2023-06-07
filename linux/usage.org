@@ -9,6 +9,14 @@ System upgrade
 ~pacman -Syu~
 mirror
 ~pacman-mirrors -c China~
+* network
+#+begin_src bash
+  wpa_cli
+  sudo wpa_supplicant -B -i interface -c /etc/wpa_supplicant/example.conf -i <eth> &
+  sudo dhcpcd
+  sudo pacman -S networkmanager
+#+end_src
+https://wiki.archlinux.org/title/wpa_supplicant
 * vpn
 ** Clash
 #+begin_src bash
