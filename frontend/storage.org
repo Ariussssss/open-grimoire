@@ -1,0 +1,16 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: storage
+#+DATE: [2023-06-09 13:25]
+* Refers
+* LocalStorage
+- No expiration date, client forever
+- Same-origin policy
+- 10MB limit
+- KV string
+* SessionStorage
+- Window lifescope, no expiration date
+- Same-origin policy
+- 10MB limit
+- KV string
+* IndexedDB
