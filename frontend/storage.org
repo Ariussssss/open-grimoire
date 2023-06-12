@@ -8,9 +8,29 @@
 - Same-origin policy
 - 10MB limit
 - KV string
+#+begin_src js
+  localStorage.setItem(“key”, “value”)
+  localStorage.getItem(“key”)
+  localStorage.removeItem(“key”)
+#+end_src
 * SessionStorage
 - Window lifescope, no expiration date
 - Same-origin policy
 - 10MB limit
 - KV string
+- Use just like ~LocalStorage~ 
+* Cooke
+- 4KB size
+- Custom expiration time or until browser close
+#+begin_src js
+  document.cookie='name=Someone'
+#+end_src
 * IndexedDB
+- 80% disk space for Chromium-based browsers, 60% for same origin
+  - IE 250MB per origin
+  - Safari 2GB per origin
+  - Firefox 1GB per origin
+- Can store any kind of value
+- Index available
+- Transactional
+- Cursor
