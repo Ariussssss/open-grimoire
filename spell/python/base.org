@@ -94,6 +94,11 @@ a#+STARTUP: all
   # 清华源
   pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 #+end_src
+
+pyenv 国内加速
+#+begin_src bash
+  version="3.8.10"; echo $version; wget "https://mirrors.huaweicloud.com/python/$version/Python-$version.tar.xz" -P ~/.pyenv/cache/;pyenv install $version
+#+end_src
 * bugs
 ** OSX 找不到 dylib
 By default of CPython (and pyenv),
