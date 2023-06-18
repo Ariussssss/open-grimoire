@@ -13,6 +13,8 @@
 ** vpn https://10davpn.cn.com/
 *** https://www.webhostingsecretrevealed.net/zh-CN/blog/web-tools/best-vpn/
 *** v2board
+** https://github.com/EbookFoundation/free-programming-books
+** https://learn-anything.xyz/
 * database
 ** https://github.com/pingcap/awesome-database-learning 
 * ml
