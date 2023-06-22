@@ -457,7 +457,7 @@ theme 都是以 symbol 来制定和读取
 - https://github.com/emacs-mirror/emacs
 - http://git.savannah.gnu.org/r/emacs.git
 
-v29  alpha-background 需要这个 ~--with-cairo --with-x-toolkit=yes~ 
+v29  alpha-background 需要这个 ~--with-cairo --with-x-toolkit=gtk3~ 
 #+begin_src bash
   cd emacs-29
   ./autogen.sh
