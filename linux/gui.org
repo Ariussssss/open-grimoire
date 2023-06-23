@@ -1,0 +1,21 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: gui
+#+DATE: [2023-06-23 17:31]
+* Refers
+* Communication Protocol
+** wayland
+- 最新一代显示服务器协议
+- 代替 X11
+- 发行版
+  - 新一代 ubuntu
+  - Fedora 社区驱动, 致力于最新的创新技术
+*** PGTK Pure GTK
+基于 wayland 的 GTK 实现, 利用性能优势, 消除 X11 依赖
+** X11 X Window System
+- 广泛使用的图形窗口系统协议
+- 大部分发行版默认都是 X11
+*** GTK, GIMP Toolkit, GNU Image Manipulation Program
+- 基于 X11 的工具包, 提供用户界面控件
+- GIMP 之前是一款开源软件, 后续 GTK 发展成独立的工具包
+*** X Resource
