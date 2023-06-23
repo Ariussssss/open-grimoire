@@ -18,4 +18,5 @@
 *** GTK, GIMP Toolkit, GNU Image Manipulation Program
 - 基于 X11 的工具包, 提供用户界面控件
 - GIMP 之前是一款开源软件, 后续 GTK 发展成独立的工具包
-*** X Resource
+*** Cairo
+
