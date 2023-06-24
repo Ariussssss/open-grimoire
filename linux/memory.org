@@ -1,17 +1,26 @@
-#+STARTUP: content
+#+STARTUP: all
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: 计算机内存
 #+DATE: [2021-11-12 18:21]
 * Refers
-1.RAM（RamdomAccessMemory）：
-　易挥发性随机存取存储器，高速存取，读写时间相等，且与地址无关，如计算机内存等。 
-
-2.ROM（Read Only Memory）：
-　　　　　　　　　　　　　　只读存储器。断电后信息不丢失，如计算机启动用的 BIOS 芯片。存取速度很低，（较 RAM 而言）且不能改写。
-　　　　　　　　　　　　　　由于不能改写信息，不能升级，现已很少使用。
-* RAM RamdomAccessMemory
-
-* vmstat
+- https://samwho.dev/memory-allocation/
+* RAM Ramdom Access Memory
+易挥发性随机存取存储器, 高速存取, 读写时间相等, 且与地址无关, 如计算机内存等
+* ROM Read Only Memory
+- 只读存储器。断电后信息不丢失, 如计算机启动用的 BIOS 芯. 存取速度很低, （较 RAM 而言）且不能改. 
+- 由于不能改写信息, 不能升级, 现已很少使. 
+* base
+Example
+#+begin_src c
+  #include <stdlib.h>
+  int main() {
+    void *ptr = malloc(4);
+    free(ptr);
+    return 0;
+  }
+#+end_src
+* Cli
+** vmstat
 In addition to CPU monitoring and I/O monitoring you can monitor your memory usage with vmstat
 
 
@@ -54,7 +63,7 @@ cpu
 - id - Time spent idle
 - wa - Time spent waiting for IO
 
-* free
+** free
 #+begin_src bash
   $ free -h
                 total        used        free      shared  buff/cache   available
