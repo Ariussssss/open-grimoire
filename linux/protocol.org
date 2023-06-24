@@ -1,0 +1,41 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: protocol
+#+DATE: [2023-06-24 18:47]
+* Refers
+* MIME Multipurpose Internet Mail Extensions
+也是一种互联网上传输多媒体数据的标准
+
+常见的:
+- text/plain: 纯文本
+- text/html: HTML 文档
+- image/jpeg: JPEG 图像
+- audio/mpeg: MPEG 音频
+- video/mp4: MP4 视频
+- application/pdf: PDF 文档
+* x-scheme-handle
+X Window System 的桌面环境集成协议
+
+配置文件 ~~/.local/share/applications/mimeapps.list~
+
+Desktop location ~/usr/share/applications~
+
+#+begin_src conf
+  MimeType=x-scheme-handler/unityhub
+#+end_src
+** Mac
+~Info.plist::CFBundleURLTypes~ in each application bundle
+* Scripts
+#+begin_src bash
+  # update
+  sudo update-mime-database -v
+  sudo update-desktop-database -v
+  xdg-mime default unityhub.desktop x-scheme-handler/unityhub
+  # test
+  xdg-mime query default x-scheme-handler/unityhub
+  xdg-open 'unityhub://'
+#+end_src
+* 相关依赖
+- shared-mime-info
+- openssl
+- libpq
