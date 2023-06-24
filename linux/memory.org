@@ -19,6 +19,20 @@ Example
     return 0;
   }
 #+end_src
+** Fragmentation
+- Free memory is not next to each other call fragmentation
+- Can't move because pointor is defined
+
+To prevent fragmentaion:
+- Allocate a minimum of 4 bytes
+- Split large and small size allocation into different free list
+  - ~Slab allocators~, even for more than 2 classes
+** Inline Bookkeeping Information
+- ~boundary tag allocators~
+- size + free/used + memory-data + size
+- Two size segment for cursor to coalesce
+- Add some magic values for bookkeeping information
+  - Prevent free a address that is not a memory start location
 * Cli
 ** vmstat
 In addition to CPU monitoring and I/O monitoring you can monitor your memory usage with vmstat
