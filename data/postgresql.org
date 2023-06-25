@@ -3,4 +3,16 @@
 #+TITLE: postgresql
 #+DATE: [2021-12-02 10:07]
 * Refers
-** 简介
+* Intro
+RDBMS relational database management system
+
+Goods:
+- 数据完整性, 主键, 唯一索引, 事务等
+- 支持复杂查询
+- 可拓展性, 自定义数据类型, 函数
+- 可编程, 多语言扩展, 编写数据库内部代码
+
+Bads:
+- 性能一般, 对比 redis, clickhouse
+- 配置复杂
+- 存储空间大, 压缩比小
