@@ -256,6 +256,9 @@ https://github.com/klaxalk/i3-layout-manager
 i3 layout manager
 ** picom
 Compositor for transparent and animation
+
+https://github.com/pijulius/picom with window animation
+
 ** fcitx
 - ~fcitx5~
 - ~fcitx5-rime~
