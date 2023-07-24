@@ -1,4 +1,4 @@
-#+STARTUP: content
+#+STARTUP: all
 #+CREATED: [2021-05-18 11:02]
 * goroutine
 ** Refer
@@ -107,7 +107,7 @@
     - 多线程调度器 1.0
       - 允许多线程, 全局锁竞争
     - 任务窃取调度器 1.1
-      - 引入 P, 出现 G-M-P模型
+      - 引入 P, 出现 G-M-P 模型
       - Goroutine 等待不会让出线程
       - STW 超长
     - 抢占式调度器 1.2 ~ 至今
