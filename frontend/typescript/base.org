@@ -75,6 +75,18 @@
     // P2: w
     // P3: orld
   #+end_src
+
+  ReturnType
+  #+begin_src typescript
+    type MyReturnType<T extends (...args: any[]) => any> = T extends (...args: any[]) => infer R ? R : any;
+
+    // 测试用例
+    function add(a: number, b: number): number {
+      return a + b;
+    }
+
+    type AddReturnType = MyReturnType<typeof add>; // number
+  #+end_src
    
 * 字符串模板 Template Type
   [[https://devblogs.microsoft.com/typescript/announcing-typescript-4-1/][TypeScript 4.1 发布声明]]
