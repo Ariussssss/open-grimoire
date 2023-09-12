@@ -120,7 +120,7 @@ Change features base on domain knowledge
 *** Linear model
 
 **** Model Bias
-Model limitation. 
+Model limitation (such as linear model)
 
 **** Sigmoid Function, S curve function
 
