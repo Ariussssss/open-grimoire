@@ -117,12 +117,14 @@ PS:
 *** Domain knowledge
 Change features base on domain knowledge
 
-*** Linear model
 
-**** Model Bias
+*** Model Bias
 Model limitation (such as linear model)
 
-**** Sigmoid Function, S curve function
+*** Perception (linear model)
+Since 1958
+
+*** Sigmoid Function, S curve function
 
 $y = c\frac{ 1 }{ 1 + e^{-(b+wx_1)}}$
 $y = c sigmoid(b+wx_1)}$
@@ -132,21 +134,22 @@ Parameters:
 - b shift horizontal
 - c height
 
-**** ReLU Rectified Linear Unit
+*** ReLU Rectified Linear Unit
 Hard, Better
 
 $c max(0,b + wx_1)$
 
-**** Activation Function
+*** Activation Function
 Both ReLU and Sigmoid are activation function
 
-**** Piecewise Linear Curves
+Means a neuron in Neural Network
+*** Piecewise Linear Curves
 Constant + a set of linear function.
 
 Approximate any continuous curve.
 
 $y = b + \sum_i C_i sigmoid(b_i + w_i x_i)$
-**** Matrix
+*** Matrix
 - Sigmoid function count is a hyper parameter
 - Sample no. as i.
 - Sigmoid no. as j.
@@ -180,16 +183,34 @@ $a = \sigma(r)$
 $y = b + c^Ta$
 
 $y = b + c^T\sigma(b + Wx)$
-**** Unknown Parameters
+*** Unknown Parameters
 AKA $\theta$
-**** Gradient Descent For Sigmoid Model
-$g=$
+*** Gradient Descent For Sigmoid Mode
+Calculus
+
+$g=\begin{bmatrix} \frac{\partial{L}}{\partial{\theta_{1}}}|\theta=\theta^0 \\ \vdots \end{bmatrix}$
+
+$g=\triangledown{L(\theta^0)}$
+
+Use learning rate $\eta$
+
+$\theta^1=\theta^0 - \eta{g}$
+
+Until g = 0 or you want to stop.
+*** Batch
+Split training data to n batches
+
+Batch size is a hyper parameter
+*** Update
+One batch gradient descent
+*** Epoch
+All batch update
 *** Layer
 Result as a new feature, iterative run the same process.
 
 Hidden layer, same as *Neuron*
 
-Many layers means *Deep*, process called *Deep learning*
+Many layers means *Depth*, process called *Deep learning*
 
 *** Neural Network
 The function node of one unknown parameters set called *Neuron* (神经元)
@@ -200,6 +221,10 @@ Bad reputation because the rumor history.
 
 *** Overfitting
 Better on training data, bad on unseen data
+
+*** Connect Neron
+
+**** Fully Connect Feedforward Network
 
 * backpropagation
 
