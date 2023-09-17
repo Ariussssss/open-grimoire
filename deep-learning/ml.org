@@ -147,6 +147,7 @@ Approximate any continuous curve.
 
 $y = b + \sum_i C_i sigmoid(b_i + w_i x_i)$
 **** Matrix
+- Sigmoid function count is a hyper parameter
 - Sample no. as i.
 - Sigmoid no. as j.
 
@@ -181,6 +182,8 @@ $y = b + c^Ta$
 $y = b + c^T\sigma(b + Wx)$
 **** Unknown Parameters
 AKA $\theta$
+**** Gradient Descent For Sigmoid Model
+$g=$
 *** Layer
 Result as a new feature, iterative run the same process.
 
