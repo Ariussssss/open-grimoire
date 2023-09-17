@@ -186,7 +186,7 @@ $y = b + c^T\sigma(b + Wx)$
 *** Unknown Parameters
 AKA $\theta$
 *** Gradient Descent For Sigmoid Mode
-Calculus
+Partial derivative
 
 $g=\begin{bmatrix} \frac{\partial{L}}{\partial{\theta_{1}}}|\theta=\theta^0 \\ \vdots \end{bmatrix}$
 
@@ -226,7 +226,19 @@ Better on training data, bad on unseen data
 
 **** Fully Connect Feedforward Network
 
-* backpropagation
+*** Design Network structure vs Feature Engineering
+Design Network structure and let computer finish the other thing.
+
+Force to deep learning.
+
+Deep learning not work well on NLP Because human do know what the real feature of document emotion like.
+But good at image and voice identification. 
+
+*** Auto network structure
+Evolutionary Artificial Neural Network
+
+* Back Propagation
+We can use toolkit instead of implement back propagation
 
 * Linear Regression
 
