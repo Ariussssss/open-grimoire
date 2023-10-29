@@ -1,4 +1,4 @@
-#+STARTUP: content
+#+STARTUP: all
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: performance
 #+DATE: [2021-12-14 09:55]
@@ -12,6 +12,13 @@
 - web-vitals lib
 - Chrome Devtools > Perfomance
 * Metrics
+
+#+DOWNLOADED: screenshot @ 2023-09-22 11:38:50
+[[file:images/20230922-113850_screenshot.png]]
+
+#+DOWNLOADED: screenshot @ 2023-09-22 11:39:01
+[[file:images/20230922-113901_screenshot.png]]
+
 ** CLS
 ** DCL DOMContentLoad Event
 ** FP first paint 首次绘制
@@ -24,7 +31,17 @@ DOM 出现内容
   - GOOD: 2.5sec
   - NEEDS IMPROVEMENT 4.0sec
   - POOR
-  
+
+Example:
+#+begin_src js
+  const observer = new PerformanceObserver((entryList) => {
+    const entries = entryList.getEntries();
+    const lastEntry = entries[entries.length - 1];
+    const lcp = lastEntry.renderTime || lastEntry.loadTime;
+    console.log('LCP:', lcp)
+  });
+  observer.observe({entryTypes: ['largest-contentful-paint']});
+#+end_src  
 ** TTI Time to Interactive 首次可交互时间
 资源加载成功且 5 秒内无长任务(50ms)
 ** [MAIN] FID First Input Delay 首次输入延迟
@@ -70,30 +87,30 @@ Test
 #+begin_src html
   <!DOCTYPE html>
   <html lang="en">
-  <body>
+    <body>
       <button id="btn">点我</button>
       <div id="box"></div>  
       <script>
-          const btn = document.getElementById('btn');
-          const box = document.getElementById('box');
+        const btn = document.getElementById('btn');
+        const box = document.getElementById('box');
 
-          btn.addEventListener('click', function() {
-              const MB = 1024 * 1024;
-              log();
+        btn.addEventListener('click', function() {
+        const MB = 1024 * 1024;
+        log();
 
-              function log() {
-                  const memory = performance.memory.totalJSHeapSize;
-                  const usagedMemory = Math.floor(memory / MB);
-                  box.insertAdjacentHTML('beforeend', `<span>${usagedMemory} </span>`);
+        function log() {
+        const memory = performance.memory.totalJSHeapSize;
+        const usagedMemory = Math.floor(memory / MB);
+        box.insertAdjacentHTML('beforeend', `<span>${usagedMemory} </span>`);
 
-                  const obj = {usagedMemory, str: 'g'.repeat(50 * MB)};
-                  console.log(obj); 
+        const obj = {usagedMemory, str: 'g'.repeat(50 * MB)};
+        console.log(obj); 
 
-                  setTimeout(() => log(), 50);
-              }
-          });
+        setTimeout(() => log(), 50);
+        }
+        });
       </script>
-  </body>
+    </body>
   </html>
 #+end_src
 

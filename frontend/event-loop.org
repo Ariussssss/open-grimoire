@@ -134,4 +134,35 @@
     // children3-1
   #+end_src
 
+* 利用宏任务实现时间分片
+https://github.com/berwin/Blog/issues/38
+
+1. 拆分生成器, 拆分函数
+2. 通过时间判断让出 cpu 或者继续执行
+   
+#+begin_src js
+  function ts (gen) {
+    if (typeof gen === 'function') gen = gen()
+    if (!gen || typeof gen.next !== 'function') return
+    return function next() {
+      const start = performance.now()
+      let res = null
+      do {
+        res = gen.next()
+      } while(!res.done && performance.now() - start < 25);
+
+      if (res.done) return
+      setTimeout(next)
+    }
+  }
+
+  ts(function* () {
+    const start = performance.now()
+    while (performance.now() - start < 1000) {
+      console.log(11)
+      yield
+    }
+    console.log('done!')
+  })();
+#+end_src
 
