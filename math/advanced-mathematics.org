@@ -128,7 +128,7 @@ $lim_{x\rightarrow{\infty}}\frac{\sin{x}}{x} = 1$
 
 integral $\int$, $sum(\Delta y)$ when delta x goes to 0 (limit for caculus)
 
-distance is the integral of speed
+Distance is the integral of speed.
 ** limit
 approach A,  close to A
 

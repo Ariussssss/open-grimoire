@@ -18,9 +18,10 @@
 - 常见场景的最佳实践和第三方库 [[https://rust-lang-nursery.github.io/rust-cookbook/][https://rust-lang-nursery.github.io/rust-cookbook/]]
 - 包托管网站 [[https://crates.io/][https://crates.io/]]
 - 文档托管网站 [[https://docs.rs/][https://docs.rs/]]
+* CDD Compiler Driven Development 编译器驱动开发
+哪里报错改哪里
 
 * Simple Syntax
-
 hello world
 ~brew install ghc~
 
@@ -169,15 +170,20 @@ tuples
 #+end_src
 
 函数直接传递值会被借用, 如果没有实现 ~copy~ 的话.
-如果是取地址这种不可变的引用就可以使用.
+简单类型值复制, 复杂类型转移所有权, 之后不会归还.
+
+只读引用: ~&~, 可变引用 ~&mut~, 类似取地址.
+类似数据库的可重复读, 允许存在多个只读引用或者一个可变引用.
+
 
 ~!~ 表示启用 macro, 类似装饰器的方式调用一段压缩代码.
 ~'~ 明明生命周期.
 
-* COMMENT 工具
+* 工具
 ~rustup~ 是 rust 的安装器, 用来管理 rust 的编译器.
-~rustup doc~ 可以查看一下安装信息.
-~rustup doc~ 可以查看本地文档.
+- ~rustup doc~ 可以查看本地文档.
+- ~rustup default stable/beta/nightly~ 来切换 Rust 工具链的 channel
+- ~rustup update~ 来更新 Rust 工具链版本
 
 ~rustc~ 是 rust 的编译器. 
 
@@ -201,6 +207,13 @@ cargo 相当于 rust 包管理工具. 包在 rust 中成为 crates (板条箱)
   cargo fmt -- --edition=2018
 #+end_src    
 
+1. ~cargo new~ 可以用来新建一个项目
+2. ~cargo fmt~ 可以自动格式化代码
+3. ~cargo check~ 可以用来检查是否编译通过
+4. ~cargo clippy~ 用来做 lint
+5. ~cargo build~ 用来编译产物
+   1. 不加 ~--release~ 就是调试模式 (不开优化，编译速度快)
+   2. 加了 ~--release~ 就是生产模式 (优化火力开满，代价是编译慢)
 * 环境
    
 #+begin_src shell
@@ -209,7 +222,7 @@ cargo 相当于 rust 包管理工具. 包在 rust 中成为 crates (板条箱)
   # 格式化工具
   rustup component add rustfmt
 #+end_src
-yt
+
 
 * 国内加速
 #+begin_src conf

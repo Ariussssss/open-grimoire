@@ -21,3 +21,10 @@ personal registry: https://verdaccio.org/
 switch: ~nrm use cnpm~
 * version
 自动更新版本:  ~npm version major/minor/patch~ 
+* link
+#+begin_src bash
+  > cd <path/to/target-pkg>
+  > npm link
+  > cd <path/to/working-place>
+  > npm link @target-pkg
+#+end_src

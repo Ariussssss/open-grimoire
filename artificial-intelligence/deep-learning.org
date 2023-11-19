@@ -1,0 +1,6 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: deep-learning
+#+DATE: [2023-11-16 12:40]
+* Refers
+- https://github.com/qiaohaoforever/DeepLearningFromScratch
