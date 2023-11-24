@@ -5,4 +5,8 @@
 * Refers
 - https://github.com/qiaohaoforever/DeepLearningFromScratch
 - 
-* 
+* FAQ
+- https://awsdocs-neuron.readthedocs-hosted.com/en/latest/frameworks/torch/torch-neuron/troubleshooting-guide.html
+**  AttributeError: module 'torch.jit' has no attribute '_script_if_tracing'
+If you encounter an error like below, it is because latest torchvision version >= 0.7 is not compatible with Torch-Neuron 1.5.1.
+Please downgrade torchvision to version 0.6.1
