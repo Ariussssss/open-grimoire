@@ -5,15 +5,30 @@
 * NAS Network-attached storage
 ** DAS Direct-attached storage
 * protocol
+** NFS Network File System
+- 允许系统在网络共享目录和文件
+- Unix 支持
+- 内核直接支持, 部署简单, 运行稳定, 协议简单, 传输效率高
+- 服务端配置进程, 客户端一到多个远程访问使用
 ** SMB Server Message Block
 - Microsoft 网络通讯协议为主, 后续改名为 CIFS Common Internet File System
-  - Samba 是 SMB 和 CIFS 的重新实现
-  - 
-** CIFS
-** WebDAV
+  - SMB/CIFS 并不支持在 Linux 上运行
+    - 著名黑客技术大牛 Andrew Tridgell 通过逆向工程, 在 Linux 上实现的 SMB / CIFS 兼容协议
+    - 命名为 Samba
+    - 通过该程序实现了 Windows 和 Linux 之间的文件共享
+- 兼容性好, 多平台硬件原生支持
+- C/S 协议, 客户端允许访问所有服务端共享的资源.
+  - Samba 允许外放到外网
+- 效率较低, 速度不稳定
+** WebDAV Web-based Distributed Authoring and Versioning
+- 自定义权限
+- 允许修改属性
+- 支持上锁
+- 版本控制
+- 集成所有 http 优点
+  - 允许开启多通道读取文件, 有利于大视频文件访问和播放
 ** FTP File Transfer ProtocoL
 - 独立于系统用户组, 适合外网访问.
 - 利于上传下载, 方便简单, 容易部署
 - 效率慢, 修改需要全量下载覆盖
-** NFS
-** DLNA
+** DLNA DIGITAL LIVING NETWORK ALLIANCE
