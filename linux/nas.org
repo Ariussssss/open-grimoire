@@ -1,0 +1,19 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: nas
+#+DATE: [2023-11-26 03:00]
+* NAS Network-attached storage
+** DAS Direct-attached storage
+* protocol
+** SMB Server Message Block
+- Microsoft 网络通讯协议为主, 后续改名为 CIFS Common Internet File System
+  - Samba 是 SMB 和 CIFS 的重新实现
+  - 
+** CIFS
+** WebDAV
+** FTP File Transfer ProtocoL
+- 独立于系统用户组, 适合外网访问.
+- 利于上传下载, 方便简单, 容易部署
+- 效率慢, 修改需要全量下载覆盖
+** NFS
+** DLNA
