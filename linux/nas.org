@@ -29,6 +29,7 @@
   - 允许开启多通道读取文件, 有利于大视频文件访问和播放
   - 尤其是杜比视界视频文件一定要用 webdav, 不能用 SMB
   - 播放器首选跨平台 KODI
+  - 本地起服务 https://github.com/hacdias/webdav
 ** FTP File Transfer ProtocoL
 - 独立于系统用户组, 适合外网访问.
 - 利于上传下载, 方便简单, 容易部署
