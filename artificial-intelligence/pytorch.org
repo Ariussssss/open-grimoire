@@ -27,6 +27,8 @@ Memorize address of real values, instead of 32-bit float in memory.
 The default data type for tensors is 32-bit floating-point.
 
 Index has a 64-bit integer data type.
+** size, shape, stride
+stride: step or gap in memory. Will be changed by ~contiguous~
 * base training setup
 #+begin_src python
 
