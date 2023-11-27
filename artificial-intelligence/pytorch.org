@@ -23,6 +23,10 @@ High dimensional matrices
 dim in pytorch, axis in numpy 
 ** difference between python list
 Memorize address of real values, instead of 32-bit float in memory.
+** dtype
+The default data type for tensors is 32-bit floating-point.
+
+Index has a 64-bit integer data type.
 * base training setup
 #+begin_src python
 
