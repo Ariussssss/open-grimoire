@@ -30,6 +30,10 @@ Index has a 64-bit integer data type.
 ** size, shape, stride
 stride: step or gap in memory. Will be changed by ~contiguous~
 ** unsderscore, will not return a new tensor
+* preprocess
+1. continuous
+2. ordinal
+3. categorical
 * base training setup
 #+begin_src python
 
