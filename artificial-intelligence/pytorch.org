@@ -29,6 +29,7 @@ The default data type for tensors is 32-bit floating-point.
 Index has a 64-bit integer data type.
 ** size, shape, stride
 stride: step or gap in memory. Will be changed by ~contiguous~
+** unsderscore, will not return a new tensor
 * base training setup
 #+begin_src python
 
