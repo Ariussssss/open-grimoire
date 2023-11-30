@@ -3,6 +3,8 @@
 #+TITLE: encode
 #+DATE: [2022-05-02 17:25]
 * char
+ASCII (American Standard Code for Information Interchange)
+
 ASCII 码对应符号, 更好的可读性. 
 
 ASCII 值可以用多种进制表示.
