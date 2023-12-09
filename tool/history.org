@@ -64,14 +64,14 @@ compress gif
 ** 历史
 *** 👻 tauri => electron
 Rust 后端代替 node, 更快更小
-*** 🦋 Hammerspon
-不习惯 Alfred, 快捷键增强, 基于 ~lua~ 定制快捷键脚本
 *** 👻 fnm => +nvm+
 更快, zsh 启动时间减少 1s
 *** 👻 Alacritty => +Iterm2+
 更快, 更简洁, 配置文件, 简化 GUI 操作
 *** 👻 starship => +powerlevel9k+
 更简洁, 配置更简单独立
-*** 👻 Spectacle => +SizeUp+
-更强的功能, 免费 
+*** 👻 Hammerspoon => +Spectacle+ => +SizeUp+
+不习惯 Alfred, 快捷键增强, 基于 ~lua~ 定制快捷键脚本, 更多能力, 自定义, 免费
+
++更强的功能, 免费+
 
