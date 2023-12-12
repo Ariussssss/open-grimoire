@@ -71,3 +71,6 @@ emacs
   )
 #+end_src
 Communicate with shell.
+#+begin_src bash
+  emacsclient -e "(emms-toggle-repeat-track)"
+#+end_src
