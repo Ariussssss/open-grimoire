@@ -252,3 +252,11 @@ cargo 相当于 rust 包管理工具. 包在 rust 中成为 crates (板条箱)
   [net]
   git-fetch-with-cli = true
 #+end_src
+
+** warning: spurious network error (1 tries remaining): [35] SSL connect error (OpenSSL SSL_connect: SSL_ERROR_SYSCALL in connection to
+~~/.cargo/config~
+#+begin_src conf
+   [http]
+   proxy = ""
+   # leaving this as a blank string resets proxy to default
+#+end_src
