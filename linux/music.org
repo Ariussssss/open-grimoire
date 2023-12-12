@@ -1,0 +1,73 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: music
+#+DATE: [2023-12-13 04:39]
+* Refers
+* Controller and player
+#+begin_src bash
+  sudo dnf install mpv-mpris mpv playerctl
+  ln -s /usr/lib/mpv/mpris.so $HOME/.config/mpv/scripts/mpris.so
+  # check
+  playerctl --list-all
+  playerctl metadata title
+#+end_src
+* Export playlist
+** Spotify
+- https://developer.spotify.com/dashboard
+- https://github.com/spotipy-dev/spotipy/tree/master/examples
+
+#+begin_src python
+  import spotipy
+  from spotipy.oauth2 import SpotifyOAuth
+
+  scope = 'playlist-read-private'
+  sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
+      client_id=CLIENT_ID, 
+      client_secret=CLIENT_SECRET, 
+      redirect_uri=REDIRECT_URI,
+      scope=scope))
+  results = sp.current_user_playlists(limit=50)
+#+end_src
+* Search and download
+** YouTube
+~download_archive~ must be a filename, can be a soft link.
+#+begin_src python
+  from youtube_search import YoutubeSearch
+  from yt_dlp import YoutubeDL
+  ...
+  res = YoutubeSearch(search_name, max_results=5).to_dict()
+  for item in res:
+      item['url'] = 'https://www.youtube.com' + item['url_suffix']
+  ...
+  with YoutubeDL(
+          {
+              "download_archive": 'download_archive.txt',
+              "retry-sleep": 2,
+              "outtmpl": f"{playlist}/%(title)s.%(ext)s",
+          }
+  ) as ydl:
+      ydl.download([url])
+#+end_src
+* emacs emms
+emacs
+#+begin_src lisp
+(use-package emms
+  :hook
+  ('emms-playlist-mode . (lambda ()
+		  (local-set-key (kbd "R")
+				  (lambda ()
+				    (interactive)
+				    (progn 
+				      (emms-playlist-clear)
+				      (emms-add-directory-tree "~/Music/Spotify")
+				      )
+				    ))))
+  :config
+  (require 'emms-setup)
+  (require 'emms-player-mpv)
+  (add-to-list 'emms-player-list 'emms-player-mpv)
+  (setq emms-player-mpv-parameters 
+	'("--quiet" "--really-quiet" "--volume=40"))
+  )
+#+end_src
+Communicate with shell.

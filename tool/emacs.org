@@ -1,4 +1,4 @@
-#+STARTUP: all
+#+STARTUP: content
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: Emacs 笔记
 #+DATE: [2021-05-18 11:42]
@@ -282,7 +282,7 @@ Example
   make -j4 && sudo make install
 #+end_src
 
-* ag
+* +ag+ 太慢了, 大项目容易崩溃
 #+begin_src bash
   brew install the_silver_searcher
 #+end_src
@@ -292,6 +292,15 @@ counsel-ag
 - ~C-c C-o~ ivy-occur
 - ~f~ ivy-occur-press
 - ~RET~ ivy-occur-press-and-switch
+
+* deadgrep
+Install ripgrep
+
+#+begin_src lisp
+  (use-package deadgrep
+    :ensure t
+    )
+#+end_src
 
 * ssh
 find-file
@@ -480,3 +489,8 @@ Fedora dependents:
 - jpeglib-devel
 - gnutls-devel
 - ncurses-devel
+
+* FAQ
+
+** mc bug
+https://www.reddit.com/r/emacs/comments/121swxh/multiplecursors_error_on_emacs_29060/

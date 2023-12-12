@@ -250,6 +250,7 @@ Settings ~~/.zshrc~
 ** variety
 Update background image
 ** polybar
+https://github.com/polybar/polybar-scripts
 ** layout-manager
 https://github.com/klaxalk/i3-layout-manager
 
@@ -293,4 +294,8 @@ Setting memlock to unlimited in ~/etc/security/limits.conf~ (or ~/etc/security/l
   hard    memlock             unlimited 
 #+end_src
 Looks like it works.
-
+** wlan cable unplugged
+#+begin_src bash
+  sudo nmcli connection show
+  sudo nmcli connection up id <wifi-name>
+#+end_src
