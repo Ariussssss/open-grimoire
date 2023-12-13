@@ -28,6 +28,8 @@
       scope=scope))
   results = sp.current_user_playlists(limit=50)
 #+end_src
+** Netease [MAC]
+
 * Search and download
 ** YouTube
 ~download_archive~ must be a filename, can be a soft link.
