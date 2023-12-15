@@ -29,50 +29,56 @@
   results = sp.current_user_playlists(limit=50)
 #+end_src
 ** Netease [MAC]
+#+begin_src bash
+  sqlite3 ~/Library/Containers/com.netease.163music/Data/Documents/storage/sqlite_storage.sqlite3
+#+end_src
+
+#+begin_src sql
+  select * from web_playlist where playlist like '%<your uid>%'
+  -- loop or join
+  select * from web_playlist_track where pid = <playlist id>
+#+end_src
 
 * Search and download
 ** YouTube
 ~download_archive~ must be a filename, can be a soft link.
 #+begin_src python
-  from youtube_search import YoutubeSearch
-  from yt_dlp import YoutubeDL
-  ...
-  res = YoutubeSearch(search_name, max_results=5).to_dict()
-  for item in res:
-      item['url'] = 'https://www.youtube.com' + item['url_suffix']
-  ...
-  with YoutubeDL(
-          {
-              "download_archive": 'download_archive.txt',
-              "retry-sleep": 2,
-              "outtmpl": f"{playlist}/%(title)s.%(ext)s",
-          }
-  ) as ydl:
-      ydl.download([url])
+    from youtube_search import YoutubeSearch
+    from yt_dlp import YoutubeDL
+    os.environ['http_proxy'] = "http://127.0.0.1:7890" 
+    os.environ['https_proxy'] = "http://127.0.0.1:7890" 
+
+    ...
+    res = YoutubeSearch(search_name, max_results=5).to_dict()
+    for item in res:
+        item['url'] = 'https://www.youtube.com' + item['url_suffix']
+    ...
+    with YoutubeDL(
+            {
+                "download_archive": 'download_archive.txt',
+                "retry-sleep": 2,
+                "outtmpl": f"{playlist}/%(title)s.%(ext)s",
+            }
+    ) as ydl:
+        ydl.download([url])
 #+end_src
+** bilibili
+https://nemo2011.github.io/bilibili-api/#/examples/video
+
+Need a bot account
 * emacs emms
-emacs
+Set up for mpv
 #+begin_src lisp
-(use-package emms
-  :hook
-  ('emms-playlist-mode . (lambda ()
-		  (local-set-key (kbd "R")
-				  (lambda ()
-				    (interactive)
-				    (progn 
-				      (emms-playlist-clear)
-				      (emms-add-directory-tree "~/Music/Spotify")
-				      )
-				    ))))
-  :config
   (require 'emms-setup)
   (require 'emms-player-mpv)
   (add-to-list 'emms-player-list 'emms-player-mpv)
   (setq emms-player-mpv-parameters 
-	'("--quiet" "--really-quiet" "--volume=40"))
-  )
+        '("--quiet" "--really-quiet" "--volume=40"))
 #+end_src
 Communicate with shell.
 #+begin_src bash
   emacsclient -e "(emms-toggle-repeat-track)"
 #+end_src
+* mpv
+Keybindings
+https://github.com/mpv-player/mpv/blob/master/etc/input.conf
