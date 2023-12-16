@@ -20,4 +20,16 @@ OSS 的下载成本高, 价格昂贵, 需要 cdn 来分发. 除了首次访问�
 每 GB 0.24 元.
 ** 免费方案
 - https://www.backblaze.com/blog/free-image-hosting-with-cloudflare-transform-rules-and-backblaze-b2/
-* 
+* P2P CDN
+直播:
+- 请求完整 flv 流
+- 异步拉取 P2P sdk, 准备切换子流
+- 尝试建立 p2p 链接
+  - 切换拉去子流
+  - 同时开始上传本地流
+** DEBUG
+- Network 面板 websocket
+  - 纯上传的就是共享
+- chrome://webrtc-internals
+  - 查看视频流接收和共享的都有
+* HLS
