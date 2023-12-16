@@ -32,4 +32,3 @@ OSS 的下载成本高, 价格昂贵, 需要 cdn 来分发. 除了首次访问�
   - 纯上传的就是共享
 - chrome://webrtc-internals
   - 查看视频流接收和共享的都有
-* HLS
