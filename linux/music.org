@@ -66,6 +66,8 @@
 https://nemo2011.github.io/bilibili-api/#/examples/video
 
 Need a bot account
+* recommend
+
 * emacs emms
 Set up for mpv
 #+begin_src lisp
