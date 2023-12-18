@@ -28,7 +28,11 @@
       scope=scope))
   results = sp.current_user_playlists(limit=50)
 #+end_src
-** Netease [MAC]
+** Netease
+*** API
+https://docs.neteasecloudmusicapi.binaryify.com/
+
+*** MAC local DB
 #+begin_src bash
   sqlite3 ~/Library/Containers/com.netease.163music/Data/Documents/storage/sqlite_storage.sqlite3
 #+end_src
@@ -66,8 +70,6 @@
 https://nemo2011.github.io/bilibili-api/#/examples/video
 
 Need a bot account
-* recommend
-
 * emacs emms
 Set up for mpv
 #+begin_src lisp
