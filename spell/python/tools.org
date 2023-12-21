@@ -16,6 +16,27 @@ emacs
 #+end_src
 
 ~<M-x>~, ~lsp-install-server~, pyright.
+
+依赖
+#+begin_src bash
+  pip install pyright
+  pip install 'python-lsp-server[all]'
+#+end_src
+
+环境变量注入
+#+begin_src lisp
+  (use-package pyenv-mode
+  :ensure t
+  :config
+  (progn
+    (pyenv-mode)
+    (pyenv-mode-set "3.8.10")))
+
+  (exec-path-from-shell-initialize)
+#+end_src
+
+DEBUG, ~C-x b~ 检查 lsp log, mesage log, pyright log
+
 * format
 black
 #+begin_src bash
