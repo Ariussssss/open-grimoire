@@ -3,6 +3,24 @@
 #+TITLE: gui
 #+DATE: [2023-06-23 17:31]
 * Refers
+
+* Check
+#+begin_src bash
+  > loginctl show-session $(loginctl | grep $(whoami) | awk '{print $1}') -p Type
+  Type=unspecified
+
+  Type=x11
+
+  Type=unspecified
+
+  Type=unspecified
+
+  Type=unspecified
+
+  Type=unspecified
+  > echo $XDG_SESSION_TYPE
+  x11
+#+end_src
 * Communication Protocol
 ** wayland
 - 最新一代显示服务器协议
