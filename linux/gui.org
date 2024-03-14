@@ -13,8 +13,13 @@
 *** PGTK Pure GTK
 基于 wayland 的 GTK 实现, 利用性能优势, 消除 X11 依赖
 ** X11 X Window System
+- 1984 MIT 大学创造规范, 1987 年发布第十一版
 - 广泛使用的图形窗口系统协议
 - 大部分发行版默认都是 X11
+- 分成三个部分
+  - X Server
+  - X Client
+  - Window Manager, Compositor
 *** GTK, GIMP Toolkit, GNU Image Manipulation Program
 - 基于 X11 的工具包, 提供用户界面控件
 - GIMP 之前是一款开源软件, 后续 GTK 发展成独立的工具包

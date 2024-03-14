@@ -6,6 +6,7 @@
 * Refers
 - https://www.youtube.com/playlist?list=PLBE9407EA64E2C318
 - https://proofwiki.org/wiki/Main_Page
+- https://www.3blue1brown.com/topics/calculus
 * pre
 ** base
 - multiply multiplication 乘
