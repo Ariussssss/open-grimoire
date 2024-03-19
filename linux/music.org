@@ -86,3 +86,14 @@ Communicate with shell.
 * mpv
 Keybindings
 https://github.com/mpv-player/mpv/blob/master/etc/input.conf
+** reverb
+Same with ~ffmpeg~
+#+begin_src bash
+  ffmpeg.exe -i input.mp4 -map 0 -c:v copy -af aecho=1.0:0.7:20:0.5 reverb.mp4
+  mpv input.mp4 -af aecho=1.0:0.7:20:0.5
+#+end_src
+aecho parameters:
+- 1.0 - Overall volume. Leave this at 1.0 or the whole audio track will be quiet.
+- 0.7 - Volume of the echo effect as a percent.
+- 20 - ms to delay echo. If you want reverb, this value should be between 10 (warm) and 50 (echo chamber reverb). Don't go beyond 50 or it will turn into a cave-like echo.
+- 0.5 - Leave the decay at the default of 0.5
