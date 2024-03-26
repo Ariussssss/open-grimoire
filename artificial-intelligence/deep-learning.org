@@ -11,6 +11,8 @@
 $(f \ast g)(n) = \int_{-\infty}^{\infty}f(\tau)g(n - \tau)d\tau$
 *** Discrete
 $(f \ast g)(n) = \sum_{\tau=-\infty}^{\infty}f(\tau)g(n - \tau)d\tau$
+* mini batch SGD
+* Regularization
 * FAQ
 - https://awsdocs-neuron.readthedocs-hosted.com/en/latest/frameworks/torch/torch-neuron/troubleshooting-guide.html
 **  AttributeError: module 'torch.jit' has no attribute '_script_if_tracing'
