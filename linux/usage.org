@@ -299,3 +299,14 @@ Looks like it works.
   sudo nmcli connection show
   sudo nmcli connection up id <wifi-name>
 #+end_src
+* Hibernation
+Update zram
+
+https://fedoramagazine.org/hibernation-in-fedora-36-workstation/
+#+begin_src bash
+  swapon
+  # NAME       TYPE       SIZE USED PRIO
+  # /dev/zram0 partition 31.1G   0B  100
+  systemctl enable nvidia-suspend.service nvidia-hibernate.service nvidia-resume.service
+  systemctl suspend
+#+end_src

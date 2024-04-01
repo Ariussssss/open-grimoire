@@ -18,4 +18,7 @@ So hackintosh can't use Nvidia over 1060, but AMD whick is open-source.
 - GeForce GT/GTX 400/500 series cards works with 390.xx NVIDIA drivers
 - GeForce GT 8/9/200/300 series cards works with 340.xx NVIDIA drivers
 * xrandr
+Setup screen arrangement
+* Motherboard
+* RAM
 
