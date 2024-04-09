@@ -99,3 +99,8 @@ aecho parameters:
 - 0.7 - Volume of the echo effect as a percent.
 - 20 - ms to delay echo. If you want reverb, this value should be between 10 (warm) and 50 (echo chamber reverb). Don't go beyond 50 or it will turn into a cave-like echo.
 - 0.5 - Leave the decay at the default of 0.5
+* others
+** Change volume
+#+begin_src bash
+  amixer set Master 80%
+#+end_src
