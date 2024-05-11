@@ -299,6 +299,10 @@ Looks like it works.
   sudo nmcli connection show
   sudo nmcli connection up id <wifi-name>
 #+end_src
+** search ld lib
+#+begin_src bash
+  dnf provides '*/libasound.so'
+#+end_src
 * Hibernation
 Update zram
 
