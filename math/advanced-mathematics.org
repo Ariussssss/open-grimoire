@@ -107,6 +107,8 @@ E, exponent, 表示以 10 为底的指数, 自然对数的底 $\exp$
 
 E xponential series 指数级数: 第二重要的无穷级数
 
+
+
 $e^x=y(x)=1+x+\frac{1}{2}x^2\dots+\frac{x^n}{n(n-1)\dots1}$
 
 geometric series 几何指数
