@@ -2,12 +2,30 @@
 #+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
 #+TITLE: nas
 #+DATE: [2023-11-26 03:00]
-* NAS Network-attached storage
+* Refers
+- https://blog.ja-ke.tech/2019/08/27/nas-performance-sshfs-nfs-smb.html
+
+* Intro
+** NAS Network-attached storage
 ** DAS Direct-attached storage
-* protocol
+* Why
+- 5T 以下的需求其实本地就完全足够了
+- 固态很贵, 机械硬盘很大很吵, 发热和供电, 监控和损坏需要统一管理
+- 日常主板和机箱可能不能满足低功耗, 多 SATA 插槽的需求
+- 有一点数据冗余和损失找回能力, 可以自动备份
+- 还有暂时用不到的内网穿透(笑死我根本不出门)
+** 为什么不选硬盘盒
+- 硬盘盒最多提供硬件加速的 Raid, 没有系统, 只有芯片
+- 不能多网口复用或者增加网卡
+- 无法跑满整个阵列的性能, 比如绿联最贵的硬盘盒 8Raid 模式 5 盘的, 只有单盘的读取速度, 浪费了多盘 raid 的性能
+- 硬件支持的 Raid 无法满足软件的硬盘性能监控和数据传输速度
+- 抛开硬 Raid 使用软 Raid 可以满足监控需求, 也因为不是 SATA 链接靠 USB3.0 根本不够跑满性能
+- 没办法自定义通用 Raid 和文件系统, 更换和维护只能求客服
+- 很多魔性隐藏问题, 比如自动休眠, 不可控断电都是黑盒子
+* Protocol
 ** NFS Network File System
-- 允许系统在网络共享目录和文件
 - Unix 支持
+- 允许系统在网络共享目录和文件
 - 内核直接支持, 部署简单, 运行稳定, 协议简单, 传输效率高
 - 服务端配置进程, 客户端一到多个远程访问使用
 ** SMB Server Message Block
@@ -19,7 +37,6 @@
 - 兼容性好, 多平台硬件原生支持
 - C/S 协议, 客户端允许访问所有服务端共享的资源.
   - Samba 允许外放到外网
-- 效率较低, 速度不稳定
 ** WebDAV Web-based Distributed Authoring and Versioning
 - 自定义权限
 - 允许修改属性
@@ -35,3 +52,20 @@
 - 利于上传下载, 方便简单, 容易部署
 - 效率慢, 修改需要全量下载覆盖
 ** DLNA DIGITAL LIVING NETWORK ALLIANCE
+* System
+** Synology
+** Truenas
+** pve
+** unraid
+
+* File System
+** xhs
+- 对大文件处理有优化
+** ext4
+** zfs
+- Raid-z 唯一支持的文件系统
+** exfat
+- 通用性最强, mac linux mac 和老系统都支持
+* dns
+** named
+- 比 system resolv 更丰富, 可以单独使用

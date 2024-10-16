@@ -7,4 +7,100 @@
 Virtual private server, share memory.
 
 Based on software like VMware.
+* Snippets
+秋水逸冰 Shadowsocks 一键脚本
 
+网址：https://teddysun.com/486.html
+软件：Shadowsocks
+最后更新时间： 2019-01-11
+#+begin_src bash
+  wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh
+  chmod +x shadowsocks-all.sh
+  ./shadowsocks-all.sh 2>&1 | tee shadowsocks-all.log
+#+end_src
+
+秋水逸冰 BBR 脚本
+
+网址：https://teddysun.com/489.html
+软件：BBR
+最后更新时间： 2022-05-11
+#+begin_src bash
+  wget --no-check-certificate -O /opt/bbr.sh https://github.com/teddysun/across/raw/master/bbr.sh
+  chmod 755 /opt/bbr.sh
+  /opt/bbr.sh
+#+end_src
+
+1024 一键脚本
+
+网址：https://github.com/yeahwu/v2ray-wss
+软件：Shadowsocks、 V2ray+ Nginx + WebSocket Reality、 Hysteria2
+#+begin_src bash
+  wget https://raw.githubusercontent.com/yeahwu/v2ray-wss/main/tcp-wss.sh && bash tcp-wss.sh
+#+end_src
+
+x-ui 安装脚本
+
+网址：https://github.com/vaxilu/x-ui
+软件：vmess、vless、trojan、shadowsocks、dokodemo-door、socks、http
+#+begin_src bash
+  bash <(curl -Ls https://raw.githubusercontent.com/vaxilu/x-ui/master/install.sh)
+#+end_src
+
+VPS 性能测试
+
+#+begin_src bash
+  wget -qO- bench.sh | bash
+  wget -qO- git.io/superbench.sh | bash
+#+end_src
+
+GB6 跑分脚本，附带宽测试：
+
+#+begin_src bash
+  curl -sL yabs.sh | bash
+  # GB6 剔除带宽测试，因为都是国外节点测试，国内跑没多大意义：
+  curl -sL yabs.sh | bash -s -- -i
+  # GB5 跑分脚本，附带宽测试：
+  curl -sL yabs.sh | bash -5
+  # GB5 剔除带宽测试：
+  curl -sL yabs.sh | bash -s -- -i -5
+#+end_src
+
+三网测速
+#+begin_src bash
+
+bash <(curl -sL bash.icu/speedtest)
+bash <(curl -Lso- https://bench.im/hyperspeed)
+bash <(curl -Lso- https://www.infski.com/files/superspeed.sh)
+#+end_src
+
+回程路由
+#+begin_src bash
+wget -N --no-check-certificate https://raw.githubusercontent.com/Chennhaoo/Shell_Bash/master/AutoTrace.sh && chmod +x AutoTrace.sh && bash AutoTrace.sh
+wget -qO- git.io/besttrace | bash
+#+end_src
+
+流媒体解锁检测脚本
+#+begin_src bash
+bash <(curl -L -s media.ispvps.com)
+bash <(curl -L -s check.unlock.media)
+wget -qO- https://github.com/yeahwu/check/raw/main/check.sh | bash
+#+end_src
+
+界面精美的 VPS IP 检测脚本
+网址：https://github.com/xykt/IPQuality
+软件：VPS IP 检测
+界面精美的 VPS IP 检测脚本
+
+#+begin_src bash
+bash <(curl -Ls IP.Check.Place)
+Docker 一键安装脚本
+#+end_src
+
+网址：https://www.docker.com/
+软件：Docker
+Docker 一键安装脚本
+
+#+begin_src bash
+curl https://get.docker.com -o get-docker.sh
+sh get-docker.sh
+#+end_src

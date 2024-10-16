@@ -25,6 +25,19 @@
 - 检验信息在每个盘上,  A1 + A2 + A3 ... = AP, 通过校验信息加减来还原重建
 - 只允许一块硬盘出故障, 大于 1 则不可重建
 - 三块盘以上, 容量使用率 (N-1)/N
+- 不是使用固态硬盘, 扩充写影响寿命
+- 不适合软 Raid, CPU 使用降低效率
+  #+begin_src bash
+    # mdadm raid5 5disk write
+    9+0 records in
+    9+0 records out
+    1887436800 bytes (1.9 GB, 1.8 GiB) copied, 20.9133 s, 90.3 MB/s
+
+    # hardware raid5 5disk write
+    100+0 records in
+    100+0 records out
+    20971520000 bytes (21 GB, 20 GiB) copied, 82.7084 s, 254 MB/s
+  #+end_src
 ** RAID10
 - RAID1+RAID0 镜像阵列条带
 - 只能用磁盘一半的容量, 两个子阵列分别存两份一半的文件
