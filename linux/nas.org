@@ -69,3 +69,10 @@
 * dns
 ** named
 - 比 system resolv 更丰富, 可以单独使用
+* note
+1. uefi 制作
+2. dhcpcd 网线直连
+3. fdisk 分区和挂载
+4. 安装到 boot
+5. dhcpcd,  sshd 自启动
+6. agetty 自动登录

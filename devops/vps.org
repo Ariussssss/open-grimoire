@@ -104,3 +104,11 @@ Docker 一键安装脚本
 curl https://get.docker.com -o get-docker.sh
 sh get-docker.sh
 #+end_src
+* FAQ
+** end Kernel panic - not syncing: System is deadlocked on memory
+
+Cause: VPS has less than 1 GB of RAM.
+
+Additional Information: Ubuntu 22.04 official system requirements have been changed to 1GB RAM or higher.
+
+Solution: Use an older version of Ubuntu, or upgrade your VPS RAM amount to 1 GB or more.
