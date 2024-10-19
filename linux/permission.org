@@ -35,7 +35,7 @@
 - etc/passwd 用户描述信息
 - home 用户个人文件
 - root 根用户的 home
-
+  
 * 权限
 :PROPERTIES:
 :CUSTOM_ID: 权限
@@ -110,3 +110,7 @@ mac 有两种特殊的扩展符号: ~+~ , ~@~
   chmod -N ~/* # -R 可以递归
 #+end_src
    
+* 用户, 组
+#+begin_src bash
+  id $USER
+#+end_src
