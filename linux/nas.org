@@ -76,3 +76,12 @@
 4. 安装到 boot
 5. dhcpcd,  sshd 自启动
 6. agetty 自动登录
+* 备份
+~321备份~
+#+begin_src bash
+  # 直接强制同步，去重，删除避免路径变化造成的赘余文件，
+  rsync -av  --ignore-existing --dry-run /path/to/source/ /path/to/destination/
+
+  # 备份盘满了后，叠加备份盘，类似 git 的方式执行文件处理. 不支持 delete, 两边计算起来比较麻烦
+  rsync -av --ignore-existing --dry-run /path/to/source/ /path/to/destination/ > files_to_sync.txt
+#+end_src

@@ -1,0 +1,17 @@
+#+STARTUP: all
+#+SETUPFILE: ~/.emacs.d/org-styles/html/main.theme
+#+TITLE: debug
+#+DATE: [2024-10-19 20:56]
+* Refers
+- https://info.support.huawei.com/info-finder/encyclopedia/zh/index.html
+* tools
+#+begin_src bash
+  # 常用的一些工具
+  ip addr
+  ip link
+  ip route
+  ip neigh
+
+  # Address Resolution Protocol
+  arp -a
+#+end_src
