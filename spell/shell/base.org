@@ -348,6 +348,13 @@ list open files 一切皆文件. 系统会为每个应用分配一个描述符, 
   # 网络和接口
   lsof -i tcp :3306
 #+end_src
+
+处理空格文件名
+#+begin_src bash
+  find . -type d | while IFS= read -r dir; do
+      echo "Processing: \"$dir\""
+  done
+#+end_src
 * multi line
 #+begin_src bash
   USAGE=$(cat <<-END
